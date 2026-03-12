@@ -128,7 +128,8 @@ async def get_exam_results(item: HTMLInput, request: Request):
      - **html**: 考試成績的 HTML 字串。
      - **返回值**: 包含考試成績資料的 JSON 物件。
     """
-    r = v1.parse_exam_scores(item.html)
+    r = v1.StudentGradeExtractor(item.html)
+    r = r.get_all_grade_data()
     if r.get("error"):
         data = request.app.state.response
         data["code"] = 500
@@ -151,8 +152,8 @@ async def get_semester_scores(item: HTMLInput, request: Request):
      - **html**: 學期成績的 HTML 字串。
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
-    r = v1.StudentGradeExtractor(item.html)
-    r = r.get_all_grade_data()
+    r = v1.parse_exam_scores(item.html)
+    
     if r.get("error"):
         data = request.app.state.response
         data["code"] = 500
