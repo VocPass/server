@@ -4,7 +4,10 @@ import os
 
 from dotenv import load_dotenv
 from pathlib import Path
-from fastapi import FastAPI, Response, status
+from fastapi import FastAPI, Request, Response, status
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 load_dotenv()
 
@@ -31,3 +34,29 @@ for module_file in sorted(routers_path.glob("*.py")):
 @app.get("/", summary="首頁")
 async def root(response: Response):
     return "Hello, VocPass API is running! Visit /docs for API documentation."
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"code": exc.status_code, "message": exc.detail, "data": None},
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    errors = exc.errors()
+    message = errors[0]["msg"] if errors else "Validation Error."
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"code": 422, "message": message, "data": None},
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={"code": 500, "message": "Internal Server Error.", "data": None},
+    )
