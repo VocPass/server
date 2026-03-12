@@ -1,0 +1,6 @@
+fastapi
+fastapi[standard]
+dotenv
+pocketbase
+BeautifulSoup4
+aiohttp
