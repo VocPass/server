@@ -94,7 +94,7 @@ async def get_attendance(item: HTMLInput, request: Request):
      - **html**: 出勤紀錄的 HTML 字串。
      - **返回值**: 包含出勤紀錄列表的 JSON 物件。
     """
-    r = v1.parse_absence_records(item.html)#, filter_types=[]
+    r = v1.parse_absence_records(item.html, filter_types=[])
     
     data = request.app.state.response
     data["code"] = 200
