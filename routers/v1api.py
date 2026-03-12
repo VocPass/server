@@ -49,7 +49,7 @@ async def index(request: Request):
     return data
 
 
-@router.get("/merit_demerit", summary="解析獎懲紀錄")
+@router.post("/merit_demerit", summary="解析獎懲紀錄")
 async def get_merit_demerit(request: Request, item: HTMLInput):
     """
     解析獎懲紀錄的 HTML，回傳 JSON 格式的獎懲紀錄列表。
@@ -91,7 +91,7 @@ async def get_merit_demerit(request: Request, item: HTMLInput):
     return data
 
 
-@router.get("/curriculum", summary="解析課表")
+@router.post("/curriculum", summary="解析課表")
 async def get_curriculum(request: Request, item: HTMLInput):
     """
     解析課表的 HTML，回傳 JSON 格式的課程表資料。
@@ -137,7 +137,7 @@ async def get_curriculum(request: Request, item: HTMLInput):
     return data
 
 
-@router.get("/attendance", summary="解析出缺紀錄")
+@router.post("/attendance", summary="解析出缺紀錄")
 async def get_attendance(item: HTMLInput, request: Request):
     """
     解析出勤紀錄的 HTML，回傳 JSON 格式的出勤紀錄列表。
@@ -177,7 +177,7 @@ async def get_attendance(item: HTMLInput, request: Request):
     return data
 
 
-@router.get("/exam_menu", summary="解析考試選單")
+@router.post("/exam_menu", summary="解析考試選單")
 async def get_exam_menu(item: HTMLInput, request: Request):
     """
     解析考試選單的 HTML，回傳 JSON 格式的考試選單資料。
