@@ -91,7 +91,6 @@ class AttendanceDataExtractor:
             return info_div.text.strip()
         return "無法找到學生資訊"
 
-
 class StudentGradeExtractor:
     def __init__(self, html_content):
         self.soup = BeautifulSoup(html_content, 'html.parser')
@@ -100,7 +99,7 @@ class StudentGradeExtractor:
         info_div = self.soup.find('div', style='vertical-align: bottom;')
         if info_div:
             return info_div.text.strip()
-        return "無法找到學生資訊"
+        return {"error": "Can not find student info"}
 
     def extract_subjects(self):
         subjects = []
@@ -111,18 +110,18 @@ class StudentGradeExtractor:
                 cells = row.find_all('td')
                 if len(cells) == 8:
                     subject = {
-                        '科目': cells[0].text.strip(),
-                        '上學期': {
-                            '屬性': cells[1].text.strip(),
-                            '學分': cells[2].text.strip(),
-                            '成績': cells[3].text.strip()
+                        'subject': cells[0].text.strip(),
+                        'first_semester': {
+                            'type': cells[1].text.strip(),
+                            'credits': cells[2].text.strip(),
+                            'score': cells[3].text.strip()
                         },
-                        '下學期': {
-                            '屬性': cells[4].text.strip(),
-                            '學分': cells[5].text.strip(),
-                            '成績': cells[6].text.strip()
+                        'second_semester': {
+                            'type': cells[4].text.strip(),
+                            'credits': cells[5].text.strip(),
+                            'score': cells[6].text.strip()
                         },
-                        '學年成績': cells[7].text.strip()
+                        'annual_score': cells[7].text.strip()
                     }
                     subjects.append(subject)
                 elif '重(補)修科目' in row.text:
@@ -140,43 +139,43 @@ class StudentGradeExtractor:
                 if len(cells) == 4:
                     category = cells[0].text.strip()
                     total_scores[category] = {
-                        '上學期': cells[1].text.strip(),
-                        '下學期': cells[2].text.strip(),
-                        '學年': cells[3].text.strip()
+                        'first_semester': cells[1].text.strip(),
+                        'second_semester': cells[2].text.strip(),
+                        'annual': cells[3].text.strip()
                     }
         return total_scores
 
     def extract_daily_performance(self):
-        daily_performance = {'上學期': {}, '下學期': {}}
+        daily_performance = {'first_semester': {}, 'second_semester': {}}
         table = self.soup.find(
             'table', class_='brk01 collapse padding3 spacing0')
         if table:
             current_semester = None
             for row in table.find_all('tr'):  # type: ignore
                 if '上學期' in row.text:
-                    current_semester = '上學期'
+                    current_semester = 'first_semester'
                 elif '下學期' in row.text:
-                    current_semester = '下學期'
+                    current_semester = 'second_semester'
                 elif current_semester and len(row.find_all('td')) == 6:
                     cells = row.find_all('td')
                     daily_life_content = str(cells[0])
                     daily_life_content = daily_life_content.replace('<td>', '').replace('</td>', '').strip()
                     
                     daily_performance[current_semester] = {
-                        '日常生活表現': {'評量': daily_life_content, '描述': cells[1].text.strip()},
-                        '服務學習': cells[2].text.strip(),
-                        '校內外特殊表現': cells[3].text.strip(),
-                        '具體建議及評語': cells[4].text.strip(),
-                        '其他': cells[5].text.strip()
+                        'daily_life_performance': {'evaluation': daily_life_content, 'description': cells[1].text.strip()},
+                        'service_learning': cells[2].text.strip(),
+                        'special_achievements': cells[3].text.strip(),
+                        'suggestions_and_comments': cells[4].text.strip(),
+                        'others': cells[5].text.strip()
                     }
         return daily_performance
 
     def get_all_grade_data(self):
         return {
-            '學生資訊': self.extract_student_info(),
-            '科目成績': self.extract_subjects(),
-            '總成績': self.extract_total_scores(),
-            '日常表現': self.extract_daily_performance()
+            'student_info': self.extract_student_info(),
+            'subject_scores': self.extract_subjects(),
+            'total_scores': self.extract_total_scores(),
+            'daily_performance': self.extract_daily_performance()
         }
     
 def parse_weekly_curriculum(html_content):
@@ -244,15 +243,14 @@ def parse_absence_records(html_content, filter_types=["曠", "事"]):
         for i, cell in enumerate(cells[3:], start=3):
             if cell in ["曠", "事"] or len(filter_types)==0:
                 period = headers[i] if i < len(headers) else f"col{i}"
-                # 過濾出數字期間
                 if period.isdigit():
                     if cell!="":
                         results.append({
-                            "學年": academic_term[0],
-                            "日期": date,
-                            "星期": weekday,
-                            "節次": period,
-                            "狀態": cell
+                            "academic_term": academic_term[0],
+                            "date": date,
+                            "weekday": weekday,
+                            "period": period,
+                            "cell": cell
                         })
     return results
 
