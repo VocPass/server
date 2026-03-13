@@ -183,69 +183,58 @@ def parse_weekly_curriculum(html_content):
     table = soup.find("table", class_="TimeTable")
     if not table:
         return {}
-
-    def extract_period_time(time_text):
-        times = re.findall(r"\d{1,2}:\d{2}", time_text)
-        if len(times) >= 2:
-            return times[0], times[1]
-        return None, None
     
     rows = table.find_all("tr")
     header_tds = rows[0].find_all("td")
-    weekday_fallback = ["一", "二", "三", "四", "五", "六", "日"]
-    weekdays = []
-    for td in header_tds[3:]:
-        text = td.get_text(strip=True)
-        m = re.search(r"[一二三四五六日天]", text)
-        weekdays.append(m.group(0).replace("天", "日") if m else None)
+    weekdays = [td.get_text(strip=True) for td in header_tds[3:]]
     
     result = {}
+    period_time_map = {}
     
     for tr in rows[1:]:
         tds = tr.find_all("td")
         if not tds:
             continue
-        if tds[0].has_attr("colspan"):
-            continue
         if tds[0].has_attr("rowspan"):
             if len(tds) < 4:
                 continue
             period = tds[1].get_text(strip=True)
-            time_text = tds[2].get_text(separator="\n", strip=True)
+            time_cell = tds[2].get_text(separator="\n", strip=True)
             course_cells = tds[3:]
         else:
             if len(tds) < 3:
                 continue
             period = tds[0].get_text(strip=True)
-            time_text = tds[1].get_text(separator="\n", strip=True)
+            time_cell = tds[1].get_text(separator="\n", strip=True)
             course_cells = tds[2:]
         if not period:
             continue
-
-        start_time, end_time = extract_period_time(time_text)
         
         m = re.search(r'第(.+)節', period)
         if m:
             period = m.group(1)
+
+        time_matches = re.findall(r'\d{1,2}:\d{2}', time_cell)
+        if len(time_matches) >= 2:
+            period_time_map[period] = {
+                "start": time_matches[0],
+                "end": time_matches[1]
+            }
     
         for idx, cell in enumerate(course_cells):
             cell_text = cell.get_text(separator="\n", strip=True)
             if not cell_text:
                 continue
             subject = cell_text.split("\n")[0]
-            if idx < len(weekdays) and weekdays[idx]:
-                weekday = weekdays[idx]
-            else:
-                weekday = weekday_fallback[idx % len(weekday_fallback)]
+            weekday_mapping = {0: "一", 1: "二", 2: "三", 3: "四", 4: "五", 5: "六", 6: "日"}
+            weekday = f"{weekday_mapping.get(idx % 7, str(idx+1))}"
             if subject not in result:
                 result[subject] = {"count": 0, "schedule": []}
             result[subject]["count"] += 1
-            result[subject]["schedule"].append({
-                "weekday": weekday,
-                "period": period,
-                "start_time": start_time,
-                "end_time": end_time
-            })
+            schedule_item = {"weekday": weekday, "period": period}
+            if period in period_time_map:
+                schedule_item.update(period_time_map[period])
+            result[subject]["schedule"].append(schedule_item)
     
     return result
 
