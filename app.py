@@ -1,5 +1,6 @@
 import importlib
 import pocketbase
+import json
 import os
 
 from dotenv import load_dotenv
@@ -20,8 +21,10 @@ client = pocketbase.PocketBase(os.getenv("PB_URL"))
 app.state.db = client.admins.auth_with_password(
     os.getenv("PB_EMAIL"), os.getenv("PB_PASSWORD")
 )
-app.state.response = {"code": 500, "message": "Server Error.", "data": None}
-
+app.state.response = {"code": 500, "message": "Unknow Error.", "data": None}
+with open("school.json", "r", encoding="utf-8") as f:
+    app.state.schools = json.load(f)
+    
 routers_path = Path(__file__).parent / "routers"
 for module_file in sorted(routers_path.glob("*.py")):
     if module_file.name.startswith("_"):
@@ -35,6 +38,9 @@ for module_file in sorted(routers_path.glob("*.py")):
 async def root(response: Response):
     return "Hello, VocPass API is running! Visit /docs for API documentation."
 
+@app.get("/school")
+async def get_all_schools(request: Request):
+    return app.state.schools
 
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):

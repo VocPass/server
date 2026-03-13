@@ -1,0 +1,110 @@
+{
+    "鶯歌工商": {
+        "vision": "v1",
+        "app":1.0,
+        "api": "https://eschool.ykvs.ntpc.edu.tw",
+        "url": {
+            "login": "/auth/Online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginName"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {
+                "name": "v1CaptchaGenCode"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "class"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            }
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results":"/online/selection_student/{file_name}",
+            "semester_scores":"/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "三重商工": {
+        "vision": "v1",
+        "app":1.0,
+        "api": "https://score.scvs.ntpc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            }
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results":"/online/selection_student/{file_name}",
+            "semester_scores":"/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "新北高工": {
+        "vision": "v1",
+        "app":1.0,
+        "api": "https://elife.ntvs.ntpc.edu.tw",
+        "url": {
+            "login": "/auth/Auth/Login",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "studentLId"
+            },
+            "password": {
+                "name": "studentPwd"
+            },
+            "captcha": {
+                "name": "v1CaptchaImageInput"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "id"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            }
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results":"/online/selection_student/{file_name}",
+            "semester_scores":"/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    }
+}
