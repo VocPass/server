@@ -192,7 +192,12 @@ def parse_weekly_curriculum(html_content):
     
     rows = table.find_all("tr")
     header_tds = rows[0].find_all("td")
-    weekdays = [td.get_text(strip=True) for td in header_tds[3:]]
+    weekday_fallback = ["一", "二", "三", "四", "五", "六", "日"]
+    weekdays = []
+    for td in header_tds[3:]:
+        text = td.get_text(strip=True)
+        m = re.search(r"[一二三四五六日天]", text)
+        weekdays.append(m.group(0).replace("天", "日") if m else None)
     
     result = {}
     
@@ -228,7 +233,10 @@ def parse_weekly_curriculum(html_content):
             if not cell_text:
                 continue
             subject = cell_text.split("\n")[0]
-            weekday = weekdays[idx] if idx < len(weekdays) else str(idx + 1)
+            if idx < len(weekdays) and weekdays[idx]:
+                weekday = weekdays[idx]
+            else:
+                weekday = weekday_fallback[idx % len(weekday_fallback)]
             if subject not in result:
                 result[subject] = {"count": 0, "schedule": []}
             result[subject]["count"] += 1
