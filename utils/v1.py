@@ -200,11 +200,17 @@ def parse_weekly_curriculum(html_content):
         tds = tr.find_all("td")
         if not tds:
             continue
+        if tds[0].has_attr("colspan"):
+            continue
         if tds[0].has_attr("rowspan"):
+            if len(tds) < 4:
+                continue
             period = tds[1].get_text(strip=True)
             time_text = tds[2].get_text(separator="\n", strip=True)
             course_cells = tds[3:]
         else:
+            if len(tds) < 3:
+                continue
             period = tds[0].get_text(strip=True)
             time_text = tds[1].get_text(separator="\n", strip=True)
             course_cells = tds[2:]
