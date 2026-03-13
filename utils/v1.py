@@ -189,16 +189,23 @@ def parse_weekly_curriculum(html_content):
     weekdays = [td.get_text(strip=True) for td in header_tds[3:]]
     
     result = {}
+    period_time_map = {}
     
     for tr in rows[1:]:
         tds = tr.find_all("td")
         if not tds:
             continue
         if tds[0].has_attr("rowspan"):
+            if len(tds) < 4:
+                continue
             period = tds[1].get_text(strip=True)
+            time_cell = tds[2].get_text(separator="\n", strip=True)
             course_cells = tds[3:]
         else:
+            if len(tds) < 3:
+                continue
             period = tds[0].get_text(strip=True)
+            time_cell = tds[1].get_text(separator="\n", strip=True)
             course_cells = tds[2:]
         if not period:
             continue
@@ -206,6 +213,13 @@ def parse_weekly_curriculum(html_content):
         m = re.search(r'第(.+)節', period)
         if m:
             period = m.group(1)
+
+        time_matches = re.findall(r'\d{1,2}:\d{2}', time_cell)
+        if len(time_matches) >= 2:
+            period_time_map[period] = {
+                "start": time_matches[0],
+                "end": time_matches[1]
+            }
     
         for idx, cell in enumerate(course_cells):
             cell_text = cell.get_text(separator="\n", strip=True)
@@ -217,7 +231,10 @@ def parse_weekly_curriculum(html_content):
             if subject not in result:
                 result[subject] = {"count": 0, "schedule": []}
             result[subject]["count"] += 1
-            result[subject]["schedule"].append({"weekday": weekday, "period": period})
+            schedule_item = {"weekday": weekday, "period": period}
+            if period in period_time_map:
+                schedule_item.update(period_time_map[period])
+            result[subject]["schedule"].append(schedule_item)
     
     return result
 

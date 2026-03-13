@@ -4,3 +4,4 @@ dotenv
 pocketbase
 BeautifulSoup4
 aiohttp
+jinja2

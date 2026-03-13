@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocPass | 高職通用校務查詢系統</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-pattern {
+            background-color: #f0f4ff;
+            background-image: radial-gradient(#c7d2fe 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.12), 0 10px 10px -5px rgba(99, 102, 241, 0.06);
+        }
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .marquee {
+            position: relative;
+            overflow: hidden;
+        }
+        .marquee::before,
+        .marquee::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 56px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .marquee::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(30, 41, 59, 0.65), rgba(30, 41, 59, 0));
+        }
+        .marquee::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(30, 41, 59, 0.65), rgba(30, 41, 59, 0));
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            align-items: center;
+            gap: 12px;
+            animation: marquee-scroll 20s linear infinite;
+        }
+        .marquee:hover .marquee-track {
+            animation-play-state: paused;
+        }
+        .school-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            background: linear-gradient(180deg, rgba(71, 85, 105, 0.38) 0%, rgba(51, 65, 85, 0.32) 100%);
+            color: rgb(241 245 249);
+            font-weight: 700;
+            box-shadow: 0 10px 20px -12px rgba(30, 41, 59, 0.45);
+        }
+        @keyframes marquee-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .marquee-track {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased overflow-x-hidden">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-indigo-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg object-cover border border-indigo-200">
+                    <span class="font-bold text-xl tracking-wider">VocPass</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-indigo-600 transition-colors">功能特色</a>
+                    <a href="#schools" class="text-gray-600 hover:text-indigo-600 transition-colors">支援學校</a>
+                    <a href="#install" class="text-gray-600 hover:text-indigo-600 transition-colors">立即下載</a>
+                    <a href="https://github.com/VocPass" target="_blank"
+                       class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-slate-700 transition-colors">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 區塊 -->
+    <section class="hero-pattern pt-32 pb-20 lg:pt-48 lg:pb-36 px-4 relative">
+        <div class="max-w-4xl mx-auto text-center" data-aos="zoom-in" data-aos-duration="900">
+            <!-- 平台 badge -->
+            <div class="inline-flex items-center gap-2 px-5 py-2 bg-white border border-indigo-200 rounded-full text-indigo-700 text-sm font-semibold mb-8 shadow-sm">
+                <i class="fa-brands fa-apple text-base"></i>
+                iOS 17.0+ &nbsp;·&nbsp; iPadOS 17.0+ &nbsp;·&nbsp; macOS 11.0+
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-black tracking-tight text-slate-900 mb-4 relative block w-fit mx-auto leading-tight">
+                VocPass
+                <div class="absolute -bottom-2 left-0 w-full h-4 bg-indigo-200 -z-10 transform -rotate-1 rounded"></div>
+            </h1>
+            <p class="mt-8 text-2xl md:text-3xl font-bold text-indigo-600">高職通用校務查詢系統</p>
+            <p class="mt-5 text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                課表、成績、缺曠、獎懲，一站式查詢。<br>
+                原生 SwiftUI 打造，資料本機處理，全面保護你的隱私。
+            </p>
+
+            <!-- CTA 按鈕 -->
+            <div class="mt-10 flex flex-wrap justify-center gap-4">
+                <a href="https://github.com/VocPass" target="_blank"
+                   class="px-8 py-4 bg-slate-900 text-white rounded-full font-semibold hover:bg-slate-700 transition-transform hover:scale-105 shadow-lg flex items-center gap-2">
+                    <i class="fa-brands fa-github text-xl"></i>
+                    在 GitHub 上查看
+                </a>
+                <a href="#features"
+                   class="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-semibold hover:bg-indigo-50 hover:border-indigo-300 transition-all hover:scale-105 shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-star text-indigo-500"></i>
+                    查看功能特色
+                </a>
+            </div>
+
+            <!-- Shields.io badges -->
+            <div class="mt-10 flex flex-wrap justify-center gap-2 opacity-80">
+                <img src="https://img.shields.io/badge/platform-iOS%20%7C%20iPadOS%20%7C%20macOS-blue?logo=apple" alt="platform">
+                <img src="https://img.shields.io/badge/Swift-5.9+-orange?logo=swift" alt="swift">
+                <img src="https://img.shields.io/badge/iOS-17.0+-blue" alt="ios">
+                <img src="https://img.shields.io/badge/license-GPL%203.0-green" alt="license">
+            </div>
+        </div>
+
+        <!-- 裝飾浮動元素 -->
+        <div class="absolute top-44 left-16 text-5xl text-indigo-300 opacity-40 animate-bounce" style="animation-duration: 3.2s;">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+        <div class="absolute bottom-24 right-16 text-5xl text-indigo-300 opacity-40 animate-bounce" style="animation-duration: 4.1s;">
+            <i class="fa-brands fa-apple"></i>
+        </div>
+        <div class="absolute top-60 right-32 text-3xl text-indigo-200 opacity-30 animate-bounce hidden lg:block" style="animation-duration: 5s;">
+            <i class="fa-solid fa-table-cells"></i>
+        </div>
+    </section>
+
+    <!-- 功能特色 -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-2">Features</p>
+                <h2 class="text-4xl font-extrabold text-slate-900">功能特色</h2>
+                <div class="w-20 h-1.5 bg-indigo-500 mx-auto mt-5 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="50">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mb-5"><i class="fa-regular fa-calendar"></i></div>
+                    <h3 class="text-base font-bold mb-2">課表查詢</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">查看每週課表，支援離線快取，無需每次重新載入</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 text-2xl mb-5"><i class="fa-solid fa-chart-column"></i></div>
+                    <h3 class="text-base font-bold mb-2">成績查詢</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">第一、二學期及學年成績，各科目一覽無遺</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 text-2xl mb-5"><i class="fa-regular fa-clock"></i></div>
+                    <h3 class="text-base font-bold mb-2">缺曠統計</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">自動統計曠課、事假、病假、公假，即時掌握距 1/3 門檻狀況</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-500 text-2xl mb-5"><i class="fa-solid fa-award"></i></div>
+                    <h3 class="text-base font-bold mb-2">獎懲記錄</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">功過明細、核定日期、銷過狀態完整呈現</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="250">
+                    <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 text-2xl mb-5"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3 class="text-base font-bold mb-2">Dynamic Island</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">課表即時活動顯示，當前與下一節課盡在靈動島</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 text-2xl mb-5"><i class="fa-solid fa-shield"></i></div>
+                    <h3 class="text-base font-bold mb-2">驗證碼自動辨識</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">使用 Vision OCR 自動辨識登入驗證碼，免除手動輸入</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="350">
+                    <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-600 text-2xl mb-5"><i class="fa-solid fa-lock"></i></div>
+                    <h3 class="text-base font-bold mb-2">本地隱私保護</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">帳號密碼於本機處理，不經過任何第三方伺服器</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-slate-100 p-6 card-hover shadow-sm" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-sky-600 text-2xl mb-5"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                    <h3 class="text-base font-bold mb-2">離線快取</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">成績、課表資料快取，無網路也能查閱</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 支援學校 & 技術棧 -->
+    <section id="schools" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-indigo-900 rounded-full blur-3xl opacity-40 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-indigo-900 rounded-full blur-3xl opacity-40 translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+                <!-- 支援學校 -->
+                <div data-aos="fade-right">
+                    <p class="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-2">Supported Schools</p>
+                    <h2 class="text-4xl font-extrabold mb-4">支援學校</h2>
+                    <p class="text-slate-300 mb-6 text-lg">還在增加中！</p>
+
+                    <div class="mb-8 rounded-2xl border border-indigo-200/20 bg-white/5 p-3 backdrop-blur-sm">
+                        <div class="marquee rounded-xl">
+                            <div id="school-marquee-track" class="marquee-track py-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-800 border border-dashed border-slate-600 rounded-xl text-slate-400 text-sm flex items-start gap-3">
+                        <i class="fa-solid fa-circle-plus text-indigo-400 mt-0.5 flex-shrink-0"></i>
+                        <span>想增加其他學校嗎？填寫此 <a class="text-indigo-300" href="https://forms.gle/A8qrSusaDUv83Q1eA" target="_blank">表單</a> 以擴充支援</span>
+                    </div>
+                </div>
+
+                <!-- 技術棧 -->
+                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold mb-7 flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-indigo-400"></i> 技術棧
+                    </h3>
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center flex-shrink-0 border border-slate-600">
+                                <i class="fa-brands fa-swift text-orange-400 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">SwiftUI</h4>
+                                <p class="text-slate-400 text-sm">全 UI 框架，原生體驗</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center flex-shrink-0 border border-slate-600">
+                                <i class="fa-solid fa-bars-staggered text-green-400 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">ActivityKit + WidgetKit</h4>
+                                <p class="text-slate-400 text-sm">Dynamic Island / 鎖定螢幕小工具</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center flex-shrink-0 border border-slate-600">
+                                <i class="fa-solid fa-eye text-blue-400 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Vision</h4>
+                                <p class="text-slate-400 text-sm">驗證碼 OCR 辨識</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center flex-shrink-0 border border-slate-600">
+                                <i class="fa-solid fa-globe text-purple-400 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">WKWebView</h4>
+                                <p class="text-slate-400 text-sm">學校系統登入與資料擷取</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center flex-shrink-0 border border-slate-600">
+                                <i class="fa-solid fa-database text-yellow-400 text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">UserDefaults</h4>
+                                <p class="text-slate-400 text-sm">本地快取與帳號記憶</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 立即下載 -->
+    <section id="install" class="py-24 bg-slate-50">
+        <div class="max-w-3xl mx-auto px-4" data-aos="fade-up">
+            <div class="text-center mb-12">
+                <p class="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-2">Download</p>
+                <h2 class="text-4xl font-extrabold text-slate-900">立即下載</h2>
+                <p class="text-slate-500 mt-4 text-lg">可直接前往 App Store 下載，或取得原始碼</p>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-8">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="https://apps.apple.com/tw/search?term=VocPass" target="_blank"
+                                    class="flex-1 px-6 py-4 bg-slate-900 text-white rounded-2xl font-semibold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+                                     <i class="fa-brands fa-apple"></i>
+                                     App Store 下載
+                        </a>
+                        <a href="https://github.com/VocPass/ios/archive/refs/heads/main.zip" target="_blank"
+                           class="flex-1 px-6 py-4 bg-white border border-slate-300 text-slate-900 rounded-2xl font-semibold hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-zipper"></i>
+                            下載原始碼 ZIP
+                        </a>
+                    </div>
+                    <p class="text-slate-500 text-sm mt-5 text-center">若要自行建置，請使用 Xcode 15+ 開啟專案。</p>
+                </div>
+
+                <div class="border-t border-slate-100 p-8 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-slate-900">想貢獻或新增學校支援？</h4>
+                        <p class="text-slate-500 text-sm mt-1">歡迎提交 Issue 或 PR，一起讓 VocPass 支援更多學校！</p>
+                    </div>
+                    <a href="https://github.com/VocPass" target="_blank"
+                       class="flex-shrink-0 px-6 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-slate-700 transition-colors flex items-center gap-2">
+                        <i class="fa-brands fa-github text-lg"></i>
+                        前往 GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="bg-slate-950 py-10 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-6 h-6 rounded-md object-cover border border-indigo-300/40">
+                <span class="font-bold text-lg tracking-wider text-slate-300">VocPass</span>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">
+                高職通用校務查詢系統 &nbsp;·&nbsp; iOS / iPadOS / macOS<br>
+                Licensed under <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank" class="hover:text-slate-300 transition-colors underline underline-offset-2">GPL 3.0</a>
+            </p>
+            <div class="flex items-center justify-center gap-6 text-slate-600 text-sm">
+                <a href="https://github.com/VocPass" target="_blank"
+                   class="hover:text-slate-400 transition-colors flex items-center gap-1.5">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="https://github.com/VocPass/ios/issues" target="_blank"
+                   class="hover:text-slate-400 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-dot"></i> 回報問題
+                </a>
+                <a href="https://github.com/VocPass/ios/pulls" target="_blank"
+                   class="hover:text-slate-400 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-code-pull-request"></i> 貢獻 PR
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 50,
+        });
+
+        async function loadSchools() {
+            const marqueeTrack = document.getElementById('school-marquee-track');
+            if (!marqueeTrack) return;
+
+            const escapeHtml = (value) => String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+
+            const fallbackSchools = ['鶯歌工商', '三重商工', '新北高工'];
+            let schoolNames = [];
+
+            try {
+                const response = await fetch('/school', { cache: 'no-store' });
+                if (!response.ok) throw new Error('Failed to fetch /school');
+                const data = await response.json();
+                schoolNames = Object.keys(data || {});
+            } catch (error) {
+                schoolNames = fallbackSchools;
+            }
+
+            if (!schoolNames.length) {
+                schoolNames = fallbackSchools;
+            }
+
+            const chips = schoolNames.map((name) => `
+                <div class="school-chip">
+                    <i class="fa-solid fa-school text-indigo-300"></i>
+                    <span>${escapeHtml(name)}</span>
+                </div>
+            `).join('');
+
+            marqueeTrack.innerHTML = `
+                <div class="flex items-center gap-3 pr-3">${chips}</div>
+                <div class="flex items-center gap-3 pr-3" aria-hidden="true">${chips}</div>
+            `;
+        }
+
+        loadSchools();
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>

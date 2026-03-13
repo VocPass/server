@@ -34,14 +34,6 @@ for module_file in sorted(routers_path.glob("*.py")):
         app.include_router(module.router)
 
 
-@app.get("/", summary="首頁")
-async def root(response: Response):
-    return "Hello, VocPass API is running! Visit /docs for API documentation."
-
-@app.get("/school")
-async def get_all_schools(request: Request):
-    return app.state.schools
-
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     return JSONResponse(
