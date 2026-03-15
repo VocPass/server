@@ -22,7 +22,7 @@ class YearModel:
         # YYYY/MM/DD
 
         self.year = datetime_object.year - 1911
-        self.semester = 1 if datetime_object.month < 8 else 2
+        self.semester = 1 if datetime_object.month > 8 or datetime_object.month < 3 else 2
     
     def to_dict(self):
         return {"year": self.year, "semester": self.semester}
