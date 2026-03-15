@@ -1,19 +1,4 @@
-
-def num_to_chinese(num):
-    chinese_numerals = {
-        0: "零",
-        1: "一",
-        2: "二",
-        3: "三",
-        4: "四",
-        5: "五",
-        6: "六",
-        7: "七",
-        8: "八",
-        9: "九",
-    }
-    return chinese_numerals.get(num, "")
-
+from utils.base import *
 
 def parse_curriculum(curriculum_data):
     """
@@ -42,4 +27,32 @@ def parse_curriculum(curriculum_data):
                 "end": time[str(i["PaiKe"])]["end"],
             }
         )
+    return data
+
+def parse_merit_demerit_records(records):
+    """
+    解析獎懲紀錄
+    """
+    good = ["大功", "小功", "嘉獎"]
+    bad = ["大過", "小過", "警告"]
+
+    data = [[],[]]
+    for record in records['obj']['ListD']:
+        i = 3
+        if record['RewardItem'][:2] in good:
+            i = 0
+        elif record['RewardItem'][:2] in bad:
+            i = 1
+        date = YearModel(record['RdDate'].replace("-", "/"))
+        data[i].append(
+            {
+                "date_occurred": record['RdDate'].replace("-", "/"),
+                "date_approved": record['RdDate'].replace("-", "/") if record['ReformStatusText'] != "申請中" else "申請中",
+                "reason": record['Descript'],
+                "action": record['RewardItem'],
+                "date_revoked": None, # 佔位
+                "year": f"{date.year}{date.semester}",
+            }
+        )
+        
     return data
