@@ -25,7 +25,8 @@
             },
             "button": {
                 "class": "loginBtnAdjust"
-            }
+            },
+            "successKeywords": ["附屬進階設定/應用"]
         },
         "route": {
             "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
@@ -62,7 +63,8 @@
             },
             "button": {
                 "class": "Enter"
-            }
+            },
+            "successKeywords": ["附屬進階設定/應用"]
         },
         "route": {
             "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
@@ -99,7 +101,9 @@
             },
             "button": {
                 "class": "loginBtnAdjust"
-            }
+            },
+            "successKeywords": ["附屬進階設定/應用"]
+            
         },
         "route": {
             "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
@@ -129,7 +133,8 @@
             },
             "captcha": {},
             "captchaImage": {},
-            "button": {}
+            "button": {},
+            "successKeywords": ["系統公告", "重要行程"]
         },
         "route": {
             "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
