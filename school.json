@@ -26,7 +26,9 @@
             "button": {
                 "class": "loginBtnAdjust"
             },
-            "successKeywords": ["附屬進階設定/應用"]
+            "successKeywords": [
+                "附屬進階設定/應用"
+            ]
         },
         "route": {
             "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
@@ -64,7 +66,9 @@
             "button": {
                 "class": "Enter"
             },
-            "successKeywords": ["附屬進階設定/應用"]
+            "successKeywords": [
+                "附屬進階設定/應用"
+            ]
         },
         "route": {
             "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
@@ -102,8 +106,9 @@
             "button": {
                 "class": "loginBtnAdjust"
             },
-            "successKeywords": ["附屬進階設定/應用"]
-            
+            "successKeywords": [
+                "附屬進階設定/應用"
+            ]
         },
         "route": {
             "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
@@ -134,15 +139,64 @@
             "captcha": {},
             "captchaImage": {},
             "button": {},
-            "successKeywords": ["系統公告", "重要行程"]
+            "successKeywords": [
+                "系統公告",
+                "重要行程"
+            ]
         },
         "route": {
             "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
-            "attendance": "/Home/SD51",
+            "attendance": "/Mvc_SD51/Home/SD51",
             "exam_menu": null,
             "exam_results": null,
-            "semester_scores": "/Home/StuScore_Qry",
+            "semester_scores": "/Mvc_StuScore/Home/StuScore_Qry",
             "curriculum": "/Mvc_StuCosTable/Home/GetCosTable"
+        },
+        "get": {
+            "merit_demerit": "/Mvc_SC14",
+            "attendance": "/Mvc_SD51/Home/SD51",
+            "exam_menu": null,
+            "exam_results": null,
+            "semester_scores": "/Mvc_StuScore",
+            "curriculum": "/Mvc_StuCosTable"
+        },
+        "time": {
+            "1": {
+                "start": "08:20",
+                "end": "09:10"
+            },
+            "2": {
+                "start": "09:20",
+                "end": "10:10"
+            },
+            "3": {
+                "start": "10:20",
+                "end": "11:10"
+            },
+            "4": {
+                "start": "11:20",
+                "end": "12:10"
+            },
+            "5": {
+                "start": "13:10",
+                "end": "14:00"
+            },
+            "6": {
+                "start": "14:10",
+                "end": "15:00"
+            },
+            "7": {
+                "start": "15:10",
+                "end": "16:00"
+            },
+            "8": {
+                "start": "16:10",
+                "end": "17:00"
+            },
+            "9": {
+                "start": "17:10",
+                "end": "18:00"
+            }
         }
     }
 }

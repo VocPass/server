@@ -56,7 +56,10 @@ class HttpsClient:
             cookies=cookies, headers=self.headers
         ) as session:
             async with session.post(url, data=data) as resp:
-                body = await resp.text(encoding=encoding)
+                try:
+                    body = await resp.text(encoding=encoding)
+                except UnicodeDecodeError:
+                    body = await resp.text(encoding="latin1")
                 if resp.status != 200:
                     return ResponseModel(
                         code=resp.status, message="Failed to fetch data.", data=body

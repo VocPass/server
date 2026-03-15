@@ -53,18 +53,21 @@ def get_request_verification_token(html_content):
     return token_input.get("value")
 
 
-def parse_curriculum(curriculum_data):
+def parse_curriculum(curriculum_data,school_info):
     """
     解析課表
     """
     data = {}
     time = {}
 
-    for i in curriculum_data["TimeList"]:
-        time[i["Paike"]] = {
-            "start": i["BegTime"],
-            "end": i["EndTime"],
-        }
+    if curriculum_data['TimeList'] == []:
+        time = school_info['time']
+    else:
+        for i in curriculum_data["TimeList"]:
+            time[i["Paike"]] = {
+                "start": i["BegTime"],
+                "end": i["EndTime"],
+            }
 
     for i in curriculum_data["MyCosTableS"]:
 

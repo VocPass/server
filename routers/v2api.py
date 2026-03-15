@@ -60,6 +60,8 @@ async def get_merit_demerit(
 
         return data
     find_all = []
+    url = f"{school['api']}{school['get']['merit_demerit']}"
+    await http.get(url, request.cookies, "utf-8")
     for i in range(0, 3):
         for j in range(1, 3):
             now = datetime.now()
@@ -67,7 +69,6 @@ async def get_merit_demerit(
             date = YearModel(now.strftime("%Y/%m/%d"))
             year = date.year - i
             url = f"{school['api']}{school['route']['merit_demerit']}"
-
             search = {
                 "J_Year": year,
                 "J_Semi": date.semester,
@@ -81,7 +82,6 @@ async def get_merit_demerit(
                 data["data"] = None
 
                 return data
-            
             r = v2.parse_merit_demerit_records(original_data.data)
             find_all.extend(r[0])
 
@@ -89,7 +89,7 @@ async def get_merit_demerit(
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = find_all
-
+    
     return data
 
 
@@ -118,6 +118,8 @@ async def get_curriculum(
         return data
     now = datetime.now()
     date = YearModel(now.strftime("%Y/%m/%d"))
+    url = f"{school['api']}{school['get']['curriculum']}"
+    r = await http.get(url, request.cookies, "utf-8")
 
     url = f"{school['api']}{school['route']['curriculum']}"
     search = {
@@ -126,6 +128,7 @@ async def get_curriculum(
     }
 
     original_data = await http.post(url, search, request.cookies, "utf-8")
+
     if not original_data.data:
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -133,8 +136,8 @@ async def get_curriculum(
         data["data"] = None
 
         return data
-
-    r = v2.parse_curriculum(original_data.data)
+    
+    r = v2.parse_curriculum(original_data.data,school)
     if r.get("error"):
         data = request.app.state.response
         data["code"] = 500
@@ -173,17 +176,31 @@ async def get_attendance(
         data["data"] = None
 
         return data
+    
+    data["code"] = 404
+    data["message"] = "Not Implemented."
+    data["data"] = None
 
+    return data
+    url = f"{school['api']}{school['get']['attendance']}"
+    r = await http.get(url, request.cookies, "utf-8")
+
+    token = v2.get_request_verification_token(r.data)
     url = f"{school['api']}{school['route']['attendance']}"
 
+    now = datetime.now()
+    start = datetime(now.year - 3, 1, 1)
+
     search = {
-        "__RequestVerificationToken": "",
+        "__RequestVerificationToken": token,
         "StuName": "",
-        "BegDate": "2019/03/01",
-        "EndDate": "2026/03/15",
+        "StuId": "",
+        "BegDate": start.strftime("%Y/%m/%d"),
+        "EndDate": now.strftime("%Y/%m/%d"),
         "SubmitButton": "查詢",
     }
-    original_data = await http.get(url, request.cookies, data=search)
+
+    original_data = await http.post(url, search, request.cookies, "utf-8")
     if not original_data.data:
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -191,7 +208,7 @@ async def get_attendance(
         data["data"] = None
 
         return data
-
+    print(original_data.data)
     r = v2.parse_absence_records(original_data.data)
 
     data = request.app.state.response
@@ -282,6 +299,7 @@ async def get_semester_scores(
         "J_StuID": "",
     }
     url = f"{school_info['api']}{school_info['route']['merit_demerit']}"
+
     d = await http.post(url, s, request.cookies, "utf-8")
     if not d.data:
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -290,6 +308,9 @@ async def get_semester_scores(
         data["data"] = None
         return data
     y = v2.parse_grade_level(d.data)
+
+    url = f"{school_info['api']}{school_info['get']['semester_scores']}"
+    await http.get(url, request.cookies, "utf-8")
 
     url = f"{school_info['api']}{school_info['route']['semester_scores']}"
     s1 = {
