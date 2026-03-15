@@ -34,26 +34,6 @@ def require_cookie_header(
     return cookie
 
 
-@router.get("/", summary="獲取此端點支援學校列表")
-async def index(request: Request):
-    """
-    獲取 v1 樣式解析支援的學校列表。
-     - **返回值**: 包含支援學校列表的 JSON 物件。
-    """
-    data = request.app.state.response
-    schools = request.app.state.schools
-    
-    data["code"] = 200
-    data["message"] = "Success."
-    supported_schools = []
-    for i in schools:
-        if schools[i].get("vision") == "v1":
-            supported_schools.append(i)
-    data["data"] = supported_schools
-
-    return data
-
-
 @router.get("/merit_demerit", summary="解析獎懲紀錄")
 async def get_merit_demerit(
     request: Request,
