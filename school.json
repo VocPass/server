@@ -2,6 +2,7 @@
     "鶯歌工商": {
         "vision": "v1",
         "app":1.0,
+        "beta": false,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
         "url": {
             "login": "/auth/Online",
@@ -38,6 +39,7 @@
     "三重商工": {
         "vision": "v1",
         "app":1.0,
+        "beta": false,
         "api": "https://score.scvs.ntpc.edu.tw",
         "url": {
             "login": "/online",
@@ -74,6 +76,7 @@
     "新北高工": {
         "vision": "v1",
         "app":1.0,
+        "beta": false,  
         "api": "https://elife.ntvs.ntpc.edu.tw",
         "url": {
             "login": "/auth/Auth/Login",
@@ -105,6 +108,43 @@
             "exam_results":"/online/selection_student/{file_name}",
             "semester_scores":"/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
             "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "大安高工": {
+        "vision": "v2",
+        "app":1.1,
+        "beta": true,  
+        "api": "https://vschool.tp.edu.tw",
+        "url": {
+            "login": "/B2K2017/login.aspx",
+            "logined": "/B2K2017",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "studentLId"
+            },
+            "password": {
+                "name": "studentPwd"
+            },
+            "captcha": {
+                "name": "v1CaptchaImageInput"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "id"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            }
+        },
+        "route": {
+            "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
+            "attendance": "/Home/SD51",
+            "exam_menu": null,
+            "exam_results":null,
+            "semester_scores":"/Home/StuScore_Qry",
+            "curriculum": "/Mvc_StuCosTable/Home/GetCosTable"
         }
     }
 }

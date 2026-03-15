@@ -23,16 +23,7 @@ async def index(request: Request):
      - **返回值**: 包含支援學校列表的 JSON 物件。
     """
     data = request.app.state.response
-    async with aiohttp.ClientSession() as session:
-        async with session.get(os.getenv("SCHOOL_URL")) as resp:
-            if resp.status == 200:
-                schools = json.loads(await resp.text())
-
-            else:
-                data["code"] = 500
-                data["message"] = "Failed to fetch school list."
-
-                return data
+    schools = request.app.state.schools
 
     data["code"] = 200
     data["message"] = "Success."

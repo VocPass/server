@@ -3,6 +3,56 @@ import re
 from bs4 import BeautifulSoup
 
 
+def _score_to_number(value):
+    if value is None:
+        return None
+
+    text = str(value).strip()
+    if not text or text == "-":
+        return None
+
+    try:
+        return float(text)
+    except (TypeError, ValueError):
+        return None
+
+
+def _build_course_key(course):
+    return (
+        course.get("CourseID")
+        or course.get("OCID")
+        or course.get("OpTitle")
+        or ""
+    )
+
+
+def _build_semester_payload(course):
+    if not course:
+        return {
+            "type": "",
+            "credits": "",
+            "score": "-",
+        }
+
+    return {
+        "type": course.get("StudyType", ""),
+        "credits": str(course.get("Credit", "")),
+        "score": course.get("AllScore", "-"),
+    }
+
+
+def get_request_verification_token(html_content):
+    """
+    取得頁面中的 __RequestVerificationToken。
+    """
+    soup = BeautifulSoup(html_content, "html.parser")
+    token_input = soup.find("input", {"name": "__RequestVerificationToken"})
+    if not token_input:
+        return None
+
+    return token_input.get("value")
+
+
 def parse_curriculum(curriculum_data):
     """
     解析課表
@@ -72,25 +122,67 @@ def parse_semester_grades(first_semester_grades, second_semester_grades):
         "subject_scores": [],
     }
 
-    for first, second in zip(
-        first_semester_grades["obj"]["DataList"],
-        second_semester_grades["obj"]["DataList"],
-    ):
+    first_courses = first_semester_grades["obj"].get("DataList", [])
+    second_courses = second_semester_grades["obj"].get("DataList", [])
+
+    second_courses_by_key = {}
+    for course in second_courses:
+        key = _build_course_key(course)
+        if key not in second_courses_by_key:
+            second_courses_by_key[key] = []
+        second_courses_by_key[key].append(course)
+
+    matched_second_course_ids = set()
+
+    for first in first_courses:
+        key = _build_course_key(first)
+        candidates = second_courses_by_key.get(key, [])
+        second = candidates.pop(0) if candidates else None
+
+        if second is None:
+            for candidate in second_courses:
+                if candidate.get("Objid") in matched_second_course_ids:
+                    continue
+                if candidate.get("OpTitle") == first.get("OpTitle"):
+                    second = candidate
+                    break
+
+        if second is not None and second.get("Objid"):
+            matched_second_course_ids.add(second.get("Objid"))
+
+        first_score = _score_to_number(first.get("AllScore"))
+        second_score = _score_to_number(second.get("AllScore") if second else None)
+
+        annual_score = None
+        if first_score is not None and second_score is not None:
+            annual_score = int((first_score + second_score) // 2)
+        elif first_score is not None:
+            annual_score = int(first_score)
+        elif second_score is not None:
+            annual_score = int(second_score)
+
         d = {
-            "subject": first["OpTitle"],
-            "first_semester": {
-                "type": first["StudyType"],
-                "credits": str(first["Credit"]),
-                "score": "-",
-            },
-            "second_semester": {
-                "type": second["StudyType"],
-                "credits": str(second["Credit"]),
-                "score": "-",
-            },
-            "annual_score": "-",
+            "subject": first.get("OpTitle", ""),
+            "first_semester": _build_semester_payload(first),
+            "second_semester": _build_semester_payload(second),
+            "annual_score": annual_score,
         }
         data["subject_scores"].append(d)
+
+    for second in second_courses:
+        if second.get("Objid") in matched_second_course_ids:
+            continue
+
+        second_score = _score_to_number(second.get("AllScore"))
+
+        d = {
+            "subject": second.get("OpTitle", ""),
+            "first_semester": _build_semester_payload(None),
+            "second_semester": _build_semester_payload(second),
+            "annual_score": int(second_score) if second_score is not None else None,
+        }
+        data["subject_scores"].append(d)
+
     return data
 
 
@@ -165,4 +257,17 @@ def parse_absence_records(html_content):
             )
 
     return result
-        
+
+def parse_grade_level(info):
+    text = info.get("obj", {}).get("OrgTitle")
+    if not text:
+        return 1
+    else:
+        text = text[-2]
+    y = {
+        "一": 1,
+        "二": 2,
+        "三": 3,
+        "四": 4,
+    }
+    return y[text] if text in "一二三四" else 1
