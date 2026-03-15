@@ -116,7 +116,7 @@
         "beta": true,
         "api": "https://vschool.tp.edu.tw",
         "url": {
-            "login": "/login",
+            "login": "/B2K2017/login.aspx",
             "logined": "/B2K2017",
             "root": "/"
         },
