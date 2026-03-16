@@ -62,7 +62,7 @@
                 "class": "loginBtnAdjust"
             },
             "successKeywords": [
-                "附屬進階設定/應用"
+                "學生線上查詢"
             ]
         },
         "route": {
@@ -102,7 +102,7 @@
                 "class": "Enter"
             },
             "successKeywords": [
-                "附屬進階設定/應用"
+                "學生線上查詢"
             ]
         },
         "route": {
@@ -142,7 +142,7 @@
                 "class": "loginBtnAdjust"
             },
             "successKeywords": [
-                "附屬進階設定/應用"
+                "學生線上查詢"
             ]
         },
         "route": {
