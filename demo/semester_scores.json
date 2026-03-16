@@ -1,0 +1,340 @@
+{
+    "student_info": "Demo",
+    "subject_scores": [
+        {
+            "subject": "歷史",
+            "first_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "60"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "",
+                "score": ""
+            },
+            "annual_score": "60"
+        },
+        {
+            "subject": "地理",
+            "first_semester": {
+                "type": "必修",
+                "credits": "",
+                "score": ""
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "60"
+            },
+            "annual_score": "60"
+        },
+        {
+            "subject": "物理",
+            "first_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "45"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "27"
+            },
+            "annual_score": "36"
+        },
+        {
+            "subject": "資訊科技",
+            "first_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "81"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "",
+                "score": ""
+            },
+            "annual_score": "81"
+        },
+        {
+            "subject": "資訊科技與應用",
+            "first_semester": {
+                "type": "選修",
+                "credits": "",
+                "score": ""
+            },
+            "second_semester": {
+                "type": "選修",
+                "credits": "2",
+                "score": "73"
+            },
+            "annual_score": "73"
+        },
+        {
+            "subject": "數學",
+            "first_semester": {
+                "type": "必修",
+                "credits": "4",
+                "score": "47"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "4",
+                "score": "60"
+            },
+            "annual_score": "53.5"
+        },
+        {
+            "subject": "國語文",
+            "first_semester": {
+                "type": "必修",
+                "credits": "3",
+                "score": "43"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "3",
+                "score": "34"
+            },
+            "annual_score": "38.5"
+        },
+        {
+            "subject": "文學作家與作品",
+            "first_semester": {
+                "type": "選修",
+                "credits": "1",
+                "score": "43"
+            },
+            "second_semester": {
+                "type": "選修",
+                "credits": "1",
+                "score": "34"
+            },
+            "annual_score": "38.5"
+        },
+        {
+            "subject": "閩南語文",
+            "first_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "77"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "62"
+            },
+            "annual_score": "69.5"
+        },
+        {
+            "subject": "英語文",
+            "first_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "42"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "40"
+            },
+            "annual_score": "41"
+        },
+        {
+            "subject": "基礎英文閱讀與寫作",
+            "first_semester": {
+                "type": "選修",
+                "credits": "2",
+                "score": "40"
+            },
+            "second_semester": {
+                "type": "選修",
+                "credits": "2",
+                "score": "0"
+            },
+            "annual_score": "20"
+        },
+        {
+            "subject": "音樂",
+            "first_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "72"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "81"
+            },
+            "annual_score": "76.5"
+        },
+        {
+            "subject": "美術",
+            "first_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "78"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "68"
+            },
+            "annual_score": "73"
+        },
+        {
+            "subject": "體育",
+            "first_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "84"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "58"
+            },
+            "annual_score": "71"
+        },
+        {
+            "subject": "基本電學實習",
+            "first_semester": {
+                "type": "必修",
+                "credits": "3",
+                "score": "62"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "",
+                "score": ""
+            },
+            "annual_score": "62"
+        },
+        {
+            "subject": "程式設計實習",
+            "first_semester": {
+                "type": "必修",
+                "credits": "",
+                "score": ""
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "3",
+                "score": "83"
+            },
+            "annual_score": "83"
+        },
+        {
+            "subject": "基本電學",
+            "first_semester": {
+                "type": "必修",
+                "credits": "3",
+                "score": "60"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "3",
+                "score": "62"
+            },
+            "annual_score": "61"
+        },
+        {
+            "subject": "基本電子學",
+            "first_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "49"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "2",
+                "score": "58"
+            },
+            "annual_score": "53.5"
+        },
+        {
+            "subject": "健康與護理",
+            "first_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "72"
+            },
+            "second_semester": {
+                "type": "必修",
+                "credits": "1",
+                "score": "80"
+            },
+            "annual_score": "76"
+        }
+    ],
+    "total_scores": {
+        "補前平均": {
+            "first_semester": "57",
+            "second_semester": "55.8",
+            "annual": "56.4"
+        },
+        "學科平均": {
+            "first_semester": "57.1",
+            "second_semester": "54.2",
+            "annual": "55.7"
+        },
+        "智育成績": {
+            "first_semester": "54.6",
+            "second_semester": "50.7",
+            "annual": "53.9"
+        },
+        "體育成績": {
+            "first_semester": "",
+            "second_semester": "",
+            "annual": ""
+        },
+        "實習成績": {
+            "first_semester": "62",
+            "second_semester": "83",
+            "annual": "72.5"
+        },
+        "軍訓成績": {
+            "first_semester": "",
+            "second_semester": "",
+            "annual": ""
+        },
+        "實得學分": {
+            "first_semester": "16",
+            "second_semester": "28",
+            "annual": ""
+        },
+        "實得累計": {
+            "first_semester": "16",
+            "second_semester": "44",
+            "annual": ""
+        },
+        "學期名次": {
+            "first_semester": "28",
+            "second_semester": "26",
+            "annual": ""
+        }
+    },
+    "daily_performance": {
+        "first_semester": {
+            "daily_life_performance": {
+                "evaluation": "<td class=\"top\" style=\"width: 144px;\">待人誠信：表現優異<br/>整潔習慣：表現優異<br/>禮  節：表現優異<br/>班級服務：表現優異<br/>社團活動：表現優異<br/>",
+                "description": "性情爽朗，頗具創意，天真活潑"
+            },
+            "service_learning": "擔任校外志工服務態度認真，本學期服務學習總時數共計19 小時(校內: 小時,校外: 小時)",
+            "special_achievements": "擔任班長認真負責，服儀整齊，協助導師辦理家長日活動",
+            "suggestions_and_comments": "收起頑皮之心，專心於學業，上課須專心，才不辜負父母之期望。",
+            "others": ""
+        },
+        "second_semester": {
+            "daily_life_performance": {
+                "evaluation": "<td class=\"top\" style=\"width: 144px;\">待人誠信：表現優異<br/>整潔習慣：表現優異<br/>禮  節：表現優異<br/>班級服務：表現優異<br/>社團活動：亟待改進<br/>",
+                "description": "具領導力，天真活潑"
+            },
+            "service_learning": "擔任校外志工服務態度認真，本學期服務學習總時數共計  小時(校內: 18  小時,校外:   小時)",
+            "special_achievements": "擔任班長認真負責，體育週比賽表現優異",
+            "suggestions_and_comments": "天真坦率，工作熱心。課業面如能細心、勤讀，必可獲改善，願你體會力行之",
+            "others": ""
+        }
+    }
+}

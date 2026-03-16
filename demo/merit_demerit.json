@@ -1,0 +1,30 @@
+[
+    [
+        {
+            "date_occurred": "2023/12/29",
+            "date_approved": "2024/01/02",
+            "reason": "擔任班長認真負責",
+            "action": "嘉獎貳次",
+            "date_revoked": null,
+            "year": "1121"
+        },
+        {
+            "date_occurred": "2024/03/22",
+            "date_approved": "2024/03/27",
+            "reason": "協助校慶園遊會攤位相關事宜認真負責",
+            "action": "嘉獎乙次",
+            "date_revoked": null,
+            "year": "1122"
+        }
+    ],
+    [
+        {
+            "date_occurred": "2023/09/25",
+            "date_approved": "2023/10/16",
+            "reason": "1120919違反行動載具管理規則屢勸不聽",
+            "action": "警告貳次",
+            "date_revoked": null,
+            "year": "1121"
+        }
+    ]
+]
