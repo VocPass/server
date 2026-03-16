@@ -634,7 +634,7 @@
             }
         }
     },
-    "開南商工                                                                                                                                                                                                    ": {
+    "開南商工": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -714,7 +714,7 @@
             }
         }
     },
-    "開平餐飲                                                                                                                                                                                                    ": {
+    "開平餐飲": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -874,7 +874,7 @@
             }
         }
     },
-    "木柵高工                                                                                                                                                                                                    ": {
+    "木柵高工": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -954,7 +954,7 @@
             }
         }
     },
-    "南港高工                                                                                                                                                                                                    ": {
+    "南港高工": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -1034,7 +1034,7 @@
             }
         }
     },
-    "內湖高工                                                                                                                                                                                                    ": {
+    "內湖高工": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -1194,7 +1194,7 @@
             }
         }
     },
-    "士林高商                                                                                                                                                                                                    ": {
+    "士林高商": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -1354,7 +1354,7 @@
             }
         }
     },
-    "松山家商                                                                                                                                                                                                    ": {
+    "松山家商": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -1514,7 +1514,7 @@
             }
         }
     },
-    "稻江護家                                                                                                                                                                                                    ": {
+    "稻江護家": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -1994,7 +1994,7 @@
             }
         }
     },
-    "稻江高商                                                                                                                                                                                                    ": {
+    "稻江高商": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -2074,167 +2074,7 @@
             }
         }
     },
-    "稻江高商(夜)                                                                                                                                                                                                 ": {
-        "vision": "v2",
-        "app": 1.1,
-        "beta": true,
-        "api": "https://vschool.tp.edu.tw",
-        "url": {
-            "login": "/B2K2017/login.aspx",
-            "logined": "/B2K2017",
-            "root": "/"
-        },
-        "login": {
-            "username": {
-                "name": "account"
-            },
-            "password": {
-                "name": "password"
-            },
-            "captcha": {},
-            "captchaImage": {},
-            "button": {},
-            "successKeywords": [
-                "系統公告",
-                "重要行程"
-            ]
-        },
-        "route": {
-            "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore/Home/StuScore_Qry",
-            "curriculum": "/Mvc_StuCosTable/Home/GetCosTable"
-        },
-        "get": {
-            "merit_demerit": "/Mvc_SC14",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore",
-            "curriculum": "/Mvc_StuCosTable"
-        },
-        "time": {
-            "1": {
-                "start": "08:20",
-                "end": "09:10"
-            },
-            "2": {
-                "start": "09:20",
-                "end": "10:10"
-            },
-            "3": {
-                "start": "10:20",
-                "end": "11:10"
-            },
-            "4": {
-                "start": "11:20",
-                "end": "12:10"
-            },
-            "5": {
-                "start": "13:10",
-                "end": "14:00"
-            },
-            "6": {
-                "start": "14:10",
-                "end": "15:00"
-            },
-            "7": {
-                "start": "15:10",
-                "end": "16:00"
-            },
-            "8": {
-                "start": "16:10",
-                "end": "17:00"
-            },
-            "9": {
-                "start": "17:10",
-                "end": "18:00"
-            }
-        }
-    },
-    "臺北市教育局": {
-        "vision": "v2",
-        "app": 1.1,
-        "beta": true,
-        "api": "https://vschool.tp.edu.tw",
-        "url": {
-            "login": "/B2K2017/login.aspx",
-            "logined": "/B2K2017",
-            "root": "/"
-        },
-        "login": {
-            "username": {
-                "name": "account"
-            },
-            "password": {
-                "name": "password"
-            },
-            "captcha": {},
-            "captchaImage": {},
-            "button": {},
-            "successKeywords": [
-                "系統公告",
-                "重要行程"
-            ]
-        },
-        "route": {
-            "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore/Home/StuScore_Qry",
-            "curriculum": "/Mvc_StuCosTable/Home/GetCosTable"
-        },
-        "get": {
-            "merit_demerit": "/Mvc_SC14",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore",
-            "curriculum": "/Mvc_StuCosTable"
-        },
-        "time": {
-            "1": {
-                "start": "08:20",
-                "end": "09:10"
-            },
-            "2": {
-                "start": "09:20",
-                "end": "10:10"
-            },
-            "3": {
-                "start": "10:20",
-                "end": "11:10"
-            },
-            "4": {
-                "start": "11:20",
-                "end": "12:10"
-            },
-            "5": {
-                "start": "13:10",
-                "end": "14:00"
-            },
-            "6": {
-                "start": "14:10",
-                "end": "15:00"
-            },
-            "7": {
-                "start": "15:10",
-                "end": "16:00"
-            },
-            "8": {
-                "start": "16:10",
-                "end": "17:00"
-            },
-            "9": {
-                "start": "17:10",
-                "end": "18:00"
-            }
-        }
-    },
-    "虹橋資訊": {
+    "稻江高商(夜)": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
@@ -2315,166 +2155,6 @@
         }
     },
     "泰北高中(夜)": {
-        "vision": "v2",
-        "app": 1.1,
-        "beta": true,
-        "api": "https://vschool.tp.edu.tw",
-        "url": {
-            "login": "/B2K2017/login.aspx",
-            "logined": "/B2K2017",
-            "root": "/"
-        },
-        "login": {
-            "username": {
-                "name": "account"
-            },
-            "password": {
-                "name": "password"
-            },
-            "captcha": {},
-            "captchaImage": {},
-            "button": {},
-            "successKeywords": [
-                "系統公告",
-                "重要行程"
-            ]
-        },
-        "route": {
-            "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore/Home/StuScore_Qry",
-            "curriculum": "/Mvc_StuCosTable/Home/GetCosTable"
-        },
-        "get": {
-            "merit_demerit": "/Mvc_SC14",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore",
-            "curriculum": "/Mvc_StuCosTable"
-        },
-        "time": {
-            "1": {
-                "start": "08:20",
-                "end": "09:10"
-            },
-            "2": {
-                "start": "09:20",
-                "end": "10:10"
-            },
-            "3": {
-                "start": "10:20",
-                "end": "11:10"
-            },
-            "4": {
-                "start": "11:20",
-                "end": "12:10"
-            },
-            "5": {
-                "start": "13:10",
-                "end": "14:00"
-            },
-            "6": {
-                "start": "14:10",
-                "end": "15:00"
-            },
-            "7": {
-                "start": "15:10",
-                "end": "16:00"
-            },
-            "8": {
-                "start": "16:10",
-                "end": "17:00"
-            },
-            "9": {
-                "start": "17:10",
-                "end": "18:00"
-            }
-        }
-    },
-    "進修部學校": {
-        "vision": "v2",
-        "app": 1.1,
-        "beta": true,
-        "api": "https://vschool.tp.edu.tw",
-        "url": {
-            "login": "/B2K2017/login.aspx",
-            "logined": "/B2K2017",
-            "root": "/"
-        },
-        "login": {
-            "username": {
-                "name": "account"
-            },
-            "password": {
-                "name": "password"
-            },
-            "captcha": {},
-            "captchaImage": {},
-            "button": {},
-            "successKeywords": [
-                "系統公告",
-                "重要行程"
-            ]
-        },
-        "route": {
-            "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore/Home/StuScore_Qry",
-            "curriculum": "/Mvc_StuCosTable/Home/GetCosTable"
-        },
-        "get": {
-            "merit_demerit": "/Mvc_SC14",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore",
-            "curriculum": "/Mvc_StuCosTable"
-        },
-        "time": {
-            "1": {
-                "start": "08:20",
-                "end": "09:10"
-            },
-            "2": {
-                "start": "09:20",
-                "end": "10:10"
-            },
-            "3": {
-                "start": "10:20",
-                "end": "11:10"
-            },
-            "4": {
-                "start": "11:20",
-                "end": "12:10"
-            },
-            "5": {
-                "start": "13:10",
-                "end": "14:00"
-            },
-            "6": {
-                "start": "14:10",
-                "end": "15:00"
-            },
-            "7": {
-                "start": "15:10",
-                "end": "16:00"
-            },
-            "8": {
-                "start": "16:10",
-                "end": "17:00"
-            },
-            "9": {
-                "start": "17:10",
-                "end": "18:00"
-            }
-        }
-    },
-    "日間部學校": {
         "vision": "v2",
         "app": 1.1,
         "beta": true,
