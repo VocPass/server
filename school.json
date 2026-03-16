@@ -1,4 +1,39 @@
 {
+    "Cool School": {
+        "vision": "demo",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://dev.vocpass.com",
+        "url": {
+            "login": "/api/demo/login",
+            "logined": "/api/demo/login",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "id": "username"
+            },
+            "password": {
+                "id": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "login-btn"
+            },
+            "successKeywords": [
+                "登入成功"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/demo",
+            "attendance": "/demo",
+            "exam_menu": "/demo",
+            "exam_results": "/demo",
+            "semester_scores": "/demo",
+            "curriculum": "/demo"
+        }
+    },
     "鶯歌工商": {
         "vision": "v1",
         "app": 1.0,

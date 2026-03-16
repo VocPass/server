@@ -1,0 +1,277 @@
+{
+    "英語文": {
+        "count": 2,
+        "schedule": [
+            {
+                "weekday": "一",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00"
+            },
+            {
+                "weekday": "一",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00"
+            }
+        ]
+    },
+    "體育": {
+        "count": 2,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00"
+            },
+            {
+                "weekday": "四",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00"
+            }
+        ]
+    },
+    "作業系統實習": {
+        "count": 4,
+        "schedule": [
+            {
+                "weekday": "三",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00"
+            },
+            {
+                "weekday": "三",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00"
+            },
+            {
+                "weekday": "三",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00"
+            },
+            {
+                "weekday": "三",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00"
+            }
+        ]
+    },
+    "選修跨班": {
+        "count": 6,
+        "schedule": [
+            {
+                "weekday": "四",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00"
+            },
+            {
+                "weekday": "五",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00"
+            },
+            {
+                "weekday": "四",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00"
+            },
+            {
+                "weekday": "五",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00"
+            },
+            {
+                "weekday": "四",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00"
+            },
+            {
+                "weekday": "五",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00"
+            }
+        ]
+    },
+    "全民國防教育": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00"
+            }
+        ]
+    },
+    "網路分析": {
+        "count": 3,
+        "schedule": [
+            {
+                "weekday": "一",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00"
+            },
+            {
+                "weekday": "一",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00"
+            },
+            {
+                "weekday": "四",
+                "period": "七",
+                "start": "15:10",
+                "end": "16:00"
+            }
+        ]
+    },
+    "國語文": {
+        "count": 2,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00"
+            },
+            {
+                "weekday": "二",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00"
+            }
+        ]
+    },
+    "趣味英文閱讀": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "五",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00"
+            }
+        ]
+    },
+    "統整數學": {
+        "count": 4,
+        "schedule": [
+            {
+                "weekday": "一",
+                "period": "五",
+                "start": "13:10",
+                "end": "14:00"
+            },
+            {
+                "weekday": "四",
+                "period": "五",
+                "start": "13:10",
+                "end": "14:00"
+            },
+            {
+                "weekday": "一",
+                "period": "六",
+                "start": "14:10",
+                "end": "15:00"
+            },
+            {
+                "weekday": "四",
+                "period": "六",
+                "start": "14:10",
+                "end": "15:00"
+            }
+        ]
+    },
+    "專題實作": {
+        "count": 3,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "五",
+                "start": "13:10",
+                "end": "14:00"
+            },
+            {
+                "weekday": "二",
+                "period": "六",
+                "start": "14:10",
+                "end": "15:00"
+            },
+            {
+                "weekday": "二",
+                "period": "七",
+                "start": "15:10",
+                "end": "16:00"
+            }
+        ]
+    },
+    "數位電子實習": {
+        "count": 3,
+        "schedule": [
+            {
+                "weekday": "三",
+                "period": "五",
+                "start": "13:10",
+                "end": "14:00"
+            },
+            {
+                "weekday": "三",
+                "period": "六",
+                "start": "14:10",
+                "end": "15:00"
+            },
+            {
+                "weekday": "三",
+                "period": "七",
+                "start": "15:10",
+                "end": "16:00"
+            }
+        ]
+    },
+    "團體活動時間": {
+        "count": 3,
+        "schedule": [
+            {
+                "weekday": "五",
+                "period": "五",
+                "start": "13:10",
+                "end": "14:00"
+            },
+            {
+                "weekday": "五",
+                "period": "六",
+                "start": "14:10",
+                "end": "15:00"
+            },
+            {
+                "weekday": "五",
+                "period": "七",
+                "start": "15:10",
+                "end": "16:00"
+            }
+        ]
+    },
+    "國語文閱讀與寫作": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "一",
+                "period": "七",
+                "start": "15:10",
+                "end": "16:00"
+            }
+        ]
+    }
+}
