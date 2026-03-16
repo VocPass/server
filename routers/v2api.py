@@ -89,7 +89,7 @@ async def get_merit_demerit(
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = find_all
-    
+
     return data
 
 
@@ -136,8 +136,8 @@ async def get_curriculum(
         data["data"] = None
 
         return data
-    
-    r = v2.parse_curriculum(original_data.data,school)
+
+    r = v2.parse_curriculum(original_data.data, school)
     if r.get("error"):
         data = request.app.state.response
         data["code"] = 500
@@ -169,6 +169,7 @@ async def get_attendance(
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
+
     if not school:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
@@ -176,40 +177,74 @@ async def get_attendance(
         data["data"] = None
 
         return data
-    
-    data["code"] = 404
-    data["message"] = "Not Implemented."
-    data["data"] = None
-
-    return data
-    url = f"{school['api']}{school['get']['attendance']}"
-    r = await http.get(url, request.cookies, "utf-8")
-
-    token = v2.get_request_verification_token(r.data)
-    url = f"{school['api']}{school['route']['attendance']}"
-
-    now = datetime.now()
-    start = datetime(now.year - 3, 1, 1)
-
-    search = {
-        "__RequestVerificationToken": token,
-        "StuName": "",
-        "StuId": "",
-        "BegDate": start.strftime("%Y/%m/%d"),
-        "EndDate": now.strftime("%Y/%m/%d"),
-        "SubmitButton": "查詢",
+    headers = {
+        "Accept": "*/*",
+        "Accept-Language": "zh-TW,zh;q=0.9",
+        "Connection": "keep-alive",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+        "X-Requested-With": "XMLHttpRequest",
+        "sec-ch-ua": '"Not:A-Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
     }
+    
+    url = f"{school['api']}{school['get']['attendance']}"
+    
+    async with aiohttp.ClientSession(
+        cookies=request.cookies, headers=headers
+    ) as session:
+        async with session.get(url) as resp:
+            if resp.status != 200:
+                response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                data["code"] = resp.status
+                data["message"] = "Failed to fetch original data."
+                data["data"] = None
 
-    original_data = await http.post(url, search, request.cookies, "utf-8")
-    if not original_data.data:
-        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-        data["code"] = original_data.code
-        data["message"] = "Failed to fetch original data."
-        data["data"] = None
+                return data
+            token = v2.get_request_verification_token((await resp.text(encoding="utf-8")))
+            if not token:
+                response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                data["code"] = 500
+                data["message"] = "Failed to parse request verification token."
+                data["data"] = None
 
-        return data
-    print(original_data.data)
-    r = v2.parse_absence_records(original_data.data)
+                return data
+            url = f"{school['api']}{school['route']['attendance']}"
+
+            now = datetime.now()
+            start = datetime(now.year - 3, 1, 1)
+
+            search = {
+                "__RequestVerificationToken": token,
+                "StuName": "",
+                "StuId": "",
+                "BegDate": start.strftime("%Y/%m/%d"),
+                "EndDate": now.strftime("%Y/%m/%d"),
+                "SubmitButton": "",
+            }
+
+            post_resp = await session.post(url, data=search)
+            if post_resp.status != 200:
+                response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                data["code"] = post_resp.status
+                data["message"] = "Failed to fetch original data."
+                data["data"] = None
+
+                return data
+            original_data = await post_resp.text(encoding="utf-8")
+
+            if not original_data:
+                response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+                data["code"] = post_resp.status
+                data["message"] = "Failed to fetch original data."
+                data["data"] = None
+
+                return data
+            r = v2.parse_absence_records(original_data)
 
     data = request.app.state.response
     data["code"] = 200
