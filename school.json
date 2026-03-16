@@ -22,7 +22,7 @@
                 "class": "login-btn"
             },
             "successKeywords": [
-                "登入成功"
+                "done"
             ]
         },
         "route": {

@@ -171,7 +171,7 @@ async def login(request: Request, response: Response):
     模擬登入，回傳 Cookie。
      - **返回值**: 包含模擬登入後 Cookie 的 JSON 物件。
     """
-    html = "登入成功"
+    html = "done"
     # 設定模擬的 Cookie 值
     response.set_cookie(
         key="sessionid", value="fake-session-id-for-demo", httponly=True, max_age=3600
