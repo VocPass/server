@@ -34,6 +34,49 @@
             "curriculum": "/demo"
         }
     },
+    "中大壢中": {
+        "vision": "v3",
+        "app": 1.1,
+        "beta": true,
+        "api": "https://shcloud2.k12ea.gov.tw",
+        "url": {
+            "login": "/CLHSTYC/Auth/Auth/CloudLogin",
+            "logined": "/CLHSTYC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyStatisticsList",
+            "attendance": "/CLHSTYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CLHSTYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable/GetTimeTable"
+        },
+        "get": {
+            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty",
+            "attendance": "/CLHSTYC/ICampus/TutorShSheAbsentStatistics",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CLHSTYC/ICampus/TutorShGrade",
+            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable"
+        }
+    },
     "鶯歌工商": {
         "vision": "v1",
         "app": 1.0,
