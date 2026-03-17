@@ -34,6 +34,53 @@
             "curriculum": "/demo"
         }
     },
+    "宜蘭高商": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "0000",
+        "api": "https://shcloud4.k12ea.gov.tw",
+        "url": {
+            "login": "/ILVSILC/Auth/Auth/CloudLogin",
+            "logined": "/ILVSILC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ILVSILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ILVSILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ILVSILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ILVSILC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ILVSILC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ILVSILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ILVSILC/ICampus/StudentInfo",
+            "attendance": "/ILVSILC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ILVSILC/ICampus/StudentInfo/Index",
+            "curriculum": "/ILVSILC/ClassTableV2/ClassTable",
+            "info": "/ILVSILC/ICampus/StudentInfo"
+        }
+    },
     "中壢高中": {
         "vision": "v3",
         "app": 1.0,
