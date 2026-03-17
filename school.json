@@ -86,7 +86,7 @@
         "app": 1.0,
         "beta": false,
         "school_code": "150404",
-        "api": "https://shcloud4.k12ea.gov.tw",
+        "api": "https://shcloud3.k12ea.gov.tw",
         "url": {
             "login": "/HLISHLC/Auth/Auth/CloudLogin",
             "logined": "/HLISHLC/ICampus/Home/Index2",
