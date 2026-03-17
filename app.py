@@ -17,6 +17,7 @@ app = FastAPI(
 )
 
 client = pocketbase.PocketBase(os.getenv("PB_URL"))
+app.state.pb_client = client
 
 app.state.db = client.admins.auth_with_password(
     os.getenv("PB_EMAIL"), os.getenv("PB_PASSWORD")

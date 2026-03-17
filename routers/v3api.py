@@ -1,20 +1,19 @@
 from fastapi import APIRouter, Response, Request, status, Header, Depends
 from fastapi.responses import RedirectResponse
+from utils.debug import Debug
 from datetime import datetime
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
-import os
-import json
 import aiohttp
 import utils.v3 as v3
 from utils.http import HttpsClient
 from utils.base import *
-import urllib.parse
 
 load_dotenv()
 router = APIRouter(prefix="/api/v3", tags=["v3 解析端點"])
 http = HttpsClient()
+
 headers = {
     "Accept": "*/*",
     "Accept-Language": "zh-TW,zh;q=0.9",
@@ -48,6 +47,11 @@ def require_cookie_header(
     )
 ):
     return cookie
+
+
+def send_debug_error(request: Request, error_message: str, school_name: str, page: str):
+    client = getattr(request.app.state, "pb_client", None)
+    Debug(client).send_error(error_message, school_name, page)
 
 
 @router.get("/merit_demerit", summary="解析獎懲紀錄")
@@ -84,6 +88,7 @@ async def get_merit_demerit(
         token = v3.get_request_verification_token(page_html)
         student_no = v3.get_query_student_no(page_html)
         if not token:
+
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             data["code"] = 500
             data["message"] = "Failed to parse request verification token."
@@ -130,6 +135,12 @@ async def get_merit_demerit(
 
                 resp = await session.post(url, data=rd)
                 if resp.status != 200:
+                    send_debug_error(
+                        request,
+                        (await resp.text()),
+                        school_name,
+                        "merit_demerit",
+                    )
                     response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
                     data["code"] = resp.status
                     data["message"] = "Failed to fetch original data."
@@ -192,6 +203,12 @@ async def get_curriculum(
             return data
 
         if r.status != 200:
+            send_debug_error(
+                request,
+                (await r.text()),
+                school_name,
+                "curriculum",
+            )
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             data["code"] = r.status
             data["message"] = "Failed to fetch original data."
@@ -235,6 +252,12 @@ async def get_curriculum(
         resp = await session.post(url, data=rd)
 
         if resp.status != 200:
+            send_debug_error(
+                request,
+                (await resp.text()),
+                school_name,
+                "curriculum",
+            )
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             data["code"] = resp.status
             data["message"] = "Failed to fetch original data."
@@ -314,6 +337,12 @@ async def get_attendance(
 
             resp = await session.post(url, data=rd)
             if resp.status != 200:
+                send_debug_error(
+                    request,
+                    (await resp.text()),
+                    school_name,
+                    "merit_demerit",
+                )
                 response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
                 data["code"] = resp.status
                 data["message"] = "Failed to fetch original data."
@@ -425,6 +454,12 @@ async def get_semester_scores(
 
         resp = await session.post(url, data=rd)
         if resp.status != 200:
+            send_debug_error(
+                request,
+                (await resp.text()),
+                school_name,
+                "semester_scores",
+            )
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             data["code"] = resp.status
             data["message"] = "Failed to fetch original data."
@@ -439,10 +474,8 @@ async def get_semester_scores(
         url = f"{school['api']}{school['route']['daily']}"
         rp = await session.post(url, data=rd)
         daily_json = await rp.json()
-        daily = v3.parse_daily_performance(daily_json,semester)
+        daily = v3.parse_daily_performance(daily_json, semester)
         r["daily_performance"] = daily
-
-
 
     data["code"] = 200
     data["message"] = "Success."

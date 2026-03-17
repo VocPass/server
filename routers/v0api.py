@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Response, Request
 from fastapi.responses import RedirectResponse
+from utils.debug import Debug
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -8,13 +9,16 @@ import json
 import aiohttp
 import utils.v1 as v1
 
+
 load_dotenv()
 router = APIRouter(prefix="/api/v0", tags=["v0 解析端點"])
-
 
 class HTMLInput(BaseModel):
     html: str
 
+def send_debug_error(request: Request, error_message: str, school_name: str, page: str):
+    client = getattr(request.app.state, "pb_client", None)
+    Debug(client).send_error(error_message, school_name, page)
 
 @router.post("/merit_demerit", summary="解析獎懲紀錄")
 async def get_merit_demerit(request: Request, item: HTMLInput):
