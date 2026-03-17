@@ -37,7 +37,7 @@
     "中大壢中": {
         "vision": "v3",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "school_code": "030305",
         "api": "https://shcloud2.k12ea.gov.tw",
         "url": {
@@ -84,7 +84,7 @@
     "鶯歌工商": {
         "vision": "v1",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
         "url": {
             "login": "/auth/Online",
