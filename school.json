@@ -81,6 +81,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "台南海事": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "210416",
+        "api": "https://shcloud10.k12ea.gov.tw",
+        "url": {
+            "login": "/TNVSTN/Auth/Auth/CloudLogin",
+            "logined": "/TNVSTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TNVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TNVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TNVSTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TNVSTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TNVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TNVSTN/ICampus/StudentInfo",
+            "attendance": "/TNVSTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNVSTN/ICampus/StudentInfo/Index",
+            "curriculum": "/TNVSTN/ClassTableV2/ClassTable",
+            "info": "/TNVSTN/ICampus/StudentInfo"
+        }
+    },
     "中壢高中": {
         "vision": "v3",
         "app": 1.0,
