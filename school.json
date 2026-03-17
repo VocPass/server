@@ -81,7 +81,7 @@
     "鶯歌工商": {
         "vision": "v1",
         "app": 1.0,
-        "beta": false,
+        "beta": true,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
         "url": {
             "login": "/auth/Online",
