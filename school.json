@@ -81,6 +81,53 @@
             "info": "/CLHSTYC/ICampus/StudentInfo"
         }
     },
+    "南科實中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "114542",
+        "api": "https://shcloud13.k12ea.gov.tw",
+        "url": {
+            "login": "/NNKIEHTN/Auth/Auth/CloudLogin",
+            "logined": "/NNKIEHTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/NNKIEHTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/NNKIEHTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/NNKIEHTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/NNKIEHTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/NNKIEHTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/NNKIEHTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/NNKIEHTN/ICampus/StudentInfo",
+            "attendance": "/NNKIEHTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/NNKIEHTN/ICampus/StudentInfo/Index",
+            "curriculum": "/NNKIEHTN/ClassTableV2/ClassTable",
+            "info": "/NNKIEHTN/ICampus/StudentInfo"
+        }
+    },
     "鶯歌工商": {
         "vision": "v1",
         "app": 1.0,
