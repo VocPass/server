@@ -37,8 +37,8 @@
     "宜蘭高商": {
         "vision": "v3",
         "app": 1.0,
-        "beta": true,
-        "school_code": "0000",
+        "beta": false,
+        "school_code": "020403",
         "api": "https://shcloud4.k12ea.gov.tw",
         "url": {
             "login": "/ILVSILC/Auth/Auth/CloudLogin",
