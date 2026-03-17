@@ -66,14 +66,15 @@
             "exam_menu": "#",
             "exam_results": "#",
             "semester_scores": "/CLHSTYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable/GetTimeTable"
+            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/CLHSTYC/ICampus/CommonData/GetStudentBasicInfo"
         },
         "get": {
-            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty",
-            "attendance": "/CLHSTYC/ICampus/TutorShSheAbsentStatistics",
+            "merit_demerit": "/CLHSTYC/ICampus/StudentInfo/Index",
+            "attendance": "/CLHSTYC/ICampus/StudentInfo/Indexs",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CLHSTYC/ICampus/TutorShGrade",
+            "semester_scores": "/CLHSTYC/ICampus/StudentInfo/Index",
             "curriculum": "/CLHSTYC/ClassTableV2/ClassTable"
         }
     },
