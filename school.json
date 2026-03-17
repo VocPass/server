@@ -81,6 +81,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "花蓮高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "150404",
+        "api": "https://shcloud4.k12ea.gov.tw",
+        "url": {
+            "login": "/HLISHLC/Auth/Auth/CloudLogin",
+            "logined": "/HLISHLC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/HLISHLC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/HLISHLC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/HLISHLC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/HLISHLC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/HLISHLC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/HLISHLC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/HLISHLC/ICampus/StudentInfo",
+            "attendance": "/HLISHLC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/HLISHLC/ICampus/StudentInfo/Index",
+            "curriculum": "/HLISHLC/ClassTableV2/ClassTable",
+            "info": "/HLISHLC/ICampus/StudentInfo"
+        }
+    },
     "台南海事": {
         "vision": "v3",
         "app": 1.0,
