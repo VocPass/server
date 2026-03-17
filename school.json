@@ -36,7 +36,7 @@
     },
     "中大壢中": {
         "vision": "v3",
-        "app": 1.1,
+        "app": 100.1,
         "beta": true,
         "api": "https://shcloud2.k12ea.gov.tw",
         "url": {
