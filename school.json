@@ -395,7 +395,48 @@
             "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
             "curriculum": "/online/student/school_class_tabletime.asp"
         }
-    },"楊梅高中": {
+    },
+    "育達高中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://ydsturec-web.yuda.tyc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginName"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {
+                "name": "v1CaptchaGenCode"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "class"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "楊梅高中": {
         "vision": "v1",
         "app": 1.0,
         "beta": false,
@@ -514,7 +555,8 @@
             "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
             "curriculum": "/online/student/school_class_tabletime.asp"
         }
-    },"瑞芳高工": {
+    },
+    "瑞芳高工": {
         "vision": "v1",
         "app": 1.0,
         "beta": false,
@@ -2795,86 +2837,6 @@
         }
     },
     "臺灣戲曲學院": {
-        "vision": "v2",
-        "app": 1.1,
-        "beta": false,
-        "api": "https://vschool.tp.edu.tw",
-        "url": {
-            "login": "/B2K2017/login.aspx",
-            "logined": "/B2K2017",
-            "root": "/"
-        },
-        "login": {
-            "username": {
-                "name": "account"
-            },
-            "password": {
-                "name": "password"
-            },
-            "captcha": {},
-            "captchaImage": {},
-            "button": {},
-            "successKeywords": [
-                "系統公告",
-                "重要行程"
-            ]
-        },
-        "route": {
-            "merit_demerit": "/Mvc_SC14/Home/SCList_Qry",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore/Home/StuScore_Qry",
-            "curriculum": "/Mvc_StuCosTable/Home/GetCosTable"
-        },
-        "get": {
-            "merit_demerit": "/Mvc_SC14",
-            "attendance": "/Mvc_SD51/Home/SD51",
-            "exam_menu": null,
-            "exam_results": null,
-            "semester_scores": "/Mvc_StuScore",
-            "curriculum": "/Mvc_StuCosTable"
-        },
-        "time": {
-            "1": {
-                "start": "08:20",
-                "end": "09:10"
-            },
-            "2": {
-                "start": "09:20",
-                "end": "10:10"
-            },
-            "3": {
-                "start": "10:20",
-                "end": "11:10"
-            },
-            "4": {
-                "start": "11:20",
-                "end": "12:10"
-            },
-            "5": {
-                "start": "13:10",
-                "end": "14:00"
-            },
-            "6": {
-                "start": "14:10",
-                "end": "15:00"
-            },
-            "7": {
-                "start": "15:10",
-                "end": "16:00"
-            },
-            "8": {
-                "start": "16:10",
-                "end": "17:00"
-            },
-            "9": {
-                "start": "17:10",
-                "end": "18:00"
-            }
-        }
-    },
-    "育達高中": {
         "vision": "v2",
         "app": 1.1,
         "beta": false,
