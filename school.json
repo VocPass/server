@@ -1861,6 +1861,46 @@
             }
         }
     },
+    "淡江高中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://info.tksh.ntpc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginName"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {
+                "name": "v1CaptchaGenCode"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "class"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
     "稻江護家": {
         "vision": "v1",
         "app": 1.0,
