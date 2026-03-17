@@ -2,7 +2,7 @@
     "Cool School": {
         "vision": "demo",
         "app": 1.0,
-        "beta": false,
+        "beta": true,
         "api": "https://dev.vocpass.com",
         "url": {
             "login": "/api/demo/login",
@@ -36,8 +36,9 @@
     },
     "中大壢中": {
         "vision": "v3",
-        "app": 100.1,
+        "app": 1.0,
         "beta": true,
+        "school_code": "030305",
         "api": "https://shcloud2.k12ea.gov.tw",
         "url": {
             "login": "/CLHSTYC/Auth/Auth/CloudLogin",
@@ -61,21 +62,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyStatisticsList",
+            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
             "attendance": "/CLHSTYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
             "semester_scores": "/CLHSTYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
             "curriculum": "/CLHSTYC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/CLHSTYC/ICampus/CommonData/GetStudentBasicInfo"
+            "info": "/CLHSTYC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/CLHSTYC/ICampus/StudentInfo/Index",
-            "attendance": "/CLHSTYC/ICampus/StudentInfo/Indexs",
+            "merit_demerit": "/CLHSTYC/ICampus/StudentInfo",
+            "attendance": "/CLHSTYC/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
             "semester_scores": "/CLHSTYC/ICampus/StudentInfo/Index",
-            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable"
+            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable",
+            "info": "/CLHSTYC/ICampus/StudentInfo"
         }
     },
     "鶯歌工商": {
@@ -121,7 +124,7 @@
     "三重商工": {
         "vision": "v1",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "api": "https://score.scvs.ntpc.edu.tw",
         "url": {
             "login": "/online",
@@ -161,7 +164,7 @@
     "新北高工": {
         "vision": "v1",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "api": "https://elife.ntvs.ntpc.edu.tw",
         "url": {
             "login": "/auth/Auth/Login",
@@ -186,7 +189,7 @@
                 "class": "loginBtnAdjust"
             },
             "successKeywords": [
-                "學生線上查詢"
+                "智慧校園平台首頁"
             ]
         },
         "route": {
@@ -201,7 +204,7 @@
     "大安高工": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -281,7 +284,7 @@
     "志仁高中(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -361,7 +364,7 @@
     "大安高工(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -441,7 +444,7 @@
     "新民中學(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -521,7 +524,7 @@
     "喬治高職": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -601,7 +604,7 @@
     "華岡藝校": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -681,7 +684,7 @@
     "開南商工": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -761,7 +764,7 @@
     "開平餐飲": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -841,7 +844,7 @@
     "開平餐飲(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -921,7 +924,7 @@
     "木柵高工": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1001,7 +1004,7 @@
     "南港高工": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1081,7 +1084,7 @@
     "內湖高工": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1161,7 +1164,7 @@
     "南華高中(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1241,7 +1244,7 @@
     "士林高商": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1321,7 +1324,7 @@
     "士林高商(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1401,7 +1404,7 @@
     "松山家商": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1481,7 +1484,7 @@
     "松山工農": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1561,7 +1564,7 @@
     "稻江護家": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1641,7 +1644,7 @@
     "稻江護家(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1721,7 +1724,7 @@
     "大誠高中(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1801,7 +1804,7 @@
     "東方工商": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1881,7 +1884,7 @@
     "東方工商(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -1961,7 +1964,7 @@
     "惇敘工商": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -2041,7 +2044,7 @@
     "稻江高商": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -2121,7 +2124,7 @@
     "稻江高商(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -2201,7 +2204,7 @@
     "泰北高中(夜)": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -2281,7 +2284,7 @@
     "臺灣戲曲學院": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
@@ -2361,7 +2364,7 @@
     "育達高中": {
         "vision": "v2",
         "app": 1.1,
-        "beta": true,
+        "beta": false,
         "api": "https://vschool.tp.edu.tw",
         "url": {
             "login": "/B2K2017/login.aspx",
