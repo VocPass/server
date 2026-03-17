@@ -175,6 +175,53 @@
             "info": "/CLHSTYC/ICampus/StudentInfo"
         }
     },
+    "中壢高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "030305",
+        "api": "https://shcloud2.k12ea.gov.tw",
+        "url": {
+            "login": "/CLHSTYC/Auth/Auth/CloudLogin",
+            "logined": "/CLHSTYC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/CLHSTYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CLHSTYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/CLHSTYC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/CLHSTYC/ICampus/StudentInfo",
+            "attendance": "/CLHSTYC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CLHSTYC/ICampus/StudentInfo/Index",
+            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable",
+            "info": "/CLHSTYC/ICampus/StudentInfo"
+        }
+    },
     "南科實中": {
         "vision": "v3",
         "app": 1.0,
@@ -426,6 +473,46 @@
         "app": 1.0,
         "beta": false,
         "api": "https://elife.ntvs.ntpc.edu.tw",
+        "url": {
+            "login": "/auth/Auth/Login",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "studentLId"
+            },
+            "password": {
+                "name": "studentPwd"
+            },
+            "captcha": {
+                "name": "v1CaptchaImageInput"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "id"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "中壢高商": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://sco.clvsc.tyc.edu.tw",
         "url": {
             "login": "/auth/Auth/Login",
             "logined": "/online/student/frames.asp",
