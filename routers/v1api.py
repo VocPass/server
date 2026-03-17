@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Response, Request, status, Header, Depends
 from fastapi.responses import RedirectResponse
+from utils.debug import Debug
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -33,6 +34,10 @@ def require_cookie_header(
 ):
     return cookie
 
+def send_debug_error(request: Request, error_message: str, school_name: str, page: str):
+    client = getattr(request.app.state, "pb_client", None)
+    Debug(client).send_error(error_message, school_name, page)
+
 
 @router.get("/merit_demerit", summary="解析獎懲紀錄")
 async def get_merit_demerit(
@@ -45,7 +50,7 @@ async def get_merit_demerit(
     取得獎懲紀錄的，回傳 JSON 格式的獎懲紀錄列表。
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
-     
+
     """
 
     school = request.app.state.schools.get(school_name)
@@ -61,6 +66,12 @@ async def get_merit_demerit(
     url = f"{school['api']}{school['route']['merit_demerit']}"
     original_data = await http.get(url, request.cookies)
     if not original_data.data:
+        send_debug_error(
+            request,
+            original_data.data,
+            school_name,
+            "merit_demerit",
+        )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
         data["message"] = "Failed to fetch original data."
@@ -105,6 +116,12 @@ async def get_curriculum(
     url = f"{school['api']}{school['route']['curriculum']}"
     original_data = await http.get(url, request.cookies)
     if not original_data.data:
+        send_debug_error(
+            request,
+            original_data.data,
+            school_name,
+            "merit_demerit",
+        )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
         data["message"] = "Failed to fetch original data."
@@ -155,6 +172,12 @@ async def get_attendance(
     url = f"{school['api']}{school['route']['attendance']}"
     original_data = await http.get(url, request.cookies)
     if not original_data.data:
+        send_debug_error(
+            request,
+            original_data.data,
+            school_name,
+            "merit_demerit",
+        )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
         data["message"] = "Failed to fetch original data."
@@ -198,6 +221,12 @@ async def get_exam_menu(
     original_data = await http.get(url, request.cookies)
 
     if not original_data.data:
+        send_debug_error(
+            request,
+            original_data.data,
+            school_name,
+            "merit_demerit",
+        )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
         data["message"] = "Failed to fetch original data."
@@ -279,7 +308,12 @@ async def get_semester_scores(
     original_data = await http.get(url, request.cookies)
 
     if not original_data.data:
-        
+        send_debug_error(
+            request,
+            original_data.data,
+            school_name,
+            "merit_demerit",
+        )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = 500
         data["message"] = "Failed to fetch original data."
