@@ -15,26 +15,60 @@ def get_request_verification_token(html_content):
     return token_input.get("value")
 
 
+def get_query_student_no(html_content):
+    """
+    取得頁面中的 queryStudentNo
+    """
+    if not html_content:
+        return None
+
+    match = re.search(
+        r"var\s+queryStudentNo\s*=\s*['\"]([^'\"]+)['\"]\s*;?",
+        html_content,
+    )
+    if not match:
+        return None
+
+    return match.group(1)
+
+
+def get_query_student_class(html_content):
+    """
+    取得頁面中的 queryStudentClass
+    """
+    if not html_content:
+        return None
+
+    match = re.search(
+        r"const\s+userClassNo\s*=\s*['\"]([^'\"]+)['\"]\s*;?",
+        html_content,
+    )
+    if not match:
+        return None
+
+    return match.group(1)
+
+
 def parse_curriculum(curriculum_data):
     """
     解析課表
     """
     data = {}
 
-    for item in curriculum_data['TimeTableItemList']:
-        if not item.get('IsShow', False):
+    for item in curriculum_data["TimeTableItemList"]:
+        if not item.get("IsShow", False):
             continue
-        subject = item.get('SubjectName', '')
+        subject = item.get("SubjectName", "")
         if not subject:
             continue
-        weekday = num_to_chinese(item['WeekDay'])
-        period = num_to_chinese(item['SectionSeq'])
+        weekday = num_to_chinese(item["WeekDay"])
+        period = num_to_chinese(item["SectionSeq"])
         if not weekday or not period:
             continue
         if subject not in data:
-            data[subject] = {'count': 0, 'schedule': []}
-        data[subject]['schedule'].append({'weekday': weekday, 'period': period})
-        data[subject]['count'] += 1
+            data[subject] = {"count": 0, "schedule": []}
+        data[subject]["schedule"].append({"weekday": weekday, "period": period})
+        data[subject]["count"] += 1
 
     return data
 
@@ -49,13 +83,13 @@ def parse_merit_demerit_records(records):
     data = [[], []]
     for record in records["Result"]:
         d = {
-                    "date_occurred": record['MeritPenaltyDateDisplayString'],
-                    "date_approved": record['MeritPenaltyCheckDateDisplayString'],
-                    "reason": record['MertipenaltyReason'],
-                    "action": f"{record['MertiPenaltyText']}{record['MertiPenaltyCount']}次",
-                    "date_revoked": record['MertipenaltyCleanDate'],
-                    "year": record['MertipenaltyYearTerm'],
-                }
+            "date_occurred": record["MeritPenaltyDateDisplayString"],
+            "date_approved": record["MeritPenaltyCheckDateDisplayString"],
+            "reason": record["MertipenaltyReason"],
+            "action": f"{record['MertiPenaltyText']}{record['MertiPenaltyCount']}次",
+            "date_revoked": record["MertipenaltyCleanDate"],
+            "year": record["MertipenaltyYearTerm"],
+        }
         if record["MertiPenaltyText"] in good:
             data[0].append(d)
         elif record["MertiPenaltyText"] in bad:

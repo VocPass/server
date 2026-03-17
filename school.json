@@ -36,8 +36,9 @@
     },
     "中大壢中": {
         "vision": "v3",
-        "app": 100.1,
+        "app": 1.0,
         "beta": false,
+        "school_code": "030305",
         "api": "https://shcloud2.k12ea.gov.tw",
         "url": {
             "login": "/CLHSTYC/Auth/Auth/CloudLogin",
@@ -61,27 +62,29 @@
             ]
         },
         "route": {
-            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyStatisticsList",
+            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
             "attendance": "/CLHSTYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
             "semester_scores": "/CLHSTYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
             "curriculum": "/CLHSTYC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/CLHSTYC/ICampus/CommonData/GetStudentBasicInfo"
+            "info": "/CLHSTYC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/CLHSTYC/ICampus/StudentInfo/Index",
-            "attendance": "/CLHSTYC/ICampus/StudentInfo/Indexs",
+            "merit_demerit": "/CLHSTYC/ICampus/StudentInfo",
+            "attendance": "/CLHSTYC/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
             "semester_scores": "/CLHSTYC/ICampus/StudentInfo/Index",
-            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable"
+            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable",
+            "info": "/CLHSTYC/ICampus/StudentInfo"
         }
     },
     "鶯歌工商": {
         "vision": "v1",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
         "url": {
             "login": "/auth/Online",
