@@ -15,7 +15,20 @@ def num_to_chinese(num):
         9: "九",
     }
     return chinese_numerals.get(num, "")
-
+def chinese_to_num(c):
+    chinese_numerals = {
+        "零": 0,
+        "一": 1,
+        "二": 2,
+        "三": 3,
+        "四": 4,
+        "五": 5,
+        "六": 6,
+        "七": 7,
+        "八": 8,
+        "九": 9,
+    }
+    return chinese_numerals.get(c, -1)
 
 class YearModel:
     def __init__(self, date):
