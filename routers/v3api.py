@@ -49,9 +49,12 @@ def require_cookie_header(
     return cookie
 
 
-def send_debug_error(request: Request, error_message: str, school_name: str, page: str):
+def send_debug_error(
+    request: Request, error_message: str, school_name: str, page: str, status: int
+):
     client = getattr(request.app.state, "pb_client", None)
-    Debug(client).send_error(error_message, school_name, page)
+    r = Debug(client).send_error(error_message, school_name, page, status)
+    return r
 
 
 @router.get("/merit_demerit", summary="解析獎懲紀錄")
@@ -135,14 +138,16 @@ async def get_merit_demerit(
 
                 resp = await session.post(url, data=rd)
                 if resp.status != 200:
-                    send_debug_error(
+                    e = send_debug_error(
                         request,
                         (await resp.text()),
                         school_name,
                         "merit_demerit",
+                        resp.status,
                     )
                     response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
                     data["code"] = resp.status
+                    data["error_id"] = e
                     data["message"] = "Failed to fetch original data."
                     data["data"] = None
 
@@ -203,14 +208,16 @@ async def get_curriculum(
             return data
 
         if r.status != 200:
-            send_debug_error(
+            e = send_debug_error(
                 request,
                 (await r.text()),
                 school_name,
                 "curriculum",
+                r.status,
             )
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             data["code"] = r.status
+            data["error_id"] = e
             data["message"] = "Failed to fetch original data."
             data["data"] = None
 
@@ -252,14 +259,16 @@ async def get_curriculum(
         resp = await session.post(url, data=rd)
 
         if resp.status != 200:
-            send_debug_error(
+            e = send_debug_error(
                 request,
                 (await resp.text()),
                 school_name,
                 "curriculum",
+                resp.status,
             )
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             data["code"] = resp.status
+            data["error_id"] = e
             data["message"] = "Failed to fetch original data."
             data["data"] = None
 
@@ -337,14 +346,16 @@ async def get_attendance(
 
             resp = await session.post(url, data=rd)
             if resp.status != 200:
-                send_debug_error(
+                e = send_debug_error(
                     request,
                     (await resp.text()),
                     school_name,
                     "merit_demerit",
+                    resp.status,
                 )
                 response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
                 data["code"] = resp.status
+                data["error_id"] = e
                 data["message"] = "Failed to fetch original data."
                 data["data"] = None
 
@@ -454,14 +465,16 @@ async def get_semester_scores(
 
         resp = await session.post(url, data=rd)
         if resp.status != 200:
-            send_debug_error(
+            e = send_debug_error(
                 request,
                 (await resp.text()),
                 school_name,
                 "semester_scores",
+                resp.status,
             )
             response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
             data["code"] = resp.status
+            data["error_id"] = e
             data["message"] = "Failed to fetch original data."
             data["data"] = None
 
