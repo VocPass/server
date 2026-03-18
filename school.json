@@ -222,6 +222,53 @@
             "info": "/PTIVSPTC/ICampus/StudentInfo"
         }
     },
+    "台南高商": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "210408",
+        "api": "https://shcloud8.k12ea.gov.tw",
+        "url": {
+            "login": "/TNCVSTN/Auth/Auth/CloudLogin",
+            "logined": "/TNCVSTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TNCVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TNCVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNCVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TNCVSTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TNCVSTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TNCVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TNCVSTN/ICampus/StudentInfo",
+            "attendance": "/TNCVSTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNCVSTN/ICampus/StudentInfo/Index",
+            "curriculum": "/TNCVSTN/ClassTableV2/ClassTable",
+            "info": "/TNCVSTN/ICampus/StudentInfo"
+        }
+    },
     "羅東高工": {
         "vision": "v3",
         "app": 1.0,
