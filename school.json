@@ -222,6 +222,53 @@
             "info": "/PTIVSPTC/ICampus/StudentInfo"
         }
     },
+    "曾文家商": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "110405",
+        "api": "https://shcloud12.k12ea.gov.tw",
+        "url": {
+            "login": "/TWVSTN/Auth/Auth/CloudLogin",
+            "logined": "/TWVSTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TWVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TWVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TWVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TWVSTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TWVSTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TWVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TWVSTN/ICampus/StudentInfo",
+            "attendance": "/TWVSTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TWVSTN/ICampus/StudentInfo/Index",
+            "curriculum": "/TWVSTN/ClassTableV2/ClassTable",
+            "info": "/TWVSTN/ICampus/StudentInfo"
+        }
+    },
     "台南高商": {
         "vision": "v3",
         "app": 1.0,
