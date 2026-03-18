@@ -81,6 +81,335 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "嘉義高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "200405",
+        "api": "https://shcloud6.k12ea.gov.tw",
+        "url": {
+            "login": "/CYIVSCY/Auth/Auth/CloudLogin",
+            "logined": "/CYIVSCY/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/CYIVSCY/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/CYIVSCY/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CYIVSCY/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/CYIVSCY/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/CYIVSCY/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CYIVSCY/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/CYIVSCY/ICampus/StudentInfo",
+            "attendance": "/CYIVSCY/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CYIVSCY/ICampus/StudentInfo/Index",
+            "curriculum": "/CYIVSCY/ClassTableV2/ClassTable",
+            "info": "/CYIVSCY/ICampus/StudentInfo"
+        }
+    },
+    "竹南高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "050310",
+        "api": "https://shcloud7.k12ea.gov.tw",
+        "url": {
+            "login": "/CNSHMLC/Auth/Auth/CloudLogin",
+            "logined": "/CNSHMLC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/CNSHMLC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/CNSHMLC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CNSHMLC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/CNSHMLC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/CNSHMLC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CNSHMLC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/CNSHMLC/ICampus/StudentInfo",
+            "attendance": "/CNSHMLC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CNSHMLC/ICampus/StudentInfo/Index",
+            "curriculum": "/CNSHMLC/ClassTableV2/ClassTable",
+            "info": "/CNSHMLC/ICampus/StudentInfo"
+        }
+    },
+    "屏東高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "130403",
+        "api": "https://shcloud6.k12ea.gov.tw",
+        "url": {
+            "login": "/PTIVSPTC/Auth/Auth/CloudLogin",
+            "logined": "/PTIVSPTC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/PTIVSPTC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/PTIVSPTC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/PTIVSPTC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/PTIVSPTC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/PTIVSPTC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/PTIVSPTC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/PTIVSPTC/ICampus/StudentInfo",
+            "attendance": "/PTIVSPTC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/PTIVSPTC/ICampus/StudentInfo/Index",
+            "curriculum": "/PTIVSPTC/ClassTableV2/ClassTable",
+            "info": "/PTIVSPTC/ICampus/StudentInfo"
+        }
+    },
+    "曾文家商": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "110405",
+        "api": "https://shcloud12.k12ea.gov.tw",
+        "url": {
+            "login": "/TWVSTN/Auth/Auth/CloudLogin",
+            "logined": "/TWVSTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TWVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TWVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TWVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TWVSTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TWVSTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TWVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TWVSTN/ICampus/StudentInfo",
+            "attendance": "/TWVSTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TWVSTN/ICampus/StudentInfo/Index",
+            "curriculum": "/TWVSTN/ClassTableV2/ClassTable",
+            "info": "/TWVSTN/ICampus/StudentInfo"
+        }
+    },
+    "蘭陽女中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "020301",
+        "api": "https://shcloud8.k12ea.gov.tw",
+        "url": {
+            "login": "/LYGSHILC/Auth/Auth/CloudLogin",
+            "logined": "/LYGSHILC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/LYGSHILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/LYGSHILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LYGSHILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/LYGSHILC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/LYGSHILC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/LYGSHILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/LYGSHILC/ICampus/StudentInfo",
+            "attendance": "/LYGSHILC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LYGSHILC/ICampus/StudentInfo/Index",
+            "curriculum": "/LYGSHILC/ClassTableV2/ClassTable",
+            "info": "/LYGSHILC/ICampus/StudentInfo"
+        }
+    },
+    "台南高商": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "210408",
+        "api": "https://shcloud8.k12ea.gov.tw",
+        "url": {
+            "login": "/TNCVSTN/Auth/Auth/CloudLogin",
+            "logined": "/TNCVSTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TNCVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TNCVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNCVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TNCVSTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TNCVSTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TNCVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TNCVSTN/ICampus/StudentInfo",
+            "attendance": "/TNCVSTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNCVSTN/ICampus/StudentInfo/Index",
+            "curriculum": "/TNCVSTN/ClassTableV2/ClassTable",
+            "info": "/TNCVSTN/ICampus/StudentInfo"
+        }
+    },
+    "羅東高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "020407",
+        "api": "https://shcloud1.k12ea.gov.tw",
+        "url": {
+            "login": "/LTIVSILC/Auth/Auth/CloudLogin",
+            "logined": "/LTIVSILC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/LTIVSILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/LTIVSILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LTIVSILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/LTIVSILC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/LTIVSILC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/LTIVSILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/LTIVSILC/ICampus/StudentInfo",
+            "attendance": "/LTIVSILC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LTIVSILC/ICampus/StudentInfo/Index",
+            "curriculum": "/LTIVSILC/ClassTableV2/ClassTable",
+            "info": "/LTIVSILC/ICampus/StudentInfo"
+        }
+    },
     "花蓮高工": {
         "vision": "v3",
         "app": 1.0,
@@ -469,6 +798,166 @@
             "curriculum": "/online/student/school_class_tabletime.asp"
         }
     },
+    "台東農工": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://web.ntc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "長榮中學": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://online.cjshs.tn.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "文興高中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://online.hshs.chc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "陽明高中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://reg.pymhs.tyc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
     "治平高中": {
         "vision": "v1",
         "app": 1.0,
@@ -514,6 +1003,86 @@
         "app": 1.0,
         "beta": false,
         "api": "https://score.jfvs.ntpc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "義民中學": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://da01.ymsh.hcc.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "黎明高中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "http://stuquery.lmsh.tn.edu.tw",
         "url": {
             "login": "/online",
             "logined": "/online/student/frames.asp",
