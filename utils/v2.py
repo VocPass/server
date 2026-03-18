@@ -60,7 +60,7 @@ def parse_curriculum(curriculum_data,school_info):
     data = {}
     time = {}
 
-    if curriculum_data['TimeList'] == []:
+    if curriculum_data.get('TimeList',[]) == []:
         time = school_info['time']
     else:
         for i in curriculum_data["TimeList"]:
@@ -125,8 +125,8 @@ def parse_semester_grades(first_semester_grades, second_semester_grades):
         "subject_scores": [],
     }
 
-    first_courses = first_semester_grades["obj"].get("DataList", [])
-    second_courses = second_semester_grades["obj"].get("DataList", [])
+    first_courses = first_semester_grades.get("obj",{}).get("DataList", [])
+    second_courses = second_semester_grades.get("obj",{}).get("DataList", [])
 
     second_courses_by_key = {}
     for course in second_courses:
