@@ -128,6 +128,53 @@
             "info": "/CYIVSCY/ICampus/StudentInfo"
         }
     },
+    "竹南高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "050310",
+        "api": "https://shcloud7.k12ea.gov.tw",
+        "url": {
+            "login": "/CNSHMLC/Auth/Auth/CloudLogin",
+            "logined": "/CNSHMLC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/CNSHMLC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/CNSHMLC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CNSHMLC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/CNSHMLC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/CNSHMLC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CNSHMLC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/CNSHMLC/ICampus/StudentInfo",
+            "attendance": "/CNSHMLC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CNSHMLC/ICampus/StudentInfo/Index",
+            "curriculum": "/CNSHMLC/ClassTableV2/ClassTable",
+            "info": "/CNSHMLC/ICampus/StudentInfo"
+        }
+    },
     "羅東高工": {
         "vision": "v3",
         "app": 1.0,
