@@ -353,7 +353,7 @@
                             Schools</p>
                         <h2 class="text-4xl font-extrabold mb-4">支援學校</h2>
                         <p class="text-slate-300 mb-6 text-lg">已支援 <span
-                                id="school-count">10</span> 所，還在增加中！</p>
+                                id="school-count">80</span> 所，還在增加中！</p>
 
                         <div
                             class="mb-8 rounded-2xl border border-indigo-200/20 bg-white/5 p-3 backdrop-blur-sm">
@@ -603,6 +603,9 @@
                 <div class="flex items-center gap-3 pr-3">${chips}</div>
                 <div class="flex items-center gap-3 pr-3" aria-hidden="true">${chips}</div>
             `;
+
+            const duration = Math.max(20, schoolNames.length * 1.5);
+            marqueeTrack.style.animationDuration = `${duration}s`;
         }
 
         loadSchools();
