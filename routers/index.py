@@ -40,6 +40,16 @@ async def index(request: Request):
     return FileResponse("templates/index.html")
 
 
+@router.get("/privacy-policy", summary="隱私權政策")
+async def privacy_policy():
+    return FileResponse("templates/privacy-policy.html")
+
+
+@router.get("/disclaimer", summary="免責聲明")
+async def disclaimer():
+    return FileResponse("templates/disclaimer.html")
+
+
 @router.get("/school")
 async def get_all_schools(request: Request):
     return request.app.state.schools
