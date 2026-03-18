@@ -102,7 +102,11 @@ async def ping(
             data["data"] = None
 
             return data
-        html = await r.text(encoding="utf-8")
+        try:
+            html = await r.text(encoding="utf-8")
+        except:
+            html = await r.text(encoding="big5")
+
         for i in school["login"]["successKeywords"]:
             if i in html:
                 data["code"] = 200
