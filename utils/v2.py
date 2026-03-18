@@ -125,8 +125,8 @@ def parse_semester_grades(first_semester_grades, second_semester_grades):
         "subject_scores": [],
     }
 
-    first_courses = first_semester_grades["obj"].get("DataList", [])
-    second_courses = second_semester_grades["obj"].get("DataList", [])
+    first_courses = first_semester_grades.get("obj",{}).get("DataList", [])
+    second_courses = second_semester_grades.get("obj",{}).get("DataList", [])
 
     second_courses_by_key = {}
     for course in second_courses:
