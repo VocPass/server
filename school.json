@@ -81,6 +81,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "北科附工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "030403",
+        "api": "https://shcloud11.k12ea.gov.tw",
+        "url": {
+            "login": "/TYAITYC/Auth/Auth/CloudLogin",
+            "logined": "/TYAITYC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TYAITYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TYAITYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TYAITYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TYAITYC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TYAITYC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TYAITYC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TYAITYC/ICampus/StudentInfo",
+            "attendance": "/TYAITYC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TYAITYC/ICampus/StudentInfo/Index",
+            "curriculum": "/TYAITYC/ClassTableV2/ClassTable",
+            "info": "/TYAITYC/ICampus/StudentInfo"
+        }
+    },
     "臺南高工": {
         "vision": "v4",
         "app": 1.3,
