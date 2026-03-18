@@ -81,6 +81,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "羅東高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "020407",
+        "api": "https://shcloud1.k12ea.gov.tw",
+        "url": {
+            "login": "/LTIVSILC/Auth/Auth/CloudLogin",
+            "logined": "/LTIVSILC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/LTIVSILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/LTIVSILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LTIVSILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/LTIVSILC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/LTIVSILC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/LTIVSILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/LTIVSILC/ICampus/StudentInfo",
+            "attendance": "/LTIVSILC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LTIVSILC/ICampus/StudentInfo/Index",
+            "curriculum": "/LTIVSILC/ClassTableV2/ClassTable",
+            "info": "/LTIVSILC/ICampus/StudentInfo"
+        }
+    },
     "花蓮高工": {
         "vision": "v3",
         "app": 1.0,
