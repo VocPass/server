@@ -175,6 +175,53 @@
             "info": "/CNSHMLC/ICampus/StudentInfo"
         }
     },
+    "屏東高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "130403",
+        "api": "https://shcloud6.k12ea.gov.tw",
+        "url": {
+            "login": "/PTIVSPTC/Auth/Auth/CloudLogin",
+            "logined": "/PTIVSPTC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/PTIVSPTC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/PTIVSPTC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/PTIVSPTC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/PTIVSPTC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/PTIVSPTC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/PTIVSPTC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/PTIVSPTC/ICampus/StudentInfo",
+            "attendance": "/PTIVSPTC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/PTIVSPTC/ICampus/StudentInfo/Index",
+            "curriculum": "/PTIVSPTC/ClassTableV2/ClassTable",
+            "info": "/PTIVSPTC/ICampus/StudentInfo"
+        }
+    },
     "羅東高工": {
         "vision": "v3",
         "app": 1.0,
