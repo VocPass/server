@@ -56,6 +56,49 @@ def send_debug_error(
     r = Debug(client).send_error(error_message, school_name, page, status)
     return r
 
+@router.get("/ping", summary="檢查登入狀態")
+async def ping(request: Request, response: Response, school_name: str, _cookie: str = Depends(require_cookie_header)):
+    """檢查登入狀態，回傳 JSON 格式的結果。
+ - 需帶入 cookies
+ - **返回值**: 包含登入狀態的 JSON 物件。
+    """
+    school = request.app.state.schools.get(school_name)
+    data = request.app.state.response
+    if not school:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        data["code"] = 400
+        data["message"] = "Unsupported school."
+        data["data"] = None
+
+        return data
+
+    async with aiohttp.ClientSession(
+        cookies=request.cookies, headers=headers
+    ) as session:
+        url = f"{school['api']}{school['url']['logined']}"
+
+        r = await session.get(url)
+        if r.status != 200:
+            response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+            data["code"] = r.status
+            data["message"] = "Failed to fetch original data."
+            data["data"] = None
+
+            return data
+        html = await r.text(encoding="utf-8")
+        for i in school['login']['successKeywords']:
+            if i in html:
+                data["code"] = 200
+                data["message"] = "Success."
+                data["data"] = {"logged_in": True}
+
+                return data
+            
+    response.status_code = status.HTTP_403_FORBIDDEN
+    data["code"] = 403
+    data["message"] = "Success."
+    data["data"] = {"logged_in": False}
+    return data
 
 @router.get("/merit_demerit", summary="解析獎懲紀錄")
 async def get_merit_demerit(
