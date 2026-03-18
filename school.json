@@ -81,6 +81,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "北科附工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "030403",
+        "api": "https://shcloud11.k12ea.gov.tw",
+        "url": {
+            "login": "/TYAITYC/Auth/Auth/CloudLogin",
+            "logined": "/TYAITYC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TYAITYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TYAITYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TYAITYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TYAITYC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TYAITYC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TYAITYC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TYAITYC/ICampus/StudentInfo",
+            "attendance": "/TYAITYC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TYAITYC/ICampus/StudentInfo/Index",
+            "curriculum": "/TYAITYC/ClassTableV2/ClassTable",
+            "info": "/TYAITYC/ICampus/StudentInfo"
+        }
+    },
     "臺南高工": {
         "vision": "v4",
         "app": 1.3,
@@ -833,6 +880,46 @@
             "curriculum": "/online/student/school_class_tabletime.asp"
         }
     },
+    "慈幼工商": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://www-1.ssvs.tn.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
     "台東農工": {
         "vision": "v1",
         "app": 1.0,
@@ -1198,6 +1285,46 @@
         "app": 1.0,
         "beta": false,
         "api": "https://elife.ntvs.ntpc.edu.tw",
+        "url": {
+            "login": "/auth/Auth/Login",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "studentLId"
+            },
+            "password": {
+                "name": "studentPwd"
+            },
+            "captcha": {
+                "name": "v1CaptchaImageInput"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "id"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "振聲高中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://fxshap.fxsh.tyc.edu.tw",
         "url": {
             "login": "/auth/Auth/Login",
             "logined": "/online/student/frames.asp",
