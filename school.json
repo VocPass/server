@@ -750,12 +750,12 @@
             ]
         },
         "route": {
-            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
-            "attendance": "/online/selection_student/absentation_skip_school.asp",
-            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
-            "exam_results": "/online/selection_student/{file_name}",
-            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
-            "curriculum": "/online/student/school_class_tabletime.asp"
+            "merit_demerit": "/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/selection_student/{file_name}",
+            "semester_scores": "/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/student/school_class_tabletime.asp"
         }
     },
     "三重商工": {

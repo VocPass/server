@@ -191,7 +191,6 @@ async def get_attendance(
         data["data"] = None
 
         return data
-
     r = v1.parse_absence_records(original_data.data, filter_types=[])
 
     data = request.app.state.response
