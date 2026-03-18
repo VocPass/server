@@ -7,12 +7,12 @@ from dotenv import load_dotenv
 import os
 import json
 import aiohttp
-import utils.v1 as v1
+import utils.v4 as v4
 from utils.http import HttpsClient
 import urllib.parse
 
 load_dotenv()
-router = APIRouter(prefix="/api/v1", tags=["v1 解析端點"])
+router = APIRouter(prefix="/api/v4", tags=["v4 解析端點"])
 http = HttpsClient()
 
 
@@ -64,8 +64,8 @@ async def get_merit_demerit(
 
         return data
 
-    url = f"{school['api']}{school['route']['merit_demerit']}"
-    original_data = await http.get(url, request.cookies)
+    url = f"{school['api']}{school['route']['merit_demerit']}".replace('{token}',request.cookies.get('X-Token'))
+    original_data = await http.get(url, request.cookies,'utf-8')
     if not original_data.data:
         e =send_debug_error(
             request,
@@ -82,13 +82,12 @@ async def get_merit_demerit(
 
         return data
 
-    r = v1.parse_merit_demerit_records(original_data.data)
+    r = v4.parse_merit_demerit_records(original_data.data)
 
     data = request.app.state.response
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = r
-
     return data
 
 
@@ -116,37 +115,10 @@ async def get_curriculum(
 
         return data
 
-    url = f"{school['api']}{school['route']['curriculum']}"
-    original_data = await http.get(url, request.cookies)
-    if not original_data.data:
-        e =send_debug_error(
-            request,
-            original_data.data,
-            school_name,
-            "merit_demerit",
-            original_data.code,
-        )
-        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-        data["code"] = original_data.code
-        data['error_id'] = e
-        data["message"] = "Failed to fetch original data."
-        data["data"] = None
-
-        return data
-
-    r = v1.parse_weekly_curriculum(original_data.data)
-    if r.get("error"):
-        data = request.app.state.response
-        data["code"] = 500
-        data["message"] = r["error"]
-        data["data"] = None
-
-        return data
-
     data = request.app.state.response
-    data["code"] = 200
-    data["message"] = "Success."
-    data["data"] = r
+    response.status_code = status.HTTP_404_NOT_FOUND
+    data["code"] = 404
+    data["message"] = "Not Implemented"
 
     return data
 
@@ -174,8 +146,8 @@ async def get_attendance(
 
         return data
 
-    url = f"{school['api']}{school['route']['attendance']}"
-    original_data = await http.get(url, request.cookies)
+    url = f"{school['api']}{school['route']['attendance']}".replace('{token}',request.cookies.get('X-Token'))
+    original_data = await http.get(url, request.cookies,'utf-8')
     if not original_data.data:
         e =send_debug_error(
             request,
@@ -191,7 +163,7 @@ async def get_attendance(
         data["data"] = None
 
         return data
-    r = v1.parse_absence_records(original_data.data, filter_types=[])
+    r = v4.parse_absence_records(original_data.data)
 
     data = request.app.state.response
     data["code"] = 200
@@ -223,8 +195,8 @@ async def get_exam_menu(
 
         return data
 
-    url = f"{school['api']}{school['route']['exam_menu']}"
-    original_data = await http.get(url, request.cookies)
+    url = f"{school['api']}{school['route']['exam_menu']}".replace('{token}',request.cookies.get('X-Token'))
+    original_data = await http.get(url, request.cookies,'utf-8')
 
     if not original_data.data:
         e =send_debug_error(
@@ -242,36 +214,28 @@ async def get_exam_menu(
 
         return data
 
-    r = v1.parse_exam_menu(original_data.data)
-
     data = request.app.state.response
-    data["code"] = 200
-    data["message"] = "Success."
-    data["data"] = r
+    response.status_code = status.HTTP_404_NOT_FOUND
+    data["code"] = 404
+    data["message"] = "Not Implemented"
+
 
     return data
 
 
 @router.post("/exam_results", summary="解析考試成績")
-async def get_exam_results(item: HTMLInput, request: Request, exam: str):
+async def get_exam_results(item: HTMLInput, request: Request, exam: str,response: Response):
     """
     取得考試成績，回傳 JSON 格式的考試成績資料。
      - 需帶入 cookies
-     - **返回值**: 包含學期成績資料的 JSON 物件。
-    """
-    r = v1.parse_exam_scores(item.html)
-    if r.get("error"):
-        data = request.app.state.response
-        data["code"] = 500
-        data["message"] = r["error"]
-        data["data"] = None
-
-        return data
+     - **返回值**: 包含學期成績資料的 JS
+     """
 
     data = request.app.state.response
-    data["code"] = 200
-    data["message"] = "Success."
-    data["data"] = r
+    response.status_code = status.HTTP_404_NOT_FOUND
+    data["code"] = 404
+    data["message"] = "Not Implemented"
+
 
     return data
 
@@ -309,11 +273,9 @@ async def get_semester_scores(
         return data
 
     year_class = ["", "一", "二", "三"][semester]
-    url = f"{school_info['api']}{school_info['route']['semester_scores']}".replace(
-        "{year_class}", urllib.parse.quote(year_class.encode("big5"))
-    ).replace("{number}", str(semester))
+    url = f"{school_info['api']}{school_info['route']['semester_scores']}".replace('{token}',request.cookies.get('X-Token'))
 
-    original_data = await http.get(url, request.cookies)
+    original_data = await http.get(url, request.cookies,'utf-8')
 
     if not original_data.data:
         e =send_debug_error(
@@ -331,16 +293,9 @@ async def get_semester_scores(
 
         return data
 
-    r = v1.StudentGradeExtractor(original_data.data)
-    r = r.get_all_grade_data()
+    r = v4.parse_semester_grades(original_data.data, semester)
+    print(original_data.data)
 
-    if r.get("error"):
-        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-        data["code"] = 500
-        data["message"] = r["error"]
-        data["data"] = None
-
-        return data
 
     data["code"] = 200
     data["message"] = "Success."

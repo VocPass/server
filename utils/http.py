@@ -18,7 +18,6 @@ class HttpsClient:
             "Accept": "*/*",
             "Accept-Language": "zh-TW,zh;q=0.9",
             "Connection": "keep-alive",
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "Sec-Fetch-Dest": "empty",
             "Sec-Fetch-Mode": "cors",
             "Sec-Fetch-Site": "same-origin",
@@ -34,7 +33,11 @@ class HttpsClient:
             cookies=cookies, headers=self.headers
         ) as session:
             async with session.get(url, data=data) as resp:
-                body = await resp.text(encoding=encoding)
+                try:
+                    body = await resp.text(encoding=encoding)
+                except UnicodeDecodeError:
+                    raw = await resp.read()
+                    body = raw.decode(encoding, errors="ignore")
                 if resp.status != 200:
                     return ResponseModel(
                         code=resp.status, message="Failed to fetch data.", data=body
@@ -59,7 +62,7 @@ class HttpsClient:
                 try:
                     body = await resp.text(encoding=encoding)
                 except UnicodeDecodeError:
-                    body = await resp.text(encoding="latin1")
+                    body = await resp.text(encoding="cp950")
                 if resp.status != 200:
                     return ResponseModel(
                         code=resp.status, message="Failed to fetch data.", data=body

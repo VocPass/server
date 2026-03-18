@@ -53,6 +53,15 @@ def parse_curriculum(curriculum_data):
     """
     解析課表
     """
+    time_map = {
+        s["SectionSeq"]: {
+            "start": s["SectionBeginTimeDisplay"],
+            "end": s["SectionEndTimeDisplay"],
+        }
+        for s in curriculum_data.get("TimeTableSectionList", [])
+        if s.get("WeekDaySeq") == 0 and s.get("SectionBeginTimeDisplay")
+    }
+
     data = {}
 
     for item in curriculum_data["TimeTableItemList"]:
@@ -67,9 +76,11 @@ def parse_curriculum(curriculum_data):
             continue
         if subject not in data:
             data[subject] = {"count": 0, "schedule": []}
-        data[subject]["schedule"].append({"weekday": weekday, "period": period})
+        entry = {"weekday": weekday, "period": period}
+        entry.update(time_map.get(item["SectionSeq"], {}))
+        data[subject]["schedule"].append(entry)
         data[subject]["count"] += 1
-
+        
     return data
 
 
