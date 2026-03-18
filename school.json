@@ -81,6 +81,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "嘉義高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "200405",
+        "api": "https://shcloud6.k12ea.gov.tw",
+        "url": {
+            "login": "/CYIVSCY/Auth/Auth/CloudLogin",
+            "logined": "/CYIVSCY/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/CYIVSCY/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/CYIVSCY/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CYIVSCY/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/CYIVSCY/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/CYIVSCY/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CYIVSCY/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/CYIVSCY/ICampus/StudentInfo",
+            "attendance": "/CYIVSCY/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CYIVSCY/ICampus/StudentInfo/Index",
+            "curriculum": "/CYIVSCY/ClassTableV2/ClassTable",
+            "info": "/CYIVSCY/ICampus/StudentInfo"
+        }
+    },
     "羅東高工": {
         "vision": "v3",
         "app": 1.0,
