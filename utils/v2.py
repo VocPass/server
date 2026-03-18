@@ -60,7 +60,7 @@ def parse_curriculum(curriculum_data,school_info):
     data = {}
     time = {}
 
-    if curriculum_data['TimeList'] == []:
+    if curriculum_data.get('TimeList',[]) == []:
         time = school_info['time']
     else:
         for i in curriculum_data["TimeList"]:

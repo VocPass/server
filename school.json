@@ -2,7 +2,7 @@
     "Cool School": {
         "vision": "demo",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "api": "https://dev.vocpass.com",
         "url": {
             "login": "/api/demo/login",
