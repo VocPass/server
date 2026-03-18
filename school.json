@@ -3476,5 +3476,705 @@
                 "end": "18:00"
             }
         }
+    },
+    "羅東高中": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "蘇澳海事(日校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "頭城家商": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "關西高中": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "苗栗高中": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "苗栗高商": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "仁愛高農": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "新營高工(日校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "玉井工商": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "曾文農工": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "新營高工(進校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "臺南高工進修部": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "旗美高中": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "佳冬高農(日校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "佳冬高農(進校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "臺東高中": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "新竹高商(日校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "臺中高農(日校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "臺中高農(進校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "馬祖高中": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
     }
 }
