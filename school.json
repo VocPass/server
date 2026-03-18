@@ -81,6 +81,41 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "臺南高工": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
     "嘉義高工": {
         "vision": "v3",
         "app": 1.0,
