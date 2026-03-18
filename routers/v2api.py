@@ -6,7 +6,8 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 
 import os
-import json
+import random
+import asyncio
 import aiohttp
 import utils.v2 as v2
 from utils.http import HttpsClient
@@ -81,10 +82,11 @@ async def get_merit_demerit(
             search = {
                 "J_Year": year,
                 "J_Semi": date.semester,
-                "J_StuID": "",
+                "J_StuID": "1206221",
             }
             original_data = await http.post(url, search, request.cookies, "utf-8")
-            if original_data.data:
+
+            if not original_data.data:
                 e = send_debug_error(
                     request,
                     original_data.data,
@@ -99,6 +101,7 @@ async def get_merit_demerit(
                 data["data"] = None
 
                 return data
+
             r = v2.parse_merit_demerit_records(original_data.data)
             find_all.extend(r[0])
 
