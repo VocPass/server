@@ -1367,6 +1367,46 @@
             "curriculum": "/online/student/school_class_tabletime.asp"
         }
     },
+    "武陵高中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://schoolsys.wlsh.tyc.edu.tw",
+        "url": {
+            "login": "/auth/Auth/Login",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "studentLId"
+            },
+            "password": {
+                "name": "studentPwd"
+            },
+            "captcha": {
+                "name": "v1CaptchaImageInput"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "id"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
     "振聲高中": {
         "vision": "v1",
         "app": 1.0,
@@ -2528,6 +2568,10 @@
             "9": {
                 "start": "17:10",
                 "end": "18:00"
+            },
+            "10": {
+                "start": "18:10",
+                "end": "19:00"
             }
         }
     },
@@ -2896,6 +2940,46 @@
         "app": 1.0,
         "beta": false,
         "api": "https://vschool.tcnvs.tp.edu.tw",
+        "url": {
+            "login": "/online",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginName"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {
+                "name": "v1CaptchaGenCode"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "class"
+            },
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "長榮女中": {
+        "vision": "v1",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://eweb.ckgsh.tn.edu.tw",
         "url": {
             "login": "/online",
             "logined": "/online/student/frames.asp",
@@ -3649,6 +3733,46 @@
                 "start": "17:10",
                 "end": "18:00"
             }
+        }
+    },
+    "羅東高中": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://kcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "Loginid"
+            },
+            "password": {
+                "name": "LoginPwd"
+            },
+            "captcha": {
+                "name": "vcode"
+            },
+            "captchaImage": {
+                "selector": "imgvcode",
+                "type": "id"
+            },
+            "button": {
+                "class": "Enter"
+            },
+            "successKeywords": [
+                "學生線上查詢"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
         }
     },
     "格致中學（高中部）": {
