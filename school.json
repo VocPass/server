@@ -81,6 +81,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "虎尾農工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "00000",
+        "api": "https://shcloud12.k12ea.gov.tw",
+        "url": {
+            "login": "/HWAIVSYLC/Auth/Auth/CloudLogin",
+            "logined": "/HWAIVSYLC/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/HWAIVSYLC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/HWAIVSYLC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/HWAIVSYLC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/HWAIVSYLC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/HWAIVSYLC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/HWAIVSYLC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/HWAIVSYLC/ICampus/StudentInfo",
+            "attendance": "/HWAIVSYLC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/HWAIVSYLC/ICampus/StudentInfo/Index",
+            "curriculum": "/HWAIVSYLC/ClassTableV2/ClassTable",
+            "info": "/HWAIVSYLC/ICampus/StudentInfo"
+        }
+    },
     "北科附工": {
         "vision": "v3",
         "app": 1.0,
