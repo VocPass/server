@@ -3814,5 +3814,52 @@
             "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
             "curriculum": "/online/student/school_class_tabletime.asp"
         }
+    },
+    "淡水商工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "020301",
+        "api": "https://system.tsvs.ntpc.edu.tw",
+        "url": {
+            "login": "/TSVS/Auth/Auth/CloudLogin",
+            "logined": "/TSVS/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/LYGSHILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/LYGSHILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LYGSHILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/LYGSHILC/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/LYGSHILC/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/LYGSHILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/LYGSHILC/ICampus/StudentInfo",
+            "attendance": "/LYGSHILC/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/LYGSHILC/ICampus/StudentInfo/Index",
+            "curriculum": "/LYGSHILC/ClassTableV2/ClassTable",
+            "info": "/LYGSHILC/ICampus/StudentInfo"
+        }
     }
 }
