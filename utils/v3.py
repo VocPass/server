@@ -145,7 +145,10 @@ def daily_performance_evaluation(dp):
 
 def parse_daily_performance(daily_performance, year=1):
     """日常表現"""
+    
     dp = daily_performance["Result"][year - 1 : year + 1]
+    if len(dp) == 0:
+        return {}
     data = {
         "first_semester": {
             "daily_life_performance": {
@@ -157,7 +160,10 @@ def parse_daily_performance(daily_performance, year=1):
             "suggestions_and_comments": dp[0]["大項4內容"],
             "others": dp[0]["大項5內容"],
         },
-        "second_semester": {
+        
+    }
+    try:
+        data["second_semester"]= {
             "daily_life_performance": {
                 "evaluation": daily_performance_evaluation(dp[1]),
                 "description": dp[1]["大項1內容"],
@@ -166,8 +172,9 @@ def parse_daily_performance(daily_performance, year=1):
             "special_achievements": dp[1]["大項3內容"],
             "suggestions_and_comments": dp[1]["大項4內容"],
             "others": dp[1]["大項5內容"],
-        },
-    }
+        }
+    except:
+        pass
     return data
 
 

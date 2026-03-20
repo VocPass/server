@@ -79,8 +79,8 @@ def parse_curriculum(curriculum_data,school_info):
             {
                 "weekday": num_to_chinese(i["DayOfWeek"]),
                 "period": num_to_chinese(i["PaiKe"]),
-                "start": time[str(i["PaiKe"])]["start"],
-                "end": time[str(i["PaiKe"])]["end"],
+                "start": time.get(str(i["PaiKe"]),{"start":"00:00"})["start"],
+                "end": time.get(str(i["PaiKe"]),{"end":"00:00"})["end"],
             }
         )
     return data
