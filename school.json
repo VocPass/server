@@ -128,6 +128,53 @@
             "info": "/HWAIVSYLC/ICampus/StudentInfo"
         }
     },
+    "台南二中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "210303",
+        "api": "https://shcloud9.k12ea.gov.tw",
+        "url": {
+            "login": "/TNSSHTN/Auth/Auth/CloudLogin",
+            "logined": "/TNSSHTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/TNSSHTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/TNSSHTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNSSHTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/TNSSHTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/TNSSHTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/TNSSHTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/TNSSHTN/ICampus/StudentInfo",
+            "attendance": "/TNSSHTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/TNSSHTN/ICampus/StudentInfo/Index",
+            "curriculum": "/TNSSHTN/ClassTableV2/ClassTable",
+            "info": "/TNSSHTN/ICampus/StudentInfo"
+        }
+    },
     "北科附工": {
         "vision": "v3",
         "app": 1.0,
