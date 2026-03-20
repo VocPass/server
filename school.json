@@ -1298,7 +1298,7 @@
         "vision": "v1",
         "app": 1.0,
         "beta": false,
-        "api": "http://stuquery.lmsh.tn.edu.tw",
+        "api": "https://stuquery.lmsh.tn.edu.tw",
         "url": {
             "login": "/online",
             "logined": "/online/student/frames.asp",
@@ -3864,6 +3864,181 @@
             "exam_results": "/online/selection_student/{file_name}",
             "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
             "curriculum": "/online/student/school_class_tabletime.asp"
+        }
+    },
+    "豐原高商": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://tcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "東勢高工": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://tcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "霧峰農工": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://tcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "豐原高商(夜校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://tcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
+        }
+    },
+    "東勢高工(夜校)": {
+        "vision": "v4",
+        "app": 1.3,
+        "beta": false,
+        "api": "https://tcsc.k12ea.gov.tw",
+        "url": {
+            "login": "/#/login",
+            "logined": "/#/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "id": "pwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginForm__btn"
+            },
+            "successKeywords": [
+                " 主頁 "
+            ]
+        },
+        "route": {
+            "merit_demerit": "/skyweb/skyweb_protal.asp?url=stu/stu_result6.asp&token={token}",
+            "attendance": "/skyweb/skyweb_protal.asp?url=stu/stu_result3.asp&token={token}",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
+            "curriculum": "#"
         }
     }
 }
