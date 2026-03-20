@@ -1298,7 +1298,7 @@
         "vision": "v1",
         "app": 1.0,
         "beta": false,
-        "api": "http://stuquery.lmsh.tn.edu.tw",
+        "api": "https://stuquery.lmsh.tn.edu.tw",
         "url": {
             "login": "/online",
             "logined": "/online/student/frames.asp",
