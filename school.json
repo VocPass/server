@@ -4076,5 +4076,38 @@
             "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
             "curriculum": "#"
         }
+    },
+    "臺北數實": {
+        "vision": "v6",
+        "app": 1.5,
+        "beta": false,
+        "api": "https://cs.ray-tw.com",
+        "url": {
+            "login": "/login",
+            "logined": "/dashboard",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "dashboard"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "/api/public/user-info?user_session={user_session}"
+        }
     }
 }

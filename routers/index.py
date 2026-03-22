@@ -2,6 +2,7 @@ from fastapi import APIRouter, Response, Request, status, Header, Depends
 from fastapi.responses import RedirectResponse, FileResponse
 import aiohttp
 from dotenv import load_dotenv
+import urllib.parse
 
 import os
 
@@ -97,6 +98,38 @@ async def ping(
         data["message"] = "Unsupported school."
         data["data"] = None
 
+        return data
+
+    if school.get("vision") == "v6":
+        user_session = request.cookies.get("user_session")
+        if not user_session:
+            response.status_code = status.HTTP_403_FORBIDDEN
+            data["code"] = 403
+            data["message"] = "Success."
+            data["data"] = {"logged_in": False}
+            return data
+        url = (
+            f"{school['api']}/api/public/user-info?"
+            f"user_session={urllib.parse.quote(user_session, safe='')}"
+        )
+        async with aiohttp.ClientSession(
+            cookies=request.cookies, headers=headers
+        ) as session:
+            r = await session.get(url)
+            if r.status == 200:
+                try:
+                    j = await r.json()
+                except Exception:
+                    j = None
+                if isinstance(j, dict) and j.get("success"):
+                    data["code"] = 200
+                    data["message"] = "Success."
+                    data["data"] = {"logged_in": True}
+                    return data
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data["code"] = 403
+        data["message"] = "Success."
+        data["data"] = {"logged_in": False}
         return data
 
     async with aiohttp.ClientSession(
