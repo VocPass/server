@@ -10,13 +10,20 @@ from fastapi import FastAPI, Request, Response, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 from utils.debug import Debug
 
 load_dotenv()
 
+limiter = Limiter(key_func=get_remote_address)
+
 app = FastAPI(
     title="VocPass API", description="VosPass 後端 API 文件。", version="1.0.0"
 )
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 client = pocketbase.PocketBase(os.getenv("PB_URL"))
 app.state.pb_client = client

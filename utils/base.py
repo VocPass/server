@@ -31,7 +31,9 @@ def chinese_to_num(c):
     return chinese_numerals.get(c, -1)
 
 class YearModel:
-    def __init__(self, date):
+    def __init__(self, date=None):
+        if date is None:
+            date = datetime.now().strftime("%Y/%m/%d")
         datetime_object = datetime.strptime(date, "%Y/%m/%d")
         # YYYY/MM/DD
         self.semester = (

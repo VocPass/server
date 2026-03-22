@@ -102,28 +102,30 @@ async def ping(
     async with aiohttp.ClientSession(
         cookies=request.cookies, headers=headers
     ) as session:
-        url = f"{school['api']}{school['url']['logined']}"
+        
+        #for v4
+        query=[f"token={request.cookies.get('X-Token')}"]
 
-        r = await session.get(url)
-        if r.status != 200:
-            response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
-            data["code"] = r.status
-            data["message"] = "Failed to fetch original data."
-            data["data"] = None
+        # for v5
+        rd = {
+            "session_key": request.cookies.get("session_key"),
+        }
+        url = f"{school['api']}{school['url']['logined']}?" + "&".join(query)
 
-            return data
-        try:
-            html = await r.text(encoding="utf-8")
-        except:
-            html = await r.text(encoding="big5")
+        for method in ["get", "post"]:
+            r = await getattr(session, method)(url, data=rd)
+            try:
+                html = await r.text(encoding="utf-8")
+            except:
+                html = await r.text(encoding="big5")
+                
+            for i in school["login"]["successKeywords"]:
+                if i in html:
+                    data["code"] = 200
+                    data["message"] = "Success."
+                    data["data"] = {"logged_in": True}
 
-        for i in school["login"]["successKeywords"]:
-            if i in html:
-                data["code"] = 200
-                data["message"] = "Success."
-                data["data"] = {"logged_in": True}
-
-                return data
+                    return data
 
     response.status_code = status.HTTP_403_FORBIDDEN
     data["code"] = 403
