@@ -3,7 +3,7 @@
         "vision": "demo",
         "app": 1.0,
         "beta": false,
-        "api": "https://dev.vocpass.com",
+        "api": "https://vocpass.com",
         "url": {
             "login": "/api/demo/login",
             "logined": "/api/demo/login",
@@ -34,39 +34,40 @@
             "curriculum": "/demo"
         }
     },
-    "test": {
-        "vision": "demo",
-        "app": 1.0,
+    "高雄高商": {
+        "vision": "v5",
+        "app": 1.4,
         "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=563401D",
-            "logined": "/api/demo/login",
+            "logined": "/Index.action",
             "root": "/"
         },
         "login": {
             "username": {
-                "id": "username"
+                "name": "userid"
             },
             "password": {
-                "id": "password"
+                "name": "password"
             },
             "captcha": {},
             "captchaImage": {},
             "button": {
-                "class": "login-btn"
+                "class": "btn_submit"
             },
             "successKeywords": [
                 "上次登入系統紀錄"
             ]
         },
         "route": {
-            "merit_demerit": "/demo",
-            "attendance": "/demo",
-            "exam_menu": "/demo",
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
             "exam_results": "/demo",
-            "semester_scores": "/demo",
-            "curriculum": "/demo"
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "/demo",
+            "info":"/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
         }
     },
     "宜蘭高商": {

@@ -1,5 +1,8 @@
 import pocketbase
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class Debug:
     def __init__(self, client: pocketbase.PocketBase | None):
@@ -8,7 +11,8 @@ class Debug:
     def send_error(self, error_message, school, page, status):
         if self.client is None:
             return
-
+        if os.environ.get("ENV") != "production":
+            return
         try:
             r = self.client.collection("debug").create(
                 {
