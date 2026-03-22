@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Response, Request, status, Depends
+from fastapi import APIRouter, Response, Request, status, Depends,File, UploadFile
+from pocketbase.models import FileUpload
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import RedirectResponse, FileResponse
 from pydantic import BaseModel
@@ -94,6 +95,7 @@ async def add_restaurant(request: Request, response: Response, item: dict):
             "school": school,
             "map": item.get("map"),
             "user": user.id,
+            "addess": item.get("address"),
         }
     )
     return record
@@ -131,3 +133,65 @@ async def update_evaluate(request: Request, response: Response, evaluate_id: str
     if updated:
         db.collection("restaurant_evaluate").update(evaluate_id, updated)
     return {"code": 200, "message": "Updated", "data": None}
+
+
+@router.delete("/evaluate/{evaluate_id}", summary="刪除餐廳評價")
+async def delete_evaluate(request: Request, response: Response, evaluate_id: str):
+    db = request.app.state.pb_client
+    user = get_user(request.headers.get("Authorization"))
+    if not user:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {"code": 401, "message": "Unauthorized", "data": None}
+    record = db.collection("restaurant_evaluate").get_one(evaluate_id)
+    if record.user != user.id:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        return {"code": 403, "message": "Forbidden", "data": None}
+    db.collection("restaurant_evaluate").delete(evaluate_id)
+    return {"code": 200, "message": "Deleted", "data": None}
+
+
+@router.get("/menu/{restaurant_id}", summary="餐廳菜單")
+async def get_menu(request: Request, response: Response, restaurant_id: str):
+    db = request.app.state.pb_client
+    record = db.collection("restaurant_menu").get_list(
+        page=1, per_page=50, query_params={"filter": f'restaurant="{restaurant_id}"'}
+    )
+    for i in record.items:
+        i.menu = f"{os.environ.get('PB_URL')}/api/files/{i.collection_id}/{i.id}/{i.menu}"
+    return record
+
+
+
+@router.post("/menu/{restaurant_id}", summary="新增餐廳菜單")
+@limiter.limit("5/minute")
+async def add_menu(request: Request, response: Response, restaurant_id: str, menu: UploadFile = File(...)):
+    db = request.app.state.pb_client
+    user = get_user(request.headers.get("Authorization"))
+    if not user:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {"code": 401, "message": "Unauthorized", "data": None}
+
+    contents = await menu.read()
+    new_record = db.collection("restaurant_menu").create(
+        {
+            "restaurant": restaurant_id,
+            "uesr": user.id,
+            "menu": FileUpload((menu.filename, contents, menu.content_type)),
+        }
+    )
+    return new_record
+
+@router.delete("/menu/{menu_id}", summary="刪除餐廳菜單")
+async def delete_menu(request: Request, response: Response, menu_id: str):
+    db = request.app.state.pb_client
+    user = get_user(request.headers.get("Authorization"))
+    if not user:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {"code": 401, "message": "Unauthorized", "data": None}
+    record = db.collection("restaurant_menu").get_one(menu_id)
+    restaurant = db.collection("restaurant").get_one(record.restaurant)
+    if restaurant.user != user.id:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        return {"code": 403, "message": "Forbidden", "data": None}
+    db.collection("restaurant_menu").delete(menu_id)
+    return {"code": 200, "message": "Deleted", "data": None}
