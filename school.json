@@ -41,7 +41,7 @@
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=563401D",
-            "logined": "/Index.action",
+            "logined": "/PersonalWidget_getMyWidget.action",
             "root": "/"
         },
         "login": {
@@ -57,7 +57,7 @@
                 "class": "btn_submit"
             },
             "successKeywords": [
-                "登入者："
+                "上次登入系統紀錄"
             ]
         },
         "route": {
