@@ -63,7 +63,7 @@ async def add_evaluate(request: Request, response: Response, item: dict):
     record = db.collection("restaurant_evaluate").create(
         {
             "restaurant": restaurant_id,
-            "evaluate": item.get("evaluate"),
+            "description": item.get("description"),
             "score": item.get("score"),
             "title": item.get("title"),
             "user": user.id,
