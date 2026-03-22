@@ -23,19 +23,18 @@ async def index(request: Request, response: Response):
     if request.query_params.get("token"):
         user = get_user(request.query_params.get("token"))
         if user:
-            response.set_cookie(key="Authorization", value=request.query_params.get("token"), httponly=True)
-            return "login success"
+            return RedirectResponse(
+                f"vocpass://auth?token={request.query_params.get('token')}"
+            )
         else:
             return RedirectResponse("/auth")
     return FileResponse("templates/auth.html", media_type="text/html")
 
 
-_bearer = HTTPBearer(auto_error=False)
-
 @router.get("/me", summary="獲取當前用戶資訊")
 async def me(request: Request):
-    token = request.cookies.get("Authorization")
-    
+    token = request.headers.get("Authorization")
+
     if token:
         user = get_user(token)
         if user:
