@@ -57,7 +57,7 @@
                 "class": "btn_submit"
             },
             "successKeywords": [
-                "上次登入系統紀錄"
+                "登入者："
             ]
         },
         "route": {
