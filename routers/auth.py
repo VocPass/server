@@ -19,15 +19,6 @@ router = APIRouter(prefix="/auth", tags=["VocPass 登入端點"])
 
 @router.get("/", summary="Login 頁面")
 async def index(request: Request, response: Response):
-
-    if request.query_params.get("token"):
-        user = get_user(request.query_params.get("token"))
-        if user:
-            return RedirectResponse(
-                f"vocpass://auth?token={request.query_params.get('token')}"
-            )
-        else:
-            return RedirectResponse("/auth")
     return FileResponse("templates/auth.html", media_type="text/html")
 
 

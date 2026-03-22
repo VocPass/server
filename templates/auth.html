@@ -138,7 +138,7 @@
             location.reload();
         }
         function confirmUser() {
-            location.href += '?token=' + pb.authStore.token;
+            location.href = `vocpass://auth?token=${pb.authStore.token}`;
         }
 
         async function checkAuth() {
