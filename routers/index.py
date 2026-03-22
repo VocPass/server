@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Response, Request, status, Header, Depends
 from fastapi.responses import RedirectResponse, FileResponse
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 import aiohttp
 from dotenv import load_dotenv
 
@@ -7,6 +9,7 @@ import os
 
 router = APIRouter()
 load_dotenv()
+limiter = Limiter(key_func=get_remote_address)
 
 
 def require_cookie_header(
@@ -102,9 +105,9 @@ async def ping(
     async with aiohttp.ClientSession(
         cookies=request.cookies, headers=headers
     ) as session:
-        
-        #for v4
-        query=[f"token={request.cookies.get('X-Token')}"]
+
+        # for v4
+        query = [f"token={request.cookies.get('X-Token')}"]
 
         # for v5
         rd = {
@@ -118,7 +121,7 @@ async def ping(
                 html = await r.text(encoding="utf-8")
             except:
                 html = await r.text(encoding="big5")
-                
+
             for i in school["login"]["successKeywords"]:
                 if i in html:
                     data["code"] = 200
@@ -132,3 +135,20 @@ async def ping(
     data["message"] = "Success."
     data["data"] = {"logged_in": False}
     return data
+
+
+@router.post("/api/report", summary="檢舉內容")
+@limiter.limit("3/minute")
+async def report(request: Request, item: dict):
+    db = request.app.state.pb_client
+
+    data = {
+        "restaurant": item.get("restaurant_id"),
+        "restaurant_evaluate": item.get("restaurant_evaluate_id"),
+        "restaurant_menu": item.get("restaurant_menu_id"),
+        "reason": item["reason"],
+        "description": item.get("description"),
+    }
+
+    db.collection("report").create(data)
+    return {"code": 200, "message": "Reported", "data": None}
