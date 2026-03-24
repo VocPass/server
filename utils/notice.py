@@ -45,8 +45,8 @@ async def get_notice_v2(url, method="GET"):
                 "link": a_tag["href"] if a_tag else None,
                 "title": a_tag.get_text(strip=True) if a_tag else None,
                 "date": date_tag.get_text(strip=True) if date_tag else None,
-                "views": None,
-                "publisher": None,
+                "views": "-",
+                "publisher": "未知",
             }
         )
     return results
