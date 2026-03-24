@@ -178,6 +178,34 @@ class StudentGradeExtractor:
             'daily_performance': self.extract_daily_performance()
         }
     
+def _parse_course_cell(cell):
+    courses = []
+    current_subject = None
+    current_teacher = None
+    current_room = None
+
+    for child in cell.children:
+        if getattr(child, 'name', None) == 'hr' and 'MultiSeparator' in child.get('class', []):
+            if current_subject:
+                courses.append({'subject': current_subject, 'teacher': current_teacher, 'room': current_room})
+            current_subject = current_teacher = current_room = None
+        elif getattr(child, 'name', None) == 'span':
+            classes = child.get('class', [])
+            if 'eudcFont' in classes:
+                current_teacher = child.get_text(strip=True)
+            elif 'RoomName' in classes:
+                current_room = child.get_text(strip=True)
+        elif getattr(child, 'name', None) is None:
+            text = str(child).strip()
+            if text and current_subject is None:
+                current_subject = text
+
+    if current_subject:
+        courses.append({'subject': current_subject, 'teacher': current_teacher, 'room': current_room})
+
+    return courses
+
+
 def parse_weekly_curriculum(html_content):
     soup = BeautifulSoup(html_content, "html.parser")
     table = soup.find("table", class_="TimeTable")
@@ -221,20 +249,26 @@ def parse_weekly_curriculum(html_content):
                 "end": time_matches[1]
             }
     
+        weekday_mapping = {0: "一", 1: "二", 2: "三", 3: "四", 4: "五", 5: "六", 6: "日"}
         for idx, cell in enumerate(course_cells):
-            cell_text = cell.get_text(separator="\n", strip=True)
-            if not cell_text:
+            if not cell.get_text(strip=True):
                 continue
-            subject = cell_text.split("\n")[0]
-            weekday_mapping = {0: "一", 1: "二", 2: "三", 3: "四", 4: "五", 5: "六", 6: "日"}
-            weekday = f"{weekday_mapping.get(idx % 7, str(idx+1))}"
-            if subject not in result:
-                result[subject] = {"count": 0, "schedule": []}
-            result[subject]["count"] += 1
-            schedule_item = {"weekday": weekday, "period": period}
-            if period in period_time_map:
-                schedule_item.update(period_time_map[period])
-            result[subject]["schedule"].append(schedule_item)
+            weekday = weekday_mapping.get(idx % 7, str(idx + 1))
+            for course in _parse_course_cell(cell):
+                subject = course["subject"]
+                if not subject:
+                    continue
+                if subject not in result:
+                    result[subject] = {"count": 0, "schedule": []}
+                result[subject]["count"] += 1
+                schedule_item = {"weekday": weekday, "period": period}
+                if period in period_time_map:
+                    schedule_item.update(period_time_map[period])
+                if course["teacher"]:
+                    schedule_item["teacher"] = course["teacher"]
+                if course["room"]:
+                    schedule_item["room"] = course["room"]
+                result[subject]["schedule"].append(schedule_item)
     
     return result
 

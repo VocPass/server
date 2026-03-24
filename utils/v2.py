@@ -81,6 +81,8 @@ def parse_curriculum(curriculum_data,school_info):
                 "period": num_to_chinese(i["PaiKe"]),
                 "start": time.get(str(i["PaiKe"]),{"start":"00:00"})["start"],
                 "end": time.get(str(i["PaiKe"]),{"end":"00:00"})["end"],
+                "tracher": i["TeaName"],
+                "room": None,
             }
         )
     return data
@@ -262,15 +264,18 @@ def parse_absence_records(html_content):
     return result
 
 def parse_grade_level(info):
-    text = info.get("obj", {}).get("OrgTitle")
-    if not text:
-        return 1
-    else:
-        text = text[-2]
-    y = {
-        "一": 1,
-        "二": 2,
-        "三": 3,
-        "四": 4,
-    }
-    return y[text] if text in "一二三四" else 1
+    try:
+        text = info.get("obj", {}).get("OrgTitle")
+        if not text:
+            raise ValueError("無法解析年級資訊，請先去其他頁面逛逛再回來看吧")
+        else:
+            text = text[-2]
+        y = {
+            "一": 1,
+            "二": 2,
+            "三": 3,
+            "四": 4,
+        }
+        return y[text] if text in "一二三四" else 1
+    except Exception:
+        raise ValueError("無法解析年級資訊，請先去其他頁面逛逛再回來看吧")

@@ -82,7 +82,7 @@ async def get_merit_demerit(
             search = {
                 "J_Year": year,
                 "J_Semi": date.semester,
-                "J_StuID": "1206221",
+                "J_StuID": "1111111",
             }
             original_data = await http.post(url, search, request.cookies, "utf-8")
 
@@ -381,11 +381,15 @@ async def get_semester_scores(
 
     now = datetime.now()
     date = YearModel(now.strftime("%Y/%m/%d"))
+
+    url = f"{school_info['api']}{school_info['get']['semester_scores']}"
+    r = await http.get(url, request.cookies, "utf-8")
+
     # 現在年級
     s = {
         "J_Year": date.year,
         "J_Semi": "1",
-        "J_StuID": "",
+        "J_StuID": "1111111",
     }
     url = f"{school_info['api']}{school_info['route']['merit_demerit']}"
 
@@ -398,20 +402,19 @@ async def get_semester_scores(
         return data
     y = v2.parse_grade_level(d.data)
 
-    url = f"{school_info['api']}{school_info['get']['semester_scores']}"
-    await http.get(url, request.cookies, "utf-8")
+    
 
     url = f"{school_info['api']}{school_info['route']['semester_scores']}"
     s1 = {
         "J_Year": max(date.year - (y - semester), 1),
         "J_Semi": "1",
-        "J_StuID": "",
+        "J_StuID": "1111111",
     }
 
     s2 = {
         "J_Year": max(date.year - (y - semester), 1),
         "J_Semi": "2",
-        "J_StuID": "",
+        "J_StuID": "1111111",
     }
 
     data1 = await http.post(url, s1, request.cookies, "utf-8")

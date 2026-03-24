@@ -72,11 +72,15 @@ def parse_curriculum(curriculum_data):
             continue
         weekday = num_to_chinese(item["WeekDay"])
         period = num_to_chinese(item["SectionSeq"])
+        teacher = item['FirstTeacherName']
+        room = item['ClassroomDisplay']
+        
         if not weekday or not period:
             continue
         if subject not in data:
             data[subject] = {"count": 0, "schedule": []}
-        entry = {"weekday": weekday, "period": period}
+
+        entry = {"weekday": weekday, "period": period,"teacher":teacher,"room":room}
         entry.update(time_map.get(item["SectionSeq"], {}))
         data[subject]["schedule"].append(entry)
         data[subject]["count"] += 1
