@@ -8,7 +8,7 @@ import os
 import json
 import aiohttp
 import utils.v4 as v4
-from utils.http import HttpsClient
+from utils.http_client import HttpsClient
 import urllib.parse
 
 load_dotenv()

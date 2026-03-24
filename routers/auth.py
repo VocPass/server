@@ -9,7 +9,7 @@ import os
 import json
 import aiohttp
 import utils.v1 as v1
-from utils.http import HttpsClient
+from utils.http_client import HttpsClient
 import urllib.parse
 import pocketbase
 

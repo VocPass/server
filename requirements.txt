@@ -6,3 +6,4 @@ BeautifulSoup4
 aiohttp
 jinja2
 slowapi
+curl-cffi

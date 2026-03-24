@@ -4,6 +4,7 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 import aiohttp
 from dotenv import load_dotenv
+import utils.notice as notice
 
 import os
 
@@ -61,6 +62,7 @@ async def get_all_schools(request: Request):
 @router.get("/me", summary="獲取使用者資訊")
 async def get_me(request: Request, response: Response):
     return FileResponse("templates/me.html")
+
 
 @router.get("/api/v{v}", summary="獲取此端點支援學校列表")
 async def index(request: Request, v: int):
@@ -138,6 +140,31 @@ async def ping(
     data["code"] = 403
     data["message"] = "Success."
     data["data"] = {"logged_in": False}
+    return data
+
+
+@router.get("/api/v{v}/notice", summary="獲取公告列表")
+async def get_notice(request: Request, v: int,school_name: str,response: Response):
+    school = request.app.state.schools.get(school_name)
+    if not school:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return {"code": 400, "message": "Unsupported school.", "data": None}
+    
+    f = {"v1": notice.get_notice_v1}
+    func = f.get(f"v{v}")
+    if not func:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"code": 404, "message": "Unsupported version.", "data": None}
+    if not school.get("notice"):
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"code": 404, "message": "This school does not support notice.", "data": None}
+    result = await func(school['notice']['url'], method=school['notice']['method'])
+    data = request.app.state.response
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = result
+    print(data)
+
     return data
 
 

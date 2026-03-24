@@ -10,7 +10,7 @@ import aiohttp
 import time
 import utils.v5 as v5
 from utils.base import *
-from utils.http import HttpsClient
+from utils.http_client import HttpsClient
 import urllib.parse
 
 load_dotenv()

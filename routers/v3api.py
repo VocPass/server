@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 import aiohttp
 import utils.v3 as v3
-from utils.http import HttpsClient
+from utils.http_client import HttpsClient
 from utils.base import *
 
 load_dotenv()

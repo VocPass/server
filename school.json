@@ -815,6 +815,11 @@
         "app": 1.0,
         "beta": false,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
+        "notice":{
+            "vision":"v1",
+            "url":"https://www.ykvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=23",
+            "method":"POST"
+        },
         "url": {
             "login": "/auth/Online",
             "logined": "/online/student/frames.asp",
