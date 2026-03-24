@@ -14,3 +14,13 @@ def get_user(token):
     except Exception as e:
         print(f"Error fetching user: {e}")
         return None
+    
+
+def share_curriculum(user_token, curriculum_data, status):
+    pb.auth_store.save(user_token, None)
+    record = pb.collection('users').auth_refresh().record
+    
+    pb.collection('users').update(record.id, {
+        "curriculum": curriculum_data,
+        "curriculum_status": bool(status)
+    })

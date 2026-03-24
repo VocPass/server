@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>me</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
+</head>
+<body>
+    <p name="view"></p>
+</body>
+<script>
+    const pb = new PocketBase('https://vppb.zeabur.app');
+    const view = document.getElementsByName("view")[0];
+    if (pb.authStore.isValid) {
+        view.innerText = `歡迎，${pb.authStore.model.name}！`;
+        console.log(pb.authStore.model);
+    } else {
+        view.innerText = "您尚未登入，請先登入以查看您的資訊。";
+    }
+</script>
+</html>

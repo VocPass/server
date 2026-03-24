@@ -58,6 +58,10 @@ async def get_all_schools(request: Request):
     return request.app.state.schools
 
 
+@router.get("/me", summary="獲取使用者資訊")
+async def get_me(request: Request, response: Response):
+    return FileResponse("templates/me.html")
+
 @router.get("/api/v{v}", summary="獲取此端點支援學校列表")
 async def index(request: Request, v: int):
     """
