@@ -1420,6 +1420,11 @@
         "app": 1.0,
         "beta": false,
         "api": "https://elife.ntvs.ntpc.edu.tw",
+        "notice":{
+            "vision":"v2",
+            "url":"https://www.ntvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=54",
+            "method":"POST"
+        },
         "url": {
             "login": "/auth/Auth/Login",
             "logined": "/online/student/frames.asp",

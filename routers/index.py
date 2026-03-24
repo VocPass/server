@@ -150,7 +150,7 @@ async def get_notice(request: Request, v: int,school_name: str,response: Respons
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"code": 400, "message": "Unsupported school.", "data": None}
     
-    f = {"v1": notice.get_notice_v1}
+    f = {"v1": notice.get_notice_v1, "v2": notice.get_notice_v2}
     func = f.get(f"v{v}")
     if not func:
         response.status_code = status.HTTP_404_NOT_FOUND
@@ -163,7 +163,6 @@ async def get_notice(request: Request, v: int,school_name: str,response: Respons
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = result
-    print(data)
 
     return data
 

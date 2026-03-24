@@ -2,13 +2,15 @@ import asyncio
 from curl_cffi.requests import AsyncSession
 from bs4 import BeautifulSoup
 
-async def get_notice_v1(url, method="GET"):
+
+def get_headers(url):
+    root_url = f"https://{url.split('/')[2]}"
     headers = {
         "accept": "*/*",
         "accept-language": "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7",
-        "origin": "https://www.ykvs.ntpc.edu.tw",
+        "origin": root_url,
         "priority": "u=1, i",
-        "referer": "https://www.ykvs.ntpc.edu.tw/",
+        "referer": root_url,
         "sec-ch-ua": '"Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"macOS"',
@@ -18,6 +20,11 @@ async def get_notice_v1(url, method="GET"):
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
         "x-requested-with": "XMLHttpRequest",
     }
+    return headers
+
+
+async def get_notice_v2(url, method="GET"):
+    headers = get_headers(url)
 
     async with AsyncSession(impersonate="chrome") as session:
         if method == "GET":
@@ -25,6 +32,35 @@ async def get_notice_v1(url, method="GET"):
         else:
             response = await session.post(url, headers=headers)
 
+    soup = BeautifulSoup(response.text, "html.parser")
+    results = []
+    for item in soup.select(".d-item.d-title"):
+        mtitle = item.select_one(".mtitle")
+        if not mtitle:
+            continue
+        a_tag = mtitle.find("a")
+        date_tag = mtitle.find("i", class_="mdate")
+        results.append(
+            {
+                "link": a_tag["href"] if a_tag else None,
+                "title": a_tag.get_text(strip=True) if a_tag else None,
+                "date": date_tag.get_text(strip=True) if date_tag else None,
+                "views": None,
+                "publisher": None,
+            }
+        )
+    return results
+
+
+async def get_notice_v1(url, method="GET"):
+    headers = get_headers(url)
+
+    async with AsyncSession(impersonate="chrome") as session:
+        if method == "GET":
+            response = await session.get(url, headers=headers)
+        else:
+            response = await session.post(url, headers=headers)
+            
     soup = BeautifulSoup(response.text, "html.parser")
     results = []
     for row in soup.select("tbody tr"):
@@ -44,14 +80,3 @@ async def get_notice_v1(url, method="GET"):
             }
         )
     return results
-
-
-async def main():
-    result = await get_notice_v1(
-        "https://www.ykvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=23",
-        method="POST",
-    )
-    print(result)
-
-if __name__ == "__main__":
-    asyncio.run(main())
