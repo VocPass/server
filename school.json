@@ -37,7 +37,7 @@
     "高雄高商": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=563401D",
@@ -158,7 +158,7 @@
     "虎尾農工": {
         "vision": "v3",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "school_code": "00000",
         "api": "https://shcloud12.k12ea.gov.tw",
         "url": {
@@ -205,7 +205,7 @@
     "台南二中": {
         "vision": "v3",
         "app": 1.0,
-        "beta": true,
+        "beta": false,
         "school_code": "210303",
         "api": "https://shcloud9.k12ea.gov.tw",
         "url": {
@@ -4128,7 +4128,7 @@
     "六龜高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=124333D",
@@ -4164,7 +4164,7 @@
     "路竹高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=124322D",
@@ -4200,7 +4200,7 @@
     "中山高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=543301D",
@@ -4236,7 +4236,7 @@
     "楠梓高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=543302D",
@@ -4272,7 +4272,7 @@
     "仁武高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=124313D",
@@ -4308,7 +4308,7 @@
     "左營高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=533301D",
@@ -4344,7 +4344,7 @@
     "新莊高中(高雄)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=533302D",
@@ -4380,7 +4380,7 @@
     "海青工商": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=533401D",
@@ -4416,7 +4416,7 @@
     "三民家商": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=533402D",
@@ -4452,7 +4452,7 @@
     "海青工商(夜)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=533C01N",
@@ -4488,7 +4488,7 @@
     "文山高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=124302D",
@@ -4524,7 +4524,7 @@
     "立志高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=551301D",
@@ -4560,7 +4560,7 @@
     "樹德家商": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=551402D",
@@ -4596,7 +4596,7 @@
     "立志高中(夜)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=551B01N",
@@ -4632,7 +4632,7 @@
     "樹德家商(夜)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=551C02N",
@@ -4668,7 +4668,7 @@
     "高雄高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=553301D",
@@ -4704,7 +4704,7 @@
     "三民高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=553302D",
@@ -4740,7 +4740,7 @@
     "高雄高工": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=553401D",
@@ -4776,7 +4776,7 @@
     "高雄高工(夜)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=553C01N",
@@ -4812,7 +4812,7 @@
     "明誠高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=521301D",
@@ -4848,7 +4848,7 @@
     "大榮高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=521303D",
@@ -4884,7 +4884,7 @@
     "中華藝校": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=521401D",
@@ -4920,7 +4920,7 @@
     "鼓山高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=523301D",
@@ -4956,7 +4956,7 @@
     "高雄女子高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=573301D",
@@ -4992,7 +4992,7 @@
     "復華高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=581301D",
@@ -5028,7 +5028,7 @@
     "道明高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=581302D",
@@ -5064,7 +5064,7 @@
     "三信家商": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=581402D",
@@ -5100,7 +5100,7 @@
     "三信家商(夜)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=581C02N",
@@ -5136,7 +5136,7 @@
     "中正高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=583301D",
@@ -5172,7 +5172,7 @@
     "新興高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=563301D",
@@ -5208,7 +5208,7 @@
     "高雄高商(夜)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=563C01N",
@@ -5244,7 +5244,7 @@
     "前鎮高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=593301D",
@@ -5280,7 +5280,7 @@
     "瑞祥高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=593302D",
@@ -5316,7 +5316,7 @@
     "中正高工": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=593401D",
@@ -5352,7 +5352,7 @@
     "中正高工(夜)": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=593C01N",
@@ -5388,7 +5388,7 @@
     "福誠高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=124340D",
@@ -5424,7 +5424,7 @@
     "小港高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=613301D",
@@ -5460,7 +5460,7 @@
     "林園高中": {
         "vision": "v5",
         "app": 1.4,
-        "beta": true,
+        "beta": false,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=124311D",
