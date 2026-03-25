@@ -37,7 +37,7 @@
     "高雄高商": {
         "vision": "v5",
         "app": 1.4,
-        "beta": false,
+        "beta": true,
         "api": "https://highschool.kh.edu.tw",
         "url": {
             "login": "/Login.action?schNo=563401D",
@@ -64,10 +64,47 @@
             "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
             "attendance": "/B0209S_Absence_select.action",
             "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
-            "exam_results": "/demo",
+            "exam_results": "#",
             "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
-            "curriculum": "/demo",
-            "info":"/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "test": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://sschool.tp.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=393302",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "account"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "登出",
+                ",\"page\":1,"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "/aiohusifgshsuaifgyduio",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
         }
     },
     "宜蘭高商": {
@@ -815,10 +852,10 @@
         "app": 1.0,
         "beta": false,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
-        "notice":{
-            "vision":"v1",
-            "url":"https://www.ykvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=23",
-            "method":"POST"
+        "notice": {
+            "vision": "v1",
+            "url": "https://www.ykvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=23",
+            "method": "POST"
         },
         "url": {
             "login": "/auth/Online",
@@ -1420,10 +1457,10 @@
         "app": 1.0,
         "beta": false,
         "api": "https://elife.ntvs.ntpc.edu.tw",
-        "notice":{
-            "vision":"v2",
-            "url":"https://www.ntvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=54",
-            "method":"POST"
+        "notice": {
+            "vision": "v2",
+            "url": "https://www.ntvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=54",
+            "method": "POST"
         },
         "url": {
             "login": "/auth/Auth/Login",
@@ -4085,6 +4122,1374 @@
             "exam_results": "#",
             "semester_scores": "/skyweb/skyweb_protal.asp?url=stu/stu_result10.asp&token={token}",
             "curriculum": "#"
+        }
+    },
+    "六龜高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=124333D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "路竹高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=124322D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "中山高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=543301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "楠梓高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=543302D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "仁武高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=124313D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "左營高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=533301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "新莊高中(高雄)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=533302D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "海青工商": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=533401D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "三民家商": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=533402D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "海青工商(夜)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=533C01N",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "文山高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=124302D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "立志高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=551301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "樹德家商": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=551402D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "立志高中(夜)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=551B01N",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "樹德家商(夜)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=551C02N",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "高雄高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=553301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "三民高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=553302D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "高雄高工": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=553401D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "高雄高工(夜)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=553C01N",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "明誠高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=521301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "大榮高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=521303D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "中華藝校": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=521401D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "鼓山高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=523301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "高雄女子高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=573301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "復華高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=581301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "道明高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=581302D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "三信家商": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=581402D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "三信家商(夜)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=581C02N",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "中正高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=583301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "新興高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=563301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "高雄高商(夜)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=563C01N",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "前鎮高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=593301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "瑞祥高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=593302D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "中正高工": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=593401D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "中正高工(夜)": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=593C01N",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "福誠高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=124340D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "小港高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=613301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "林園高中": {
+        "vision": "v5",
+        "app": 1.4,
+        "beta": true,
+        "api": "https://highschool.kh.edu.tw",
+        "url": {
+            "login": "/Login.action?schNo=124311D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "userid"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_submit"
+            },
+            "successKeywords": [
+                "上次登入系統紀錄"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
         }
     }
 }

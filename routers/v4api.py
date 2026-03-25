@@ -294,8 +294,6 @@ async def get_semester_scores(
         return data
 
     r = v4.parse_semester_grades(original_data.data, semester)
-    print(original_data.data)
-
 
     data["code"] = 200
     data["message"] = "Success."
