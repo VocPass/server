@@ -152,6 +152,40 @@ def parse_absence_records(absence):
     return records
 
 
+def parse_curriculum(raw):
+    """
+    解析課表(台北)
+    """
+    period_map = {"1": "一", "2": "二", "3": "三", "4": "四", "5": "五", "6": "六", "7": "七", "8": "八"}
+    day_fields = [("o1", "t1", "r1", "一"), ("o2", "t2", "r2", "二"), ("o3", "t3", "r3", "三"),
+                  ("o4", "t4", "r4", "四"), ("o5", "t5", "r5", "五")]
+
+    courses = {}
+    for row in raw.get("dataRows", []):
+        period = period_map.get(str(row.get("no", "")))
+        if not period:
+            continue
+        start = row.get("b").replace(" ", "")
+        end = row.get("e").replace(" ", "")
+        for subj_f, tea_f, room_f, weekday in day_fields:
+            subject = row.get(subj_f)
+            if not subject:
+                continue
+            if subject not in courses:
+                courses[subject] = {"count": 0, "schedule": []}
+            courses[subject]["count"] += 1
+            courses[subject]["schedule"].append({
+                "weekday": weekday,
+                "period": period,
+                "start": start,
+                "end": end,
+                "teacher": row.get(tea_f,""),
+                "room": row.get(room_f,""),
+            })
+
+    return courses
+
+
 def parse_semester_grades(first_semester_grades, second_semester_grades):
     """
     解析學期成績
@@ -198,3 +232,4 @@ def parse_semester_grades(first_semester_grades, second_semester_grades):
         subject_scores.append(data)
 
     return subject_scores
+

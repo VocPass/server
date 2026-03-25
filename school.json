@@ -71,7 +71,7 @@
         }
     },
     "test": {
-        "vision": "v5",
+        "vision": "v6",
         "app": 1.4,
         "beta": false,
         "api": "https://sschool.tp.edu.tw",
@@ -102,9 +102,10 @@
             "attendance": "/B0209S_Absence_select.action",
             "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
             "exam_results": "#",
-            "semester_scores": "/A0410S_OpenItemScoreView_selectA0410s.action?itemId={itemId}&stdSemeId={stdSemeId}",
-            "curriculum": "/aiohusifgshsuaifgyduio",
-            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "/myLessons.action",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+            "login":"/LoginInfo.action"
         }
     },
     "宜蘭高商": {
