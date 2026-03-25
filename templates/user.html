@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocPass | 個人資料</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-pattern {
+            background-color: #f0f4ff;
+            background-image: radial-gradient(#c7d2fe 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 antialiased overflow-x-hidden">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-indigo-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <img src="https://github.com/vocpass.png" alt="VocPass"
+                        class="w-8 h-8 rounded-lg object-cover border border-indigo-200">
+                    <span class="font-bold text-xl tracking-wider">VocPass</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/#features" class="text-gray-600 hover:text-indigo-600 transition-colors">功能特色</a>
+                    <a href="/#schools" class="text-gray-600 hover:text-indigo-600 transition-colors">支援學校</a>
+                    <a href="/#install" class="text-gray-600 hover:text-indigo-600 transition-colors">立即下載</a>
+                    <a href="https://github.com/VocPass" target="_blank"
+                        class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-slate-700 transition-colors">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主內容 -->
+    <div class="hero-pattern min-h-screen px-4 pt-24 pb-12">
+        <div class="w-full max-w-2xl mx-auto">
+
+            <!-- 載入中 -->
+            <div id="loading-card" class="flex flex-col items-center justify-center py-24 text-slate-400">
+                <i class="fa-solid fa-spinner fa-spin text-4xl mb-4 text-indigo-400"></i>
+                <p class="text-sm">載入中...</p>
+            </div>
+
+            <!-- 找不到使用者 -->
+            <div id="not-found-card" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm p-10 text-center">
+                <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-red-400 text-3xl mx-auto mb-4">
+                    <i class="fa-solid fa-user-xmark"></i>
+                </div>
+                <h1 class="text-xl font-bold text-slate-900 mb-2">找不到此使用者</h1>
+                <p class="text-slate-500 text-sm">該使用者不存在或帳號已停用</p>
+            </div>
+
+            <!-- 使用者資料 -->
+            <div id="user-card" class="hidden space-y-4">
+
+                <!-- 個人資訊 -->
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-center">
+                    <img id="user-avatar" src="" alt="頭像"
+                        class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-indigo-100 shadow-md object-cover">
+                    <h1 id="user-name" class="text-2xl font-black text-slate-900 mb-1"></h1>
+                    <p id="user-username" class="text-slate-400 text-sm font-medium"></p>
+
+                    <div id="curriculum-badge" class="hidden mt-4 inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-full text-sm font-semibold">
+                        <i class="fa-solid fa-table-cells"></i>
+                        已共享課表
+                    </div>
+                </div>
+
+                <!-- 課表 -->
+                <div id="curriculum-section" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-table-cells text-indigo-500"></i>
+                        課表
+                    </h2>
+                    <div id="curriculum-table" class="overflow-x-auto">
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr id="table-header" class="text-slate-500"></tr>
+                            </thead>
+                            <tbody id="table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const WEEKDAYS = ['一', '二', '三', '四', '五'];
+        const WEEKDAY_LABELS = { '一': '週一', '二': '週二', '三': '週三', '四': '週四', '五': '週五' };
+        const PERIOD_ORDER = { '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9, '十': 10 };
+
+        function getUsername() {
+            const path = window.location.pathname;
+            const match = path.match(/^\/@(.+)$/);
+            return match ? match[1] : null;
+        }
+
+        function buildTimetable(curriculum) {
+            // Collect all periods and weekdays used
+            const periodsSet = new Set();
+            const weekdaysUsed = new Set();
+            const cellMap = {}; // "weekday-period" -> [{subject, room, teacher}]
+
+            for (const [subject, info] of Object.entries(curriculum)) {
+                for (const slot of info.schedule) {
+                    const key = `${slot.weekday}-${slot.period}`;
+                    periodsSet.add(slot.period);
+                    weekdaysUsed.add(slot.weekday);
+                    if (!cellMap[key]) cellMap[key] = [];
+                    cellMap[key].push({ subject, room: slot.room, teacher: slot.teacher });
+                }
+            }
+
+            const periods = [...periodsSet].sort((a, b) => (PERIOD_ORDER[a] || 99) - (PERIOD_ORDER[b] || 99));
+            const weekdays = WEEKDAYS.filter(d => weekdaysUsed.has(d));
+
+            // Header
+            const header = document.getElementById('table-header');
+            header.innerHTML = `<th class="py-2 px-2 text-left text-xs font-semibold text-slate-400 w-10">節次</th>` +
+                weekdays.map(d => `<th class="py-2 px-2 text-center text-xs font-semibold text-slate-500">${WEEKDAY_LABELS[d]}</th>`).join('');
+
+            // Body
+            const tbody = document.getElementById('table-body');
+            const colors = [
+                'bg-indigo-50 text-indigo-700',
+                'bg-violet-50 text-violet-700',
+                'bg-sky-50 text-sky-700',
+                'bg-emerald-50 text-emerald-700',
+                'bg-amber-50 text-amber-700',
+                'bg-rose-50 text-rose-700',
+                'bg-teal-50 text-teal-700',
+                'bg-pink-50 text-pink-700',
+                'bg-orange-50 text-orange-700',
+                'bg-cyan-50 text-cyan-700',
+            ];
+            const subjectColorMap = {};
+            let colorIndex = 0;
+            function getColor(subject) {
+                if (!subjectColorMap[subject]) {
+                    subjectColorMap[subject] = colors[colorIndex % colors.length];
+                    colorIndex++;
+                }
+                return subjectColorMap[subject];
+            }
+
+            tbody.innerHTML = periods.map(period => {
+                const cells = weekdays.map(day => {
+                    const key = `${day}-${period}`;
+                    const entries = cellMap[key];
+                    if (!entries || entries.length === 0) {
+                        return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full rounded-xl bg-slate-50"></div></td>`;
+                    }
+                    const inner = entries.map(e => {
+                        const color = getColor(e.subject);
+                        const roomLine = e.room ? `<span class="block text-xs opacity-60 truncate">${e.room}</span>` : '';
+                        return `<div class="rounded-xl px-2 py-1.5 mb-1 last:mb-0 ${color}">
+                            <span class="block font-semibold leading-tight text-xs">${e.subject}</span>
+                            ${roomLine}
+                        </div>`;
+                    }).join('');
+                    return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full flex flex-col justify-start">${inner}</div></td>`;
+                }).join('');
+                return `<tr class="border-t border-slate-100">
+                    <td class="py-2 px-2 text-center text-xs font-bold text-slate-400 align-top pt-3">${period}</td>
+                    ${cells}
+                </tr>`;
+            }).join('');
+        }
+
+        async function loadUser() {
+            const username = getUsername();
+            if (!username) {
+                document.getElementById('loading-card').classList.add('hidden');
+                document.getElementById('not-found-card').classList.remove('hidden');
+                return;
+            }
+
+            document.title = `VocPass | @${username}`;
+
+            try {
+                const res = await fetch(`/api/user/${encodeURIComponent(username)}`);
+                const json = await res.json();
+
+                document.getElementById('loading-card').classList.add('hidden');
+
+                if (json.code !== 200 || !json.data) {
+                    document.getElementById('not-found-card').classList.remove('hidden');
+                    return;
+                }
+
+                const user = json.data;
+                document.title = `VocPass | ${user.name || user.username}`;
+
+                document.getElementById('user-avatar').src = user.avatar || 'https://github.com/vocpass.png';
+                document.getElementById('user-name').textContent = user.name || user.username;
+                document.getElementById('user-username').textContent = `@${user.username}`;
+
+                if (user.curriculum_status) {
+                    document.getElementById('curriculum-badge').classList.remove('hidden');
+                }
+
+                if (user.curriculum_status && user.curriculum && Object.keys(user.curriculum).length > 0) {
+                    document.getElementById('curriculum-section').classList.remove('hidden');
+                    buildTimetable(user.curriculum);
+                }
+
+                document.getElementById('user-card').classList.remove('hidden');
+            } catch (e) {
+                document.getElementById('loading-card').classList.add('hidden');
+                document.getElementById('not-found-card').classList.remove('hidden');
+            }
+        }
+
+        loadUser();
+    </script>
+
+</body>
+
+</html>

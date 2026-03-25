@@ -15,11 +15,9 @@ load_dotenv()
 @router.get("/curriculum/{username}", summary="取得課表")
 async def index(request: Request,username: str, response: Response):
     db = request.app.state.pb_client
-    record = db.collection("users").get_list(
-        query_params={"filter": f'username="{username}"'}
-    )
-    if record.items[0].curriculum_status:
-        return record.items[0].curriculum
+    record = db.collection("users").get_first_list_item(f'username="{username}"')
+    if record.curriculum_status:
+        return record.curriculum
     else:
         response.status_code = status.HTTP_404_NOT_FOUND
         return {"code": 404, "message": "Curriculum not found.", "data": None}
