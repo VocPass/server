@@ -105,7 +105,7 @@
             "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
             "curriculum": "/myLessons.action",
             "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
-            "login":"/LoginInfo.action"
+            "login": "/LoginInfo.action"
         }
     },
     "宜蘭高商": {
@@ -5492,5 +5492,2045 @@
             "curriculum": "#",
             "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
         }
-    }
+    },
+    "新民中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=351301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "建國中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=353301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "成功中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=353302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "北一女中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=353303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "靜修高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=361301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "明倫高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=363301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "成淵高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=363302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "大同高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=343302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "中山女中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=343301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "大直高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=343303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "非學校型態實驗教育學校": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=343F99",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "西松高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=313301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "中崙高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=313302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "師大附中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=330301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "延平中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=331301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "金甌女中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=331302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "復興實驗高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=331304",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "和平高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=333301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "芳和實驗中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=333304",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "立人高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=371301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "華江高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=373301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "大理高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=373302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "協和祐德高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=321399",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "松山高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=323301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "永春高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=323302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "泰北高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=411301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "衛理女中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=411302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "華興中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=411303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "百齡高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=413302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "薇閣高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=421301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "幼華高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=421302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "奎山實驗中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=421303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "復興高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=423301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "文德女中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=401301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "方濟中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=401302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "達人高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=401303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "內湖高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=403301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "麗山高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=403302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "南湖高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=403303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "南港高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=393301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "育成高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=393302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "政大附中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=380301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "東山高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=381301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "滬江高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=381302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "大誠高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=381303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "再興中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=381304",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "景文高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=381305",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "靜心高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=381306",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "景美女中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=383301",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "萬芳高中": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=383302",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ],
+    "數位實驗高級中學": [
+        {
+            "vision": "v6",
+            "app": 1.4,
+            "beta": false,
+            "api": "https://sschool.tp.edu.tw",
+            "url": {
+                "login": "/Login.action?schNo=383303",
+                "logined": "/PersonalWidget_getMyWidget.action",
+                "root": "/"
+            },
+            "login": {
+                "username": {
+                    "name": "account"
+                },
+                "password": {
+                    "name": "password"
+                },
+                "captcha": {},
+                "captchaImage": {},
+                "button": {
+                    "class": "btn_submit"
+                },
+                "successKeywords": [
+                    "登出",
+                    ",\"page\":1,"
+                ]
+            },
+            "route": {
+                "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+                "attendance": "/B0209S_Absence_select.action",
+                "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+                "exam_results": "#",
+                "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+                "curriculum": "/myLessons.action",
+                "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+                "login": "/LoginInfo.action"
+            }
+        }
+    ]
 }
