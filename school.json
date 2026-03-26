@@ -8460,5 +8460,428 @@
             "semester_scores": "/online/selection_student/year_accompliv1ment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
             "curriculum": "/online/student/school_class_tabletime.asp"
         }
+    },
+    "金門高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "710301",
+        "api": "https://shcloud7.k12ea.gov.tw/KMSHKM",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "德光高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "211318",
+        "api": "https://shinher.tkgsh.tn.edu.tw/TKGSH",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "復旦高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "031311",
+        "api": "https://shinho.fdhs.tyc.edu.tw/FDSH",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "曾文農工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "{sb}",
+        "api": "https://shcloud1.k12ea.gov.tw/TWIVSTN",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "恆春工商": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "{sb}",
+        "api": "https://shcloud13.k12ea.gov.tw/HCVSPTC",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "觀音高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "{sb}",
+        "api": "https://ssys.gish.tyc.edu.tw",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "光復中學": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "{sb}",
+        "api": "https://shinher.kfsh.hc.edu.tw/kfsh",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "永靖高工": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "{sb}",
+        "api": "https://shcloud7.k12ea.gov.tw/YJVSCHC",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "澎湖海事": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": true,
+        "school_code": "{sb}",
+        "api": "https://shcloud12.k12ea.gov.tw/PHMHSPHC",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
     }
 }
