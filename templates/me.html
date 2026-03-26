@@ -15,43 +15,54 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        :root {
+            --apple-blue: #0071e3;
+            --apple-text: #1d1d1f;
+            --apple-secondary: #6e6e73;
         }
-        .hero-pattern {
-            background-color: #f0f4ff;
-            background-image: radial-gradient(#c7d2fe 1px, transparent 1px);
-            background-size: 20px 20px;
+        .apple-nav {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .logout-btn {
+            background: rgba(0,0,0,0.06);
+            color: #1d1d1f;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .logout-btn:hover {
+            background: #fff0f0;
+            color: #d93025;
         }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900 antialiased overflow-x-hidden">
+<body style="background:#f5f5f7; color:#1d1d1f;" class="antialiased overflow-x-hidden">
 
     <!-- 導覽列 -->
-    <nav class="fixed w-full z-50 glass-nav border-b border-indigo-100 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
+    <nav class="apple-nav fixed w-full z-50 transition-all duration-300" style="height:44px;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between h-full items-center">
                 <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
                     <img src="https://github.com/vocpass.png" alt="VocPass"
-                        class="w-8 h-8 rounded-lg object-cover border border-indigo-200">
-                    <span class="font-bold text-xl tracking-wider">VocPass</span>
+                        class="w-6 h-6 rounded-md object-cover">
+                    <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
                 </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/#features" class="text-gray-600 hover:text-indigo-600 transition-colors">功能特色</a>
-                    <a href="/#schools" class="text-gray-600 hover:text-indigo-600 transition-colors">支援學校</a>
-                    <a href="/#install" class="text-gray-600 hover:text-indigo-600 transition-colors">立即下載</a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="/#features" class="text-sm transition-colors" style="color:#6e6e73;">功能特色</a>
+                    <a href="/#schools" class="text-sm transition-colors" style="color:#6e6e73;">支援學校</a>
+                    <a href="/#install" class="text-sm transition-colors" style="color:#6e6e73;">立即下載</a>
                     <a href="https://github.com/VocPass" target="_blank"
-                        class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-slate-700 transition-colors">
+                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold"
+                        style="background:#1d1d1f; color:#fff;">
                         <i class="fa-brands fa-github"></i> GitHub
                     </a>
                 </div>
@@ -60,33 +71,39 @@
     </nav>
 
     <!-- 主內容 -->
-    <div class="hero-pattern min-h-screen flex items-center justify-center px-4 pt-16">
+    <div class="min-h-screen flex items-center justify-center px-4" style="padding-top:44px;">
         <div class="w-full max-w-sm">
 
             <!-- 已登入：使用者資訊 -->
-            <div id="user-card" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-center">
+            <div id="user-card" class="hidden bg-white rounded-2xl p-8 text-center"
+                style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
                 <img id="user-avatar" src="" alt="頭像"
-                    class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-indigo-100 shadow-md object-cover">
-                <h1 id="user-name" class="text-2xl font-black text-slate-900 mb-1"></h1>
-                <p id="user-email" class="text-slate-500 text-sm mb-6"></p>
+                    class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+                    style="border:3px solid #f5f5f7;">
+                <h1 id="user-name" class="text-2xl font-bold tracking-tight mb-1"
+                    style="color:#1d1d1f; letter-spacing:-0.02em;"></h1>
+                <p id="user-email" class="text-sm mb-6" style="color:#6e6e73;"></p>
 
-                <div id="user-meta" class="space-y-3 text-left mb-6"></div>
+                <div id="user-meta" class="space-y-2 text-left mb-6"></div>
 
                 <button onclick="logout()"
-                    class="w-full px-5 py-3 bg-slate-100 text-slate-700 rounded-2xl font-semibold hover:bg-red-50 hover:text-red-600 transition-colors">
+                    class="logout-btn w-full px-5 py-3 rounded-xl font-semibold text-sm">
                     <i class="fa-solid fa-right-from-bracket mr-2"></i>登出
                 </button>
             </div>
 
             <!-- 未登入 -->
-            <div id="guest-card" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-center">
-                <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-500 text-3xl mx-auto mb-4">
+            <div id="guest-card" class="hidden bg-white rounded-2xl p-8 text-center"
+                style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
+                    style="background:#e4f3ff; color:#0071e3;">
                     <i class="fa-solid fa-user-slash"></i>
                 </div>
-                <h1 class="text-xl font-bold text-slate-900 mb-2">尚未登入</h1>
-                <p class="text-slate-500 text-sm mb-6">請先登入以查看您的帳號資訊</p>
+                <h1 class="text-xl font-semibold mb-2" style="color:#1d1d1f;">尚未登入</h1>
+                <p class="text-sm mb-6" style="color:#6e6e73;">請先登入以查看您的帳號資訊</p>
                 <a href="/auth?web=1"
-                    class="block w-full px-5 py-3 bg-indigo-600 text-white rounded-2xl font-semibold hover:bg-indigo-500 transition-colors">
+                    class="block w-full px-5 py-3 rounded-full font-semibold text-sm text-center transition-colors"
+                    style="background:#0071e3; color:#fff;">
                     前往登入
                 </a>
             </div>
@@ -104,30 +121,33 @@
 
         function renderMeta(key, label, icon) {
             return `
-                <div class="flex items-center gap-3 px-4 py-3 bg-slate-50 rounded-xl">
-                    <div class="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-500 text-sm flex-shrink-0">
+                <div class="flex items-center gap-3 px-4 py-3 rounded-xl" style="background:#f5f5f7;">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
+                        style="background:#e4f3ff; color:#0071e3;">
                         <i class="${icon}"></i>
                     </div>
                     <div class="min-w-0">
-                        <p class="text-xs text-slate-400 font-medium">${label}</p>
-                        <p class="text-sm font-semibold text-slate-700 truncate">${key}</p>
+                        <p class="text-xs font-medium" style="color:#6e6e73;">${label}</p>
+                        <p class="text-sm font-semibold truncate" style="color:#1d1d1f;">${key}</p>
                     </div>
                 </div>
             `;
         }
 
         function renderCurriculumStatus(enabled) {
-            const color = enabled ? 'text-emerald-500' : 'text-slate-400';
+            const color = enabled ? '#1a7f4e' : '#6e6e73';
             const icon = enabled ? 'fa-solid fa-table-cells' : 'fa-solid fa-table-cells';
             const label = enabled ? '已開啟' : '未開啟';
+            const bgColor = enabled ? '#e6f9f0' : '#f5f5f7';
             return `
-                <div class="flex items-center gap-3 px-4 py-3 bg-slate-50 rounded-xl">
-                    <div class="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center ${color} text-sm flex-shrink-0">
+                <div class="flex items-center gap-3 px-4 py-3 rounded-xl" style="background:#f5f5f7;">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
+                        style="background:${bgColor}; color:${color};">
                         <i class="${icon}"></i>
                     </div>
                     <div class="min-w-0 flex-1">
-                        <p class="text-xs text-slate-400 font-medium">共享課表</p>
-                        <p class="text-sm font-semibold ${color}">${label}</p>
+                        <p class="text-xs font-medium" style="color:#6e6e73;">共享課表</p>
+                        <p class="text-sm font-semibold" style="color:${color};">${label}</p>
                     </div>
                 </div>
             `;

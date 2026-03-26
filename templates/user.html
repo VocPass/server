@@ -14,95 +14,100 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        :root {
+            --apple-blue: #0071e3;
+            --apple-text: #1d1d1f;
+            --apple-secondary: #6e6e73;
         }
-        .hero-pattern {
-            background-color: #f0f4ff;
-            background-image: radial-gradient(#c7d2fe 1px, transparent 1px);
-            background-size: 20px 20px;
+        .apple-nav {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900 antialiased overflow-x-hidden">
+<body style="background:#f5f5f7; color:#1d1d1f;" class="antialiased overflow-x-hidden">
 
     <!-- 導覽列 -->
-    <nav class="fixed w-full z-50 glass-nav border-b border-indigo-100 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
+    <nav class="apple-nav fixed w-full z-50 transition-all duration-300" style="height:44px;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between h-full items-center">
                 <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
                     <img src="https://github.com/vocpass.png" alt="VocPass"
-                        class="w-8 h-8 rounded-lg object-cover border border-indigo-200">
-                    <span class="font-bold text-xl tracking-wider">VocPass</span>
+                        class="w-6 h-6 rounded-md object-cover">
+                    <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
                 </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/#features" class="text-gray-600 hover:text-indigo-600 transition-colors">功能特色</a>
-                    <a href="/#schools" class="text-gray-600 hover:text-indigo-600 transition-colors">支援學校</a>
-                    <a href="/#install" class="text-gray-600 hover:text-indigo-600 transition-colors">立即下載</a>
-                    <a href="https://github.com/VocPass" target="_blank"
-                        class="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-slate-700 transition-colors">
-                        <i class="fa-brands fa-github"></i> GitHub
-                    </a>
-                </div>
+                <a href="/" class="flex items-center gap-1.5 text-sm transition-colors" style="color:#0071e3;">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                    返回首頁
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- 主內容 -->
-    <div class="hero-pattern min-h-screen px-4 pt-24 pb-12">
+    <div class="min-h-screen px-4 pb-12" style="padding-top:calc(44px + 24px);">
         <div class="w-full max-w-2xl mx-auto">
 
             <!-- 載入中 -->
-            <div id="loading-card" class="flex flex-col items-center justify-center py-24 text-slate-400">
-                <i class="fa-solid fa-spinner fa-spin text-4xl mb-4 text-indigo-400"></i>
+            <div id="loading-card" class="flex flex-col items-center justify-center py-24" style="color:#6e6e73;">
+                <i class="fa-solid fa-spinner fa-spin text-3xl mb-4" style="color:#0071e3;"></i>
                 <p class="text-sm">載入中...</p>
             </div>
 
             <!-- 找不到使用者 -->
-            <div id="not-found-card" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm p-10 text-center">
-                <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-red-400 text-3xl mx-auto mb-4">
+            <div id="not-found-card" class="hidden bg-white rounded-2xl p-10 text-center"
+                style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
+                    style="background:#ffeaea; color:#d93025;">
                     <i class="fa-solid fa-user-xmark"></i>
                 </div>
-                <h1 class="text-xl font-bold text-slate-900 mb-2">找不到此使用者</h1>
-                <p class="text-slate-500 text-sm">該使用者不存在或帳號已停用</p>
+                <h1 class="text-lg font-semibold mb-2" style="color:#1d1d1f;">找不到此使用者</h1>
+                <p class="text-sm" style="color:#6e6e73;">該使用者不存在或帳號已停用</p>
             </div>
 
             <!-- 使用者資料 -->
             <div id="user-card" class="hidden space-y-4">
 
                 <!-- 個人資訊 -->
-                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-center">
+                <div class="bg-white rounded-2xl p-8 text-center"
+                    style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
                     <img id="user-avatar" src="" alt="頭像"
-                        class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-indigo-100 shadow-md object-cover">
-                    <h1 id="user-name" class="text-2xl font-black text-slate-900 mb-1"></h1>
-                    <p id="user-username" class="text-slate-400 text-sm font-medium"></p>
+                        class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+                        style="border:3px solid #f5f5f7;">
+                    <h1 id="user-name" class="text-2xl font-bold tracking-tight mb-1"
+                        style="color:#1d1d1f; letter-spacing:-0.02em;"></h1>
+                    <p id="user-username" class="text-sm font-medium" style="color:#6e6e73;"></p>
 
-                    <div id="curriculum-badge" class="hidden mt-4 inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-600 rounded-full text-sm font-semibold">
+                    <div id="curriculum-badge"
+                        class="hidden mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold"
+                        style="background:#e6f9f0; color:#1a7f4e;">
                         <i class="fa-solid fa-table-cells"></i>
                         已共享課表
                     </div>
                 </div>
 
                 <!-- 課表 -->
-                <div id="curriculum-section" class="hidden bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
-                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-table-cells text-indigo-500"></i>
+                <div id="curriculum-section" class="hidden bg-white rounded-2xl p-6"
+                    style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+                    <h2 class="text-base font-semibold mb-4 flex items-center gap-2"
+                        style="color:#1d1d1f;">
+                        <i class="fa-solid fa-table-cells" style="color:#0071e3;"></i>
                         課表
                     </h2>
                     <div id="curriculum-table" class="overflow-x-auto">
                         <table class="w-full text-sm border-collapse">
                             <thead>
-                                <tr id="table-header" class="text-slate-500"></tr>
+                                <tr id="table-header"></tr>
                             </thead>
                             <tbody id="table-body"></tbody>
                         </table>
@@ -145,8 +150,8 @@
 
             // Header
             const header = document.getElementById('table-header');
-            header.innerHTML = `<th class="py-2 px-2 text-left text-xs font-semibold text-slate-400 w-10">節次</th>` +
-                weekdays.map(d => `<th class="py-2 px-2 text-center text-xs font-semibold text-slate-500">${WEEKDAY_LABELS[d]}</th>`).join('');
+            header.innerHTML = `<th class="py-2 px-2 text-left text-xs font-semibold w-10" style="color:#6e6e73;">節次</th>` +
+                weekdays.map(d => `<th class="py-2 px-2 text-center text-xs font-semibold" style="color:#1d1d1f;">${WEEKDAY_LABELS[d]}</th>`).join('');
 
             // Body
             const tbody = document.getElementById('table-body');
@@ -177,7 +182,7 @@
                     const key = `${day}-${period}`;
                     const entries = cellMap[key];
                     if (!entries || entries.length === 0) {
-                        return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full rounded-xl bg-slate-50"></div></td>`;
+                        return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full rounded-xl" style="background:#f5f5f7;"></div></td>`;
                     }
                     const inner = entries.map(e => {
                         const color = getColor(e.subject);
@@ -189,8 +194,8 @@
                     }).join('');
                     return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full flex flex-col justify-start">${inner}</div></td>`;
                 }).join('');
-                return `<tr class="border-t border-slate-100">
-                    <td class="py-2 px-2 text-center text-xs font-bold text-slate-400 align-top pt-3">${period}</td>
+                return `<tr style="border-top:1px solid rgba(0,0,0,0.06);">
+                    <td class="py-2 px-2 text-center text-xs font-bold align-top pt-3" style="color:#6e6e73;">${period}</td>
                     ${cells}
                 </tr>`;
             }).join('');
