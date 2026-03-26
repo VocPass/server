@@ -7640,5 +7640,545 @@
             "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
             "login": "/LoginInfo.action"
         }
+    },
+    "苗栗高商(夜)": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=050C07D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "花蓮高商": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=150405D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "臺南附中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=110308D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "華僑高中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=010301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "花蓮高農": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=150401D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "嘉義高商": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=200406D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "磐石高中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=181307D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "土庫工商": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=090413D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "台南一中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=210305D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "台南一中(夜)": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=210B05D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "鳳山高中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=120303D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "花蓮高商(夜)": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=150C05D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "和美實驗學校": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=070F01D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "高師大附中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=580301D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "南大附聰": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=110F01D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
     }
 }

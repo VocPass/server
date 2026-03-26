@@ -40,13 +40,27 @@ def get_allschool():
 
 def write_school_json():
     # 先簡寫
-    new_schools = {
-        "020302": "宜蘭高中",
-        "060322": "興大附中",
-        "060323": "中科實中",
-        "110314": "後壁高中",
-        "130306": "潮州高中",
-    }
+    ns = """050C07D:苗栗高商(夜)
+150405D:花蓮高商
+110308D:臺南附中
+010301D:華僑高中
+150401D:花蓮高農
+200406D:嘉義高商
+181307D:磐石高中
+090413D:土庫工商
+210305D:台南一中
+210B05D:台南一中(夜)
+120303D:鳳山高中
+150C05D:花蓮高商(夜)
+070F01D:和美實驗學校
+580301D:高師大附中
+110F01D:南大附聰"""
+
+    new_schools = {}
+    for i in ns.splitlines():
+        a = i.strip().split(":")[0]
+        d = i.strip().split(":")[1]
+        new_schools[a] = d
     import json
 
     with open("school.json", "r", encoding="utf-8") as f:
@@ -58,7 +72,7 @@ def write_school_json():
             "vision": "v6",
             "app": 1.4,
             "beta": False,
-            "api": "https://hschool-mlife.k12ea.gov.tw",
+            "api": "https://hschool-mlife.k12ea.gov.tw/ecampus_KH",
             "url": {
                 "login": f"/Login.action?schNo={i}",
                 "logined": "/PersonalWidget_getMyWidget.action",
@@ -66,11 +80,11 @@ def write_school_json():
             },
             "login": {
                 "username": {"name": "loginId"},
-                "password": {"name": "pas1"},
-                "captcha": {"name": "validateCode"},
-                "captchaImage": {"id": "validatePic"},
-                "button": {"class": "ui-button ui-corner-all ui-widget"},
-                "successKeywords": ["登出", ',"page":1,'],
+                "password": {"name": "password"},
+                "captcha": {},
+                "captchaImage": {},
+                "button": {"class": "btn_suui-button ui-corner-all ui-widgetbmit"},
+                "successKeywords": ["登入者"],
             },
             "route": {
                 "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
@@ -78,9 +92,8 @@ def write_school_json():
                 "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
                 "exam_results": "#",
                 "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
-                "curriculum": "/myLessons.action",
+                "curriculum": "#",
                 "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
-                "login": "/LoginInfo.action",
             },
         }
 

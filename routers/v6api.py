@@ -12,7 +12,7 @@ import utils.v5 as v5
 from utils.base import *
 from utils.http_client import HttpsClient
 import urllib.parse
-
+import base64
 load_dotenv()
 router = APIRouter(prefix="/api/v6", tags=["v6 解析端點"])
 http = HttpsClient()
@@ -267,11 +267,16 @@ async def get_semester_scores(
 
         return data
     
-    url = f"{school_info['api']}{school_info['route']['login']}"
-    original_data = await http.post(url,{"session_key": request.cookies.get("session_key")}, request.cookies, "utf-8")
+    if "ecampus_KH" in school_info["api"]:
+        user_data = json.loads(base64.b64decode(request.cookies.get("userInfo", "")).decode("utf-8"))
+        stdId = str(user_data["id"])
+        statusM = "15"
+    else:
+        url = f"{school_info['api']}{school_info['route']['login']}"
+        original_data = await http.post(url,{"session_key": request.cookies.get("session_key")}, request.cookies, "utf-8")
 
-    stdId = str(original_data.data['parameterMap']['userInfo']['id'])
-    statusM ="15"
+        stdId = str(original_data.data['parameterMap']['userInfo']['id'])
+        statusM ="15"
     
     url = f"{school_info['api']}{school_info['route']['info']}".replace(
         "{statusM}", statusM
@@ -285,7 +290,7 @@ async def get_semester_scores(
         "sord": "asc",
         "session_key": request.cookies.get("session_key"),
     }
-
+    
     user_info = await http.post(url, rd, request.cookies, "utf-8")
     dl = len(user_info.data["dataRows"])
     if dl < 3:
@@ -314,7 +319,11 @@ async def get_semester_scores(
     second_semester_grades = []
 
     for i in range(2):
-        pId = stdSemeId[i]
+        try:
+            pId = stdSemeId[i]
+        except IndexError:
+            continue
+
         url = f"{school_info['api']}{school_info['route']['semester_scores']}".replace("{pId}", str(pId))
         
         rd = {

@@ -233,3 +233,5 @@ def parse_semester_grades(first_semester_grades, second_semester_grades):
 
     return subject_scores
 
+
+
