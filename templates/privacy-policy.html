@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>隱私權政策 | VocPass</title>
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <!-- Font Awesome -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Noto Sans TC -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
-            rel="stylesheet">
-        <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
-        <script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隱私權政策 | VocPass</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -24,215 +23,220 @@
                 }
             }
         }
-        </script>
-        <style>
+    </script>
+    <style>
         :root {
             --apple-blue: #0071e3;
             --apple-text: #1d1d1f;
             --apple-secondary: #6e6e73;
         }
+
         .apple-nav {
             background: rgba(255, 255, 255, 0.72);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
-        </style>
-    </head>
-    <body style="background:#ffffff; color:#1d1d1f;" class="antialiased">
+    </style>
+</head>
 
-        <!-- 導覽列 -->
-        <nav class="apple-nav fixed w-full z-50 transition-all duration-300" style="height:44px;">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-                <div class="flex justify-between h-full items-center">
-                    <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                        <img src="https://github.com/vocpass.png" alt="VocPass"
-                            class="w-6 h-6 rounded-md object-cover">
-                        <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
-                    </a>
-                    <a href="/" class="flex items-center gap-1.5 text-sm transition-colors" style="color:#0071e3;">
-                        <i class="fa-solid fa-chevron-left text-xs"></i>
-                        返回首頁
-                    </a>
-                </div>
+<body style="background:#ffffff; color:#1d1d1f;" class="antialiased">
+
+    <!-- 導覽列 -->
+    <nav class="apple-nav fixed w-full z-50 transition-all duration-300" style="height:44px;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between h-full items-center">
+                <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <img src="https://github.com/vocpass.png" alt="VocPass" class="w-6 h-6 rounded-md object-cover">
+                    <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
+                </a>
+                <a href="/" class="flex items-center gap-1.5 text-sm transition-colors" style="color:#0071e3;">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                    返回首頁
+                </a>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- 主內容 -->
-        <main style="padding-top:calc(44px + 40px); padding-bottom:80px;" class="px-4">
-            <div class="max-w-3xl mx-auto">
+    <!-- 主內容 -->
+    <main style="padding-top:calc(44px + 40px); padding-bottom:80px;" class="px-4">
+        <div class="max-w-3xl mx-auto">
 
-                <!-- 標題 -->
-                <div class="mb-12">
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#6e6e73;">Legal</p>
-                    <h1 class="text-4xl font-bold tracking-tight mb-3"
-                        style="color:#1d1d1f; letter-spacing:-0.02em;">隱私權政策</h1>
-                    <p class="text-sm" style="color:#6e6e73;">最後更新日期：2026 年 3 月 18 日</p>
-                </div>
-
-                <!-- 內容卡片 -->
-                <div class="bg-white rounded-2xl p-8 sm:p-10 space-y-10"
-                    style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
-
-                    <!-- 前言 -->
-                    <section>
-                        <p class="leading-relaxed text-sm" style="color:#6e6e73;">
-                            VocPass（以下簡稱「本應用程式」）由 VocPass 開發團隊開發與維護。我們非常重視您的隱私，本政策說明本應用程式如何收集、使用及保護您的個人資料。使用本應用程式，即表示您同意本政策之內容。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 1 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#e4f3ff;">
-                                <i class="fa-solid fa-database text-sm" style="color:#0071e3;"></i>
-                            </div>
-                            <h2 class="text-base font-semibold" style="color:#1d1d1f;">1. 我們收集的資料</h2>
-                        </div>
-                        <div class="space-y-3 text-sm leading-relaxed" style="color:#6e6e73;">
-                            <p><strong style="color:#1d1d1f;">錯誤紀錄：</strong>當應用程式發生錯誤時，我們可能會收集錯誤發生時的相關技術資訊（如錯誤訊息、學校名稱、API 路徑），用於診斷與改善服務品質。此資料不包含您的帳號或個人識別資訊。</p>
-                            <p><strong style="color:#1d1d1f;">其他資料：</strong>本應用程式不主動收集帳號密碼、裝置識別碼、位置資訊或其他個人識別資料。</p>
-                        </div>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 2 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#e6f9f0;">
-                                <i class="fa-solid fa-lock text-sm" style="color:#1a7f4e;"></i>
-                            </div>
-                            <h2 class="text-base font-semibold" style="color:#1d1d1f;">2. 資料的儲存與使用方式</h2>
-                        </div>
-                        <div class="space-y-3 text-sm leading-relaxed" style="color:#6e6e73;">
-                            <p><strong style="color:#1d1d1f;">本地處理：</strong>您的學號、密碼及所有校務資料，均儲存於您的裝置本機（透過 iOS Keychain 及 UserDefaults），不會上傳至任何第三方伺服器或 VocPass 伺服器。</p>
-                            <p><strong style="color:#1d1d1f;">網路通訊：</strong>本應用程式透過 VocPass 伺服器作為中間層與您所屬學校的校務系統通訊以取得資料。您的請求會經過 VocPass 伺服器轉發至學校系統，但伺服器不會儲存您的帳號、密碼或校務內容。</p>
-                            <p><strong style="color:#1d1d1f;">離線快取：</strong>為提升使用體驗，部分資料（如課表、成績）會以快取方式儲存於本機，供無網路時使用。</p>
-                        </div>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 3 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#f3eeff;">
-                                <i class="fa-solid fa-share-nodes text-sm" style="color:#7c3aed;"></i>
-                            </div>
-                            <h2 class="text-base font-semibold" style="color:#1d1d1f;">3. 資料共享</h2>
-                        </div>
-                        <p class="text-sm leading-relaxed" style="color:#6e6e73;">
-                            我們不會將您的任何個人資料出售、出租或以其他方式提供給第三方。本應用程式不包含任何廣告 SDK 或第三方數據追蹤工具。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 4 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#fff3e0;">
-                                <i class="fa-solid fa-child-reaching text-sm" style="color:#f0830a;"></i>
-                            </div>
-                            <h2 class="text-base font-semibold" style="color:#1d1d1f;">4. 兒童隱私</h2>
-                        </div>
-                        <p class="text-sm leading-relaxed" style="color:#6e6e73;">
-                            本應用程式主要服務對象為高職學生（通常為 15 歲以上）。我們不會在知情的情況下收集 13 歲以下兒童的個人資料。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 5 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#ffeaea;">
-                                <i class="fa-solid fa-shield-halved text-sm" style="color:#d93025;"></i>
-                            </div>
-                            <h2 class="text-base font-semibold" style="color:#1d1d1f;">5. 資料安全</h2>
-                        </div>
-                        <p class="text-sm leading-relaxed" style="color:#6e6e73;">
-                            我們採取合理的技術措施保護您的資料，包括使用 iOS Keychain 安全儲存憑證。然而，任何電子傳輸或儲存方式都無法保證 100% 安全，請您妥善保管您的裝置。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 6 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#e4f3ff;">
-                                <i class="fa-solid fa-pen-to-square text-sm" style="color:#0071e3;"></i>
-                            </div>
-                            <h2 class="text-base font-semibold" style="color:#1d1d1f;">6. 政策更新</h2>
-                        </div>
-                        <p class="text-sm leading-relaxed" style="color:#6e6e73;">
-                            本隱私權政策可能不定期更新。更新後我們將在本頁面公告新版政策，並更新頁面上方的「最後更新日期」。建議您定期查閱本頁面以了解最新內容。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 7 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#f5f5f7;">
-                                <i class="fa-solid fa-envelope text-sm" style="color:#6e6e73;"></i>
-                            </div>
-                            <h2 class="text-base font-semibold" style="color:#1d1d1f;">7. 聯絡我們</h2>
-                        </div>
-                        <p class="text-sm leading-relaxed" style="color:#6e6e73;">
-                            如您對本隱私權政策有任何疑問，歡迎透過以下方式聯絡我們：
-                        </p>
-                        <div class="mt-4 flex flex-wrap gap-3">
-                            <a href="https://github.com/VocPass/ios/issues" target="_blank"
-                                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors"
-                                style="background:#f5f5f7; color:#1d1d1f;">
-                                <i class="fa-brands fa-github"></i>
-                                GitHub Issues
-                            </a>
-                        </div>
-                    </section>
-
-                </div>
-
-                <!-- 底部導航 -->
-                <div class="mt-8 flex flex-wrap justify-center gap-4 text-sm" style="color:#6e6e73;">
-                    <a href="/" class="transition-colors hover:opacity-70">首頁</a>
-                    <span>·</span>
-                    <a href="/disclaimer" class="transition-colors hover:opacity-70">免責聲明</a>
-                    <span>·</span>
-                    <a href="https://github.com/VocPass" target="_blank" class="transition-colors hover:opacity-70">GitHub</a>
-                </div>
+            <!-- 標題 -->
+            <div class="mb-12">
+                <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#6e6e73;">Legal</p>
+                <h1 class="font-bold mb-3"
+                    style="color:#1d1d1f; letter-spacing:-0.025em; font-size:clamp(32px,4vw,48px);">隱私權政策</h1>
+                <p style="color:#6e6e73; font-size:15px;">最後更新日期：2026 年 3 月 18 日</p>
             </div>
-        </main>
 
-        <!-- 頁尾 -->
-        <footer class="py-10" style="background:#000000;">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <div class="flex items-center justify-center gap-2 mb-4">
-                    <img src="https://github.com/vocpass.png" alt="VocPass"
-                        class="w-6 h-6 rounded-md object-cover">
-                    <span class="font-semibold text-sm tracking-tight" style="color:rgba(255,255,255,0.8);">VocPass</span>
-                </div>
-                <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.4);">
-                    高職通用校務查詢系統 &nbsp;·&nbsp; iOS / iPadOS / macOS<br>
-                    Licensed under <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank"
-                        class="transition-colors underline underline-offset-2"
-                        style="color:rgba(255,255,255,0.4);">GPL 3.0</a>
-                </p>
+            <!-- 內容卡片 -->
+            <div class="bg-white rounded-2xl p-8 sm:p-10 space-y-10" style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+
+                <!-- 前言 -->
+                <section>
+                    <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        VocPass（以下簡稱「本應用程式」）由 VocPass
+                        開發團隊開發與維護。我們非常重視您的隱私，本政策說明本應用程式如何收集、使用及保護您的個人資料。使用本應用程式，即表示您同意本政策之內容。
+                    </p>
+                </section>
+
+                <hr style="border-color:rgba(0,0,0,0.06);">
+
+                <!-- 1 -->
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style="background:#e4f3ff;">
+                            <i class="fa-solid fa-database text-sm" style="color:#0071e3;"></i>
+                        </div>
+                        <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">1. 我們收集的資料</h2>
+                    </div>
+                    <div class="space-y-4 leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        <p><strong style="color:#1d1d1f;">錯誤紀錄：</strong>當應用程式發生錯誤時，我們可能會收集錯誤發生時的相關技術資訊（如錯誤訊息、學校名稱、API
+                            路徑），用於診斷與改善服務品質。此資料不包含您的帳號或個人識別資訊。</p>
+                        <p><strong style="color:#1d1d1f;">其他資料：</strong>本應用程式不主動收集帳號密碼、裝置識別碼、位置資訊或其他個人識別資料。</p>
+                    </div>
+                </section>
+
+                <hr style="border-color:rgba(0,0,0,0.06);">
+
+                <!-- 2 -->
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style="background:#e6f9f0;">
+                            <i class="fa-solid fa-lock text-sm" style="color:#1a7f4e;"></i>
+                        </div>
+                        <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">2. 資料的儲存與使用方式</h2>
+                    </div>
+                    <div class="space-y-4 leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        <p><strong style="color:#1d1d1f;">本地處理：</strong>您的學號、密碼及所有校務資料，均儲存於您的裝置本機（透過 iOS Keychain 及
+                            UserDefaults），不會上傳至任何第三方伺服器或 VocPass 伺服器。</p>
+                        <p><strong style="color:#1d1d1f;">網路通訊：</strong>本應用程式透過 VocPass
+                            伺服器作為中間層與您所屬學校的校務系統通訊以取得資料。您的請求會經過 VocPass 伺服器轉發至學校系統，但伺服器不會儲存您的帳號、密碼或校務內容。</p>
+                        <p><strong style="color:#1d1d1f;">離線快取：</strong>為提升使用體驗，部分資料（如課表、成績）會以快取方式儲存於本機，供無網路時使用。</p>
+                    </div>
+                </section>
+
+                <hr style="border-color:rgba(0,0,0,0.06);">
+
+                <!-- 3 -->
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style="background:#f3eeff;">
+                            <i class="fa-solid fa-share-nodes text-sm" style="color:#7c3aed;"></i>
+                        </div>
+                        <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">3. 資料共享</h2>
+                    </div>
+                    <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        我們不會將您的任何個人資料出售、出租或以其他方式提供給第三方。本應用程式不包含任何廣告 SDK 或第三方數據追蹤工具。
+                    </p>
+                </section>
+
+                <hr style="border-color:rgba(0,0,0,0.06);">
+
+                <!-- 4 -->
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style="background:#fff3e0;">
+                            <i class="fa-solid fa-child-reaching text-sm" style="color:#f0830a;"></i>
+                        </div>
+                        <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">4. 兒童隱私</h2>
+                    </div>
+                    <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        本應用程式主要服務對象為高職學生（通常為 15 歲以上）。我們不會在知情的情況下收集 13 歲以下兒童的個人資料。
+                    </p>
+                </section>
+
+                <hr style="border-color:rgba(0,0,0,0.06);">
+
+                <!-- 5 -->
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style="background:#ffeaea;">
+                            <i class="fa-solid fa-shield-halved text-sm" style="color:#d93025;"></i>
+                        </div>
+                        <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">5. 資料安全</h2>
+                    </div>
+                    <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        我們採取合理的技術措施保護您的資料，包括使用 iOS Keychain 安全儲存憑證。然而，任何電子傳輸或儲存方式都無法保證 100% 安全，請您妥善保管您的裝置。
+                    </p>
+                </section>
+
+                <hr style="border-color:rgba(0,0,0,0.06);">
+
+                <!-- 6 -->
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style="background:#e4f3ff;">
+                            <i class="fa-solid fa-pen-to-square text-sm" style="color:#0071e3;"></i>
+                        </div>
+                        <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">6. 政策更新</h2>
+                    </div>
+                    <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        本隱私權政策可能不定期更新。更新後我們將在本頁面公告新版政策，並更新頁面上方的「最後更新日期」。建議您定期查閱本頁面以了解最新內容。
+                    </p>
+                </section>
+
+                <hr style="border-color:rgba(0,0,0,0.06);">
+
+                <!-- 7 -->
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                            style="background:#f5f5f7;">
+                            <i class="fa-solid fa-envelope text-sm" style="color:#6e6e73;"></i>
+                        </div>
+                        <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">7. 聯絡我們</h2>
+                    </div>
+                    <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
+                        如您對本隱私權政策有任何疑問，歡迎透過以下方式聯絡我們：
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-3">
+                        <a href="https://github.com/VocPass/ios/issues" target="_blank"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors"
+                            style="background:#f5f5f7; color:#1d1d1f;">
+                            <i class="fa-brands fa-github"></i>
+                            GitHub Issues
+                        </a>
+                    </div>
+                </section>
+
             </div>
-        </footer>
 
-    </body>
+            <!-- 底部導航 -->
+            <div class="mt-8 flex flex-wrap justify-center gap-4 text-sm" style="color:#6e6e73;">
+                <a href="/" class="transition-colors hover:opacity-70">首頁</a>
+                <span>·</span>
+                <a href="/disclaimer" class="transition-colors hover:opacity-70">免責聲明</a>
+                <span>·</span>
+                <a href="https://github.com/VocPass" target="_blank"
+                    class="transition-colors hover:opacity-70">GitHub</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="py-10" style="background:#000000;">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-6 h-6 rounded-md object-cover">
+                <span class="font-semibold text-sm tracking-tight" style="color:rgba(255,255,255,0.8);">VocPass</span>
+            </div>
+            <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.4);">
+                高職通用校務查詢系統 &nbsp;·&nbsp; iOS / iPadOS / macOS<br>
+                Licensed under <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank"
+                    class="transition-colors underline underline-offset-2" style="color:rgba(255,255,255,0.4);">GPL
+                    3.0</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
 </html>

@@ -7,7 +7,8 @@
     <title>VocPass | 我的帳號</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
     <script>
@@ -27,17 +28,20 @@
             --apple-text: #1d1d1f;
             --apple-secondary: #6e6e73;
         }
+
         .apple-nav {
             background: rgba(255, 255, 255, 0.72);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
+
         .logout-btn {
-            background: rgba(0,0,0,0.06);
+            background: rgba(0, 0, 0, 0.06);
             color: #1d1d1f;
             transition: background 0.2s ease, color 0.2s ease;
         }
+
         .logout-btn:hover {
             background: #fff0f0;
             color: #d93025;
@@ -52,8 +56,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div class="flex justify-between h-full items-center">
                 <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                    <img src="https://github.com/vocpass.png" alt="VocPass"
-                        class="w-6 h-6 rounded-md object-cover">
+                    <img src="https://github.com/vocpass.png" alt="VocPass" class="w-6 h-6 rounded-md object-cover">
                     <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
                 </a>
                 <div class="hidden md:flex items-center gap-6">
@@ -77,17 +80,16 @@
             <!-- 已登入：使用者資訊 -->
             <div id="user-card" class="hidden bg-white rounded-2xl p-8 text-center"
                 style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
-                <img id="user-avatar" src="" alt="頭像"
-                    class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
+                <img id="user-avatar" src="" alt="頭像" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
                     style="border:3px solid #f5f5f7;">
                 <h1 id="user-name" class="text-2xl font-bold tracking-tight mb-1"
                     style="color:#1d1d1f; letter-spacing:-0.02em;"></h1>
-                <p id="user-email" class="text-sm mb-6" style="color:#6e6e73;"></p>
+                <p id="user-email" class="mb-6" style="color:#6e6e73; font-size:15px;"></p>
 
                 <div id="user-meta" class="space-y-2 text-left mb-6"></div>
 
-                <button onclick="logout()"
-                    class="logout-btn w-full px-5 py-3 rounded-xl font-semibold text-sm">
+                <button onclick="logout()" class="logout-btn w-full px-5 py-3.5 rounded-full font-semibold"
+                    style="font-size:15px;">
                     <i class="fa-solid fa-right-from-bracket mr-2"></i>登出
                 </button>
             </div>
@@ -99,11 +101,11 @@
                     style="background:#e4f3ff; color:#0071e3;">
                     <i class="fa-solid fa-user-slash"></i>
                 </div>
-                <h1 class="text-xl font-semibold mb-2" style="color:#1d1d1f;">尚未登入</h1>
-                <p class="text-sm mb-6" style="color:#6e6e73;">請先登入以查看您的帳號資訊</p>
+                <h1 class="font-semibold mb-2" style="color:#1d1d1f; font-size:20px;">尚未登入</h1>
+                <p class="mb-6" style="color:#6e6e73; font-size:15px;">請先登入以查看您的帳號資訊</p>
                 <a href="/auth?web=1"
-                    class="block w-full px-5 py-3 rounded-full font-semibold text-sm text-center transition-colors"
-                    style="background:#0071e3; color:#fff;">
+                    class="block w-full px-5 py-3.5 rounded-full font-semibold text-center transition-colors"
+                    style="font-size:15px;" style="background:#0071e3; color:#fff;">
                     前往登入
                 </a>
             </div>
@@ -152,27 +154,30 @@
                 </div>
             `;
         }
+        async function checkAuth() {
+            if (pb.authStore.isValid) {
+                await pb.collection('users').authRefresh();
+                const user = pb.authStore.model;
+                const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://github.com/vocpass.png';
 
-        if (pb.authStore.isValid) {
-            const user = pb.authStore.model;
-            const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://github.com/vocpass.png';
+                document.getElementById('user-avatar').src = avatarUrl;
+                document.getElementById('user-name').textContent = user.name || user.username || '使用者';
+                document.getElementById('user-email').textContent = user.email || '';
 
-            document.getElementById('user-avatar').src = avatarUrl;
-            document.getElementById('user-name').textContent = user.name || user.username || '使用者';
-            document.getElementById('user-email').textContent = user.email || '';
+                const meta = [];
+                if (user.username) meta.push(renderMeta(user.username, '使用者名稱', 'fa-solid fa-at'));
+                if (user.verified) meta.push(renderMeta('已驗證', '帳號狀態', 'fa-solid fa-circle-check'));
+                meta.push(renderCurriculumStatus(user.curriculum_status));
+                const joined = user.created ? new Date(user.created).toLocaleDateString('zh-TW') : '';
+                if (joined) meta.push(renderMeta(joined, '加入時間', 'fa-regular fa-calendar'));
 
-            const meta = [];
-            if (user.username) meta.push(renderMeta(user.username, '使用者名稱', 'fa-solid fa-at'));
-            if (user.verified) meta.push(renderMeta('已驗證', '帳號狀態', 'fa-solid fa-circle-check'));
-            meta.push(renderCurriculumStatus(user.curriculum_status));
-            const joined = user.created ? new Date(user.created).toLocaleDateString('zh-TW') : '';
-            if (joined) meta.push(renderMeta(joined, '加入時間', 'fa-regular fa-calendar'));
-
-            document.getElementById('user-meta').innerHTML = meta.join('');
-            document.getElementById('user-card').classList.remove('hidden');
-        } else {
-            document.getElementById('guest-card').classList.remove('hidden');
+                document.getElementById('user-meta').innerHTML = meta.join('');
+                document.getElementById('user-card').classList.remove('hidden');
+            } else {
+                document.getElementById('guest-card').classList.remove('hidden');
+            }
         }
+        checkAuth();
     </script>
 
 </body>
