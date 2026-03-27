@@ -853,6 +853,7 @@
         "app": 1.0,
         "beta": false,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
+        "telephone":"https://www.ykvs.ntpc.edu.tw/p/404-1000-10153.php",
         "notice": {
             "vision": "v1",
             "url": "https://www.ykvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=23",

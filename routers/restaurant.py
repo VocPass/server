@@ -44,15 +44,14 @@ async def evaluate(
 @router.post("/evaluate", summary="新增餐廳評價")
 @limiter.limit("10/minute")
 async def add_evaluate(request: Request, response: Response, item: dict):
-    db = request.app.state.pb_client
-
     user = get_user(request.headers.get("Authorization"))
     if not user:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"code": 401, "message": "Unauthorized", "data": None}
 
+    user_db = set_user(request.headers.get("Authorization"))
     restaurant_id = item.get("restaurant")
-    existing = db.collection("restaurant_evaluate").get_list(
+    existing = user_db.collection("restaurant_evaluate").get_list(
         page=1, per_page=1,
         query_params={"filter": f'restaurant="{restaurant_id}"&&user="{user.id}"'}
     )
@@ -60,7 +59,7 @@ async def add_evaluate(request: Request, response: Response, item: dict):
         response.status_code = status.HTTP_409_CONFLICT
         return {"code": 409, "message": "您已評價過此餐廳", "data": None}
 
-    record = db.collection("restaurant_evaluate").create(
+    record = user_db.collection("restaurant_evaluate").create(
         {
             "restaurant": restaurant_id,
             "description": item.get("description"),
@@ -75,21 +74,21 @@ async def add_evaluate(request: Request, response: Response, item: dict):
 @router.post("/", summary="新增餐廳")
 @limiter.limit("10/minute")
 async def add_restaurant(request: Request, response: Response, item: dict):
-    db = request.app.state.pb_client
     
     user = get_user(request.headers.get("Authorization"))
     if not user:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"code": 401, "message": "Unauthorized", "data": None}
+    user_db = set_user(request.headers.get("Authorization"))
     name = item.get("name")
     school = item.get("school")
-    existing = db.collection("restaurant").get_list(
+    existing = user_db.collection("restaurant").get_list(
         page=1, per_page=1, query_params={"filter": f'name="{name}"&&school="{school}"'}
     )
     if existing.total_items > 0:
         response.status_code = status.HTTP_409_CONFLICT
         return {"code": 409, "message": "餐廳已存在", "data": None}
-    record = db.collection("restaurant").create(
+    record = user_db.collection("restaurant").create(
         {
             "name": name,
             "school": school,
@@ -102,27 +101,27 @@ async def add_restaurant(request: Request, response: Response, item: dict):
 
 @router.delete("/{restaurant_id}", summary="刪除餐廳")
 async def delete_restaurant(request: Request, response: Response, restaurant_id: str):
-    db = request.app.state.pb_client
     user = get_user(request.headers.get("Authorization"))
     if not user:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"code": 401, "message": "Unauthorized", "data": None}
-    record = db.collection("restaurant").get_one(restaurant_id)
+    user_db = set_user(request.headers.get("Authorization"))
+    record = user_db.collection("restaurant").get_one(restaurant_id)
     if record.user != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         return {"code": 403, "message": "Forbidden", "data": None}
-    db.collection("restaurant").delete(restaurant_id)
+    user_db.collection("restaurant").delete(restaurant_id)
     return {"code": 200, "message": "Deleted", "data": None}
 
 
 @router.patch("/evaluate/{evaluate_id}", summary="更新餐廳評價")
 async def update_evaluate(request: Request, response: Response, evaluate_id: str, item: dict):
-    db = request.app.state.pb_client
     user = get_user(request.headers.get("Authorization"))
     if not user:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"code": 401, "message": "Unauthorized", "data": None}
-    record = db.collection("restaurant_evaluate").get_one(evaluate_id)
+    user_db = set_user(request.headers.get("Authorization"))
+    record = user_db.collection("restaurant_evaluate").get_one(evaluate_id)
     if record.user != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         return {"code": 403, "message": "Forbidden", "data": None}
@@ -131,22 +130,22 @@ async def update_evaluate(request: Request, response: Response, evaluate_id: str
         if item.get(field) is not None:
             updated[field] = item.get(field)
     if updated:
-        db.collection("restaurant_evaluate").update(evaluate_id, updated)
+        user_db.collection("restaurant_evaluate").update(evaluate_id, updated)
     return {"code": 200, "message": "Updated", "data": None}
 
 
 @router.delete("/evaluate/{evaluate_id}", summary="刪除餐廳評價")
 async def delete_evaluate(request: Request, response: Response, evaluate_id: str):
-    db = request.app.state.pb_client
     user = get_user(request.headers.get("Authorization"))
     if not user:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"code": 401, "message": "Unauthorized", "data": None}
-    record = db.collection("restaurant_evaluate").get_one(evaluate_id)
+    user_db = set_user(request.headers.get("Authorization"))
+    record = user_db.collection("restaurant_evaluate").get_one(evaluate_id)
     if record.user != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         return {"code": 403, "message": "Forbidden", "data": None}
-    db.collection("restaurant_evaluate").delete(evaluate_id)
+    user_db.collection("restaurant_evaluate").delete(evaluate_id)
     return {"code": 200, "message": "Deleted", "data": None}
 
 
@@ -157,7 +156,8 @@ async def get_menu(request: Request, response: Response, restaurant_id: str):
         page=1, per_page=50, query_params={"filter": f'restaurant="{restaurant_id}"'}
     )
     for i in record.items:
-        i.menu = f"{os.environ.get('PB_URL')}/api/files/{i.collection_id}/{i.id}/{i.menu}"
+        i.uesr = i.user
+        i.menu = f"{os.environ.get('PB_URL')}api/files/{i.collection_id}/{i.id}/{i.menu}"
     return record
 
 
@@ -165,17 +165,16 @@ async def get_menu(request: Request, response: Response, restaurant_id: str):
 @router.post("/menu/{restaurant_id}", summary="新增餐廳菜單")
 @limiter.limit("5/minute")
 async def add_menu(request: Request, response: Response, restaurant_id: str, menu: UploadFile = File(...)):
-    db = request.app.state.pb_client
     user = get_user(request.headers.get("Authorization"))
     if not user:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"code": 401, "message": "Unauthorized", "data": None}
-
+    user_db = set_user(request.headers.get("Authorization"))
     contents = await menu.read()
-    new_record = db.collection("restaurant_menu").create(
+    new_record = user_db.collection("restaurant_menu").create(
         {
             "restaurant": restaurant_id,
-            "uesr": user.id,
+            "user": user.id,
             "menu": FileUpload((menu.filename, contents, menu.content_type)),
         }
     )
@@ -183,15 +182,15 @@ async def add_menu(request: Request, response: Response, restaurant_id: str, men
 
 @router.delete("/menu/{menu_id}", summary="刪除餐廳菜單")
 async def delete_menu(request: Request, response: Response, menu_id: str):
-    db = request.app.state.pb_client
     user = get_user(request.headers.get("Authorization"))
     if not user:
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {"code": 401, "message": "Unauthorized", "data": None}
-    record = db.collection("restaurant_menu").get_one(menu_id)
-    restaurant = db.collection("restaurant").get_one(record.restaurant)
+    user_db = set_user(request.headers.get("Authorization"))
+    record = user_db.collection("restaurant_menu").get_one(menu_id)
+    restaurant = user_db.collection("restaurant").get_one(record.restaurant)
     if restaurant.user != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         return {"code": 403, "message": "Forbidden", "data": None}
-    db.collection("restaurant_menu").delete(menu_id)
+    user_db.collection("restaurant_menu").delete(menu_id)
     return {"code": 200, "message": "Deleted", "data": None}

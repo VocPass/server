@@ -24,3 +24,7 @@ def share_curriculum(user_token, curriculum_data, status):
         "curriculum": curriculum_data,
         "curriculum_status": bool(status)
     })
+
+def set_user(token):
+    pb.auth_store.save(token, None)
+    return pb
