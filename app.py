@@ -3,7 +3,6 @@ import pocketbase
 import json
 import os
 import time
-import traceback
 
 from dotenv import load_dotenv
 from pathlib import Path
@@ -16,7 +15,6 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 
-from utils.debug import Debug
 from utils.logger import log_request, log_error, log_startup, app_logger
 from utils import metrics as m
 
@@ -88,11 +86,13 @@ async def observability_middleware(request: Request, call_next):
 
     try:
         response = await call_next(request)
+        status_code = response.status_code
+    except Exception:
+        status_code = 500
+        raise
     finally:
         duration = time.perf_counter() - start
         m.HTTP_REQUESTS_IN_FLIGHT.labels(method=method, path=path).dec()
-
-    status_code = response.status_code
     duration_ms = duration * 1000
 
     # Prometheus
@@ -144,14 +144,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request: Request, exc: Exception):
-    error_message = "".join(
-        traceback.format_exception(type(exc), exc, exc.__traceback__)
-    )
     school_name = request.query_params.get("school_name", "system")
-    error_id = Debug(getattr(request.app.state, "pb_client", None)).send_error(
-        error_message, school_name, request.url.path, 500
-    )
-
     error_type = type(exc).__name__
     m.ERRORS_TOTAL.labels(
         school_name=school_name, error_type=error_type, path=request.url.path
@@ -161,13 +154,12 @@ async def general_exception_handler(request: Request, exc: Exception):
         school_name=school_name,
         path=request.url.path,
         error_type=error_type,
-        error_id=error_id,
         exc=exc,
     )
 
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"code": 500, "message": str(exc), "data": None, "error_id": error_id},
+        content={"code": 500, "message": str(exc), "data": None},
     )
 
 

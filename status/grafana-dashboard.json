@@ -230,15 +230,15 @@
       "gridPos": { "h": 8, "w": 24, "x": 0, "y": 39 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
       "targets": [{
-        "expr": "sum by (school_name, result) (increase(vocpass_school_login_checks_total{school_name=~\"$school\"}[1h]))",
+        "expr": "sum by (school_name, result) (increase(vocpass_school_login_checks_total{school_name=~\"$school\", result!=\"attempt\"}[1h]))",
         "legendFormat": "{{ school_name }} / {{ result }}"
       }],
-      "options": { "orientation": "horizontal", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "options": { "orientation": "horizontal", "reduceOptions": { "calcs": ["sum"] } },
       "fieldConfig": {
         "defaults": { "unit": "short" },
         "overrides": [
-          { "matcher": { "id": "byRegexp", "options": ".*logged_in$" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }] },
-          { "matcher": { "id": "byRegexp", "options": ".*not_logged_in$" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }] }
+          { "matcher": { "id": "byRegexp", "options": ".*/ logged_in$" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }] },
+          { "matcher": { "id": "byRegexp", "options": ".*/ not_logged_in$" }, "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }] }
         ]
       }
     },
@@ -282,7 +282,7 @@
       "gridPos": { "h": 6, "w": 8, "x": 0, "y": 56 },
       "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
       "targets": [{
-        "expr": "vocpass_schools_by_version_total",
+        "expr": "max by (api_version) (vocpass_schools_by_version_total)",
         "legendFormat": "{{ api_version }}"
       }],
       "options": { "orientation": "horizontal", "reduceOptions": { "calcs": ["lastNotNull"] } },
@@ -327,7 +327,7 @@
       "gridPos": { "h": 10, "w": 24, "x": 0, "y": 63 },
       "datasource": { "type": "loki", "uid": "${DS_LOKI}" },
       "targets": [{
-        "expr": "{logger=~\"vocpass.*\"} | json | level = `error`",
+        "expr": "{logger=~\"vocpass.*\", level=\"error\"}",
         "legendFormat": ""
       }],
       "options": { "showTime": true, "showLabels": true, "wrapLogMessage": true, "sortOrder": "Descending", "dedupStrategy": "none" }
@@ -339,7 +339,7 @@
       "gridPos": { "h": 10, "w": 24, "x": 0, "y": 73 },
       "datasource": { "type": "loki", "uid": "${DS_LOKI}" },
       "targets": [{
-        "expr": "{logger=\"vocpass.school\"} | json | level = `warning`",
+        "expr": "{logger=\"vocpass.school\", level=\"warning\"}",
         "legendFormat": ""
       }],
       "options": { "showTime": true, "showLabels": true, "wrapLogMessage": true, "sortOrder": "Descending", "dedupStrategy": "none" }
