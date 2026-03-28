@@ -9,6 +9,7 @@ import json
 import aiohttp
 import utils.v4 as v4
 from utils.http_client import HttpsClient
+from utils import metrics as m
 import urllib.parse
 
 load_dotenv()
@@ -54,6 +55,8 @@ async def get_merit_demerit(
 
     """
 
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v4", data_type="merit_demerit").inc()
+
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
     if not school:
@@ -65,7 +68,7 @@ async def get_merit_demerit(
         return data
 
     url = f"{school['api']}{school['route']['merit_demerit']}".replace('{token}',request.cookies.get('X-Token'))
-    original_data = await http.get(url, request.cookies,'utf-8')
+    original_data = await http.get(url, request.cookies, 'utf-8', school_name=school_name, endpoint="merit_demerit")
     if not original_data.data:
         e =send_debug_error(
             request,
@@ -136,6 +139,8 @@ async def get_attendance(
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
 
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v4", data_type="attendance").inc()
+
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
     if not school:
@@ -147,7 +152,7 @@ async def get_attendance(
         return data
 
     url = f"{school['api']}{school['route']['attendance']}".replace('{token}',request.cookies.get('X-Token'))
-    original_data = await http.get(url, request.cookies,'utf-8')
+    original_data = await http.get(url, request.cookies, 'utf-8', school_name=school_name, endpoint="attendance")
     if not original_data.data:
         e =send_debug_error(
             request,
@@ -195,8 +200,9 @@ async def get_exam_menu(
 
         return data
 
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v4", data_type="exam_menu").inc()
     url = f"{school['api']}{school['route']['exam_menu']}".replace('{token}',request.cookies.get('X-Token'))
-    original_data = await http.get(url, request.cookies,'utf-8')
+    original_data = await http.get(url, request.cookies, 'utf-8', school_name=school_name, endpoint="exam_menu")
 
     if not original_data.data:
         e =send_debug_error(
@@ -273,9 +279,10 @@ async def get_semester_scores(
         return data
 
     year_class = ["", "一", "二", "三"][semester]
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v4", data_type="semester_scores").inc()
     url = f"{school_info['api']}{school_info['route']['semester_scores']}".replace('{token}',request.cookies.get('X-Token'))
 
-    original_data = await http.get(url, request.cookies,'utf-8')
+    original_data = await http.get(url, request.cookies, 'utf-8', school_name=school_name, endpoint="semester_scores")
 
     if not original_data.data:
         e =send_debug_error(

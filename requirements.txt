@@ -7,3 +7,5 @@ aiohttp
 jinja2
 slowapi
 curl-cffi
+prometheus-client
+python-logging-loki

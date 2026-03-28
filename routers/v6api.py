@@ -11,6 +11,7 @@ import time
 import utils.v5 as v5
 from utils.base import *
 from utils.http_client import HttpsClient
+from utils import metrics as m
 import urllib.parse
 import base64
 load_dotenv()
@@ -69,6 +70,7 @@ async def get_merit_demerit(
 
         return data
 
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v6", data_type="merit_demerit").inc()
     url = f"{school['api']}{school['route']['merit_demerit']}"
     rd = {
         "_search": False,
@@ -80,7 +82,7 @@ async def get_merit_demerit(
         "session_key": request.cookies.get("session_key"),
     }
 
-    original_data = await http.post(url, rd, request.cookies, "utf-8")
+    original_data = await http.post(url, rd, request.cookies, "utf-8", school_name=school_name, endpoint="merit_demerit")
 
     if not original_data.data:
         e = send_debug_error(
@@ -131,6 +133,7 @@ async def get_attendance(
 
         return data
 
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v6", data_type="attendance").inc()
     url = f"{school['api']}{school['route']['attendance']}?dataName=vo"
     rd = {
         "_search": False,
@@ -142,7 +145,7 @@ async def get_attendance(
         "session_key": request.cookies.get("session_key"),
     }
 
-    original_data = await http.post(url, rd, request.cookies, "utf-8")
+    original_data = await http.post(url, rd, request.cookies, "utf-8", school_name=school_name, endpoint="attendance")
     if not original_data.data:
         e = send_debug_error(
             request,
@@ -190,8 +193,9 @@ async def get_exam_menu(
 
         return data
 
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v6", data_type="exam_menu").inc()
     url = f"{school['api']}{school['route']['exam_menu']}"
-    original_data = await http.get(url, request.cookies, "utf-8")
+    original_data = await http.get(url, request.cookies, "utf-8", school_name=school_name, endpoint="exam_menu")
 
     if not original_data.data:
         e = send_debug_error(
@@ -291,7 +295,8 @@ async def get_semester_scores(
         "session_key": request.cookies.get("session_key"),
     }
     
-    user_info = await http.post(url, rd, request.cookies, "utf-8")
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v6", data_type="semester_scores").inc()
+    user_info = await http.post(url, rd, request.cookies, "utf-8", school_name=school_name, endpoint="user_info")
     dl = len(user_info.data["dataRows"])
     if dl < 3:
         now_year = 1

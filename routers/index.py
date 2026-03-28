@@ -5,6 +5,7 @@ from slowapi.util import get_remote_address
 import aiohttp
 from dotenv import load_dotenv
 import utils.notice as notice
+from utils import metrics as m
 
 import os
 
@@ -103,6 +104,7 @@ async def ping(
     - 需帶入 cookies
     - **返回值**: 包含登入狀態的 JSON 物件。
     """
+    m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="attempt").inc()
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
     if not school:
@@ -135,12 +137,14 @@ async def ping(
 
             for i in school["login"]["successKeywords"]:
                 if i in html:
+                    m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="logged_in").inc()
                     data["code"] = 200
                     data["message"] = "Success."
                     data["data"] = {"logged_in": True}
 
                     return data
 
+    m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="not_logged_in").inc()
     response.status_code = status.HTTP_403_FORBIDDEN
     data["code"] = 403
     data["message"] = "Success."
@@ -150,6 +154,7 @@ async def ping(
 
 @router.get("/api/v{v}/notice", summary="獲取公告列表")
 async def get_notice(request: Request, v: int,school_name: str,response: Response):
+    m.SCHOOL_NOTICE_REQUESTS_TOTAL.labels(school_name=school_name, api_version=f"v{v}").inc()
     school = request.app.state.schools.get(school_name)
     if not school:
         response.status_code = status.HTTP_400_BAD_REQUEST
@@ -186,4 +191,5 @@ async def report(request: Request, item: dict):
     }
 
     db.collection("report").create(data)
+    m.REPORT_TOTAL.inc()
     return {"code": 200, "message": "Reported", "data": None}

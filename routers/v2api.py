@@ -12,6 +12,7 @@ import aiohttp
 import utils.v2 as v2
 from utils.http_client import HttpsClient
 from utils.base import *
+from utils import metrics as m
 import urllib.parse
 
 load_dotenv()
@@ -59,7 +60,8 @@ async def get_merit_demerit(
      - **返回值**: 包含學期成績資料的 JSON 物件。
 
     """
-    
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v2", data_type="merit_demerit").inc()
+
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
     if not school:
@@ -71,7 +73,7 @@ async def get_merit_demerit(
         return data
     find_all = []
     url = f"{school['api']}{school['get']['merit_demerit']}"
-    await http.get(url, request.cookies, "utf-8")
+    await http.get(url, request.cookies, "utf-8", school_name=school_name, endpoint="merit_demerit_pre")
     for i in range(0, 3):
         for j in range(1, 3):
             now = datetime.now()
@@ -84,7 +86,7 @@ async def get_merit_demerit(
                 "J_Semi": date.semester,
                 "J_StuID": "1111111",
             }
-            original_data = await http.post(url, search, request.cookies, "utf-8")
+            original_data = await http.post(url, search, request.cookies, "utf-8", school_name=school_name, endpoint="merit_demerit")
 
             if not original_data.data:
                 e = send_debug_error(
@@ -126,6 +128,7 @@ async def get_curriculum(
      - **返回值**: 包含學期成績資料的 JSON 物件。
 
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v2", data_type="curriculum").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -139,7 +142,7 @@ async def get_curriculum(
     now = datetime.now()
     date = YearModel(now.strftime("%Y/%m/%d"))
     url = f"{school['api']}{school['get']['curriculum']}"
-    r = await http.get(url, request.cookies, "utf-8")
+    r = await http.get(url, request.cookies, "utf-8", school_name=school_name, endpoint="curriculum_pre")
 
     url = f"{school['api']}{school['route']['curriculum']}"
     search = {
@@ -147,7 +150,7 @@ async def get_curriculum(
         "ppSemi": date.semester,
     }
 
-    original_data = await http.post(url, search, request.cookies, "utf-8")
+    original_data = await http.post(url, search, request.cookies, "utf-8", school_name=school_name, endpoint="curriculum")
 
     if not original_data.data:
         e = send_debug_error(
@@ -194,6 +197,8 @@ async def get_attendance(
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v2", data_type="attendance").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -360,6 +365,7 @@ async def get_semester_scores(
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v2", data_type="semester_scores").inc()
     data = request.app.state.response
 
     if semester < 1 or semester > 3:
@@ -383,7 +389,7 @@ async def get_semester_scores(
     date = YearModel(now.strftime("%Y/%m/%d"))
 
     url = f"{school_info['api']}{school_info['get']['semester_scores']}"
-    r = await http.get(url, request.cookies, "utf-8")
+    r = await http.get(url, request.cookies, "utf-8", school_name=school_name, endpoint="semester_scores_pre")
 
     # 現在年級
     s = {
@@ -393,7 +399,7 @@ async def get_semester_scores(
     }
     url = f"{school_info['api']}{school_info['route']['merit_demerit']}"
 
-    d = await http.post(url, s, request.cookies, "utf-8")
+    d = await http.post(url, s, request.cookies, "utf-8", school_name=school_name, endpoint="grade_level")
     if not d.data:
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = 500
@@ -402,7 +408,7 @@ async def get_semester_scores(
         return data
     y = v2.parse_grade_level(d.data)
 
-    
+
 
     url = f"{school_info['api']}{school_info['route']['semester_scores']}"
     s1 = {
@@ -417,8 +423,8 @@ async def get_semester_scores(
         "J_StuID": "1111111",
     }
 
-    data1 = await http.post(url, s1, request.cookies, "utf-8")
-    data2 = await http.post(url, s2, request.cookies, "utf-8")
+    data1 = await http.post(url, s1, request.cookies, "utf-8", school_name=school_name, endpoint="semester_scores")
+    data2 = await http.post(url, s2, request.cookies, "utf-8", school_name=school_name, endpoint="semester_scores")
 
     if not data1.data or not data2.data:
         current_status = data1.code if not data1.data else data2.code

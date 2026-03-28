@@ -9,6 +9,7 @@ import aiohttp
 import utils.v3 as v3
 from utils.http_client import HttpsClient
 from utils.base import *
+from utils import metrics as m
 
 load_dotenv()
 router = APIRouter(prefix="/api/v3", tags=["v3 解析端點"])
@@ -70,6 +71,7 @@ async def get_merit_demerit(
      - **返回值**: 包含學期成績資料的 JSON 物件。
 
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v3", data_type="merit_demerit").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -180,6 +182,7 @@ async def get_curriculum(
      - **返回值**: 包含學期成績資料的 JSON 物件。
 
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v3", data_type="curriculum").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -297,6 +300,7 @@ async def get_attendance(
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v3", data_type="attendance").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -425,6 +429,7 @@ async def get_semester_scores(
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v3", data_type="semester_scores").inc()
     data = request.app.state.response
 
     if semester < 1 or semester > 3:

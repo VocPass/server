@@ -9,6 +9,7 @@ import json
 import aiohttp
 import utils.v1 as v1
 from utils.http_client import HttpsClient
+from utils import metrics as m
 import urllib.parse
 
 load_dotenv()
@@ -53,6 +54,7 @@ async def get_merit_demerit(
      - **返回值**: 包含學期成績資料的 JSON 物件。
 
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="merit_demerit").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -65,7 +67,7 @@ async def get_merit_demerit(
         return data
 
     url = f"{school['api']}{school['route']['merit_demerit']}"
-    original_data = await http.get(url, request.cookies)
+    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="merit_demerit")
     if not original_data.data:
         e =send_debug_error(
             request,
@@ -105,6 +107,7 @@ async def get_curriculum(
      - **返回值**: 包含學期成績資料的 JSON 物件。
 
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="curriculum").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -117,7 +120,7 @@ async def get_curriculum(
         return data
 
     url = f"{school['api']}{school['route']['curriculum']}"
-    original_data = await http.get(url, request.cookies)
+    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="curriculum")
     if not original_data.data:
         e =send_debug_error(
             request,
@@ -163,6 +166,7 @@ async def get_attendance(
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="attendance").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -175,7 +179,7 @@ async def get_attendance(
         return data
 
     url = f"{school['api']}{school['route']['attendance']}"
-    original_data = await http.get(url, request.cookies)
+    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="attendance")
     if not original_data.data:
         e =send_debug_error(
             request,
@@ -213,6 +217,7 @@ async def get_exam_menu(
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="exam_menu").inc()
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
     if not school:
@@ -224,7 +229,7 @@ async def get_exam_menu(
         return data
 
     url = f"{school['api']}{school['route']['exam_menu']}"
-    original_data = await http.get(url, request.cookies)
+    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="exam_menu")
 
     if not original_data.data:
         e =send_debug_error(
@@ -259,6 +264,7 @@ async def get_exam_results(item: HTMLInput, request: Request, exam: str):
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name="unknown", api_version="v1", data_type="exam_results").inc()
     r = v1.parse_exam_scores(item.html)
     if r.get("error"):
         data = request.app.state.response
@@ -289,6 +295,7 @@ async def get_semester_scores(
      - 需帶入 cookies
      - **返回值**: 包含學期成績資料的 JSON 物件。
     """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="semester_scores").inc()
     data = request.app.state.response
 
     if semester < 1 or semester > 3:
@@ -313,7 +320,7 @@ async def get_semester_scores(
         "{year_class}", urllib.parse.quote(year_class.encode("big5"))
     ).replace("{number}", str(semester))
 
-    original_data = await http.get(url, request.cookies)
+    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="semester_scores")
 
     if not original_data.data:
         e =send_debug_error(
