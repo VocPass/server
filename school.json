@@ -8701,7 +8701,7 @@
         "vision": "v3",
         "app": 1.0,
         "beta": false,
-        "school_code": "{sb}",
+        "school_code": "034532",
         "api": "https://ssys.gish.tyc.edu.tw",
         "url": {
             "login": "/Auth/Auth/Login",
