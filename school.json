@@ -853,7 +853,7 @@
         "app": 1.0,
         "beta": false,
         "api": "https://eschool.ykvs.ntpc.edu.tw",
-        "telephone":"https://www.ykvs.ntpc.edu.tw/p/404-1000-10153.php",
+        "telephone": "https://www.ykvs.ntpc.edu.tw/p/404-1000-10153.php",
         "notice": {
             "vision": "v1",
             "url": "https://www.ykvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=23",
@@ -8698,50 +8698,43 @@
         }
     },
     "觀音高中": {
-        "vision": "v3",
+        "vision": "v1",
         "app": 1.0,
         "beta": false,
-        "school_code": "034532",
         "api": "https://ssys.gish.tyc.edu.tw",
         "url": {
-            "login": "/Auth/Auth/Login",
-            "logined": "/ICampus/Home/Index2",
-            "root": ""
+            "login": "/Auth/Auth/Login?sys=Auth",
+            "logined": "/online/student/frames.asp",
+            "root": "/"
         },
         "login": {
             "username": {
-                "name": "LoginId"
+                "name": "LoginName"
             },
             "password": {
                 "name": "PassString"
             },
-            "captcha": {},
-            "captchaImage": {},
+            "captcha": {
+                "name": "v1CaptchaGenCode"
+            },
+            "captchaImage": {
+                "selector": "captcha-image",
+                "type": "class"
+            },
             "button": {
                 "class": "loginBtnAdjust"
             },
             "successKeywords": [
-                "智慧校園平台首頁"
+                "學生線上查詢"
             ]
         },
         "route": {
-            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
-            "exam_menu": "#",
-            "exam_results": "#",
-            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
-        },
-        "get": {
-            "merit_demerit": "/ICampus/StudentInfo",
-            "attendance": "/ICampus/StudentInfo",
-            "exam_menu": "#",
-            "exam_results": "#",
-            "semester_scores": "/ICampus/StudentInfo/Index",
-            "curriculum": "/ClassTableV2/ClassTable",
-            "info": "/ICampus/StudentInfo"
+            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
+            "attendance": "/online/selection_student/absentation_skip_school.asp",
+            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
+            "exam_results": "/online/selection_student/{file_name}",
+            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
+            "curriculum": "/online/student/school_class_tabletime.asp"
         }
     },
     "光復中學": {
