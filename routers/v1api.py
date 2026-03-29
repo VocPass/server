@@ -11,6 +11,7 @@ import utils.v1 as v1
 from utils.http_client import HttpsClient
 from utils import metrics as m
 import urllib.parse
+import base64
 
 load_dotenv()
 router = APIRouter(prefix="/api/v1", tags=["v1 解析端點"])
@@ -281,6 +282,55 @@ async def get_exam_results(item: HTMLInput, request: Request, exam: str):
 
     return data
 
+
+
+@router.get("/exam_results", summary="解析考試成績(new)")
+async def get_exam_results(response: Response, request: Request, school_name: str, exam: str, _cookie: str = Depends(require_cookie_header)):
+    """
+    取得考試成績，回傳 JSON 格式的考試成績資料。
+     - 需帶入 cookies
+     - **返回值**: 包含學期成績資料的 JSON 物件。
+    """
+    school= request.app.state.schools.get(school_name)
+    data = request.app.state.response
+    exam = base64.b64decode(exam).decode("utf-8")
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="exam_results").inc()
+
+    url = f"{school['api']}{school['route']['exam_results']}".replace("{file_name}",exam)
+    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="exam_results")  
+    if not original_data.data:
+        e =send_debug_error(
+            request,
+            original_data.data,
+            school_name,
+            "exam_results",
+            original_data.code
+        )
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        data["code"] = original_data.code
+        data['error_id'] = e
+        data["message"] = "Failed to fetch original data."
+        data["data"] = None
+
+        
+
+        return data
+    
+    r = v1.parse_exam_scores(original_data.data)
+    if r.get("error"):
+        data = request.app.state.response
+        data["code"] = 500
+        data["message"] = r["error"]
+        data["data"] = None
+
+        return data
+
+    data = request.app.state.response
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = r
+    
+    return data
 
 @router.get("/semester_scores", summary="解析學期成績")
 async def get_semester_scores(
