@@ -143,7 +143,10 @@ def parse_semester_grades(semester_grades):
 def daily_performance_evaluation(dp):
     text = ""
     for i in range(1, 6):
-        text += f'{dp[f"小項10{i}標題"].replace(" ", "")}：{dp[f"小項10{i}內容"].replace(" ", "")}<br/>'
+        try:
+            text += f'{dp[f"小項10{i}標題"].replace(" ", "")}：{dp[f"小項10{i}內容"].replace(" ", "")}<br/>'
+        except:
+            continue
     return text
 
 
