@@ -10,7 +10,7 @@ scrape_configs:
         - targets: ["localhost:9090"]
   - job_name: "vocpass_api"
       static_configs:
-        - targets: ["ipaq-tracked-attended-write.trycloudflare.com"]
+        - targets: []
       metrics_path: /metrics
       authorization:
         credentials: <token>
