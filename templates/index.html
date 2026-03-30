@@ -1,568 +1,494 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>VocPass | 高職通用校務查詢系統</title>
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <!-- AOS Animation CSS -->
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Noto Sans TC -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
-            rel="stylesheet">
-        <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocPass | 高職通用校務查詢系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
 
-        <script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, rgba(255,255,255,0) 70%)',
                     }
                 }
             }
         }
-        </script>
-        <style>
+    </script>
+    <style>
         :root {
-            --apple-blue: #0071e3;
-            --apple-blue-hover: #0077ed;
             --apple-text: #1d1d1f;
-            --apple-secondary: #6e6e73;
-            --apple-gray-bg: #f5f5f7;
+            --apple-secondary: #86868b;
+            --bg-gray: #fbfbfd;
         }
-        .apple-nav {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        body { background-color: var(--bg-gray); color: var(--apple-text); }
+        
+        /* 玻璃導覽列 */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        .apple-nav.scrolled {
-            box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+        
+        /* Bento Card 懸停效果 */
+        .bento-card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
         }
-        .card-hover {
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
-        .card-hover:hover {
+        .bento-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+            box-shadow: 0 12px 30px -4px rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.08);
         }
-        .btn-primary {
-            background: var(--apple-blue);
-            color: #fff;
-            border-radius: 980px;
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
-        .btn-primary:hover {
-            background: var(--apple-blue-hover);
-        }
-        .btn-secondary {
-            background: rgba(0,0,0,0.06);
-            color: var(--apple-text);
-            border-radius: 980px;
-            font-weight: 600;
-            transition: background 0.2s ease;
-        }
-        .btn-secondary:hover {
-            background: rgba(0,0,0,0.10);
-        }
+
+        /* 跑馬燈 */
         .marquee {
             position: relative;
             overflow: hidden;
-        }
-        .marquee::before,
-        .marquee::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 56px;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .marquee::before {
-            left: 0;
-            background: linear-gradient(to right, #1d1d1f, transparent);
-        }
-        .marquee::after {
-            right: 0;
-            background: linear-gradient(to left, #1d1d1f, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
         .marquee-track {
             display: flex;
             width: max-content;
             align-items: center;
-            gap: 12px;
-            animation: marquee-scroll 50s linear infinite;
+            gap: 16px;
+            animation: marquee-scroll 40s linear infinite;
         }
-        .marquee:hover .marquee-track {
-            animation-play-state: paused;
-        }
-        .school-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-            padding: 10px 18px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        
         @keyframes marquee-scroll {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
         }
-        @media (prefers-reduced-motion: reduce) {
-            .marquee-track {
-                animation: none;
-            }
+        
+        /* 文字漸層 */
+        .text-gradient {
+            background: linear-gradient(135deg, #1d1d1f 0%, #434352 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        </style>
-    </head>
-    <body style="background:#ffffff; color:#1d1d1f;" class="antialiased overflow-x-hidden">
+        .text-gradient-brand {
+            background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
 
-        <!-- 導覽列 -->
-        <nav class="apple-nav fixed w-full z-50 transition-all duration-300" style="height:44px;">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-                <div class="flex justify-between h-full items-center">
-                    <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                        <img src="https://github.com/vocpass.png" alt="VocPass"
-                            class="w-6 h-6 rounded-md object-cover">
-                        <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
-                    </div>
-                    <div class="hidden md:flex items-center gap-6">
-                        <a href="#features"
-                            class="text-sm transition-colors" style="color:#6e6e73;">功能特色</a>
-                        <a href="#schools"
-                            class="text-sm transition-colors" style="color:#6e6e73;">支援學校</a>
-                        <a href="#install"
-                            class="text-sm transition-colors" style="color:#6e6e73;">立即下載</a>
-                        <a href="https://github.com/VocPass" target="_blank"
-                            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors"
-                            style="background:#1d1d1f; color:#fff;">
-                            <i class="fa-brands fa-github"></i> GitHub
-                        </a>
-                    </div>
-                </div>
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
+        <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
+            <div class="flex items-center gap-2.5 cursor-pointer">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
+                <span class="font-bold text-lg tracking-tight">VocPass</span>
             </div>
-        </nav>
-
-        <!-- Hero 區塊 -->
-        <section class="pt-28 pb-24 lg:pt-40 lg:pb-36 px-4" style="background:#ffffff;">
-            <div class="max-w-4xl mx-auto text-center" data-aos="fade-up" data-aos-duration="700">
-                <!-- 平台 badge -->
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-medium mb-8" style="font-size:13px;"
-                    style="background:#f5f5f7; color:#6e6e73;">
-                    <i class="fa-brands fa-apple text-sm" style="color:#1d1d1f;"></i>
-                    iOS 17.0+ &nbsp;·&nbsp; iPadOS 17.0+ &nbsp;·&nbsp; macOS 11.0+ &nbsp;·&nbsp; Android 6.0+
-                </div>
-
-                <h1 class="font-black tracking-tight mb-4 leading-none"
-                    style="font-size:clamp(64px,10vw,96px); color:#1d1d1f; letter-spacing:-0.03em;">
-                    VocPass
-                </h1>
-                <p class="font-bold mt-6" style="color:#0071e3; font-size:clamp(24px,3.5vw,34px);">
-                    高職通用校務查詢系統
-                </p>
-                <p class="mt-5 max-w-2xl mx-auto leading-relaxed" style="color:#6e6e73; font-size:19px;">
-                    課表、成績、缺曠、獎懲，一站式查詢。<br>
-                    原生 SwiftUI 打造。
-                </p>
-
-                <!-- CTA 按鈕 -->
-                <div class="mt-10 flex flex-wrap justify-center gap-3">
-                    <a href="https://apps.apple.com/tw/app/vocpass/id6760000951"
-                        target="_blank"
-                        class="btn-primary px-7 py-3.5 flex items-center gap-2" style="font-size:15px;">
-                        <i class="fa-brands fa-apple text-base"></i>
-                        App Store 下載
-                    </a>
-                    <a href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk"
-                        target="_blank"
-                        class="btn-secondary px-7 py-3.5 flex items-center gap-2" style="font-size:15px;">
-                        <i class="fa-brands fa-android text-base"></i>
-                        Android 下載
-                    </a>
-                    <a href="#features"
-                        class="btn-secondary px-7 py-3.5 flex items-center gap-2" style="font-size:15px;">
-                        查看功能特色
-                    </a>
-                </div>
-
-                <!-- Shields.io badges -->
-                <div class="mt-10 flex flex-wrap justify-center gap-2 opacity-70">
-                    <img
-                        src="https://img.shields.io/badge/platform-iOS%20%7C%20iPadOS%20%7C%20macOS-blue?logo=apple"
-                        alt="platform">
-                    <img
-                        src="https://img.shields.io/badge/Swift-5.9+-orange?logo=swift"
-                        alt="swift">
-                    <img src="https://img.shields.io/badge/iOS-17.0+-blue"
-                        alt="ios">
-                    <img src="https://img.shields.io/badge/android-6.0+-green"
-                        alt="android">
-                    <img
-                        src="https://img.shields.io/badge/license-GPL%203.0-green"
-                        alt="license">
-                </div>
+            <div class="hidden md:flex items-center gap-7">
+                <a href="#features" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">特色</a>
+                <a href="#schools" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">支援學校</a>
+                <a href="https://github.com/VocPass" target="_blank" class="text-gray-400 hover:text-gray-900 transition-colors">
+                    <i class="fa-brands fa-github text-xl"></i>
+                </a>
+                <a href="#install" class="bg-black text-white px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
+                    獲取 App
+                </a>
             </div>
-        </section>
+            <!-- 手機版按鈕 -->
+            <a href="#install" class="md:hidden bg-black text-white px-4 py-1.5 rounded-full text-sm font-semibold">
+                獲取 App
+            </a>
+        </div>
+    </nav>
 
-        <!-- 功能特色 -->
-        <section id="features" class="py-24" style="background:#f5f5f7;">
-            <div class="max-w-[980px] mx-auto px-5">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#6e6e73;">Features</p>
-                    <h2 class="font-bold" style="color:#1d1d1f; letter-spacing:-0.025em; font-size:clamp(38px,5vw,56px);">功能特色</h2>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="50">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#e8f0fe; color:#0071e3;">
-                            <i class="fa-regular fa-calendar"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">課表查詢</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">查看每週課表，支援離線快取，無需每次重新載入</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#e6f9f0; color:#30a460;">
-                            <i class="fa-solid fa-chart-column"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">成績查詢</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">學年成績查詢，各科目一覽無遺</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="150">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#fff3e0; color:#f0830a;">
-                            <i class="fa-regular fa-clock"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">缺曠統計</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">自動統計曠課、事假，即時掌握距 1/3 門檻狀況</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#fffbe6; color:#c9a000;">
-                            <i class="fa-solid fa-award"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">獎懲記錄</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">功過明細、核定日期、銷過狀態完整呈現</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="250">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#f3eeff; color:#7c3aed;">
-                            <i class="fa-solid fa-mobile-screen-button"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">Dynamic Island</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">課表即時活動顯示，當前與下一節課盡在靈動島</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#ffeaea; color:#d93025;">
-                            <i class="fa-solid fa-shield"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">驗證碼自動辨識</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">使用 Vision OCR 自動辨識登入驗證碼，免除手動輸入</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="350">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#f5f5f7; color:#6e6e73;">
-                            <i class="fa-solid fa-lock"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">本地隱私保護</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">帳號密碼於本機處理，不經過任何第三方伺服器</p>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-7 card-hover" style="box-shadow:0 2px 16px rgba(0,0,0,0.05);"
-                        data-aos="fade-up" data-aos-delay="400">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl mb-6"
-                            style="background:#e4f3ff; color:#0071e3;">
-                            <i class="fa-solid fa-cloud-arrow-down"></i></div>
-                        <h3 class="font-semibold mb-2" style="color:#1d1d1f; font-size:15px;">離線快取</h3>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:13px;">成績、課表資料快取，無網路也能查閱</p>
-                    </div>
-
-                </div>
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-5 bg-hero-glow">
+        <div class="max-w-4xl mx-auto text-center" data-aos="zoom-y-out" data-aos-duration="1000">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-full font-medium mb-6 md:mb-8 bg-white border border-gray-200 shadow-sm text-xs md:text-sm text-gray-600">
+                <i class="fa-brands fa-apple text-black"></i>
+                <span>iOS 17+</span><span class="text-gray-300">|</span>
+                <span>macOS 11+</span><span class="text-gray-300">|</span>
+                <i class="fa-brands fa-android text-green-600 ml-0.5"></i>
+                <span>Android 6+</span>
             </div>
-        </section>
 
-        <!-- 支援學校 & 技術棧 -->
-        <section id="schools" class="py-24 relative overflow-hidden" style="background:#1d1d1f; color:#fff;">
+            <h1 class="font-black tracking-tighter mb-5 leading-[1.1]" style="font-size:clamp(36px, 8vw, 96px);">
+                你的校園生活<br class="hidden md:block" />
+                <span class="text-gradient-brand">一手掌握</span>
+            </h1>
 
-            <div class="max-w-[980px] mx-auto px-5 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <p class="mt-4 max-w-2xl mx-auto text-base md:text-xl text-gray-500 font-medium leading-relaxed">
+                專為高職生打造的通用校務查詢系統。<br class="hidden sm:block"/>課表、成績、缺曠、獎懲，以原生 SwiftUI 流暢呈現。
+            </p>
 
-                    <!-- 支援學校 -->
-                    <div data-aos="fade-up">
-                        <p class="text-xs font-semibold uppercase tracking-widest mb-3"
-                            style="color:#6e6e73;">Supported Schools</p>
-                        <h2 class="font-bold mb-3"
-                            style="color:#fff; letter-spacing:-0.025em; font-size:clamp(32px,4vw,44px);">支援學校</h2>
-                        <p class="mb-6 text-base" style="color:rgba(255,255,255,0.6);">
-                            已支援 <span id="school-count" style="color:#fff; font-weight:600;">80</span> 所，還在增加中！
-                        </p>
-
-                        <div class="mb-6 rounded-2xl p-3"
-                            style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);">
-                            <div class="marquee rounded-xl">
-                                <div id="school-marquee-track" class="marquee-track py-2"></div>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-xl flex items-start gap-3 text-sm"
-                            style="background:rgba(255,255,255,0.05); border:1px dashed rgba(255,255,255,0.15);">
-                            <i class="fa-solid fa-circle-plus mt-0.5 flex-shrink-0"
-                                style="color:rgba(255,255,255,0.5);"></i>
-                            <span style="color:rgba(255,255,255,0.6);">想增加其他學校嗎？填寫此
-                                <a class="underline underline-offset-2"
-                                    style="color:rgba(255,255,255,0.85);"
-                                    href="https://forms.gle/A8qrSusaDUv83Q1eA"
-                                    target="_blank">表單</a> 以擴充支援</span>
-                        </div>
-                    </div>
-
-                    <!-- 技術棧 -->
-                    <div class="rounded-2xl p-8"
-                        style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);"
-                        data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="font-semibold mb-7 flex items-center gap-2"
-                            style="color:#fff; letter-spacing:-0.02em; font-size:22px;">
-                            <i class="fa-solid fa-microchip" style="color:rgba(255,255,255,0.4);"></i>
-                            技術棧
-                        </h3>
-                        <div class="space-y-5">
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                    style="background:rgba(255,255,255,0.08);">
-                                    <i class="fa-brands fa-swift text-lg" style="color:#f4813a;"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold" style="color:#fff; font-size:15px;">SwiftUI</h4>
-                                    <p class="mt-1" style="color:rgba(255,255,255,0.5); font-size:13px;">全 UI 框架，原生體驗</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                    style="background:rgba(255,255,255,0.08);">
-                                    <i class="fa-solid fa-bars-staggered text-lg" style="color:#34c759;"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold" style="color:#fff; font-size:15px;">ActivityKit + WidgetKit</h4>
-                                    <p class="mt-1" style="color:rgba(255,255,255,0.5); font-size:13px;">Dynamic Island / 鎖定螢幕小工具</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                    style="background:rgba(255,255,255,0.08);">
-                                    <i class="fa-solid fa-eye text-lg" style="color:#0071e3;"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold" style="color:#fff; font-size:15px;">Vision</h4>
-                                    <p class="mt-1" style="color:rgba(255,255,255,0.5); font-size:13px;">驗證碼 OCR 辨識</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                    style="background:rgba(255,255,255,0.08);">
-                                    <i class="fa-solid fa-globe text-lg" style="color:#bf5af2;"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold" style="color:#fff; font-size:15px;">WKWebView</h4>
-                                    <p class="mt-1" style="color:rgba(255,255,255,0.5); font-size:13px;">學校系統登入與資料擷取</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                                    style="background:rgba(255,255,255,0.08);">
-                                    <i class="fa-solid fa-database text-lg" style="color:#ffd60a;"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold" style="color:#fff; font-size:15px;">UserDefaults</h4>
-                                    <p class="mt-1" style="color:rgba(255,255,255,0.5); font-size:13px;">本地快取與帳號記憶</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+                <a href="https://apps.apple.com/tw/app/vocpass/id6760000951" target="_blank" class="bg-blue-600 text-white px-7 py-3.5 rounded-full font-semibold text-base flex items-center justify-center gap-2 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30 transition-all">
+                    <i class="fa-brands fa-apple text-lg"></i> App Store 下載
+                </a>
+                <a href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk" target="_blank" class="bg-white text-gray-900 border border-gray-200 px-7 py-3.5 rounded-full font-semibold text-base flex items-center justify-center gap-2 hover:bg-gray-50 transition-all shadow-sm">
+                    <i class="fa-brands fa-android text-green-600 text-lg"></i> Android 版本
+                </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 立即下載 -->
-        <section id="install" class="py-24" style="background:#f5f5f7;">
-            <div class="max-w-3xl mx-auto px-4" data-aos="fade-up">
-                <div class="text-center mb-10">
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#6e6e73;">Download</p>
-                    <h2 class="font-bold" style="color:#1d1d1f; letter-spacing:-0.025em; font-size:clamp(38px,5vw,56px);">立即下載</h2>
-                    <p class="mt-4" style="color:#6e6e73; font-size:17px;">可直接前往 App Store 下載，或取得原始碼</p>
+    <section class="relative z-10 -mt-12 px-5 max-w-5xl mx-auto">
+        <div class="bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] p-5 md:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] grid grid-cols-3 gap-2 md:gap-4 text-center" data-aos="fade-up">
+            <div class="min-w-0">
+                <div class="font-black text-gray-900 tracking-tight mb-1 md:mb-2 truncate" style="font-size:clamp(18px,5vw,48px)">
+                    <span class="stat-number" data-target="3200" data-suffix="+">0</span>
+                </div>
+                <div class="text-[10px] md:text-sm font-semibold text-gray-500 uppercase tracking-wider">累計下載</div>
+            </div>
+            <div class="relative flex items-center justify-center min-w-0">
+                <div class="absolute left-0 w-px h-10 md:h-12 bg-gray-200"></div>
+                <div class="min-w-0">
+                    <div class="font-black text-gray-900 tracking-tight mb-1 md:mb-2 truncate" style="font-size:clamp(18px,5vw,48px)">
+                        <span class="stat-number" data-target="470" data-suffix="+">0</span>
+                    </div>
+                    <div class="text-[10px] md:text-sm font-semibold text-gray-500 uppercase tracking-wider">已註冊使用者</div>
+                </div>
+                <div class="absolute right-0 w-px h-10 md:h-12 bg-gray-200"></div>
+            </div>
+            <div class="min-w-0">
+                <div class="font-black text-gray-900 tracking-tight mb-1 md:mb-2 truncate" style="font-size:clamp(18px,5vw,48px)">
+                    <span class="stat-number" data-target="80000" data-suffix="+">0</span>
+                </div>
+                <div class="text-[10px] md:text-sm font-semibold text-gray-500 uppercase tracking-wider">總查詢次數</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 md:py-32 px-5">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
+                <h2 class="text-2xl md:text-5xl font-bold text-gray-900 mb-3 tracking-tight">一切你需要的功能，<br/>都在這裡。</h2>
+                <p class="text-gray-500 text-base md:text-lg">極致流暢的使用體驗，保護隱私的本地架構。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:auto-rows-[220px]">
+
+                <!-- 課表：手機全寬，桌面跨2欄2列 -->
+                <div class="bento-card md:col-span-2 md:row-span-2 p-6 md:p-8 bg-gradient-to-br from-blue-50 to-white flex flex-col justify-between" data-aos="fade-up" data-aos-delay="0">
+                    <div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-500 text-white rounded-2xl flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 shadow-md shadow-blue-500/20">
+                            <i class="fa-regular fa-calendar-check"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-2 md:mb-3">智慧課表查詢</h3>
+                        <p class="text-gray-600 text-sm md:text-base leading-relaxed">完整呈現每週課表，結合自動快取機制。無網路環境下依然可以瞬間載入，讓你隨時掌握下一堂課的地點。</p>
+                    </div>
+                    <div id="schedule-grid" class="mt-5 md:mt-8 grid grid-cols-5 gap-1.5"></div>
                 </div>
 
-                <div class="bg-white rounded-2xl overflow-hidden" style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
-                    <div class="p-8">
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <a href="https://apps.apple.com/tw/app/vocpass/id6760000951"
-                                target="_blank"
-                                class="btn-primary flex-1 px-6 py-3.5 flex items-center justify-center gap-2 text-sm">
-                                <i class="fa-brands fa-apple"></i>
-                                App Store 下載
-                            </a>
-                            <a href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk"
-                                target="_blank"
-                                class="btn-secondary flex-1 px-6 py-3.5 flex items-center justify-center gap-2 text-sm">
-                                <i class="fa-brands fa-android"></i>
-                                Android 下載
-                            </a>
-                            <a href="https://testflight.apple.com/join/AeHJpDMp"
-                                target="_blank"
-                                class="btn-secondary flex-1 px-6 py-3.5 flex items-center justify-center gap-2 text-sm">
-                                <i class="fa-solid fa-flask-vial"></i>
-                                加入 Beta
-                            </a>
-                        </div>
-                        <p class="text-xs mt-5 text-center" style="color:#6e6e73;">
-                            若要自行建置，請使用 Xcode 15+ 開啟專案。
-                        </p>
-                    </div>
+                <!-- 手機版：2欄並排小卡 -->
+                <div class="grid grid-cols-2 gap-4 md:contents">
 
-                    <div class="p-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-                        style="border-top:1px solid rgba(0,0,0,0.06); background:#f5f5f7;">
+                    <div class="bento-card md:col-span-2 lg:col-span-2 p-5 md:p-8 flex flex-col md:flex-row md:items-start gap-3 md:gap-5 justify-center col-span-2" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-black text-white rounded-xl flex items-center justify-center text-lg md:text-xl shrink-0">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
                         <div>
-                            <h4 class="font-semibold" style="color:#1d1d1f; font-size:15px;">想貢獻或新增學校支援？</h4>
-                            <p class="mt-1" style="color:#6e6e73; font-size:13px;">歡迎提交 Issue 或 PR，一起讓 VocPass 支援更多學校！</p>
+                            <h3 class="text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2">靈動島與實時活動</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">完美支援 iOS Dynamic Island。不用解鎖手機，當前進度與下一節課室資訊直接浮現在島上。</p>
                         </div>
-                        <a href="https://github.com/VocPass" target="_blank"
-                            class="flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2 transition-colors"
-                            style="background:#1d1d1f; color:#fff;">
-                            <i class="fa-brands fa-github"></i>
-                            前往 GitHub
+                    </div>
+
+                    <div class="bento-card p-5 md:p-8 flex flex-col justify-between bg-gradient-to-b from-green-50/50 to-white" data-aos="fade-up" data-aos-delay="150">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-green-500 text-white rounded-xl flex items-center justify-center text-lg md:text-xl mb-3 md:mb-4">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1">歷年成績</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">各科分數、學分、排名一覽無遺。</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card p-5 md:p-8 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-orange-500 text-white rounded-xl flex items-center justify-center text-lg md:text-xl mb-3 md:mb-4">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1">缺曠統計</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">即時預警，不再擔心超過 1/3 門檻。</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card md:col-span-2 p-5 md:p-8 flex items-center gap-4 md:gap-6 col-span-2" data-aos="fade-up" data-aos-delay="250">
+                        <div class="w-10 h-10 md:w-14 md:h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-xl md:text-2xl shrink-0">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2">自動辨識驗證碼</h3>
+                            <p class="text-gray-500 text-xs md:text-sm">內建 Vision OCR 技術，登入時自動破解煩人的圖片驗證碼，實現真正的一鍵登入。</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card md:col-span-1 lg:col-span-2 p-5 md:p-8 flex items-center gap-4 md:gap-6 bg-gray-900 text-white col-span-2" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-10 h-10 md:w-14 md:h-14 bg-gray-800 rounded-2xl flex items-center justify-center text-xl md:text-2xl shrink-0 border border-gray-700">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base md:text-xl font-bold mb-1 md:mb-2">絕對的本地隱私保護</h3>
+                            <p class="text-gray-400 text-xs md:text-sm">你的學號與密碼僅儲存於設備本機 (Keychain)，絕不經過任何第三方伺服器。</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="schools" class="py-20 md:py-32 relative overflow-hidden bg-black text-white border-t border-gray-800">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-5 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-center">
+                
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight">支援 <span id="school-count" class="text-blue-500">80</span>+ 所學校</h2>
+                    <p class="text-gray-400 text-lg mb-10">持續擴增中，覆蓋全台各大高職與綜合高中。</p>
+                    
+                    <div class="marquee py-4 mb-8">
+                        <div id="school-marquee-track" class="marquee-track">
+                            </div>
+                    </div>
+
+                    <a href="https://forms.gle/A8qrSusaDUv83Q1eA" target="_blank" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors bg-white/5 px-4 py-2.5 rounded-full border border-white/10 backdrop-blur-md">
+                        <i class="fa-solid fa-plus-circle"></i> 沒看到你的學校？點此許願申請
+                    </a>
+                </div>
+
+                <div data-aos="fade-left" class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
+                    <h3 class="text-xl font-semibold mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-code text-blue-400"></i> 技術驅動
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="px-4 py-2 rounded-full bg-white/10 border border-white/5 text-sm flex items-center gap-2">
+                            <i class="fa-brands fa-swift text-orange-500"></i> SwiftUI (原生體驗)
+                        </div>
+                        <div class="px-4 py-2 rounded-full bg-white/10 border border-white/5 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-bars-staggered text-green-400"></i> ActivityKit (靈動島)
+                        </div>
+                        <div class="px-4 py-2 rounded-full bg-white/10 border border-white/5 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-eye text-blue-400"></i> Vision (OCR 辨識)
+                        </div>
+                        <div class="px-4 py-2 rounded-full bg-white/10 border border-white/5 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-globe text-purple-400"></i> WKWebView
+                        </div>
+                        <div class="px-4 py-2 rounded-full bg-white/10 border border-white/5 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-database text-yellow-400"></i> 本地快取技術
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="install" class="py-20 md:py-32 px-5">
+        <div class="max-w-4xl mx-auto" data-aos="zoom-in" data-aos-duration="800">
+            <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[2rem] p-8 md:p-16 text-center text-white shadow-2xl shadow-blue-900/20 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiLz48L3N2Zz4=')] opacity-50"></div>
+
+                <div class="relative z-10">
+                    <h2 class="text-2xl md:text-5xl font-bold mb-4 md:mb-6 tracking-tight">準備好升級你的校園體驗了嗎？</h2>
+                    <p class="text-blue-100 text-base md:text-lg mb-8 md:mb-10 max-w-2xl mx-auto">開源免費、無廣告干擾。立即前往 App Store 獲取，或下載 Android 版本體驗。</p>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-3">
+                        <a href="https://apps.apple.com/tw/app/vocpass/id6760000951" target="_blank" class="bg-white text-blue-600 px-7 py-3.5 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:scale-105 transition-transform">
+                            <i class="fa-brands fa-apple text-lg text-black"></i> 取得 iOS 版
                         </a>
+                        <a href="https://testflight.apple.com/join/AeHJpDMp" target="_blank" class="bg-white/10 border border-white/20 backdrop-blur-md text-white px-7 py-3.5 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:bg-white/20 transition-colors">
+                            <i class="fa-solid fa-flask text-lg"></i> TestFlight Beta
+                        </a>
+                        <a href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk" target="_blank" class="bg-green-500 text-white px-7 py-3.5 rounded-full font-bold text-base flex items-center justify-center gap-2 hover:bg-green-400 transition-colors">
+                            <i class="fa-brands fa-android text-lg"></i> 下載 APK
+                        </a>
+                    </div>
+                    <div class="mt-8 text-sm text-blue-200 flex justify-center items-center gap-4">
+                        <a href="https://github.com/VocPass" class="hover:text-white underline underline-offset-4 decoration-blue-400">前往 GitHub 瀏覽開源程式碼</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 頁尾 -->
-        <footer class="py-10" style="background:#000000;">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <div class="flex items-center justify-center gap-2 mb-4">
-                    <img src="https://github.com/vocpass.png" alt="VocPass"
-                        class="w-6 h-6 rounded-md object-cover">
-                    <span class="font-semibold text-sm tracking-tight" style="color:rgba(255,255,255,0.8);">VocPass</span>
-                </div>
-                <p class="text-xs mb-4 leading-relaxed" style="color:rgba(255,255,255,0.4);">
-                    高職通用校務查詢系統 &nbsp;·&nbsp; iOS / iPadOS / macOS<br>
-                    Licensed under <a
-                        href="https://github.com/VocPass/ios/blob/main/LICENSE"
-                        target="_blank"
-                        class="transition-colors underline underline-offset-2"
-                        style="color:rgba(255,255,255,0.4);">GPL 3.0</a>
-                </p>
-                <div class="flex items-center justify-center gap-4 text-xs mb-4" style="color:rgba(255,255,255,0.3);">
-                    <a href="/privacy-policy" class="transition-colors hover:opacity-70">隱私權政策</a>
-                    <span>·</span>
-                    <a href="/disclaimer" class="transition-colors hover:opacity-70">免責聲明</a>
-                </div>
-                <div class="flex items-center justify-center gap-6 text-xs" style="color:rgba(255,255,255,0.3);">
-                    <a href="https://github.com/VocPass" target="_blank"
-                        class="transition-colors hover:opacity-70 flex items-center gap-1.5">
-                        <i class="fa-brands fa-github"></i> GitHub
-                    </a>
-                    <a href="https://github.com/VocPass/ios/issues" target="_blank"
-                        class="transition-colors hover:opacity-70 flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-dot"></i> 回報問題
-                    </a>
-                    <a href="https://github.com/VocPass/ios/pulls" target="_blank"
-                        class="transition-colors hover:opacity-70 flex items-center gap-1.5">
-                        <i class="fa-solid fa-code-pull-request"></i> 貢獻 PR
-                    </a>
-                </div>
+    <footer class="border-t border-gray-200 bg-white py-10 px-5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
+                <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
             </div>
-        </footer>
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
+                <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
+                <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
+                <div class="w-px h-4 bg-gray-300 hidden sm:block"></div>
+                <a href="https://forum.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-bug mr-1"></i> 回報問題</a>
+                <a href="https://dc.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-commenting mr-1"></i> 加入 Discord</a>
+            </div>
+        </div>
+    </footer>
 
-        <!-- AOS Animation Script -->
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script>
-        AOS.init({
-            once: true,
-            offset: 50,
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 初始化動畫
+        AOS.init({ once: true, offset: 50 });
+
+        // 導覽列模糊切換
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.65)';
+            }
         });
 
+        // 動態載入學校 API
         async function loadSchools() {
             const marqueeTrack = document.getElementById('school-marquee-track');
             const schoolCountElement = document.getElementById('school-count');
             if (!marqueeTrack) return;
 
-            const escapeHtml = (value) => String(value)
-                .replaceAll('&', '&amp;')
-                .replaceAll('<', '&lt;')
-                .replaceAll('>', '&gt;')
-                .replaceAll('"', '&quot;')
-                .replaceAll("'", '&#39;');
-
-            const fallbackSchools = ['鶯歌工商', '三重商工', '新北高工'];
-            let schoolNames = [];
+            const fallbackSchools = ['大安高工', '士林高商', '松山家商', '木柵高工', '南港高工', '內湖高工', '鶯歌工商', '三重商工', '新北高工'];
+            let schoolNames = fallbackSchools;
 
             try {
                 const response = await fetch('/school', { cache: 'no-store' });
-                if (!response.ok) throw new Error('Failed to fetch /school');
-                const data = await response.json();
-                schoolNames = Object.keys(data || {});
-            } catch (error) {
-                schoolNames = fallbackSchools;
-            }
+                if (response.ok) {
+                    const data = await response.json();
+                    if(data && Object.keys(data).length > 0) schoolNames = Object.keys(data);
+                }
+            } catch (e) { console.log('使用預設學校列表'); }
 
-            if (!schoolNames.length) {
-                schoolNames = fallbackSchools;
-            }
+            if (schoolCountElement) schoolCountElement.textContent = schoolNames.length;
 
-            if (schoolCountElement) {
-                schoolCountElement.textContent = String(schoolNames.length);
-            }
-
-            const chips = schoolNames.map((name) => `
-                <div class="school-chip">
-                    <i class="fa-solid fa-school" style="color:rgba(255,255,255,0.4);"></i>
-                    <span>${escapeHtml(name)}</span>
+            const chips = schoolNames.map(name => `
+                <div class="px-5 py-2.5 rounded-2xl bg-white/5 border border-white/10 text-white font-medium whitespace-nowrap flex items-center gap-2 backdrop-blur-sm">
+                    <i class="fa-solid fa-school text-gray-500 text-sm"></i> ${name}
                 </div>
             `).join('');
 
-            marqueeTrack.innerHTML = `
-                <div class="flex items-center gap-3 pr-3">${chips}</div>
-                <div class="flex items-center gap-3 pr-3" aria-hidden="true">${chips}</div>
-            `;
-
-            const duration = Math.max(20, schoolNames.length * 1.5);
-            marqueeTrack.style.animationDuration = `${duration}s`;
+            marqueeTrack.innerHTML = `<div class="flex items-center gap-4 pr-4">${chips}</div><div class="flex items-center gap-4 pr-4" aria-hidden="true">${chips}</div>`;
+            marqueeTrack.style.animationDuration = `${Math.max(30, schoolNames.length * 1.8)}s`;
         }
-
         loadSchools();
 
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-md');
-            } else {
-                nav.classList.remove('shadow-md');
+        // 數字跳動動畫
+        const animateCounter = (el) => {
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            const duration = 2000;
+            const start = performance.now();
+            
+            const update = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+                el.textContent = Math.round(eased * target).toLocaleString() + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+            };
+            requestAnimationFrame(update);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-number').forEach(el => observer.observe(el));
+
+        // 課表隨機淡出淡入
+        const subjects = [
+            { name: '程式設計', bg: 'bg-blue-100', text: 'text-blue-600' },
+            { name: '資料結構', bg: 'bg-indigo-100', text: 'text-indigo-600' },
+            { name: '演算法', bg: 'bg-violet-100', text: 'text-violet-600' },
+            { name: '網頁設計', bg: 'bg-cyan-100', text: 'text-cyan-600' },
+            { name: '資料庫', bg: 'bg-teal-100', text: 'text-teal-600' },
+            { name: '計算機概論', bg: 'bg-sky-100', text: 'text-sky-600' },
+            { name: '作業系統', bg: 'bg-orange-100', text: 'text-orange-500' },
+            { name: '網路概論', bg: 'bg-green-100', text: 'text-green-600' },
+            { name: '資訊安全', bg: 'bg-red-100', text: 'text-red-500' },
+            { name: '物聯網', bg: 'bg-lime-100', text: 'text-lime-600' },
+            { name: 'APP開發', bg: 'bg-purple-100', text: 'text-purple-500' },
+            { name: '雲端運算', bg: 'bg-blue-200', text: 'text-blue-700' },
+            { name: '人工智慧', bg: 'bg-pink-100', text: 'text-pink-500' },
+            { name: '電腦組裝', bg: 'bg-amber-100', text: 'text-amber-600' },
+            { name: '軟體工程', bg: 'bg-emerald-100', text: 'text-emerald-600' },
+            { name: '專題製作', bg: 'bg-rose-100', text: 'text-rose-500' },
+        ];
+
+        const grid = document.getElementById('schedule-grid');
+        if (grid) {
+            const COLS = 5, ROWS = 2, TOTAL = COLS * ROWS;
+            const cells = [];
+
+            // 初始化格子
+            for (let i = 0; i < TOTAL; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'h-9 rounded-lg flex items-center justify-center text-xs font-semibold transition-opacity duration-700';
+                cell.style.opacity = '0.6';
+                grid.appendChild(cell);
+                cells.push(cell);
             }
-        });
-        </script>
-    </body>
+
+            function pickSubject(exclude) {
+                let s;
+                do { s = subjects[Math.floor(Math.random() * subjects.length)]; } while (s.name === exclude);
+                return s;
+            }
+
+            function setCell(cell, subject) {
+                cell.className = `h-9 rounded-lg flex items-center justify-center text-xs font-semibold transition-opacity duration-700 ${subject.bg} ${subject.text}`;
+                cell.textContent = subject.name;
+            }
+
+            // 初始填充
+            cells.forEach(cell => setCell(cell, pickSubject(null)));
+
+            // 每個格子各自獨立隨機循環
+            function startCellLoop(cell) {
+                const delay = Math.random() * 3000;
+                setTimeout(function loop() {
+                    const current = cell.textContent;
+                    cell.style.opacity = '0';
+                    setTimeout(() => {
+                        setCell(cell, pickSubject(current));
+                        cell.style.opacity = '0.6';
+                        setTimeout(loop, 1500 + Math.random() * 3000);
+                    }, 600);
+                }, delay);
+            }
+
+            cells.forEach(cell => startCellLoop(cell));
+        }
+    </script>
+</body>
 </html>

@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>免責聲明 | VocPass</title>
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <!-- Font Awesome -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Noto Sans TC -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
-            rel="stylesheet">
-        <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
-        <script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免責聲明 | VocPass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -24,206 +18,198 @@
                 }
             }
         }
-        </script>
-        <style>
+    </script>
+    <style>
         :root {
-            --apple-blue: #0071e3;
             --apple-text: #1d1d1f;
-            --apple-secondary: #6e6e73;
+            --apple-secondary: #86868b;
+            --bg-gray: #fbfbfd;
         }
-        .apple-nav {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        body { background-color: var(--bg-gray); color: var(--apple-text); }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        </style>
-    </head>
-    <body style="background:#ffffff; color:#1d1d1f;" class="antialiased">
+    </style>
+</head>
+<body class="antialiased">
 
-        <!-- 導覽列 -->
-        <nav class="apple-nav fixed w-full z-50 transition-all duration-300" style="height:44px;">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-                <div class="flex justify-between h-full items-center">
-                    <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                        <img src="https://github.com/vocpass.png" alt="VocPass"
-                            class="w-6 h-6 rounded-md object-cover">
-                        <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
-                    </a>
-                    <a href="/" class="flex items-center gap-1.5 text-sm transition-colors" style="color:#0071e3;">
-                        <i class="fa-solid fa-chevron-left text-xs"></i>
-                        返回首頁
-                    </a>
-                </div>
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
+        <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5 cursor-pointer">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
+                <span class="font-bold text-lg tracking-tight">VocPass</span>
+            </a>
+            <a href="/" class="flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+                返回首頁
+            </a>
+        </div>
+    </nav>
+
+    <main class="px-5 pb-20" style="padding-top:calc(56px + 40px);">
+        <div class="max-w-3xl mx-auto">
+
+            <div class="mb-10">
+                <p class="text-xs font-semibold uppercase tracking-widest mb-3 text-gray-400">Legal</p>
+                <h1 class="font-bold mb-3 tracking-tight" style="font-size:clamp(32px,4vw,48px);">免責聲明</h1>
+                <p class="text-gray-500 text-[15px]">最後更新日期：2026 年 3 月 18 日</p>
             </div>
-        </nav>
 
-        <!-- 主內容 -->
-        <main style="padding-top:calc(44px + 40px); padding-bottom:80px;" class="px-4">
-            <div class="max-w-3xl mx-auto">
-
-                <!-- 標題 -->
-                <div class="mb-10">
-                    <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#6e6e73;">Legal</p>
-                    <h1 class="font-bold mb-3"
-                        style="color:#1d1d1f; letter-spacing:-0.025em; font-size:clamp(32px,4vw,48px);">免責聲明</h1>
-                    <p style="color:#6e6e73; font-size:15px;">最後更新日期：2026 年 3 月 18 日</p>
-                </div>
-
-                <!-- 警示橫幅 -->
-                <div class="mb-8 flex items-start gap-3 px-5 py-4 rounded-2xl leading-relaxed"
-                    style="background:#fffbe6; color:#8a6c00; font-size:15px;">
-                    <i class="fa-solid fa-triangle-exclamation mt-0.5 flex-shrink-0"
-                        style="color:#c9a000;"></i>
-                    <span>本應用程式為非官方工具，與各學校及其主管機關無任何隸屬或合作關係。使用前請詳閱以下聲明。</span>
-                </div>
-
-                <!-- 內容卡片 -->
-                <div class="bg-white rounded-2xl p-8 sm:p-10 space-y-10"
-                    style="box-shadow:0 4px 24px rgba(0,0,0,0.06);">
-
-                    <!-- 1 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#e4f3ff;">
-                                <i class="fa-solid fa-circle-info text-sm" style="color:#0071e3;"></i>
-                            </div>
-                            <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">1. 應用程式性質</h2>
-                        </div>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
-                            VocPass 為一款非官方、開源的第三方校務查詢工具，旨在提升高職學生查詢校務資訊的便利性。本應用程式與任何學校、教育局、教育部或政府機關均無任何官方隸屬、授權或合作關係。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 2 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#fff3e0;">
-                                <i class="fa-solid fa-file-circle-xmark text-sm" style="color:#f0830a;"></i>
-                            </div>
-                            <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">2. 資料準確性</h2>
-                        </div>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
-                            本應用程式所顯示之所有資料（包括課表、成績、缺曠、獎懲等）均直接來源於您學校的校務系統。VocPass 不對資料的準確性、完整性或即時性作任何保證。如資料有任何疑義，請以學校官方校務系統或相關人員確認之資訊為準。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 3 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#ffeaea;">
-                                <i class="fa-solid fa-ban text-sm" style="color:#d93025;"></i>
-                            </div>
-                            <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">3. 責任限制</h2>
-                        </div>
-                        <div class="space-y-4 leading-relaxed" style="color:#6e6e73; font-size:15px;">
-                            <p>對於以下情況，VocPass 開發團隊概不負責：</p>
-                            <ul class="space-y-2 ml-4">
-                                <li class="flex items-start gap-2">
-                                    <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0" style="color:#c7c7cc;"></i>
-                                    因使用本應用程式所顯示資料而做出的任何決策或行動造成的損失
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0" style="color:#c7c7cc;"></i>
-                                    學校校務系統更改介面、帳號鎖定或其他政策變動導致本應用程式無法正常運作
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0" style="color:#c7c7cc;"></i>
-                                    網路連線異常、伺服器停機或其他非本應用程式可控因素造成的服務中斷
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0" style="color:#c7c7cc;"></i>
-                                    因裝置遺失、被盜或其他使用者疏失導致帳號資料外洩
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 4 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#e4f3ff;">
-                                <i class="fa-solid fa-user-shield text-sm" style="color:#0071e3;"></i>
-                            </div>
-                            <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">4. 使用者責任</h2>
-                        </div>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
-                            使用者應自行確保其使用本應用程式之行為符合所屬學校的相關規定。如學校明令禁止使用第三方工具存取校務系統，使用者應遵從學校規定。VocPass 不承擔任何因違反學校政策而產生的責任。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 5 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#e6f9f0;">
-                                <i class="fa-brands fa-osi text-sm" style="color:#1a7f4e;"></i>
-                            </div>
-                            <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">5. 開源授權</h2>
-                        </div>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
-                            本應用程式依據 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank"
-                                style="color:#0071e3;" class="hover:underline">GNU General Public License v3.0</a> 授權釋出。任何人均可自由取得、修改及再散布原始碼，但須遵守 GPL 3.0 之規定。本授權不提供任何明示或暗示之保證。
-                        </p>
-                    </section>
-
-                    <hr style="border-color:rgba(0,0,0,0.06);">
-
-                    <!-- 6 -->
-                    <section>
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                                style="background:#f5f5f7;">
-                                <i class="fa-solid fa-gavel text-sm" style="color:#6e6e73;"></i>
-                            </div>
-                            <h2 class="font-semibold" style="color:#1d1d1f; font-size:17px;">6. 準據法</h2>
-                        </div>
-                        <p class="leading-relaxed" style="color:#6e6e73; font-size:15px;">
-                            本免責聲明依中華民國法律解釋及適用。如因使用本應用程式而發生任何爭議，雙方同意以中華民國法院為第一審管轄法院。
-                        </p>
-                    </section>
-
-                </div>
-
-                <!-- 底部導航 -->
-                <div class="mt-8 flex flex-wrap justify-center gap-4 text-sm" style="color:#6e6e73;">
-                    <a href="/" class="transition-colors hover:opacity-70">首頁</a>
-                    <span>·</span>
-                    <a href="/privacy-policy" class="transition-colors hover:opacity-70">隱私權政策</a>
-                    <span>·</span>
-                    <a href="https://github.com/VocPass" target="_blank" class="transition-colors hover:opacity-70">GitHub</a>
-                </div>
+            <!-- 警示橫幅 -->
+            <div class="mb-8 flex items-start gap-3 px-5 py-4 rounded-2xl leading-relaxed text-[15px]"
+                style="background:#fffbe6; color:#8a6c00;">
+                <i class="fa-solid fa-triangle-exclamation mt-0.5 flex-shrink-0" style="color:#c9a000;"></i>
+                <span>本應用程式為非官方工具，與各學校及其主管機關無任何隸屬或合作關係。使用前請詳閱以下聲明。</span>
             </div>
-        </main>
 
-        <!-- 頁尾 -->
-        <footer class="py-10" style="background:#000000;">
-            <div class="max-w-7xl mx-auto px-4 text-center">
-                <div class="flex items-center justify-center gap-2 mb-4">
-                    <img src="https://github.com/vocpass.png" alt="VocPass"
-                        class="w-6 h-6 rounded-md object-cover">
-                    <span class="font-semibold text-sm tracking-tight" style="color:rgba(255,255,255,0.8);">VocPass</span>
-                </div>
-                <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.4);">
-                    高職通用校務查詢系統 &nbsp;·&nbsp; iOS / iPadOS / macOS<br>
-                    Licensed under <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank"
-                        class="transition-colors underline underline-offset-2"
-                        style="color:rgba(255,255,255,0.4);">GPL 3.0</a>
-                </p>
+            <div class="bg-white rounded-[24px] p-8 sm:p-10 space-y-10"
+                style="border:1px solid rgba(0,0,0,0.04); box-shadow:0 4px 20px -2px rgba(0,0,0,0.03);">
+
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-50">
+                            <i class="fa-solid fa-circle-info text-sm text-blue-600"></i>
+                        </div>
+                        <h2 class="font-semibold text-[17px]">1. 應用程式性質</h2>
+                    </div>
+                    <p class="leading-relaxed text-gray-500 text-[15px]">
+                        VocPass 為一款非官方、開源的第三方校務查詢工具，旨在提升高職學生查詢校務資訊的便利性。本應用程式與任何學校、教育局、教育部或政府機關均無任何官方隸屬、授權或合作關係。
+                    </p>
+                </section>
+
+                <hr class="border-gray-100">
+
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#fff3e0;">
+                            <i class="fa-solid fa-file-circle-xmark text-sm" style="color:#f0830a;"></i>
+                        </div>
+                        <h2 class="font-semibold text-[17px]">2. 資料準確性</h2>
+                    </div>
+                    <p class="leading-relaxed text-gray-500 text-[15px]">
+                        本應用程式所顯示之所有資料（包括課表、成績、缺曠、獎懲等）均直接來源於您學校的校務系統。VocPass 不對資料的準確性、完整性或即時性作任何保證。如資料有任何疑義，請以學校官方校務系統或相關人員確認之資訊為準。
+                    </p>
+                </section>
+
+                <hr class="border-gray-100">
+
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-50">
+                            <i class="fa-solid fa-ban text-sm text-red-600"></i>
+                        </div>
+                        <h2 class="font-semibold text-[17px]">3. 責任限制</h2>
+                    </div>
+                    <div class="space-y-4 leading-relaxed text-gray-500 text-[15px]">
+                        <p>對於以下情況，VocPass 開發團隊概不負責：</p>
+                        <ul class="space-y-2 ml-4">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0 text-gray-300"></i>
+                                因使用本應用程式所顯示資料而做出的任何決策或行動造成的損失
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0 text-gray-300"></i>
+                                學校校務系統更改介面、帳號鎖定或其他政策變動導致本應用程式無法正常運作
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0 text-gray-300"></i>
+                                網路連線異常、伺服器停機或其他非本應用程式可控因素造成的服務中斷
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-minus mt-1.5 text-xs flex-shrink-0 text-gray-300"></i>
+                                因裝置遺失、被盜或其他使用者疏失導致帳號資料外洩
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <hr class="border-gray-100">
+
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-50">
+                            <i class="fa-solid fa-user-shield text-sm text-blue-600"></i>
+                        </div>
+                        <h2 class="font-semibold text-[17px]">4. 使用者責任</h2>
+                    </div>
+                    <p class="leading-relaxed text-gray-500 text-[15px]">
+                        使用者應自行確保其使用本應用程式之行為符合所屬學校的相關規定。如學校明令禁止使用第三方工具存取校務系統，使用者應遵從學校規定。VocPass 不承擔任何因違反學校政策而產生的責任。
+                    </p>
+                </section>
+
+                <hr class="border-gray-100">
+
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#e6f9f0;">
+                            <i class="fa-brands fa-osi text-sm" style="color:#1a7f4e;"></i>
+                        </div>
+                        <h2 class="font-semibold text-[17px]">5. 開源授權</h2>
+                    </div>
+                    <p class="leading-relaxed text-gray-500 text-[15px]">
+                        本應用程式依據 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank"
+                            class="text-blue-600 hover:underline">GNU General Public License v3.0</a> 授權釋出。任何人均可自由取得、修改及再散布原始碼，但須遵守 GPL 3.0 之規定。本授權不提供任何明示或暗示之保證。
+                    </p>
+                </section>
+
+                <hr class="border-gray-100">
+
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-gray-100">
+                            <i class="fa-solid fa-gavel text-sm text-gray-500"></i>
+                        </div>
+                        <h2 class="font-semibold text-[17px]">6. 準據法</h2>
+                    </div>
+                    <p class="leading-relaxed text-gray-500 text-[15px]">
+                        本免責聲明依中華民國法律解釋及適用。如因使用本應用程式而發生任何爭議，雙方同意以中華民國法院為第一審管轄法院。
+                    </p>
+                </section>
+
             </div>
-        </footer>
 
-    </body>
+            <div class="mt-8 flex flex-wrap justify-center gap-4 text-sm text-gray-500 font-medium">
+                <a href="/" class="hover:text-gray-900 transition-colors">首頁</a>
+                <span>·</span>
+                <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
+                <span>·</span>
+                <a href="https://github.com/VocPass" target="_blank" class="hover:text-gray-900 transition-colors">GitHub</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-200 bg-white py-10 px-5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
+                <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
+                <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
+                <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
+                <div class="w-px h-4 bg-gray-300 hidden sm:block"></div>
+                <a href="https://forum.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-bug mr-1"></i> 回報問題</a>
+                <a href="https://dc.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-commenting mr-1"></i> 加入 Discord</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.65)';
+            }
+        });
+    </script>
+
+</body>
 </html>

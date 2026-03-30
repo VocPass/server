@@ -1,80 +1,51 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo</title>
+    <title>VocPass | 登入</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            box-sizing: border-box;
+        :root {
+            --apple-text: #1d1d1f;
+            --apple-secondary: #86868b;
+            --bg-gray: #fbfbfd;
         }
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", system-ui, sans-serif;
-            background-color: #f5f5f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #1d1d1f;
+        body { background-color: var(--bg-gray); color: var(--apple-text); }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        .login-card {
-            background-color: #ffffff;
-            padding: 40px 36px;
-            border-radius: 18px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-            width: 90%;
-            max-width: 360px;
+        .bento-card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03);
         }
 
-        .login-logo {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-
-        .login-logo img {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            object-fit: cover;
-        }
-
-        .login-card h2 {
-            margin: 0 0 6px 0;
-            text-align: center;
-            color: #1d1d1f;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .login-subtitle {
-            text-align: center;
-            color: #6e6e73;
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
-
-        .input-group {
-            margin-bottom: 16px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: #1d1d1f;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .input-group input {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 12px 14px;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
             font-size: 15px;
             font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", system-ui, sans-serif;
             color: #1d1d1f;
@@ -83,62 +54,77 @@
             outline: none;
         }
 
-        .input-group input:focus {
-            border-color: #0071e3;
-            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
 
-        .input-group input::placeholder {
-            color: #c7c7cc;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 14px;
-            background-color: #0071e3;
-            color: #ffffff;
-            border: none;
-            border-radius: 980px;
-            font-size: 15px;
-            font-weight: 600;
-            font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", system-ui, sans-serif;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            margin-top: 8px;
-            letter-spacing: -0.01em;
-        }
-
-        .login-btn:hover {
-            background-color: #0077ed;
-        }
-
-        .login-btn:active {
-            background-color: #006edb;
-        }
+        input::placeholder { color: #c7c7cc; }
     </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden">
 
-    <div class="login-card">
-        <div class="login-logo">
-            <img src="https://github.com/vocpass.png" alt="VocPass">
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
+        <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5 cursor-pointer">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
+                <span class="font-bold text-lg tracking-tight">VocPass</span>
+            </a>
         </div>
-        <h2>登入</h2>
-        <p class="login-subtitle">請輸入您的帳號與密碼</p>
-        <form action="#" method="post">
-            <div class="input-group">
-                <label for="username">帳號</label>
-                <input type="text" id="username" placeholder="請輸入帳號" required>
-            </div>
+    </nav>
 
-            <div class="input-group">
-                <label for="password">密碼</label>
-                <input type="password" id="password" placeholder="請輸入密碼" required>
-            </div>
+    <div class="min-h-screen flex items-center justify-center px-5 pt-14">
+        <div class="w-full max-w-sm">
+            <div class="bento-card p-8">
+                <div class="text-center mb-8">
+                    <img src="https://github.com/vocpass.png" alt="VocPass"
+                        class="w-14 h-14 rounded-2xl object-cover mx-auto mb-4 shadow-sm">
+                    <h1 class="text-2xl font-bold tracking-tight mb-1">登入</h1>
+                    <p class="text-sm text-gray-500">請輸入您的帳號與密碼</p>
+                </div>
 
-            <button type="submit" class="login-btn">登入</button>
-        </form>
+                <form action="#" method="post" class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1.5">帳號</label>
+                        <input type="text" id="username" placeholder="請輸入帳號" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">密碼</label>
+                        <input type="password" id="password" placeholder="請輸入密碼" required>
+                    </div>
+                    <button type="submit"
+                        class="w-full py-3.5 bg-blue-600 text-white rounded-full font-semibold text-[15px] hover:bg-blue-700 transition-colors mt-2">
+                        登入
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
+    <footer class="border-t border-gray-200 bg-white py-10 px-5 mt-20">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
+                <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
+                <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
+                <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.65)';
+            }
+        });
+    </script>
 </body>
 </html>
