@@ -13,22 +13,26 @@ class Debug:
     def __init__(self, client: pocketbase.PocketBase | None):
         self.client = client
 
-    def send_error(self, error_message, school, page, status):
+    def send_error(self, error_message, school, page, status, response_body=None, traceback=None):
         if self.client is None:
             return
         if os.environ.get("ENV") != "production":
             return
 
+        payload = {
+            "error_message": str(error_message) if error_message is not None else "",
+            "school": school,
+            "page": page,
+            "status": status,
+        }
+        if response_body is not None:
+            payload["response_body"] = str(response_body)[:10000]
+        if traceback is not None:
+            payload["traceback"] = str(traceback)[:5000]
+
         start = time.perf_counter()
         try:
-            r = self.client.collection("debug").create(
-                {
-                    "error_message": error_message,
-                    "school": school,
-                    "page": page,
-                    "status": status,
-                }
-            )
+            r = self.client.collection("debug").create(payload)
             duration_ms = (time.perf_counter() - start) * 1000
             m.PB_OPERATIONS_TOTAL.labels(
                 collection="debug", operation="create", status="success"

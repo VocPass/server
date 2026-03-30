@@ -39,10 +39,10 @@ def require_cookie_header(
 
 
 def send_debug_error(
-    request: Request, error_message: str, school_name: str, page: str, status: int
+    request: Request, error_message: str, school_name: str, page: str, status: int, response_body=None, traceback=None
 ):
     client = getattr(request.app.state, "pb_client", None)
-    r = Debug(client).send_error(error_message, school_name, page, status)
+    r = Debug(client).send_error(error_message, school_name, page, status, response_body=response_body, traceback=traceback)
     return r
 
 
@@ -87,10 +87,11 @@ async def get_merit_demerit(
     if not original_data.data:
         e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
             "merit_demerit",
             original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -180,10 +181,11 @@ async def get_attendance(
     if not original_data.data:
         e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
-            "merit_demerit",
+            "attendance",
             original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -231,10 +233,11 @@ async def get_exam_menu(
     if not original_data.data:
         e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
-            "merit_demerit",
+            "exam_menu",
             original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -385,10 +388,11 @@ async def get_semester_scores(
     if not original_data.data:
         e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
-            "merit_demerit",
+            "semester_scores",
             original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = 500

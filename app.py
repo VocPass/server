@@ -16,6 +16,7 @@ from slowapi.errors import RateLimitExceeded
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 
 from utils.logger import log_request, log_error, log_startup, app_logger
+from utils.debug import Debug
 from utils import metrics as m
 
 load_dotenv()
@@ -125,6 +126,14 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     m.HTTP_ERRORS_TOTAL.labels(
         status_code=exc.status_code, path=request.url.path
     ).inc()
+    school_name = request.query_params.get("school_name", "system")
+    pb_client = getattr(request.app.state, "pb_client", None)
+    Debug(pb_client).send_error(
+        error_message=exc.detail,
+        school=school_name,
+        page=request.url.path,
+        status=exc.status_code,
+    )
     return JSONResponse(
         status_code=exc.status_code,
         content={"code": exc.status_code, "message": exc.detail, "data": None},
@@ -136,6 +145,15 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     errors = exc.errors()
     message = errors[0]["msg"] if errors else "Validation Error."
     m.HTTP_ERRORS_TOTAL.labels(status_code=422, path=request.url.path).inc()
+    school_name = request.query_params.get("school_name", "system")
+    pb_client = getattr(request.app.state, "pb_client", None)
+    Debug(pb_client).send_error(
+        error_message=message,
+        school=school_name,
+        page=request.url.path,
+        status=422,
+        traceback=str(errors),
+    )
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content={"code": 422, "message": message, "data": None},
@@ -144,6 +162,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request: Request, exc: Exception):
+    import traceback as tb
     school_name = request.query_params.get("school_name", "system")
     error_type = type(exc).__name__
     m.ERRORS_TOTAL.labels(
@@ -156,7 +175,14 @@ async def general_exception_handler(request: Request, exc: Exception):
         error_type=error_type,
         exc=exc,
     )
-
+    pb_client = getattr(request.app.state, "pb_client", None)
+    Debug(pb_client).send_error(
+        error_message=str(exc),
+        school=school_name,
+        page=request.url.path,
+        status=500,
+        traceback=tb.format_exc(),
+    )
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={"code": 500, "message": str(exc), "data": None},

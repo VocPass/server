@@ -36,9 +36,9 @@ def require_cookie_header(
 ):
     return cookie
 
-def send_debug_error(request: Request, error_message: str, school_name: str, page: str,status:int):
+def send_debug_error(request: Request, error_message: str, school_name: str, page: str, status: int, response_body=None, traceback=None):
     client = getattr(request.app.state, "pb_client", None)
-    r = Debug(client).send_error(error_message, school_name, page, status)
+    r = Debug(client).send_error(error_message, school_name, page, status, response_body=response_body, traceback=traceback)
     return r
 
 
@@ -70,12 +70,13 @@ async def get_merit_demerit(
     url = f"{school['api']}{school['route']['merit_demerit']}"
     original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="merit_demerit")
     if not original_data.data:
-        e =send_debug_error(
+        e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
             "merit_demerit",
-            original_data.code
+            original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -123,12 +124,13 @@ async def get_curriculum(
     url = f"{school['api']}{school['route']['curriculum']}"
     original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="curriculum")
     if not original_data.data:
-        e =send_debug_error(
+        e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
-            "merit_demerit",
+            "curriculum",
             original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -182,12 +184,13 @@ async def get_attendance(
     url = f"{school['api']}{school['route']['attendance']}"
     original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="attendance")
     if not original_data.data:
-        e =send_debug_error(
+        e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
-            "merit_demerit",
+            "attendance",
             original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -233,12 +236,13 @@ async def get_exam_menu(
     original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="exam_menu")
 
     if not original_data.data:
-        e =send_debug_error(
+        e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
-            "merit_demerit",
-            original_data.code
+            "exam_menu",
+            original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -297,14 +301,15 @@ async def get_exam_results(response: Response, request: Request, school_name: st
     m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="exam_results").inc()
 
     url = f"{school['api']}{school['route']['exam_results']}".replace("{file_name}",exam)
-    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="exam_results")  
+    original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="exam_results")
     if not original_data.data:
-        e =send_debug_error(
+        e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
             "exam_results",
-            original_data.code
+            original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = original_data.code
@@ -312,10 +317,8 @@ async def get_exam_results(response: Response, request: Request, school_name: st
         data["message"] = "Failed to fetch original data."
         data["data"] = None
 
-        
-
         return data
-    
+
     r = v1.parse_exam_scores(original_data.data)
     if r.get("error"):
         data = request.app.state.response
@@ -329,7 +332,7 @@ async def get_exam_results(response: Response, request: Request, school_name: st
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = r
-    
+
     return data
 
 @router.get("/semester_scores", summary="解析學期成績")
@@ -373,12 +376,13 @@ async def get_semester_scores(
     original_data = await http.get(url, request.cookies, school_name=school_name, endpoint="semester_scores")
 
     if not original_data.data:
-        e =send_debug_error(
+        e = send_debug_error(
             request,
-            original_data.data,
+            "Failed to fetch original data.",
             school_name,
-            "merit_demerit",
+            "semester_scores",
             original_data.code,
+            response_body=original_data.data,
         )
         response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         data["code"] = 500
