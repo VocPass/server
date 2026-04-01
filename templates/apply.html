@@ -381,7 +381,7 @@
                             <label class="text-sm font-medium text-gray-700 mb-1.5 block">
                                 聯絡方式（IG / Email / Line / Telegram…）
                             </label>
-                            <textarea class="field-input" id="contact" placeholder="例：@vocpass_tw 或 user@email.com" rows="2"></textarea>
+                            <textarea class="field-input" id="contact" placeholder="例：IG:08.hans_" rows="2"></textarea>
                         </div>
 
                         <div>
@@ -480,10 +480,13 @@
             const result = await pb.collection('apply').getFirstListItem(
                 `user = "${pb.authStore.model.id}"`
             );
+            
             if (result) showAlreadySubmitted();
             return;
         } catch (e) {
             // 404 = 尚未填寫，正常顯示表單
+            email = document.getElementById('email');
+            email.value = pb.authStore.baseModel.email;
         }
         document.getElementById('form-body').classList.remove('hidden');
     }
