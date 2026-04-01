@@ -119,6 +119,25 @@
     </div>
 
     <script>
+        function escapeHTML(str) {
+            if (str == null) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function sanitizeURL(url) {
+            try {
+                const parsed = new URL(url);
+                return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? url : '';
+            } catch {
+                return '';
+            }
+        }
+
         const WEEKDAYS = ['一', '二', '三', '四', '五'];
         const WEEKDAY_LABELS = { '一': '週一', '二': '週二', '三': '週三', '四': '週四', '五': '週五' };
         const PERIOD_ORDER = { '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9, '十': 10 };
@@ -186,16 +205,16 @@
                     }
                     const inner = entries.map(e => {
                         const color = getColor(e.subject);
-                        const roomLine = e.room ? `<span class="block text-xs opacity-60 truncate">${e.room}</span>` : '';
+                        const roomLine = e.room ? `<span class="block text-xs opacity-60 truncate">${escapeHTML(e.room)}</span>` : '';
                         return `<div class="rounded-xl px-2 py-1.5 mb-1 last:mb-0 ${color}">
-                            <span class="block font-semibold leading-tight text-xs">${e.subject}</span>
+                            <span class="block font-semibold leading-tight text-xs">${escapeHTML(e.subject)}</span>
                             ${roomLine}
                         </div>`;
                     }).join('');
                     return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full flex flex-col justify-start">${inner}</div></td>`;
                 }).join('');
                 return `<tr style="border-top:1px solid rgba(0,0,0,0.06);">
-                    <td class="py-2 px-2 text-center text-xs font-bold align-top pt-3" style="color:#6e6e73;">${period}</td>
+                    <td class="py-2 px-2 text-center text-xs font-bold align-top pt-3" style="color:#6e6e73;">${escapeHTML(period)}</td>
                     ${cells}
                 </tr>`;
             }).join('');
@@ -225,7 +244,7 @@
                 const user = json.data;
                 document.title = `VocPass | ${user.name || user.username}`;
 
-                document.getElementById('user-avatar').src = user.avatar || 'https://github.com/vocpass.png';
+                document.getElementById('user-avatar').src = sanitizeURL(user.avatar) || 'https://github.com/vocpass.png';
                 document.getElementById('user-name').textContent = user.name || user.username;
                 document.getElementById('user-username').textContent = `@${user.username}`;
 

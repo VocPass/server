@@ -116,6 +116,16 @@
     <script>
         const pb = new PocketBase('https://vppb.zeabur.app');
 
+        function escapeHTML(str) {
+            if (str == null) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
         function logout() {
             pb.authStore.clear();
             location.reload();
@@ -129,7 +139,7 @@
                     </div>
                     <div class="min-w-0">
                         <p class="text-xs font-medium text-gray-500">${label}</p>
-                        <p class="text-sm font-semibold truncate">${key}</p>
+                        <p class="text-sm font-semibold truncate">${escapeHTML(key)}</p>
                     </div>
                 </div>
             `;
