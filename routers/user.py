@@ -81,3 +81,39 @@ async def update_user(request: Request, response: Response):
     data["message"] = "User updated successfully."
     data["data"] = None
     return data
+
+
+class APNsToken(BaseModel):
+    device_token: str
+    start_token: str=None
+    update_token: str=None
+    is_dev: bool=False
+    is_open: bool=True
+    valid: bool=True
+    curriculum: dict=None
+
+    def dict(self, **kwargs):
+        data = super().dict(**kwargs)
+        return data
+
+
+@router.post("/notify/ios",summary="上傳Push Token")
+async def upload_push_token(request: Request, item: APNsToken):
+    user_token = request.headers.get("Authorization")
+    db = request.app.state.pb_client
+    data = item.dict()
+    if user_token:
+        user_info = get_user(user_token)
+        if not user_info:
+            return Response(content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED)
+        data['user'] = user_info.id
+    data['type'] = "ios"
+    try:
+        old_token = db.collection("notify").get_first_list_item(f'device_token="{item.device_token}"')
+        db.collection("notify").update(old_token.id, data)
+    
+    except:
+        db.collection("notify").create(item.dict())
+        
+        
+    return {"code": 200, "message": "Token uploaded successfully.", "data": None}
