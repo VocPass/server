@@ -69,6 +69,10 @@ async def get_me(request: Request, response: Response):
 async def get_user_profile(request: Request, username: str):
     return FileResponse("templates/user.html")
 
+@router.get("/apply", summary="申請學校")
+async def apply_school():
+    return FileResponse("templates/apply.html")
+
 
 @router.get("/api/v{v}", summary="獲取此端點支援學校列表")
 async def index(request: Request, v: int):
