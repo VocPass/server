@@ -102,6 +102,8 @@ async def upload_push_token(request: Request, item: APNsToken):
     user_token = request.headers.get("Authorization")
     db = request.app.state.pb_client
     data = item.dict()
+    if not item['curriculum']:
+        data.pop("curriculum")
     if user_token:
         user_info = get_user(user_token)
         if not user_info:
