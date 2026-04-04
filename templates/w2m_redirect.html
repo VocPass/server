@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開啟 VocPass | When2Meet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <style>
+        :root {
+            --apple-text: #1d1d1f;
+            --apple-secondary: #86868b;
+            --bg-gray: #fbfbfd;
+        }
+        body {
+            background-color: var(--bg-gray);
+            color: var(--apple-text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', system-ui, sans-serif;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #fff;
+            border-radius: 999px;
+            padding: 14px 32px;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            box-shadow: 0 8px 24px -4px rgba(37, 99, 235, 0.4);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--apple-secondary);
+            border-radius: 999px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: color 0.2s, background 0.2s;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.04);
+            color: var(--apple-text);
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.15);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f7ff;
+            color: #2563eb;
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .divider {
+            width: 1px;
+            height: 14px;
+            background: rgba(0, 0, 0, 0.12);
+        }
+
+        /* 圓圈波動動畫 */
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 0.4; }
+            70% { transform: scale(1.6); opacity: 0; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+        .ping-slow {
+            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        .ping-slow-delay {
+            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite 0.6s;
+        }
+
+        /* 進度條動畫 */
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        .progress-bar {
+            animation: progress 3s ease-in-out forwards;
+        }
+
+        /* 淡入動畫 */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp 0.6s ease forwards; }
+        .fade-up-delay-1 { animation: fadeUp 0.6s ease 0.1s forwards; opacity: 0; }
+        .fade-up-delay-2 { animation: fadeUp 0.6s ease 0.2s forwards; opacity: 0; }
+        .fade-up-delay-3 { animation: fadeUp 0.6s ease 0.35s forwards; opacity: 0; }
+        .fade-up-delay-4 { animation: fadeUp 0.6s ease 0.5s forwards; opacity: 0; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center justify-center px-5 py-12">
+
+    <!-- 背景光暈 -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div class="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-sm">
+
+        <!-- 主卡片 -->
+        <div class="card p-8 text-center fade-up">
+
+            <!-- App Icon + 波動圓圈 -->
+            <div class="relative inline-flex items-center justify-center mb-6">
+                <span class="absolute w-20 h-20 rounded-full bg-blue-500/20 ping-slow"></span>
+                <span class="absolute w-20 h-20 rounded-full bg-blue-500/10 ping-slow-delay"></span>
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="app-icon relative z-10">
+            </div>
+
+            <!-- Badge -->
+            <div class="flex justify-center mb-5 fade-up-delay-1">
+                <div class="badge">
+                    <i class="fa-solid fa-calendar-days text-xs"></i>
+                    When2Meet
+                </div>
+            </div>
+
+            <!-- 標題 -->
+            <h1 class="text-2xl font-black tracking-tight text-gray-900 mb-2 fade-up-delay-2">
+                即將開啟 VocPass
+            </h1>
+            <p class="text-sm text-gray-500 font-medium leading-relaxed mb-7 fade-up-delay-2">
+                點擊下方按鈕，在 App 中查看此活動的時段安排。
+            </p>
+
+            <!-- 進度條 -->
+            <div class="h-1 bg-gray-100 rounded-full overflow-hidden mb-7 fade-up-delay-3">
+                <div class="progress-bar h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full" id="progressBar"></div>
+            </div>
+
+            <!-- 主要按鈕 -->
+            <a id="openBtn" href="#" class="btn-primary w-full mb-3 fade-up-delay-3">
+                <i class="fa-solid fa-mobile-screen-button text-base"></i>
+                開啟 App
+            </a>
+
+            <!-- 下載提示 -->
+            <p class="text-xs text-gray-400 mb-5 fade-up-delay-4">還沒有 VocPass？</p>
+
+            <div class="flex gap-2 justify-center fade-up-delay-4">
+                <a href="https://apps.apple.com/tw/app/vocpass/id6760000951" target="_blank" class="btn-secondary flex-1">
+                    <i class="fa-brands fa-apple"></i> iOS
+                </a>
+                <a href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk" target="_blank" class="btn-secondary flex-1">
+                    <i class="fa-brands fa-android text-green-600"></i> Android
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-6 text-center fade-up-delay-4">
+            <div class="flex items-center justify-center gap-3 text-xs text-gray-400 font-medium">
+                <a href="/" class="hover:text-gray-700 transition-colors">VocPass</a>
+                <div class="divider"></div>
+                <a href="/privacy-policy" class="hover:text-gray-700 transition-colors">隱私政策</a>
+                <div class="divider"></div>
+                <a href="/disclaimer" class="hover:text-gray-700 transition-colors">免責聲明</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const eventId = "{{ event_id }}";
+        const deeplink = `vocpass://w2m/${eventId}`;
+
+        document.getElementById("openBtn").href = deeplink;
+
+        // 進度條結束後自動跳轉
+        setTimeout(() => {
+            window.location.href = deeplink;
+        }, 3000);
+    </script>
+
+</body>
+</html>
