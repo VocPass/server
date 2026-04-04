@@ -9605,5 +9605,2323 @@
                 "個人課表"
             ]
         }
+    },
+    "大園高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://score.dysh.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "交大附中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://cpshs-hcc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "基隆商工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://klcivs-kl.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "新竹高工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://hcvs-hc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "啟英高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://sch.cyvs.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "新豐高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://sfsh-tn.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "臺中家商": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://assotaweb.tchcvs.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "大溪高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://school.dssh.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "秀水高工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://ssivs-chc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "內壢高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://nl-score.nlhs.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "永豐高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://assota.yfms.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "民雄農工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://mhvs-cyc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "苑裡高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://ylsh-mlc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "世紀綠能工商": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://stus.cgehs.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "壽山高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://school.sssh.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "興華高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://shhs-seniorlearning.mlc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "新化高工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://hhvs-tn.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "斗六家商": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://tlhc-ylc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "斗南高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://dnsh-assota.ylc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "新營高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://hysh-tn.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "苗栗農工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://mlaivs-mlc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "嘉義家職": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://cyhvs-cy.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "嘉義高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://cysh-cy.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "平鎮高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://content.pjhs.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "復興商工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://icampus.fhvs.ntpc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "屏東高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://pths-ptc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "岡山農工": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://ksvs-khc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "中興高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://chsh-ntct.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "湖口高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://eschool.hkhs.hcc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "長億高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://grad.cyhs.tc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "竹東高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://ctsh-hcc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "羅浮高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://eschool.lfsh.tyc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "永仁高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://sts.yrhs.tn.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "暨南附中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://pshs-ntct.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "鹿港高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://lksh-chc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "大灣高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://assota.dwhs.tn.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "員林高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://ylsh-chc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "鳳新高中": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://fhsh-khc.k12ea.gov.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
     }
 }
