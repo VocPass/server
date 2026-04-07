@@ -85,6 +85,7 @@ async def update_user(request: Request, response: Response):
 
 class APNsToken(BaseModel):
     device_token: str
+    apns_token: str=None
     start_token: str=None
     update_token: str=None
     is_dev: bool=False
@@ -104,6 +105,8 @@ async def upload_push_token(request: Request, item: APNsToken):
     data = item.dict()
     if not data.get("curriculum"):
         data.pop("curriculum")
+    if not data.get("apns_token"):
+        data.pop("apns_token")
     if user_token:
         user_info = get_user(user_token)
         if not user_info:
