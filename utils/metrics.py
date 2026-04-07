@@ -152,6 +152,12 @@ REPORT_TOTAL = Counter(
     "檢舉次數",
 )
 
+NOTIFICATION_TOTAL = Counter(
+    "vocpass_notification_total",
+    "推播通知次數",
+    ["status"],  # success / failed
+)
+
 import os as _os
 
 APP_INFO = Info(

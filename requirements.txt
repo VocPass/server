@@ -9,3 +9,7 @@ slowapi
 curl-cffi
 prometheus-client
 python-logging-loki
+
+PyJWT
+cryptography
+httpx[http2]

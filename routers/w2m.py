@@ -4,6 +4,7 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from utils.pb import get_user
 from datetime import datetime, date, time, timedelta
+from utils.send_notification import send_notification
 
 templates = Jinja2Templates(directory="templates")
 
@@ -64,16 +65,22 @@ async def create_event(request: Request, response: Response, item: dict):
             all_slots.extend(generate_slots(d))
     except ValueError:
         response.status_code = status.HTTP_400_BAD_REQUEST
-        return {"code": 400, "message": "Invalid date format, use YYYY-MM-DD", "data": None}
+        return {
+            "code": 400,
+            "message": "Invalid date format, use YYYY-MM-DD",
+            "data": None,
+        }
 
     db = request.app.state.pb_client
-    record = db.collection("w2m_events").create({
-        "title": title,
-        "description": description,
-        "dates": dates,
-        "slots": all_slots,
-        "creator": user.id,
-    })
+    record = db.collection("w2m_events").create(
+        {
+            "title": title,
+            "description": description,
+            "dates": dates,
+            "slots": all_slots,
+            "creator": user.id,
+        }
+    )
 
     return {"code": 200, "message": "Event created.", "data": {"id": record.id}}
 
@@ -110,7 +117,11 @@ async def edit_event(request: Request, response: Response, event_id: str, item: 
 
     if event.creator != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
-        return {"code": 403, "message": "Only the creator can edit this event.", "data": None}
+        return {
+            "code": 403,
+            "message": "Only the creator can edit this event.",
+            "data": None,
+        }
 
     update_data = {}
 
@@ -128,14 +139,22 @@ async def edit_event(request: Request, response: Response, event_id: str, item: 
         dates = item["dates"]
         if not dates or not isinstance(dates, list):
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"code": 400, "message": "dates must be a non-empty list", "data": None}
+            return {
+                "code": 400,
+                "message": "dates must be a non-empty list",
+                "data": None,
+            }
         try:
             all_slots = []
             for d in dates:
                 all_slots.extend(generate_slots(d))
         except ValueError:
             response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"code": 400, "message": "Invalid date format, use YYYY-MM-DD", "data": None}
+            return {
+                "code": 400,
+                "message": "Invalid date format, use YYYY-MM-DD",
+                "data": None,
+            }
 
         update_data["dates"] = dates
         update_data["slots"] = all_slots
@@ -169,7 +188,11 @@ async def list_events(request: Request, response: Response):
     db = request.app.state.pb_client
 
     created = db.collection("w2m_events").get_full_list(
-        query_params={"filter": f'creator="{user.id}"', "sort": "-created", "expand": "creator"}
+        query_params={
+            "filter": f'creator="{user.id}"',
+            "sort": "-created",
+            "expand": "creator",
+        }
     )
 
     avail_records = db.collection("w2m_availability").get_full_list(
@@ -186,7 +209,11 @@ async def list_events(request: Request, response: Response):
     def fmt_creator(evt):
         expanded_creator = evt.expand.get("creator") if evt.expand else None
         if expanded_creator:
-            avatar_url = db.get_file_url(expanded_creator, expanded_creator.avatar) if expanded_creator.avatar else None
+            avatar_url = (
+                db.get_file_url(expanded_creator, expanded_creator.avatar)
+                if expanded_creator.avatar
+                else None
+            )
             creator_info = {
                 "id": expanded_creator.id,
                 "name": expanded_creator.name,
@@ -250,7 +277,11 @@ async def get_event(request: Request, response: Response, event_id: str):
     for rec in avail_records:
         expanded_user = rec.expand.get("user") if rec.expand else None
         if expanded_user:
-            avatar_url = db.get_file_url(expanded_user, expanded_user.avatar) if expanded_user.avatar else None
+            avatar_url = (
+                db.get_file_url(expanded_user, expanded_user.avatar)
+                if expanded_user.avatar
+                else None
+            )
             user_info = {
                 "id": expanded_user.id,
                 "name": expanded_user.name,
@@ -275,7 +306,9 @@ async def get_event(request: Request, response: Response, event_id: str):
 
 
 @router.put("/api/w2m/events/{event_id}/availability", summary="提交自己的可用時段")
-async def submit_availability(request: Request, response: Response, event_id: str, item: dict):
+async def submit_availability(
+    request: Request, response: Response, event_id: str, item: dict
+):
     """
     提交或更新自己的可用時段。
 
@@ -316,12 +349,26 @@ async def submit_availability(request: Request, response: Response, event_id: st
         )
         db.collection("w2m_availability").update(existing.id, {"slots": valid_slots})
     except Exception:
-        db.collection("w2m_availability").create({
-            "event": event_id,
-            "user": user.id,
-            "slots": valid_slots,
-        })
+        db.collection("w2m_availability").create(
+            {
+                "event": event_id,
+                "user": user.id,
+                "slots": valid_slots,
+            }
+        )
+    creator_id = event.creator
+    if creator_id != user.id:
 
+        devices = db.collection("notify").get_full_list(
+            query_params={"filter": f'user="{creator_id}"'}
+        )
+        
+        for i in devices:
+            await send_notification(
+                title=f"{event.title} 有新更新！",
+                body=f"{user.name} 更新了活動『{event.title}』的可用時段。",
+                apns_token=i.apns_token,
+            )
     return {"code": 200, "message": "Availability updated.", "data": None}
 
 
