@@ -152,14 +152,6 @@
                 <img src="https://github.com/vocpass.png" alt="VocPass" class="app-icon relative z-10">
             </div>
 
-            <!-- Badge -->
-            <div class="flex justify-center mb-5 fade-up-delay-1">
-                <div class="badge">
-                    <i class="fa-solid fa-calendar-days text-xs"></i>
-                    When2Meet
-                </div>
-            </div>
-
             <!-- 標題 -->
             <h1 class="text-2xl font-black tracking-tight text-gray-900 mb-2 fade-up-delay-2">
                 即將開啟 VocPass
@@ -177,6 +169,12 @@
             <a id="openBtn" href="#" class="btn-primary w-full mb-3 fade-up-delay-3">
                 <i class="fa-solid fa-mobile-screen-button text-base"></i>
                 開啟 App
+            </a>
+
+            <!-- 在網頁開啟 -->
+            <a id="webBtn" href="#" class="btn-secondary w-full mb-5 fade-up-delay-4">
+                <i class="fa-solid fa-globe text-sm"></i>
+                在網頁開啟
             </a>
 
             <!-- 下載提示 -->
@@ -209,6 +207,7 @@
         const deeplink = `vocpass://w2m/${eventId}`;
 
         document.getElementById("openBtn").href = deeplink;
+        document.getElementById("webBtn").href = `/w2m/view/${eventId}`;
 
         // 進度條結束後自動跳轉
         setTimeout(() => {

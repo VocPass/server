@@ -372,6 +372,17 @@ async def submit_availability(
     return {"code": 200, "message": "Availability updated.", "data": None}
 
 
+@router.get("/w2m/view/{event_id}", summary="在網頁查看活動")
+async def view_event(request: Request, event_id: str):
+    """
+    在瀏覽器中直接查看活動的可用時段總覽。
+    """
+    return templates.TemplateResponse(
+        "w2m_view.html",
+        {"request": request, "event_id": event_id},
+    )
+
+
 @router.get("/w2m/{event_id}", summary="跳轉至 app 連結")
 async def deeplink_redirect(request: Request, event_id: str):
     """

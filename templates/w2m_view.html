@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocPass | When2Meet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <style>
+        :root { --nav-h: 48px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', system-ui, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            overflow: hidden;
+        }
+        @media (max-width: 1023px) { body { overflow: auto; } }
+
+        /* Nav */
+        .apple-nav {
+            height: var(--nav-h);
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            height: calc(100vh - var(--nav-h));
+            overflow-y: auto;
+            border-right: 1px solid rgba(0,0,0,0.07);
+            background: #fff;
+        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+
+        /* Grid area */
+        .grid-area {
+            flex: 1;
+            height: calc(100vh - var(--nav-h));
+            overflow: auto;
+            position: relative;
+        }
+        .grid-area::-webkit-scrollbar { width: 6px; height: 6px; }
+        .grid-area::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+
+        /* Sticky date header */
+        .date-header-row th {
+            position: sticky;
+            top: 0;
+            background: rgba(245,245,247,0.95);
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            font-size: 11px;
+            font-weight: 700;
+            color: #6e6e73;
+            padding: 8px 6px 6px;
+            text-align: center;
+            white-space: nowrap;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .date-header-row th.time-col {
+            left: 0;
+            z-index: 20;
+            min-width: 44px;
+        }
+
+        /* Time label column */
+        td.time-label {
+            position: sticky;
+            left: 0;
+            background: rgba(245,245,247,0.95);
+            backdrop-filter: blur(4px);
+            font-size: 10px;
+            color: #9ca3af;
+            padding: 0 8px 0 12px;
+            text-align: right;
+            white-space: nowrap;
+            min-width: 44px;
+            z-index: 5;
+            border-right: 1px solid rgba(0,0,0,0.05);
+            user-select: none;
+        }
+
+        /* Slot cells */
+        td.slot-cell {
+            min-width: 52px;
+            height: 18px;
+            border: 1px solid rgba(255,255,255,0.6);
+            cursor: pointer;
+            position: relative;
+            transition: filter 0.08s;
+            user-select: none;
+        }
+        td.slot-cell:hover { filter: brightness(0.88); }
+        td.slot-cell.my-slot::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border: 2px solid rgba(59,130,246,0.85);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+        td.slot-cell.drag-preview { outline: 2px solid #3b82f6; outline-offset: -2px; }
+
+        /* Hour separator */
+        tr.hour-start td { border-top: 1px solid rgba(0,0,0,0.08) !important; }
+
+        /* Tooltip */
+        #tooltip {
+            display: none;
+            position: fixed;
+            background: rgba(29,29,31,0.95);
+            color: #fff;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 12px;
+            line-height: 1.55;
+            pointer-events: none;
+            z-index: 9999;
+            max-width: 180px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+
+        /* Buttons */
+        .btn-blue {
+            background: #2563eb;
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: background 0.15s, transform 0.1s;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-blue:hover { background: #1d4ed8; transform: translateY(-1px); }
+        .btn-blue:disabled { background: #93c5fd; cursor: not-allowed; transform: none; }
+
+        .btn-gray {
+            background: #f3f4f6;
+            color: #374151;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: background 0.15s;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-gray:hover { background: #e5e7eb; }
+
+        /* Avatar */
+        .avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .avatar-ph {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: #e5e7eb; display: flex; align-items: center;
+            justify-content: center; font-size: 12px; font-weight: 700;
+            color: #6b7280; flex-shrink: 0;
+        }
+
+        /* Legend */
+        .legend-swatch { width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; }
+
+        /* Mobile tab bar */
+        .tab-bar { display: none; }
+        @media (max-width: 1023px) {
+            body { overflow: auto; }
+            .sidebar { display: none; width: 100%; height: auto; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.07); overflow: visible; }
+            .sidebar.mobile-show { display: block; }
+            .grid-area { height: auto; overflow: visible; }
+            .layout-body { flex-direction: column; height: auto; }
+            td.slot-cell { min-width: 44px; }
+            .tab-bar { display: flex; }
+            .date-header-row th { position: static; }
+            td.time-label { position: static; }
+        }
+
+        /* Saving indicator */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spin { animation: spin 0.8s linear infinite; }
+
+        /* Fade in */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeUp 0.4s ease forwards; }
+
+        /* Highlight hovered participant */
+        .participant-row { cursor: pointer; border-radius: 10px; padding: 6px 8px; transition: background 0.1s; }
+        .participant-row:hover { background: #f3f4f6; }
+        .participant-row.active { background: #eff6ff; }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- Nav -->
+<nav class="apple-nav fixed top-0 left-0 right-0 z-50 flex items-center px-4 gap-3">
+    <a href="/" class="flex items-center gap-2 mr-2">
+        <img src="https://github.com/vocpass.png" class="w-6 h-6 rounded-md">
+        <span class="font-semibold text-sm hidden sm:block">VocPass</span>
+    </a>
+    <div class="flex-1 min-w-0">
+        <span id="navTitle" class="text-sm font-semibold text-gray-800 truncate block"></span>
+    </div>
+    <!-- User chip (desktop) -->
+    <div id="userChip" class="hidden items-center gap-2 bg-gray-100 rounded-full pl-1 pr-3 py-1">
+        <div id="userChipAvatar" class="w-6 h-6 rounded-full bg-gray-300 overflow-hidden flex-shrink-0"></div>
+        <span id="userChipName" class="text-xs font-semibold text-gray-700 max-w-24 truncate"></span>
+    </div>
+    <button id="loginNavBtn" onclick="openLoginModal()"
+        class="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors whitespace-nowrap">
+        <i class="fa-solid fa-right-to-bracket mr-1"></i>登入
+    </button>
+    <a id="openAppBtn" href="#"
+        class="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-800 transition-colors whitespace-nowrap">
+        <i class="fa-solid fa-mobile-screen-button"></i>在 App 開啟
+    </a>
+</nav>
+
+<!-- Layout body -->
+<div class="layout-body flex" style="margin-top: var(--nav-h);">
+
+    <!-- Sidebar -->
+    <div class="sidebar mobile-show" id="sidebar">
+        <div class="p-5 space-y-5">
+
+            <!-- Event info -->
+            <div>
+                <h1 id="eventTitle" class="text-lg font-black tracking-tight text-gray-900 leading-snug"></h1>
+                <p id="eventDesc" class="mt-1 text-sm text-gray-500 hidden leading-relaxed"></p>
+                <div id="eventDates" class="mt-3 flex flex-wrap gap-1.5"></div>
+            </div>
+
+            <hr class="border-gray-100">
+
+            <!-- My availability section -->
+            <div id="editSection">
+                <!-- Not logged in -->
+                <div id="loginPrompt">
+                    <p class="text-xs text-gray-400 mb-3">登入後可填寫你的可用時段</p>
+                    <button onclick="openLoginModal()" class="btn-blue">
+                        <i class="fa-solid fa-right-to-bracket"></i>登入填寫
+                    </button>
+                </div>
+                <!-- Logged in editing -->
+                <div id="editPanel" class="hidden space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div id="meAvatar" class="avatar-ph"></div>
+                        <div class="flex-1 min-w-0">
+                            <p id="meName" class="text-sm font-semibold text-gray-800 truncate"></p>
+                            <p class="text-xs text-gray-400">點選格子標記可用時段</p>
+                        </div>
+                        <button onclick="logout()" title="登出" class="text-gray-300 hover:text-gray-500 transition-colors text-xs p-1">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="saveBtn" onclick="saveAvailability()" class="btn-blue flex-1">
+                            <i id="saveIcon" class="fa-solid fa-floppy-disk"></i>儲存
+                        </button>
+                        <button onclick="clearMySlots()" class="btn-gray" style="width:auto;padding:10px 12px;" title="清除我的時段">
+                            <i class="fa-solid fa-trash-can text-gray-400"></i>
+                        </button>
+                    </div>
+                    <div id="saveStatus" class="text-xs text-center text-gray-400 hidden"></div>
+                </div>
+            </div>
+
+            <hr class="border-gray-100">
+
+            <!-- Legend -->
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">可用人數</p>
+                <div class="flex items-center gap-1.5">
+                    <div class="legend-swatch" style="background:#f3f4f6;border:1px solid rgba(0,0,0,0.06)"></div>
+                    <span class="text-xs text-gray-400">0</span>
+                    <div id="legendSwatches" class="flex items-center gap-1"></div>
+                    <span id="legendMax" class="text-xs text-gray-400"></span>
+                </div>
+                <!-- My slot legend -->
+                <div class="flex items-center gap-1.5 mt-2">
+                    <div class="legend-swatch relative" style="background:#bbf7d0;border:1px solid rgba(255,255,255,0.6)">
+                        <div style="position:absolute;inset:1px;border:2px solid rgba(59,130,246,0.85);border-radius:2px;"></div>
+                    </div>
+                    <span class="text-xs text-gray-400">我的時段</span>
+                </div>
+            </div>
+
+            <hr class="border-gray-100">
+
+            <!-- Participants -->
+            <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+                    參與者 <span id="participantBadge" class="normal-case font-normal"></span>
+                </p>
+                <div id="participantList" class="space-y-0.5"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid area -->
+    <div class="grid-area bg-gray-50 p-4 lg:p-6" id="gridArea">
+
+        <!-- Mobile: show sidebar toggle -->
+        <div class="tab-bar gap-2 mb-4">
+            <button onclick="toggleSidebar()" id="sidebarToggle"
+                class="flex-1 py-2 px-4 rounded-xl text-sm font-semibold bg-blue-50 border border-gray-200 text-blue-600 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-circle-info text-blue-500"></i>活動資訊
+            </button>
+            <a id="openAppBtnMobile" href="#"
+                class="flex items-center gap-1.5 py-2 px-4 rounded-xl text-sm font-semibold bg-white border border-gray-200 text-gray-600 whitespace-nowrap">
+                <i class="fa-solid fa-mobile-screen-button text-xs"></i>App
+            </a>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="flex flex-col items-center justify-center py-32">
+            <div class="w-10 h-10 border-2 border-blue-500 border-t-transparent rounded-full spin mb-4"></div>
+            <p class="text-sm text-gray-400">載入中…</p>
+        </div>
+
+        <!-- Error -->
+        <div id="errorView" class="hidden text-center py-32 fade-in">
+            <i class="fa-solid fa-circle-exclamation text-5xl text-red-300 mb-4"></i>
+            <p class="text-lg font-semibold text-gray-700">找不到此活動</p>
+            <p class="text-sm text-gray-400 mt-1">連結可能已失效，請確認後再試。</p>
+        </div>
+
+        <!-- Grid -->
+        <div id="gridWrapper" class="hidden fade-in">
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                <table id="availGrid" style="border-collapse:collapse;"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tooltip -->
+<div id="tooltip"></div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="fixed inset-0 z-[200] flex items-center justify-center p-4 hidden">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeLoginModal()"></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl p-8 w-full max-w-xs text-center z-10">
+        <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-300 hover:text-gray-600 transition-colors">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <img src="https://github.com/vocpass.png" class="w-14 h-14 rounded-2xl mx-auto mb-4 shadow-sm">
+        <h2 class="text-xl font-black tracking-tight mb-1">登入 VocPass</h2>
+        <p class="text-sm text-gray-400 mb-6">使用第三方帳號登入以填寫時段</p>
+        <div class="space-y-3">
+            <button onclick="loginWith('google')"
+                class="w-full flex items-center justify-center gap-3 px-5 py-3 rounded-xl font-semibold text-sm bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 transition-all">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">使用 Google 登入
+            </button>
+            <button onclick="loginWith('discord')"
+                class="w-full flex items-center justify-center gap-3 px-5 py-3 rounded-xl font-semibold text-sm text-white hover:opacity-90 transition-all"
+                style="background:#5865F2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                使用 Discord 登入
+            </button>
+        </div>
+        <p class="text-xs text-gray-400 mt-5">登入即表示同意
+            <a href="/privacy-policy" class="text-blue-600 hover:underline">隱私政策</a>
+        </p>
+    </div>
+</div>
+
+<script>
+const eventId = "{{ event_id }}";
+const pb = new PocketBase('https://vppb.zeabur.app');
+
+// ─── State ───────────────────────────────────────────────────────────────
+let eventData = null;
+let mySlots = new Set();      // current user's selected slots
+let isDirty = false;
+let isDragging = false;
+let dragAdding = true;        // true = drag adds slots, false = removes
+let highlightUser = null;     // userId being hovered in participant list
+
+// ─── Color scale ─────────────────────────────────────────────────────────
+function slotColor(count, maxCount) {
+    if (count === 0) return "#f3f4f6";
+    const t = count / maxCount;
+    const r = Math.round(220 - t * 160);
+    const g = Math.round(252 - t * 80);
+    const b = Math.round(220 - t * 160);
+    return `rgb(${r},${g},${b})`;
+}
+
+// ─── Auth ─────────────────────────────────────────────────────────────────
+function updateAuthUI() {
+    const isValid = pb.authStore.isValid;
+    document.getElementById("loginNavBtn").classList.toggle("hidden", isValid);
+    document.getElementById("userChip").classList.toggle("hidden", !isValid);
+    document.getElementById("loginPrompt").classList.toggle("hidden", isValid);
+    document.getElementById("editPanel").classList.toggle("hidden", !isValid);
+
+    if (isValid) {
+        const model = pb.authStore.model;
+        const name = model.name || model.username || "使用者";
+        document.getElementById("userChipName").textContent = name;
+        document.getElementById("meName").textContent = name;
+        document.getElementById("userChip").classList.remove("hidden");
+        document.getElementById("userChip").style.display = "flex";
+
+        // Avatar
+        const avatarUrl = model.avatar ? pb.files.getUrl(model, model.avatar) : null;
+        const chipAvatarEl = document.getElementById("userChipAvatar");
+        const meAvatarEl = document.getElementById("meAvatar");
+        if (avatarUrl) {
+            chipAvatarEl.innerHTML = `<img src="${avatarUrl}" class="w-full h-full object-cover">`;
+            meAvatarEl.outerHTML = `<img id="meAvatar" src="${avatarUrl}" class="avatar">`;
+        } else {
+            chipAvatarEl.textContent = name.charAt(0).toUpperCase();
+            meAvatarEl.textContent = name.charAt(0).toUpperCase();
+        }
+    }
+}
+
+async function loginWith(provider) {
+    try {
+        await pb.collection('users').authWithOAuth2({ provider });
+        if (pb.authStore.isValid) {
+            closeLoginModal();
+            updateAuthUI();
+            // Load my existing slots
+            await loadMySlots();
+            refreshGridOverlay();
+        }
+    } catch(e) {
+        console.error(e);
+    }
+}
+
+function logout() {
+    pb.authStore.clear();
+    mySlots.clear();
+    isDirty = false;
+    updateAuthUI();
+    refreshGridOverlay();
+}
+
+function openLoginModal() { document.getElementById("loginModal").classList.remove("hidden"); }
+function closeLoginModal() { document.getElementById("loginModal").classList.add("hidden"); }
+
+// ─── Load event ───────────────────────────────────────────────────────────
+async function loadEvent() {
+    try {
+        const res = await fetch(`/api/w2m/events/${eventId}`);
+        const json = await res.json();
+        if (json.code !== 200) throw new Error();
+        eventData = json.data;
+        renderEvent();
+
+        // Try refresh auth & load my slots
+        if (pb.authStore.isValid) {
+            try { await pb.collection('users').authRefresh(); } catch(e) { pb.authStore.clear(); }
+            updateAuthUI();
+            if (pb.authStore.isValid) await loadMySlots();
+        }
+        updateAuthUI();
+        refreshGridOverlay();
+    } catch(e) {
+        document.getElementById("loading").classList.add("hidden");
+        document.getElementById("errorView").classList.remove("hidden");
+    }
+}
+
+async function loadMySlots() {
+    if (!pb.authStore.isValid || !eventData) return;
+    const userId = pb.authStore.model.id;
+    const avail = eventData.availability.find(a => a.user.id === userId);
+    if (avail) {
+        mySlots = new Set(avail.slots);
+    }
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────
+function renderEvent() {
+    const event = eventData;
+    document.title = `${event.title} | VocPass`;
+    document.getElementById("navTitle").textContent = event.title;
+    document.getElementById("eventTitle").textContent = event.title;
+    document.getElementById("openAppBtn").href = `vocpass://w2m/${eventId}`;
+    document.getElementById("openAppBtnMobile").href = `vocpass://w2m/${eventId}`;
+
+    const desc = document.getElementById("eventDesc");
+    if (event.description) { desc.textContent = event.description; desc.classList.remove("hidden"); }
+
+    // Date badges
+    const datesEl = document.getElementById("eventDates");
+    (event.dates || []).forEach(d => {
+        const dt = new Date(d + "T00:00:00");
+        const badge = document.createElement("span");
+        badge.className = "inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full";
+        badge.style.cssText = "background:#f0f7ff;color:#2563eb;border:1px solid rgba(37,99,235,0.15)";
+        badge.textContent = dt.toLocaleDateString("zh-TW", { month: "numeric", day: "numeric", weekday: "short" });
+        datesEl.appendChild(badge);
+    });
+
+    // Build slot → users map
+    const avail = event.availability || [];
+    const slotUsers = {};
+    avail.forEach(a => {
+        (a.slots || []).forEach(s => {
+            if (!slotUsers[s]) slotUsers[s] = [];
+            slotUsers[s].push(a.user);
+        });
+    });
+
+    const maxCount = Math.max(0, ...Object.values(slotUsers).map(v => v.length));
+
+    // Legend
+    const legendEl = document.getElementById("legendSwatches");
+    const steps = Math.min(maxCount, 6);
+    for (let i = 1; i <= steps; i++) {
+        const c = Math.ceil(i * maxCount / steps);
+        const s = document.createElement("div");
+        s.className = "legend-swatch";
+        s.style.cssText = `background:${slotColor(c, maxCount || 1)};border:1px solid rgba(0,0,0,0.06)`;
+        legendEl.appendChild(s);
+    }
+    document.getElementById("legendMax").textContent = maxCount > 0 ? String(maxCount) : "";
+
+    // Participants
+    document.getElementById("participantBadge").textContent = avail.length ? `· ${avail.length} 人` : "";
+    const listEl = document.getElementById("participantList");
+    if (avail.length === 0) {
+        listEl.innerHTML = `<p class="text-xs text-gray-400 py-2">尚無人填寫</p>`;
+    } else {
+        avail.forEach(a => {
+            const row = document.createElement("div");
+            row.className = "participant-row flex items-center gap-2.5";
+            row.dataset.userId = a.user.id;
+
+            let avatarHtml;
+            if (a.user.avatar) {
+                avatarHtml = `<img src="${a.user.avatar}" class="avatar">`;
+            } else {
+                avatarHtml = `<div class="avatar-ph">${(a.user.name||"?").charAt(0).toUpperCase()}</div>`;
+            }
+            row.innerHTML = `${avatarHtml}<div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-800 truncate">${a.user.name || "使用者"}</p><p class="text-xs text-gray-400">${a.slots.length} 個時段</p></div>`;
+
+            row.addEventListener("mouseenter", () => { highlightUser = a.user.id; refreshGridOverlay(); row.classList.add("active"); });
+            row.addEventListener("mouseleave", () => { highlightUser = null; refreshGridOverlay(); row.classList.remove("active"); });
+            listEl.appendChild(row);
+        });
+    }
+
+    // Build grid
+    buildGrid(event, slotUsers, maxCount);
+
+    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("gridWrapper").classList.remove("hidden");
+}
+
+function buildGrid(event, slotUsers, maxCount) {
+    const dates = event.dates || [];
+    const allSlots = event.slots || [];
+
+    // Extract sorted unique times
+    const timeSet = new Set();
+    allSlots.forEach(s => timeSet.add(s.split(" ")[1]));
+    const times = Array.from(timeSet).sort();
+
+    const table = document.getElementById("availGrid");
+    table.innerHTML = "";
+    const tooltip = document.getElementById("tooltip");
+
+    // ── Header ──
+    const thead = document.createElement("thead");
+    const hrow = document.createElement("tr");
+    hrow.className = "date-header-row";
+    const th0 = document.createElement("th");
+    th0.className = "time-col";
+    hrow.appendChild(th0);
+    dates.forEach(d => {
+        const th = document.createElement("th");
+        const dt = new Date(d + "T00:00:00");
+        th.innerHTML = `<div>${dt.toLocaleDateString("zh-TW",{month:"numeric",day:"numeric"})}</div>`
+            + `<div style="font-size:10px;font-weight:500;color:#9ca3af">${dt.toLocaleDateString("zh-TW",{weekday:"short"})}</div>`;
+        hrow.appendChild(th);
+    });
+    thead.appendChild(hrow);
+    table.appendChild(thead);
+
+    // ── Body ──
+    const tbody = document.createElement("tbody");
+    times.forEach((t, tIdx) => {
+        const tr = document.createElement("tr");
+        if (t.endsWith(":00")) tr.classList.add("hour-start");
+        tr.dataset.time = t;
+
+        const timeTd = document.createElement("td");
+        timeTd.className = "time-label";
+        timeTd.textContent = t.endsWith(":00") ? t : "";
+        tr.appendChild(timeTd);
+
+        dates.forEach(d => {
+            const slotKey = `${d} ${t}`;
+            const users = slotUsers[slotKey] || [];
+            const count = users.length;
+            const td = document.createElement("td");
+            td.className = "slot-cell";
+            td.dataset.slot = slotKey;
+            td.dataset.count = count;
+            td.style.background = slotColor(count, maxCount || 1);
+
+            // Drag interaction
+            td.addEventListener("mousedown", e => {
+                e.preventDefault();
+                isDragging = true;
+                dragAdding = !mySlots.has(slotKey);
+                toggleSlot(slotKey, td);
+            });
+            td.addEventListener("mouseover", () => {
+                if (isDragging && pb.authStore.isValid) toggleSlot(slotKey, td);
+            });
+
+            // Tooltip
+            td.addEventListener("mousemove", e => {
+                if (isDragging) return;
+                const userNames = users.map(u => u.name || "使用者");
+                if (userNames.length === 0 && !mySlots.has(slotKey)) return;
+                tooltip.style.display = "block";
+                tooltip.style.left = (e.clientX + 14) + "px";
+                tooltip.style.top = (e.clientY - 10) + "px";
+                const myMark = mySlots.has(slotKey) ? `<div style="color:#93c5fd;margin-bottom:2px">✓ 我的時段</div>` : "";
+                tooltip.innerHTML = `<div style="font-weight:700;margin-bottom:3px">${slotKey}</div>${myMark}`
+                    + (userNames.length > 0 ? `<div style="color:#9ca3af;font-size:11px">${count} 人可</div><div style="margin-top:3px">${userNames.join("<br>")}</div>` : "");
+            });
+            td.addEventListener("mouseleave", () => { tooltip.style.display = "none"; });
+
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+
+    // Mouse up anywhere
+    document.addEventListener("mouseup", () => { isDragging = false; });
+}
+
+function toggleSlot(slotKey, td) {
+    if (!pb.authStore.isValid) return;
+    if (dragAdding) mySlots.add(slotKey);
+    else mySlots.delete(slotKey);
+    td.classList.toggle("my-slot", mySlots.has(slotKey));
+    isDirty = true;
+    document.getElementById("saveStatus").classList.add("hidden");
+}
+
+function refreshGridOverlay() {
+    if (!eventData) return;
+    const table = document.getElementById("availGrid");
+    const avail = eventData.availability || [];
+
+    // Rebuild slotUsers based on current data
+    const slotUsers = {};
+    avail.forEach(a => {
+        (a.slots || []).forEach(s => {
+            if (!slotUsers[s]) slotUsers[s] = [];
+            slotUsers[s].push(a.user);
+        });
+    });
+    const maxCount = Math.max(0, ...Object.values(slotUsers).map(v => v.length));
+
+    table.querySelectorAll("td.slot-cell").forEach(td => {
+        const slotKey = td.dataset.slot;
+        // My slot overlay
+        td.classList.toggle("my-slot", mySlots.has(slotKey));
+
+        // Highlight hovered participant
+        if (highlightUser) {
+            const usersInSlot = slotUsers[slotKey] || [];
+            const isHighlighted = usersInSlot.some(u => u.id === highlightUser);
+            td.style.background = isHighlighted ? "#86efac" : "#e5e7eb";
+            td.style.opacity = isHighlighted ? "1" : "0.4";
+        } else {
+            const count = parseInt(td.dataset.count || "0");
+            td.style.background = slotColor(count, maxCount || 1);
+            td.style.opacity = "1";
+        }
+    });
+}
+
+function clearMySlots() {
+    mySlots.clear();
+    isDirty = true;
+    refreshGridOverlay();
+}
+
+// ─── Save ─────────────────────────────────────────────────────────────────
+async function saveAvailability() {
+    if (!pb.authStore.isValid) return;
+    const btn = document.getElementById("saveBtn");
+    const icon = document.getElementById("saveIcon");
+    const status = document.getElementById("saveStatus");
+    btn.disabled = true;
+    icon.className = "fa-solid fa-circle-notch spin";
+
+    try {
+        const res = await fetch(`/api/w2m/events/${eventId}/availability`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": pb.authStore.token,
+            },
+            body: JSON.stringify({ slots: Array.from(mySlots) }),
+        });
+        const json = await res.json();
+        if (json.code !== 200) throw new Error();
+
+        isDirty = false;
+        icon.className = "fa-solid fa-check";
+        status.textContent = "已儲存";
+        status.style.color = "#22c55e";
+        status.classList.remove("hidden");
+
+        // Update local event data so overlay stays correct
+        const userId = pb.authStore.model.id;
+        const model = pb.authStore.model;
+        const avatarUrl = model.avatar ? pb.files.getUrl(model, model.avatar) : null;
+        const existingIdx = eventData.availability.findIndex(a => a.user.id === userId);
+        const userObj = { id: userId, name: model.name || model.username || "使用者", avatar: avatarUrl };
+        if (existingIdx >= 0) {
+            eventData.availability[existingIdx].slots = Array.from(mySlots);
+        } else {
+            eventData.availability.push({ user: userObj, slots: Array.from(mySlots) });
+        }
+        // Re-render participant list count
+        const me = eventData.availability.find(a => a.user.id === userId);
+        const meRow = document.querySelector(`.participant-row[data-user-id="${userId}"]`);
+        if (meRow) {
+            meRow.querySelector("p:last-child").textContent = `${mySlots.size} 個時段`;
+        } else {
+            // Rebuild participant list
+            const listEl = document.getElementById("participantList");
+            const row = document.createElement("div");
+            row.className = "participant-row flex items-center gap-2.5";
+            row.dataset.userId = userId;
+            const avatarHtml = avatarUrl
+                ? `<img src="${avatarUrl}" class="avatar">`
+                : `<div class="avatar-ph">${userObj.name.charAt(0).toUpperCase()}</div>`;
+            row.innerHTML = `${avatarHtml}<div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-800 truncate">${userObj.name}</p><p class="text-xs text-gray-400">${mySlots.size} 個時段</p></div>`;
+            if (listEl.querySelector("p.text-xs.text-gray-400")) listEl.innerHTML = "";
+            listEl.prepend(row);
+            document.getElementById("participantBadge").textContent = `· ${eventData.availability.length} 人`;
+        }
+
+        // Update slot counts in grid cells
+        const table = document.getElementById("availGrid");
+        table.querySelectorAll("td.slot-cell").forEach(td => {
+            const slotKey = td.dataset.slot;
+            const count = (eventData.availability || []).filter(a => (a.slots||[]).includes(slotKey)).length;
+            td.dataset.count = count;
+        });
+        refreshGridOverlay();
+
+    } catch(e) {
+        status.textContent = "儲存失敗，請重試";
+        status.style.color = "#ef4444";
+        status.classList.remove("hidden");
+        icon.className = "fa-solid fa-floppy-disk";
+    }
+    btn.disabled = false;
+    if (icon.className.includes("fa-check")) {
+        setTimeout(() => { icon.className = "fa-solid fa-floppy-disk"; }, 2000);
+    }
+}
+
+// ─── Mobile sidebar toggle ────────────────────────────────────────────────
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("mobile-show");
+    const btn = document.getElementById("sidebarToggle");
+    btn.classList.toggle("bg-blue-50");
+    btn.classList.toggle("text-blue-600");
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────
+loadEvent();
+</script>
+</body>
+</html>
