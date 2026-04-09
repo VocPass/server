@@ -55,6 +55,11 @@ async def disclaimer():
     return FileResponse("templates/disclaimer.html")
 
 
+@router.get("/creator-policy", summary="創作者政策")
+async def creator_policy():
+    return FileResponse("templates/creator-policy.html")
+
+
 @router.get("/school")
 async def get_all_schools(request: Request):
     return request.app.state.schools
