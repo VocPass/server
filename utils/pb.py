@@ -28,3 +28,8 @@ def share_curriculum(user_token, curriculum_data, status):
 def set_user(token):
     pb.auth_store.save(token, None)
     return pb
+
+
+# 刪除非a-zA-Z0-9_.
+def sanitize_str(text):
+    return "".join(c for c in text if c.isalnum() or c in (".", "_")).rstrip()

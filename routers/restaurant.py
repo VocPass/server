@@ -25,7 +25,7 @@ limiter = Limiter(key_func=get_remote_address)
 async def index(request: Request, response: Response, school: str, page: int = 1):
     db = request.app.state.pb_client
     record = db.collection("restaurant").get_list(
-        page=page, per_page=500, query_params={"filter": f'school="{school}"'}
+        page=page, per_page=500, query_params={"filter": f'school="{sanitize_str(school)}"'}
     )
     return record
 
@@ -36,7 +36,7 @@ async def evaluate(
 ):
     db = request.app.state.pb_client
     record = db.collection("restaurant_evaluate").get_list(
-        page=page, per_page=50, query_params={"filter": f'restaurant="{restaurant_id}"'}
+        page=page, per_page=50, query_params={"filter": f'restaurant="{sanitize_str(restaurant_id)}"'}
     )
     return record
 
@@ -53,7 +53,7 @@ async def add_evaluate(request: Request, response: Response, item: dict):
     restaurant_id = item.get("restaurant")
     existing = user_db.collection("restaurant_evaluate").get_list(
         page=1, per_page=1,
-        query_params={"filter": f'restaurant="{restaurant_id}"&&user="{user.id}"'}
+        query_params={"filter": f'restaurant="{sanitize_str(restaurant_id)}"&&user="{sanitize_str(user.id)}"'}
     )
     if existing.total_items > 0:
         response.status_code = status.HTTP_409_CONFLICT
@@ -83,7 +83,7 @@ async def add_restaurant(request: Request, response: Response, item: dict):
     name = item.get("name")
     school = item.get("school")
     existing = user_db.collection("restaurant").get_list(
-        page=1, per_page=1, query_params={"filter": f'name="{name}"&&school="{school}"'}
+        page=1, per_page=1, query_params={"filter": f'name="{sanitize_str(name)}"&&school="{sanitize_str(school)}"'}
     )
     if existing.total_items > 0:
         response.status_code = status.HTTP_409_CONFLICT
@@ -153,7 +153,7 @@ async def delete_evaluate(request: Request, response: Response, evaluate_id: str
 async def get_menu(request: Request, response: Response, restaurant_id: str):
     db = request.app.state.pb_client
     record = db.collection("restaurant_menu").get_list(
-        page=1, per_page=50, query_params={"filter": f'restaurant="{restaurant_id}"'}
+        page=1, per_page=50, query_params={"filter": f'restaurant="{sanitize_str(restaurant_id)}"'}
     )
     for i in record.items:
         i.uesr = i.user

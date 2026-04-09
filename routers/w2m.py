@@ -2,7 +2,7 @@ from fastapi import APIRouter, Response, Request, status
 from fastapi.templating import Jinja2Templates
 from slowapi import Limiter
 from slowapi.util import get_remote_address
-from utils.pb import get_user
+from utils.pb import get_user,sanitize_str
 from datetime import datetime, date, time, timedelta
 from utils.send_notification import send_notification
 
@@ -189,14 +189,14 @@ async def list_events(request: Request, response: Response):
 
     created = db.collection("w2m_events").get_full_list(
         query_params={
-            "filter": f'creator="{user.id}"',
+            "filter": f'creator="{sanitize_str(user.id)}"',
             "sort": "-created",
             "expand": "creator",
         }
     )
 
     avail_records = db.collection("w2m_availability").get_full_list(
-        query_params={"filter": f'user="{user.id}"', "expand": "event,event.creator"}
+        query_params={"filter": f'user="{sanitize_str(user.id)}"', "expand": "event,event.creator"}
     )
     created_ids = {r.id for r in created}
 
@@ -268,7 +268,7 @@ async def get_event(request: Request, response: Response, event_id: str):
 
     try:
         avail_records = db.collection("w2m_availability").get_full_list(
-            query_params={"filter": f'event="{event_id}"', "expand": "user"}
+            query_params={"filter": f'event="{sanitize_str(event_id)}"', "expand": "user"}
         )
     except Exception:
         avail_records = []
@@ -360,7 +360,7 @@ async def submit_availability(
     if creator_id != user.id:
 
         devices = db.collection("notify").get_full_list(
-            query_params={"filter": f'user="{creator_id}"'}
+            query_params={"filter": f'user="{sanitize_str(creator_id)}"'}
         )
         
         for i in devices:
