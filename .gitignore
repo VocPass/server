@@ -9,3 +9,5 @@ __pycache__/
 test.py
 
 *.p8
+
+wp/
