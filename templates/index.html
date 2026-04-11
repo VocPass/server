@@ -159,7 +159,7 @@
         <div class="bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] p-5 md:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] grid grid-cols-3 gap-2 md:gap-4 text-center" data-aos="fade-up">
             <div class="min-w-0">
                 <div class="font-black text-gray-900 tracking-tight mb-1 md:mb-2 truncate" style="font-size:clamp(18px,5vw,48px)">
-                    <span class="stat-number" data-target="3700" data-suffix="+">0</span>
+                    <span class="stat-number" data-target="3850" data-suffix="+">0</span>
                 </div>
                 <div class="text-[10px] md:text-sm font-semibold text-gray-500 uppercase tracking-wider">累計下載</div>
             </div>
@@ -167,7 +167,7 @@
                 <div class="absolute left-0 w-px h-10 md:h-12 bg-gray-200"></div>
                 <div class="min-w-0">
                     <div class="font-black text-gray-900 tracking-tight mb-1 md:mb-2 truncate" style="font-size:clamp(18px,5vw,48px)">
-                        <span class="stat-number" data-target="700" data-suffix="+">0</span>
+                        <span class="stat-number" data-target="750" data-suffix="+">0</span>
                     </div>
                     <div class="text-[10px] md:text-sm font-semibold text-gray-500 uppercase tracking-wider">已註冊使用者</div>
                 </div>
@@ -269,7 +269,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-center">
                 
                 <div data-aos="fade-right">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight">支援 <span id="school-count" class="text-blue-500">80</span>+ 所學校</h2>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight">支援 <span id="school-count" class="text-blue-500">250</span>+ 所學校</h2>
                     <p class="text-gray-400 text-lg mb-10">持續擴增中，覆蓋全台各大高職與綜合高中。</p>
                     
                     <div class="marquee py-4 mb-8">
@@ -344,19 +344,177 @@
                 <p class="text-gray-400 text-base md:text-lg">即時監控各項服務的運作情況。</p>
             </div>
 
-            <div class="flex flex-col gap-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
-                    <h3 class="text-base md:text-lg font-bold mb-4 text-white">主要服務</h3>
-                    <iframe src="https://vpst.zeabur.app/embed/monitor-backend?theme=dark&days=90" width="100%" height="70" frameborder="0" allowfullscreen="allowfullscreen" class="rounded-xl"></iframe>
-                </div>
+            <div id="status-monitors" class="flex flex-col gap-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-gray-500 text-sm text-center py-8">載入中...</div>
+            </div>
 
-                <div class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-sm">
-                    <h3 class="text-base md:text-lg font-bold mb-4 text-white">遠端更新 Live Activity 服務</h3>
-                    <iframe src="https://vpst.zeabur.app/embed/monitor-notify?theme=dark&days=90" width="100%" height="70" frameborder="0" allowfullscreen="allowfullscreen" class="rounded-xl"></iframe>
-                </div>
+            <div class="text-center mt-6" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://status.vocpass.com" target="_blank" rel="noopener noreferrer"
+                   class="text-sm text-gray-500 hover:text-gray-300 transition-colors">
+                    查看完整狀態頁面 →
+                </a>
             </div>
         </div>
     </section>
+
+    <script>
+    (function () {
+        const SLUG = 'vocpass';
+        const API_BASE = 'https://corsproxy.io/?url=https://status.vocpass.com';
+        const container = document.getElementById('status-monitors');
+
+        function statusColor(up) {
+            return up ? '#22c55e' : '#ef4444';
+        }
+
+        function statusLabel(up) {
+            return up ? '運作正常' : '異常';
+        }
+
+        function uptimePct(heartbeats) {
+            if (!heartbeats || heartbeats.length === 0) return null;
+            const up = heartbeats.filter(h => h.status === 1).length;
+            return ((up / heartbeats.length) * 100).toFixed(1);
+        }
+
+        function buildBar(heartbeats) {
+            const TOTAL = 100;
+            const recent = (heartbeats || []).slice(-TOTAL);
+            const padCount = TOTAL - recent.length;
+            const pads = Array(padCount).fill(`<div class="flex-1 h-8 bg-white/5 rounded-sm"></div>`).join('');
+            const blocks = recent.map(h => {
+                const color = h.status === 1 ? 'bg-green-500' : h.status === 0 ? 'bg-red-500' : 'bg-yellow-400';
+                const time = new Date(h.time).toLocaleString('zh-TW');
+                return `<div class="flex-1 h-8 ${color} opacity-80 rounded-sm" title="${time}"></div>`;
+            }).join('');
+            return `<div class="flex gap-0.5 w-full mt-3">${pads}${blocks}</div>`;
+        }
+
+        async function load() {
+            try {
+                const [pageRes, heartbeatRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/status-page/${SLUG}`),
+                    fetch(`${API_BASE}/api/status-page/heartbeat/${SLUG}`)
+                ]);
+
+                if (!pageRes.ok || !heartbeatRes.ok) throw new Error('API error');
+
+                const pageData = await pageRes.json();
+                const hbData = await heartbeatRes.json();
+
+                const monitors = pageData.publicGroupList?.flatMap(g =>
+                    (g.monitorList || []).map(m => ({ ...m, group: g.name }))
+                ) || [];
+
+                if (monitors.length === 0) {
+                    container.innerHTML = '<div class="text-gray-500 text-sm text-center py-8">暫無監控資料</div>';
+                    return;
+                }
+
+                // Split monitors: "節點" prefix → merge into one card, rest → individual cards
+                const nodeMonitors = monitors.filter(m => m.name.startsWith('節點'));
+                const otherMonitors = monitors.filter(m => !m.name.startsWith('節點'));
+
+                function renderMonitor(m) {
+                    const hb = hbData.heartbeatList?.[m.id] || [];
+                    const latest = hbData.uptimeList?.[`${m.id}_24`];
+                    const isUp = hb.length > 0 ? hb[hb.length - 1].status === 1 : null;
+                    const pct = latest != null ? (latest * 100).toFixed(1) : uptimePct(hb);
+                    const dot = isUp === null ? '#6b7280' : statusColor(isUp);
+                    const label = isUp === null ? '未知' : statusLabel(isUp);
+                    const bar = buildBar(hb);
+                    return { hb, isUp, pct, dot, label, bar };
+                }
+
+                function renderSingleCard(m) {
+                    const { dot, label, pct, bar } = renderMonitor(m);
+                    return `
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6 backdrop-blur-sm">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${dot};box-shadow:0 0 6px ${dot}88"></span>
+                                <span class="font-semibold text-sm md:text-base truncate">${m.name}</span>
+                            </div>
+                            <div class="flex items-center gap-4 flex-shrink-0">
+                                ${pct != null ? `<span class="text-xs text-gray-400">${pct}% 正常運行</span>` : ''}
+                                <span class="text-xs px-2.5 py-1 rounded-full font-medium" style="background:${dot}22;color:${dot}">${label}</span>
+                            </div>
+                        </div>
+                        ${bar}
+                    </div>`;
+                }
+
+                function renderNodeCard(nodes) {
+                    if (nodes.length === 0) return '';
+                    const TOTAL = 100;
+                    // worst priority: 0(down) > 2(pending) > 1(up)
+                    function worstStatus(a, b) {
+                        if (a === 0 || b === 0) return 0;
+                        if (a === 2 || b === 2) return 2;
+                        if (a === 1 || b === 1) return 1;
+                        return null;
+                    }
+                    // Build a time-keyed map: roundedMinute -> worst status across all nodes
+                    const timeMap = new Map();
+                    nodes.forEach(m => {
+                        (hbData.heartbeatList?.[m.id] || []).forEach(h => {
+                            // Round to minute for alignment
+                            const key = Math.floor(new Date(h.time).getTime() / 60000);
+                            timeMap.set(key, worstStatus(timeMap.get(key) ?? h.status, h.status));
+                        });
+                    });
+                    // Sort keys, take last TOTAL
+                    const sortedKeys = [...timeMap.keys()].sort((a, b) => a - b).slice(-TOTAL);
+                    const padCount = TOTAL - sortedKeys.length;
+                    const pads = Array(padCount).fill(`<div class="flex-1 h-8 bg-white/5 rounded-sm"></div>`).join('');
+                    const blocks = sortedKeys.map(k => {
+                        const s = timeMap.get(k);
+                        const color = s === 1 ? 'bg-green-500 opacity-80' : s === 0 ? 'bg-red-500 opacity-80' : 'bg-yellow-400 opacity-80';
+                        return `<div class="flex-1 h-8 ${color} rounded-sm"></div>`;
+                    }).join('');
+                    const bar = `<div class="flex gap-0.5 w-full mt-3">${pads}${blocks}</div>`;
+
+                    // Overall: worst of latest heartbeat per node
+                    const latestStatuses = nodes.map(m => {
+                        const hb = hbData.heartbeatList?.[m.id] || [];
+                        return hb.length > 0 ? hb[hb.length - 1].status : null;
+                    }).filter(s => s !== null);
+                    const overallStatus = latestStatuses.reduce((acc, s) => worstStatus(acc, s), latestStatuses[0] ?? null);
+                    const overallUp = overallStatus === 1 ? true : overallStatus === 0 ? false : null;
+                    const dot = overallUp === null ? '#6b7280' : statusColor(overallUp);
+                    const label = overallUp === null ? '未知' : statusLabel(overallUp);
+
+                    // Average uptime across nodes
+                    const pcts = nodes.map(m => hbData.uptimeList?.[`${m.id}_24`]).filter(v => v != null);
+                    const avgPct = pcts.length > 0 ? (pcts.reduce((a, b) => a + b, 0) / pcts.length * 100).toFixed(1) : null;
+
+                    return `
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6 backdrop-blur-sm">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${dot};box-shadow:0 0 6px ${dot}88"></span>
+                                <span class="font-semibold text-sm md:text-base">主要服務</span>
+                            </div>
+                            <div class="flex items-center gap-4 flex-shrink-0">
+                                ${avgPct != null ? `<span class="text-xs text-gray-400">${avgPct}% 正常運行</span>` : ''}
+                                <span class="text-xs px-2.5 py-1 rounded-full font-medium" style="background:${dot}22;color:${dot}">${label}</span>
+                            </div>
+                        </div>
+                        ${bar}
+                    </div>`;
+                }
+
+                const html = renderNodeCard(nodeMonitors) + otherMonitors.map(renderSingleCard).join('');
+                container.innerHTML = html;
+            } catch (e) {
+                container.innerHTML = `<div class="text-gray-500 text-sm text-center py-8">無法載入狀態資料，請前往 <a href="https://status.vocpass.com" target="_blank" class="underline hover:text-gray-300">status.vocpass.com</a> 查看。</div>`;
+            }
+        }
+
+        load();
+        setInterval(load, 60000);
+    })();
+    </script>
 
     <footer class="border-t border-gray-200 bg-white py-10 px-5">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
