@@ -378,7 +378,7 @@
         }
 
         function buildBar(heartbeats) {
-            const TOTAL = 100;
+            const TOTAL = window.innerWidth < 768 ? 30 : 100;
             const recent = (heartbeats || []).slice(-TOTAL);
             const padCount = TOTAL - recent.length;
             const pads = Array(padCount).fill(`<div class="flex-1 h-8 bg-white/5 rounded-sm"></div>`).join('');
@@ -446,7 +446,7 @@
 
                 function renderNodeCard(nodes) {
                     if (nodes.length === 0) return '';
-                    const TOTAL = 100;
+                    const TOTAL = window.innerWidth < 768 ? 30 : 100;
                     // worst priority: 0(down) > 2(pending) > 1(up)
                     function worstStatus(a, b) {
                         if (a === 0 || b === 0) return 0;
@@ -474,12 +474,8 @@
                     }).join('');
                     const bar = `<div class="flex gap-0.5 w-full mt-3">${pads}${blocks}</div>`;
 
-                    // Overall: worst of latest heartbeat per node
-                    const latestStatuses = nodes.map(m => {
-                        const hb = hbData.heartbeatList?.[m.id] || [];
-                        return hb.length > 0 ? hb[hb.length - 1].status : null;
-                    }).filter(s => s !== null);
-                    const overallStatus = latestStatuses.reduce((acc, s) => worstStatus(acc, s), latestStatuses[0] ?? null);
+                    // Overall: take worst status from the latest merged slot
+                    const overallStatus = sortedKeys.length > 0 ? timeMap.get(sortedKeys[sortedKeys.length - 1]) : null;
                     const overallUp = overallStatus === 1 ? true : overallStatus === 0 ? false : null;
                     const dot = overallUp === null ? '#6b7280' : statusColor(overallUp);
                     const label = overallUp === null ? '未知' : statusLabel(overallUp);
