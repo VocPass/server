@@ -70,42 +70,42 @@
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table7.png"
                     ],
-                    "left": 200,
-                    "right": 50,
-                    "top_inset": 200,
-                    "bottom": 500
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 1000
                 },
                 "8": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table8.png"
                     ],
-                    "left": 200,
-                    "right": 50,
-                    "top_inset": 200,
-                    "bottom": 360
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 700
                 },
                 "9": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table9.png"
                     ],
-                    "left": 200,
-                    "right": 50,
-                    "top_inset": 200,
-                    "bottom": 240
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 450
                 },
                 "10": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table10.png"
                     ],
-                    "left": 200,
-                    "right": 50,
-                    "top_inset": 200,
-                    "bottom": 120
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 140
                 }
             }
         },
         "table_opacity": 1,
-        "top": 50,
+        "top": 30,
         "stickers": 0,
         "font_size": 5,
         "font_color": "#000000",
