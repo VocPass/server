@@ -54,5 +54,61 @@
         "font_size": 5,
         "font_color": "#000000",
         "font_family": "台北黑體"
+    },
+    {
+        "name": "小丹的課表",
+        "author": "小丹",
+        "author_url": "https://www.threads.com/@daniel_liao_",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png",
+        "images": {
+            "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/background0.png"
+            ],
+            "stickers": [],
+            "table": {
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table7.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 500
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table8.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 360
+                },
+                "9": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table9.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 240
+                },
+                "10": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table10.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 120
+                }
+            }
+        },
+        "table_opacity": 1,
+        "top": 50,
+        "stickers": 0,
+        "font_size": 5,
+        "font_color": "#000000",
+        "font_family": "台北黑體"
     }
 ]
