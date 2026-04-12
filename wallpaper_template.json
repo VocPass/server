@@ -1,45 +1,58 @@
 [
     {
-        "name": "schedule_template",
-        "author": "user",
-        "author_url": "https://instagram.com/user",
-        "preview": "/wallpaper_assets/schedule_template/preview.png",
+        "name": "Nothing here...",
+        "author": "little monster",
+        "author_url": "https://www.instagram.com/littlemonster__8",
+        "preview": "https://cdn.vocpass.com/nothing_here/nothing_here/preview.png",
         "images": {
             "background": [
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/background0.png"
+                "https://cdn.vocpass.com/wallpaper_assets/nothing_here/background0.png"
             ],
-            "stickers": [
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker0.png",
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker1.png",
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker2.png"
-            ],
+            "stickers": [],
             "table": {
-                "7": [
-                    "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table7.png"
-                ],
-                "8": [
-                    "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table8.png"
-                ],
-                "9": [
-                    "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table9.png"
-                ],
-                "10": [
-                    "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table10.png"
-                ],
-                "11": [
-                    "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table11.png"
-                ],
-                "12": [
-                    "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table12.png"
-                ]
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 500
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 360
+                },
+                "9": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 240
+                },
+                "10": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                    ],
+                    "left": 200,
+                    "right": 50,
+                    "top_inset": 200,
+                    "bottom": 120
+                }
             }
         },
+        "table_opacity": 1,
         "top": 30,
-        "left": 30,
-        "right": 30,
-        "stickers": 3,
-        "font_size": 14,
+        "stickers": 0,
+        "font_size": 5,
         "font_color": "#000000",
-        "font_family": "寒蝉点阵体"
+        "font_family": "台北黑體"
     }
 ]
