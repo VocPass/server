@@ -1,18 +1,18 @@
 [
     {
-        "name": "Nothing here...",
+        "name": "（你說這節什麼課？）",
         "author": "little monster",
         "author_url": "https://www.instagram.com/littlemonster__8",
-        "preview": "https://cdn.vocpass.com/wallpaper_assets/nothing_here/preview.png",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/preview.png",
         "images": {
             "background": [
-                "https://cdn.vocpass.com/wallpaper_assets/nothing_here/background0.png"
+                "https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/background0.png"
             ],
             "stickers": [],
             "table": {
                 "7": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/table.png"
                     ],
                     "left": 200,
                     "right": 50,
@@ -21,7 +21,7 @@
                 },
                 "8": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/table.png"
                     ],
                     "left": 200,
                     "right": 50,
@@ -30,7 +30,7 @@
                 },
                 "9": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/table.png"
                     ],
                     "left": 200,
                     "right": 50,
@@ -39,7 +39,7 @@
                 },
                 "10": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/nothing_here/table.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/table.png"
                     ],
                     "left": 200,
                     "right": 50,
