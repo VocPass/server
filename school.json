@@ -11923,5 +11923,49 @@
                 "個人課表"
             ]
         }
+    },
+    "test": {
+        "vision": "v8",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://portal.k12.ntut.edu.tw",
+        "logined_api": "https://hsa.k12.ntut.edu.tw",
+        "url": {
+            "login": "/",
+            "logined": "/home",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "username"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "登出"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/StuAffairs/BrowseSelftRecord",
+            "attendance": "/StuAffairs/AbsForStu",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/StuScoreQuery/ExportTranscript",
+            "curriculum": "/CCT/GetClassScheduleServlet"
+        },
+        "cookie": {
+            "merit_demerit": "/StuAffairs/LoginStu",
+            "attendance": "/StuAffairs/LoginStu",
+            "exam_menu": "/StuScoreQuery/LoginStu",
+            "exam_results": "#",
+            "semester_scores": "/StuScoreQuery/LoginStu",
+            "curriculum": "/CCT/LoginStu"
+        }
     }
 }

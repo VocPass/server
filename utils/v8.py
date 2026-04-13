@@ -98,7 +98,9 @@ def parse_absence_records(absence):
             continue
 
         term_text = cells[0].get_text(strip=True)   # e.g. "114/下"
-        academic_term = term_text.split("/")[-1]    # "上" or "下"
+        term_parts = term_text.split("/")
+        academic_year = int(term_parts[0]) if term_parts[0].isdigit() else None
+        academic_term = term_parts[-1]              # "上" or "下"
 
         date_roc = cells[3].get_text(strip=True)    # e.g. "115/03/25"
         parts = date_roc.split("/")
@@ -110,6 +112,7 @@ def parse_absence_records(absence):
             cell_val = cells[5 + i].get_text(strip=True)
             if cell_val:
                 records.append({
+                    "academic_year": academic_year,
                     "academic_term": academic_term,
                     "date": date_gregorian,
                     "weekday": weekday,
@@ -163,19 +166,37 @@ def parse_curriculum(raw):
 
     return result
 
-def parse_semester_grades(semester_grades):
+def parse_semester_grades(grades_data, grade=1):
     """
     解析學期成績
     將 gradeOneJson / gradeTwoJson / gradeThreeJson 格式轉換成 semester_scores 格式
+
+    Args:
+        grades_data: 包含 gradeOneJson / gradeTwoJson / gradeThreeJson 的完整資料
+        grade: 年級 (1, 2, 3)
     """
+    GRADE_KEY_MAP = {1: "gradeOneJson", 2: "gradeTwoJson", 3: "gradeThreeJson"}
     COURSE_TYPE_MAP = {"部": "必修", "校": "必修", "選": "選修"}
 
-    def parse_earned(credits_str):
-        """'28/32' → '28'，'/' → ''"""
-        if not credits_str:
+    def add_fractions(a, b):
+        """'28/32' + '27/32' → '55/64'，任一為空則回傳非空的那個"""
+        if not a and not b:
             return ""
-        parts = credits_str.split("/")
-        return parts[0] if parts[0] else ""
+        if not a:
+            return b
+        if not b:
+            return a
+        a_parts = a.split("/")
+        b_parts = b.split("/")
+        try:
+            num = int(a_parts[0]) + int(b_parts[0])
+            den = int(a_parts[1]) + int(b_parts[1])
+            return f"{num}/{den}"
+        except (ValueError, IndexError):
+            return ""
+
+    grade_key = GRADE_KEY_MAP.get(grade, "gradeOneJson")
+    semester_grades = grades_data.get(grade_key, {})
 
     subject_scores = []
     for subj in semester_grades.get("subjects", []):
@@ -197,23 +218,43 @@ def parse_semester_grades(semester_grades):
             "annual_score": subj.get("year_score", ""),
         })
 
+    sem1_credits = semester_grades.get("sem1ActualTotalCredits", "/") or "/"
+    sem2_credits = semester_grades.get("sem2ActualTotalCredits", "/") or "/"
+    year_credits = semester_grades.get("yearActualTotalCredits", "/") or "/"
+    # 將 "/" 正規化為 ""
+    sem1_credits = "" if sem1_credits == "/" else sem1_credits
+    sem2_credits = "" if sem2_credits == "/" else sem2_credits
+    year_credits = "" if year_credits == "/" else year_credits
+
+    # 累計實得學分/累計應得學分：前一年級年末累計 + 本年級各學期
+    prev_accum = ""
+    if grade > 1:
+        prev_key = GRADE_KEY_MAP.get(grade - 1)
+        prev_grade = grades_data.get(prev_key, {})
+        prev_accum = prev_grade.get("accumulateCredits", "") or ""
+        prev_accum = "" if prev_accum == "/" else prev_accum
+
+    accum_sem1 = add_fractions(prev_accum, sem1_credits)
+    accum_sem2 = semester_grades.get("accumulateCredits", "") or ""
+    accum_sem2 = "" if accum_sem2 == "/" else accum_sem2
+
     total_scores = {
-        "學科平均": {
+        "學業成績": {
             "first_semester": semester_grades.get("sem1ScoreAvg", ""),
             "second_semester": semester_grades.get("sem2ScoreAvg", ""),
             "annual": semester_grades.get("yearScoreAvg", ""),
         },
-        "實得學分": {
-            "first_semester": parse_earned(semester_grades.get("sem1ActualTotalCredits", "/")),
-            "second_semester": parse_earned(semester_grades.get("sem2ActualTotalCredits", "/")),
+        "實得/應得學分": {
+            "first_semester": sem1_credits,
+            "second_semester": sem2_credits,
+            "annual": year_credits,
+        },
+        "累計實得學分/累計應得學分": {
+            "first_semester": accum_sem1,
+            "second_semester": accum_sem2,
             "annual": "",
         },
-        "實得累計": {
-            "first_semester": parse_earned(semester_grades.get("accumulateCredits", "")),
-            "second_semester": "",
-            "annual": "",
-        },
-        "學期名次": {
+        "學業成績名次": {
             "first_semester": semester_grades.get("sem1ClassRank", ""),
             "second_semester": semester_grades.get("sem2ClassRank", ""),
             "annual": "",
