@@ -527,6 +527,18 @@
     })();
     </script>
 
+    <section id="developers" class="py-20 md:py-32 px-5 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
+                <h2 class="text-2xl md:text-5xl font-bold text-gray-900 mb-3 tracking-tight">開發團隊</h2>
+                <p class="text-gray-500 text-base md:text-lg">這些人讓 VocPass 成為現實。</p>
+            </div>
+            <div id="developer-list" class="grid grid-cols-1 sm:grid-cols-2 gap-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-gray-400 text-sm text-center col-span-2 py-8">載入中...</div>
+            </div>
+        </div>
+    </section>
+
     <footer class="border-t border-gray-200 bg-white py-10 px-5">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
             <div class="flex items-center gap-3">
@@ -692,6 +704,40 @@
 
             cells.forEach(cell => startCellLoop(cell));
         }
+
+        // 載入開發者資訊
+        async function loadDevelopers() {
+            const container = document.getElementById('developer-list');
+            if (!container) return;
+            try {
+                const res = await fetch('/api/developer');
+                if (!res.ok) throw new Error('API error');
+                const json = await res.json();
+                const devs = json.data || [];
+                if (devs.length === 0) {
+                    container.innerHTML = '<div class="text-gray-400 text-sm text-center col-span-2 py-8">暫無資料</div>';
+                    return;
+                }
+                container.innerHTML = devs.map(dev => `
+                    <div class="bento-card p-6 flex items-center gap-5">
+                        <img src="${dev.user.avatar}" alt="${dev.user.name}"
+                             class="w-16 h-16 rounded-2xl object-cover shadow-sm flex-shrink-0"
+                             onerror="this.src='https://github.com/vocpass.png'">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="font-bold text-gray-900 text-base">${dev.user.name}</span>
+                                <span class="text-xs px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 font-medium">${dev.role}</span>
+                            </div>
+                            ${dev.description ? `<p class="text-gray-500 text-sm mt-1 leading-relaxed">${dev.description}</p>` : ''}
+                            ${dev.website ? `<a href="${dev.website}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-500 hover:underline mt-1 inline-block">${dev.website}</a>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                container.innerHTML = '<div class="text-gray-400 text-sm text-center col-span-2 py-8">無法載入開發者資料</div>';
+            }
+        }
+        loadDevelopers();
     </script>
 </body>
 </html>

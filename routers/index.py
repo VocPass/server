@@ -74,6 +74,7 @@ async def get_me(request: Request, response: Response):
 async def get_user_profile(request: Request, username: str):
     return FileResponse("templates/user.html")
 
+
 @router.get("/apply", summary="申請學校")
 async def apply_school():
     return FileResponse("templates/apply.html")
@@ -160,6 +161,28 @@ async def ping(
     data["data"] = {"logged_in": False}
     return data
 
+@router.get("/api/developer", summary="獲取開發者資訊")
+async def get_developer_info(request: Request, response: Response):
+    db = request.app.state.pb_client
+    od = db.collection("developer").get_full_list(query_params={"expand": "user"})
+    result = []
+    for i in od:
+        user = i.expand["user"]
+        result.append({
+            "user": {
+                "name": user.name,
+                "avatar": request.app.state.pb_client.get_file_url(user, user.avatar),
+                "username": user.username,
+            },
+            "website": i.website,
+            "description": i.description,
+            "role": i.role,
+        })
+    data = request.app.state.response
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = result
+    return data
 
 @router.get("/api/v{v}/notice", summary="獲取公告列表")
 async def get_notice(request: Request, v: int,school_name: str,response: Response):
@@ -202,3 +225,5 @@ async def report(request: Request, item: dict):
     db.collection("report").create(data)
     m.REPORT_TOTAL.inc()
     return {"code": 200, "message": "Reported", "data": None}
+
+
