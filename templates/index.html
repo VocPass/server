@@ -156,7 +156,8 @@
     </section>
 
     <section class="relative z-10 -mt-12 px-5 max-w-5xl mx-auto">
-        <div class="bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] p-5 md:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] grid grid-cols-3 gap-2 md:gap-4 text-center" data-aos="fade-up">
+        <div class="bg-white/80 backdrop-blur-xl border border-white rounded-[2rem] p-5 md:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] text-center" data-aos="fade-up">
+        <div class="grid grid-cols-3 gap-2 md:gap-4">
             <div class="min-w-0">
                 <div class="font-black text-gray-900 tracking-tight mb-1 md:mb-2 truncate" style="font-size:clamp(18px,5vw,48px)">
                     <span class="stat-number" data-target="3850" data-suffix="+">0</span>
@@ -179,6 +180,20 @@
                 </div>
                 <div class="text-[10px] md:text-sm font-semibold text-gray-500 uppercase tracking-wider">總查詢次數</div>
             </div>
+        </div>
+        <div class="mt-5 pt-5 border-t border-gray-100 flex flex-col items-center gap-1.5">
+            <div class="flex items-center gap-2">
+                <span class="font-black text-gray-900 tracking-tight" style="font-size:clamp(24px,5vw,40px)">4.8</span>
+                <div class="flex gap-0.5 text-yellow-400 text-lg">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+            <div class="text-[10px] md:text-sm font-semibold text-gray-500 uppercase tracking-wider">App Store 評分</div>
+        </div>
         </div>
     </section>
 
@@ -603,22 +618,34 @@
 
         // 課表隨機淡出淡入
         const subjects = [
-            { name: '程式設計', bg: 'bg-blue-100', text: 'text-blue-600' },
-            { name: '資料結構', bg: 'bg-indigo-100', text: 'text-indigo-600' },
-            { name: '演算法', bg: 'bg-violet-100', text: 'text-violet-600' },
-            { name: '網頁設計', bg: 'bg-cyan-100', text: 'text-cyan-600' },
-            { name: '資料庫', bg: 'bg-teal-100', text: 'text-teal-600' },
+            { name: '國文', bg: 'bg-red-100', text: 'text-red-600' },
+            { name: '英文', bg: 'bg-blue-100', text: 'text-blue-600' },
+            { name: '數學', bg: 'bg-indigo-100', text: 'text-indigo-600' },
+            { name: '歷史', bg: 'bg-amber-100', text: 'text-amber-600' },
+            { name: '地理', bg: 'bg-green-100', text: 'text-green-600' },
+            { name: '公民', bg: 'bg-teal-100', text: 'text-teal-600' },
+            { name: '體育', bg: 'bg-orange-100', text: 'text-orange-500' },
+            { name: '健康與護理', bg: 'bg-pink-100', text: 'text-pink-500' },
+            { name: '軍訓', bg: 'bg-slate-100', text: 'text-slate-600' },
+            { name: '機械製圖', bg: 'bg-zinc-100', text: 'text-zinc-600' },
+            { name: '機械加工', bg: 'bg-stone-100', text: 'text-stone-600' },
+            { name: '電工實習', bg: 'bg-yellow-100', text: 'text-yellow-600' },
+            { name: '電子學', bg: 'bg-cyan-100', text: 'text-cyan-600' },
+            { name: '數位邏輯', bg: 'bg-violet-100', text: 'text-violet-600' },
+            { name: '程式設計', bg: 'bg-blue-200', text: 'text-blue-700' },
             { name: '計算機概論', bg: 'bg-sky-100', text: 'text-sky-600' },
-            { name: '作業系統', bg: 'bg-orange-100', text: 'text-orange-500' },
-            { name: '網路概論', bg: 'bg-green-100', text: 'text-green-600' },
-            { name: '資訊安全', bg: 'bg-red-100', text: 'text-red-500' },
-            { name: '物聯網', bg: 'bg-lime-100', text: 'text-lime-600' },
-            { name: 'APP開發', bg: 'bg-purple-100', text: 'text-purple-500' },
-            { name: '雲端運算', bg: 'bg-blue-200', text: 'text-blue-700' },
-            { name: '人工智慧', bg: 'bg-pink-100', text: 'text-pink-500' },
-            { name: '電腦組裝', bg: 'bg-amber-100', text: 'text-amber-600' },
-            { name: '軟體工程', bg: 'bg-emerald-100', text: 'text-emerald-600' },
-            { name: '專題製作', bg: 'bg-rose-100', text: 'text-rose-500' },
+            { name: '會計', bg: 'bg-emerald-100', text: 'text-emerald-600' },
+            { name: '廣告設計', bg: 'bg-fuchsia-100', text: 'text-fuchsia-600' },
+            { name: '烹飪實習', bg: 'bg-orange-200', text: 'text-orange-700' },
+            { name: '西點麵包', bg: 'bg-rose-100', text: 'text-rose-500' },
+            { name: '美容技術', bg: 'bg-pink-200', text: 'text-pink-600' },
+            { name: '幼兒教育', bg: 'bg-lime-100', text: 'text-lime-600' },
+            { name: '汽車修護', bg: 'bg-gray-100', text: 'text-gray-600' },
+            { name: '焊接技術', bg: 'bg-red-200', text: 'text-red-700' },
+            { name: '服裝設計', bg: 'bg-purple-100', text: 'text-purple-500' },
+            { name: '建築製圖', bg: 'bg-teal-200', text: 'text-teal-700' },
+            { name: '化工實習', bg: 'bg-green-200', text: 'text-green-700' },
+            { name: '農業概論', bg: 'bg-lime-200', text: 'text-lime-700' },
         ];
 
         const grid = document.getElementById('schedule-grid');
