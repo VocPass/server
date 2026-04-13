@@ -42,8 +42,11 @@ async def get_curriculum_template(request: Request, response: Response):
 async def get_font(request: Request, response: Response):
     font_url = "https://cdn.vocpass.com/font/"
     fonts = {
+        "Noto": f"{font_url}NotoSansTC-300.ttf",
         "台北黑體": f"{font_url}TaipeiSansTCBeta-Regular.ttf",
+        "辰宇落雁體": f"{font_url}ChenYuluoyan-2.0-Thin.ttf",
         "得意黑": f"{font_url}SmileySans-Oblique.ttf",
+        "快去写作业":f"{font_url}CEFFontsCJK-Regular.ttf",
         "大波浪圓體": f"{font_url}PopGothicCjkTc-Regular.ttf",
         "铁蒺藜体": f"{font_url}TiejiliSC-Regular.ttf",
         "寒蝉点阵体": f"{font_url}ChillBitmap_16px.ttf",
