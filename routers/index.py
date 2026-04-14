@@ -147,19 +147,24 @@ async def ping(
 
             for i in school["login"]["successKeywords"]:
                 if i in html:
-                    m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="logged_in").inc()
+                    m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(
+                        school_name=school_name, result="logged_in"
+                    ).inc()
                     data["code"] = 200
                     data["message"] = "Success."
                     data["data"] = {"logged_in": True}
 
                     return data
 
-    m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="not_logged_in").inc()
+    m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(
+        school_name=school_name, result="not_logged_in"
+    ).inc()
     response.status_code = status.HTTP_403_FORBIDDEN
     data["code"] = 403
     data["message"] = "Success."
     data["data"] = {"logged_in": False}
     return data
+
 
 @router.get("/api/developer", summary="獲取開發者資訊")
 async def get_developer_info(request: Request, response: Response):
@@ -168,30 +173,37 @@ async def get_developer_info(request: Request, response: Response):
     result = []
     for i in od:
         user = i.expand["user"]
-        result.append({
-            "user": {
-                "name": user.name,
-                "avatar": request.app.state.pb_client.get_file_url(user, user.avatar),
-                "username": user.username,
-            },
-            "website": i.website,
-            "description": i.description,
-            "role": i.role,
-        })
+        result.append(
+            {
+                "user": {
+                    "name": user.name,
+                    "avatar": request.app.state.pb_client.get_file_url(
+                        user, user.avatar
+                    ),
+                    "username": user.username,
+                },
+                "website": i.website,
+                "description": i.description,
+                "role": i.role,
+            }
+        )
     data = request.app.state.response
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = result
     return data
 
+
 @router.get("/api/v{v}/notice", summary="獲取公告列表")
-async def get_notice(request: Request, v: int,school_name: str,response: Response):
-    m.SCHOOL_NOTICE_REQUESTS_TOTAL.labels(school_name=school_name, api_version=f"v{v}").inc()
+async def get_notice(request: Request, v: int, school_name: str, response: Response):
+    m.SCHOOL_NOTICE_REQUESTS_TOTAL.labels(
+        school_name=school_name, api_version=f"v{v}"
+    ).inc()
     school = request.app.state.schools.get(school_name)
     if not school:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"code": 400, "message": "Unsupported school.", "data": None}
-    
+
     f = {"v1": notice.get_notice_v1, "v2": notice.get_notice_v2}
     func = f.get(f"v{v}")
     if not func:
@@ -199,8 +211,12 @@ async def get_notice(request: Request, v: int,school_name: str,response: Respons
         return {"code": 404, "message": "Unsupported version.", "data": None}
     if not school.get("notice"):
         response.status_code = status.HTTP_404_NOT_FOUND
-        return {"code": 404, "message": "This school does not support notice.", "data": None}
-    result = await func(school['notice']['url'], method=school['notice']['method'])
+        return {
+            "code": 404,
+            "message": "This school does not support notice.",
+            "data": None,
+        }
+    result = await func(school["notice"]["url"], method=school["notice"]["method"])
     data = request.app.state.response
     data["code"] = 200
     data["message"] = "Success."
@@ -225,5 +241,3 @@ async def report(request: Request, item: dict):
     db.collection("report").create(data)
     m.REPORT_TOTAL.inc()
     return {"code": 200, "message": "Reported", "data": None}
-
-
