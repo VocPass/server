@@ -15695,7 +15695,7 @@
             "curriculum": "/CCT/LoginStu"
         }
     },
-    "西螺高農": {
+    "西螺農工": {
         "vision": "v8",
         "app": 1.0,
         "beta": false,
@@ -15740,7 +15740,7 @@
             "curriculum": "/CCT/LoginStu"
         }
     },
-    "西螺高農(夜)": {
+    "西螺農工(夜)": {
         "vision": "v8",
         "app": 1.0,
         "beta": false,
