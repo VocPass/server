@@ -210,10 +210,17 @@ async def get_exam_menu(
      - 需帶入 cookies
      - **返回值**: 包含考試選單的 JSON 物件。
     """
+
     m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v8", data_type="exam_menu").inc()
 
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
+
+    data["code"] = 404
+    data["message"] = "Not supported"
+    response.status_code = status.HTTP_404_NOT_FOUND
+    return data
+
     if not school:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
