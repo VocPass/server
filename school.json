@@ -3464,6 +3464,53 @@
             "info": "/ILVSILC/ICampus/StudentInfo"
         }
     },
+    "家齊高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "210309",
+        "api": "https://shcloud14.k12ea.gov.tw",
+        "url": {
+            "login": "/CCSHTN/Auth/Auth/CloudLogin",
+            "logined": "/CCSHTN/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/CCSHTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/CCSHTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CCSHTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/CCSHTN/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/CCSHTN/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/CCSHTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/CCSHTN/ICampus/StudentInfo",
+            "attendance": "/CCSHTN/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/CCSHTN/ICampus/StudentInfo/Index",
+            "curriculum": "/CCSHTN/ClassTableV2/ClassTable",
+            "info": "/CCSHTN/ICampus/StudentInfo"
+        }
+    },
     "虎尾農工": {
         "vision": "v3",
         "app": 1.0,
@@ -4263,6 +4310,53 @@
             "info": "/ICampus/StudentInfo"
         }
     },
+    "花蓮高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "150303",
+        "api": "https://shcloud14.k12ea.gov.tw/HLHSHLC",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
     "曾文農工": {
         "vision": "v3",
         "app": 1.0,
@@ -4360,9 +4454,103 @@
     "光復中學": {
         "vision": "v3",
         "app": 1.0,
-        "beta": true,
-        "school_code": "{sb}",
+        "beta": false,
+        "school_code": "181305",
         "api": "https://shinher.kfsh.hc.edu.tw/kfsh",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "玉里高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "150309",
+        "api": "https://shinher.kfsh.hc.edu.tw/YLSHHLC",
+        "url": {
+            "login": "/Auth/Auth/Login",
+            "logined": "/ICampus/Home/Index2",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
+    },
+    "虎尾高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "{sb}",
+        "api": "https://shcloud13.k12ea.gov.tw/HWSHYLC",
         "url": {
             "login": "/Auth/Auth/Login",
             "logined": "/ICampus/Home/Index2",
@@ -9583,11 +9771,416 @@
             "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
         }
     },
+    "沙鹿高工": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=063407D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "臺中二中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw",
+        "url": {
+            "login": "/Login.action?schNo=194303",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "pas1"
+            },
+            "captcha": {
+                "name": "validateCode"
+            },
+            "captchaImage": {
+                "selector": "img-fluid",
+                "type": "class"
+            },
+            "button": {
+                "class": "btn btn-orange btn-block rounded-pill"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "沙鹿高工(夜)": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=063C07D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "大甲高中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=063303D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "大甲高工": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=063402D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "大甲高工(夜)": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw/ecampus_KH",
+        "url": {
+            "login": "/Login.action?schNo=063C02D",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "password"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "btn_suui-button ui-corner-all ui-widgetbmit"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "新社高中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw",
+        "url": {
+            "login": "/Login.action?schNo=064328",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "pas1"
+            },
+            "captcha": {
+                "name": "validateCode"
+            },
+            "captchaImage": {
+                "selector": "img-fluid",
+                "type": "class"
+            },
+            "button": {
+                "class": "btn btn-orange btn-block rounded-pill"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "臺中女中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw",
+        "url": {
+            "login": "/Login.action?schNo=193301",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "pas1"
+            },
+            "captcha": {
+                "name": "validateCode"
+            },
+            "captchaImage": {
+                "selector": "img-fluid",
+                "type": "class"
+            },
+            "button": {
+                "class": "btn btn-orange btn-block rounded-pill"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
+    "臺中一中": {
+        "vision": "v6",
+        "app": 1.4,
+        "beta": false,
+        "api": "https://tchs.mlife.org.tw",
+        "url": {
+            "login": "/Login.action?schNo=193302",
+            "logined": "/PersonalWidget_getMyWidget.action",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "loginId"
+            },
+            "password": {
+                "name": "pas1"
+            },
+            "captcha": {
+                "name": "validateCode"
+            },
+            "captchaImage": {
+                "selector": "img-fluid",
+                "type": "class"
+            },
+            "button": {
+                "class": "btn btn-orange btn-block rounded-pill"
+            },
+            "successKeywords": [
+                "登入者"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/B0305S_Reward_select.action?dataName=vo",
+            "attendance": "/B0209S_Absence_select.action",
+            "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
+            "exam_results": "#",
+            "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
+            "curriculum": "#",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+        }
+    },
     "嶺東高中": {
         "vision": "v7",
         "app": 1.0,
         "beta": false,
         "api": "https://ss.lths.tc.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
+    "東港海事": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://tkms-ptc.k12ea.gov.tw",
         "url": {
             "login": "/SCH_UI",
             "logined": "/SSO/Main.aspx",
@@ -13588,51 +14181,6 @@
         "beta": false,
         "api": "https://portal.k12.ntut.edu.tw",
         "js": "var select = document.querySelector('select');select.value = '061D16';select.dispatchEvent(new Event('change'));",
-        "logined_api": "https://hsa.k12.ntut.edu.tw",
-        "url": {
-            "login": "/",
-            "logined": "/home",
-            "root": "/"
-        },
-        "login": {
-            "username": {
-                "name": "username"
-            },
-            "password": {
-                "name": "password"
-            },
-            "captcha": {},
-            "captchaImage": {},
-            "button": {
-                "class": "ctrlbutton"
-            },
-            "successKeywords": [
-                "登出"
-            ]
-        },
-        "route": {
-            "merit_demerit": "/StuAffairs/BrowseSelftRecord",
-            "attendance": "/StuAffairs/AbsForStu",
-            "exam_menu": "#",
-            "exam_results": "#",
-            "semester_scores": "/StuScoreQuery/ExportTranscript",
-            "curriculum": "/CCT/GetClassScheduleServlet"
-        },
-        "cookie": {
-            "merit_demerit": "/StuAffairs/LoginStu",
-            "attendance": "/StuAffairs/LoginStu",
-            "exam_menu": "/StuScoreQuery/LoginStu",
-            "exam_results": "#",
-            "semester_scores": "/StuScoreQuery/LoginStu",
-            "curriculum": "/CCT/LoginStu"
-        }
-    },
-    "沙鹿高工": {
-        "vision": "v8",
-        "app": 1.0,
-        "beta": false,
-        "api": "https://portal.k12.ntut.edu.tw",
-        "js": "var select = document.querySelector('select');select.value = '063407';select.dispatchEvent(new Event('change'));",
         "logined_api": "https://hsa.k12.ntut.edu.tw",
         "url": {
             "login": "/",
@@ -17902,7 +18450,7 @@
             "curriculum": "/CCT/LoginStu"
         }
     },
-    "屏東東港高中": {
+    "東港高中": {
         "vision": "v8",
         "app": 1.0,
         "beta": false,
@@ -19348,51 +19896,6 @@
         "beta": false,
         "api": "https://portal.k12.ntut.edu.tw",
         "js": "var select = document.querySelector('select');select.value = '193F02';select.dispatchEvent(new Event('change'));",
-        "logined_api": "https://hsa.k12.ntut.edu.tw",
-        "url": {
-            "login": "/",
-            "logined": "/home",
-            "root": "/"
-        },
-        "login": {
-            "username": {
-                "name": "username"
-            },
-            "password": {
-                "name": "password"
-            },
-            "captcha": {},
-            "captchaImage": {},
-            "button": {
-                "class": "ctrlbutton"
-            },
-            "successKeywords": [
-                "登出"
-            ]
-        },
-        "route": {
-            "merit_demerit": "/StuAffairs/BrowseSelftRecord",
-            "attendance": "/StuAffairs/AbsForStu",
-            "exam_menu": "#",
-            "exam_results": "#",
-            "semester_scores": "/StuScoreQuery/ExportTranscript",
-            "curriculum": "/CCT/GetClassScheduleServlet"
-        },
-        "cookie": {
-            "merit_demerit": "/StuAffairs/LoginStu",
-            "attendance": "/StuAffairs/LoginStu",
-            "exam_menu": "/StuScoreQuery/LoginStu",
-            "exam_results": "#",
-            "semester_scores": "/StuScoreQuery/LoginStu",
-            "curriculum": "/CCT/LoginStu"
-        }
-    },
-    "臺中二中": {
-        "vision": "v8",
-        "app": 1.0,
-        "beta": false,
-        "api": "https://portal.k12.ntut.edu.tw",
-        "js": "var select = document.querySelector('select');select.value = '194303';select.dispatchEvent(new Event('change'));",
         "logined_api": "https://hsa.k12.ntut.edu.tw",
         "url": {
             "login": "/",
