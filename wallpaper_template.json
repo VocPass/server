@@ -53,7 +53,7 @@
         "stickers": 0,
         "font_size": 5,
         "font_color": "#000000",
-        "font_family": "台北黑體"
+        "font_family": "辰宇落雁體"
     },
     {
         "name": "小丹的課表",
@@ -109,6 +109,66 @@
         "stickers": 0,
         "font_size": 5,
         "font_color": "#000000",
-        "font_family": "台北黑體"
+        "font_family": "辰宇落雁體"
+    },
+    {
+        "name": "Test",
+        "author": "VocPass",
+        "author_url": "https://vocpass.com",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/schedule_template/preview.png",
+        "images": {
+            "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/background0.png"
+            ],
+            "stickers": [
+                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker0.png",
+                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker1.png",
+                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker2.png",
+            ],
+            "table": {
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table7.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 1000
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table8.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 700
+                },
+                "9": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table9.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 450
+                },
+                "10": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table10.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 140
+                }
+            }
+        },
+        "table_opacity": 1,
+        "top": 30,
+        "stickers": 0,
+        "font_size": 5,
+        "font_color": "#000000",
+        "font_family": "辰宇落雁體"
     }
 ]
