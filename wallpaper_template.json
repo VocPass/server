@@ -53,7 +53,7 @@
         "stickers": 0,
         "font_size": 5,
         "font_color": "#000000",
-        "font_family": "辰宇落雁體"
+        "font_family": "铁蒺藜体"
     },
     {
         "name": "小丹的課表",
@@ -109,7 +109,7 @@
         "stickers": 0,
         "font_size": 5,
         "font_color": "#000000",
-        "font_family": "辰宇落雁體"
+        "font_family": "铁蒺藜体"
     },
     {
         "name": "Test",
@@ -169,6 +169,6 @@
         "stickers": 0,
         "font_size": 5,
         "font_color": "#000000",
-        "font_family": "辰宇落雁體"
+        "font_family": "铁蒺藜体"
     }
 ]
