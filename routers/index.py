@@ -60,6 +60,11 @@ async def creator_policy():
     return FileResponse("templates/creator-policy.html")
 
 
+@router.get("/terms-of-use", summary="內容使用條款")
+async def terms_of_use():
+    return FileResponse("templates/terms-of-use.html")
+
+
 @router.get("/school")
 async def get_all_schools(request: Request):
     return request.app.state.schools
