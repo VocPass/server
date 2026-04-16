@@ -118,14 +118,14 @@
         "preview": "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png",
         "images": {
             "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/background0.png"
+            ],
+            "stickers": [
                 "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/sticker0.png",
                 "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/sticker1.png",
                 "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/sticker2.png",
                 "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/sticker3.png",
                 "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/sticker4.png"
-            ],
-            "stickers": [
-                "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/background0.png"
             ],
             "table": {
                 "7": {
