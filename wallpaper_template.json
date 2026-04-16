@@ -132,62 +132,62 @@
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/table7.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 1000
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 980,
+                    "bottom": 520
                 },
                 "8": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/table8.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 700
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 850,
+                    "bottom": 390
                 },
                 "9": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/table9.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 450
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 720,
+                    "bottom": 250
                 },
                 "10": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/table10.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 140
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 590,
+                    "bottom": 90
                 },
                 "11": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/table11.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 140
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 590,
+                    "bottom": 200
                 },
                 "12": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/noba_starrr/table12.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 140
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 590,
+                    "bottom": 200
                 }
             }
         },
         "table_opacity": 1,
         "top": 30,
         "stickers": 0,
-        "font_size": 5,
+        "font_size": 7,
         "font_color": "#000000",
         "font_family": "快去写作业"
     },
