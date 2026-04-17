@@ -21251,7 +21251,8 @@
             "captchaImage": {},
             "button": {},
             "successKeywords": [
-                "修改密碼"
+                "修改密碼",
+                "使用說明"
             ]
         },
         "route": {
