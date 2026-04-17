@@ -1,18 +1,229 @@
 {
-    "英語文": {
-        "count": 2,
+    "數學": {
+        "count": 3,
         "schedule": [
             {
                 "weekday": "一",
                 "period": "一",
                 "start": "08:10",
-                "end": "09:00"
+                "end": "09:00",
+                "teacher": "XXX"
             },
+            {
+                "weekday": "二",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "三",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "四",
+                "period": "五",
+                "start": "13:20",
+                "end": "14:10",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "公民與社會": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "思維與運算": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "三",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "視覺藝術": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "四",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "國語文": {
+        "count": 5,
+        "schedule": [
+            {
+                "weekday": "五",
+                "period": "一",
+                "start": "08:10",
+                "end": "09:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "一",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "三",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "四",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "二",
+                "period": "六",
+                "start": "14:20",
+                "end": "15:10",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "輔導": {
+        "count": 1,
+        "schedule": [
             {
                 "weekday": "一",
                 "period": "二",
                 "start": "09:10",
-                "end": "10:00"
+                "end": "10:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "魔法繪本變變變": {
+        "count": 2,
+        "schedule": [
+            {
+                "weekday": "三",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "五",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "音樂": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "四",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "歷史": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "五",
+                "period": "二",
+                "start": "09:10",
+                "end": "10:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "英語文": {
+        "count": 3,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "一",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "三",
+                "period": "五",
+                "start": "13:20",
+                "end": "14:10",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "表演藝術": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "四",
+                "period": "三",
+                "start": "10:10",
+                "end": "11:00",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "生物": {
+        "count": 3,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "四",
+                "start": "11:10",
+                "end": "12:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "二",
+                "period": "七",
+                "start": "15:25",
+                "end": "16:15",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "三",
+                "period": "七",
+                "start": "15:25",
+                "end": "16:15",
+                "teacher": "XXX"
             }
         ]
     },
@@ -20,257 +231,179 @@
         "count": 2,
         "schedule": [
             {
-                "weekday": "二",
-                "period": "一",
-                "start": "08:10",
-                "end": "09:00"
-            },
-            {
-                "weekday": "四",
+                "weekday": "五",
                 "period": "四",
                 "start": "11:10",
-                "end": "12:00"
+                "end": "12:00",
+                "teacher": "XXX"
+            },
+            {
+                "weekday": "三",
+                "period": "六",
+                "start": "14:20",
+                "end": "15:10",
+                "teacher": "XXX"
             }
         ]
     },
-    "作業系統實習": {
-        "count": 4,
+    "地理": {
+        "count": 1,
         "schedule": [
             {
-                "weekday": "三",
-                "period": "一",
-                "start": "08:10",
-                "end": "09:00"
-            },
-            {
-                "weekday": "三",
-                "period": "二",
-                "start": "09:10",
-                "end": "10:00"
-            },
-            {
-                "weekday": "三",
-                "period": "三",
-                "start": "10:10",
-                "end": "11:00"
-            },
-            {
-                "weekday": "三",
-                "period": "四",
-                "start": "11:10",
-                "end": "12:00"
+                "weekday": "一",
+                "period": "五",
+                "start": "13:20",
+                "end": "14:10",
+                "teacher": "XXX"
             }
         ]
     },
-    "選修跨班": {
-        "count": 6,
-        "schedule": [
-            {
-                "weekday": "四",
-                "period": "一",
-                "start": "08:10",
-                "end": "09:00"
-            },
-            {
-                "weekday": "五",
-                "period": "一",
-                "start": "08:10",
-                "end": "09:00"
-            },
-            {
-                "weekday": "四",
-                "period": "二",
-                "start": "09:10",
-                "end": "10:00"
-            },
-            {
-                "weekday": "五",
-                "period": "二",
-                "start": "09:10",
-                "end": "10:00"
-            },
-            {
-                "weekday": "四",
-                "period": "三",
-                "start": "10:10",
-                "end": "11:00"
-            },
-            {
-                "weekday": "五",
-                "period": "三",
-                "start": "10:10",
-                "end": "11:00"
-            }
-        ]
-    },
-    "全民國防教育": {
+    "問題解決與情緒管理": {
         "count": 1,
         "schedule": [
             {
                 "weekday": "二",
-                "period": "二",
-                "start": "09:10",
-                "end": "10:00"
+                "period": "五",
+                "start": "13:20",
+                "end": "14:10",
+                "teacher": "XXX"
             }
         ]
     },
-    "網路分析": {
-        "count": 3,
-        "schedule": [
-            {
-                "weekday": "一",
-                "period": "三",
-                "start": "10:10",
-                "end": "11:00"
-            },
-            {
-                "weekday": "一",
-                "period": "四",
-                "start": "11:10",
-                "end": "12:00"
-            },
-            {
-                "weekday": "四",
-                "period": "七",
-                "start": "15:10",
-                "end": "16:00"
-            }
-        ]
-    },
-    "國語文": {
-        "count": 2,
-        "schedule": [
-            {
-                "weekday": "二",
-                "period": "三",
-                "start": "10:10",
-                "end": "11:00"
-            },
-            {
-                "weekday": "二",
-                "period": "四",
-                "start": "11:10",
-                "end": "12:00"
-            }
-        ]
-    },
-    "趣味英文閱讀": {
+    "班級活動": {
         "count": 1,
         "schedule": [
             {
                 "weekday": "五",
-                "period": "四",
-                "start": "11:10",
-                "end": "12:00"
+                "period": "五",
+                "start": "13:20",
+                "end": "14:10",
+                "teacher": "XXX"
             }
         ]
     },
-    "統整數學": {
-        "count": 4,
+    "資訊科技": {
+        "count": 1,
         "schedule": [
             {
                 "weekday": "一",
-                "period": "五",
-                "start": "13:10",
-                "end": "14:00"
-            },
-            {
-                "weekday": "四",
-                "period": "五",
-                "start": "13:10",
-                "end": "14:00"
-            },
-            {
-                "weekday": "一",
                 "period": "六",
-                "start": "14:10",
-                "end": "15:00"
-            },
+                "start": "14:20",
+                "end": "15:10",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "生活科技": {
+        "count": 1,
+        "schedule": [
             {
                 "weekday": "四",
                 "period": "六",
-                "start": "14:10",
-                "end": "15:00"
+                "start": "14:20",
+                "end": "15:10",
+                "teacher": "XXX"
             }
         ]
     },
-    "專題實作": {
-        "count": 3,
-        "schedule": [
-            {
-                "weekday": "二",
-                "period": "五",
-                "start": "13:10",
-                "end": "14:00"
-            },
-            {
-                "weekday": "二",
-                "period": "六",
-                "start": "14:10",
-                "end": "15:00"
-            },
-            {
-                "weekday": "二",
-                "period": "七",
-                "start": "15:10",
-                "end": "16:00"
-            }
-        ]
-    },
-    "數位電子實習": {
-        "count": 3,
-        "schedule": [
-            {
-                "weekday": "三",
-                "period": "五",
-                "start": "13:10",
-                "end": "14:00"
-            },
-            {
-                "weekday": "三",
-                "period": "六",
-                "start": "14:10",
-                "end": "15:00"
-            },
-            {
-                "weekday": "三",
-                "period": "七",
-                "start": "15:10",
-                "end": "16:00"
-            }
-        ]
-    },
-    "團體活動時間": {
-        "count": 3,
+    "社團": {
+        "count": 1,
         "schedule": [
             {
                 "weekday": "五",
-                "period": "五",
-                "start": "13:10",
-                "end": "14:00"
-            },
-            {
-                "weekday": "五",
                 "period": "六",
-                "start": "14:10",
-                "end": "15:00"
-            },
-            {
-                "weekday": "五",
-                "period": "七",
-                "start": "15:10",
-                "end": "16:00"
+                "start": "14:20",
+                "end": "15:10"
             }
         ]
     },
-    "國語文閱讀與寫作": {
+    "童軍": {
         "count": 1,
         "schedule": [
             {
                 "weekday": "一",
                 "period": "七",
-                "start": "15:10",
-                "end": "16:00"
+                "start": "15:25",
+                "end": "16:15",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "健康教育": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "四",
+                "period": "七",
+                "start": "15:25",
+                "end": "16:15",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "家政": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "五",
+                "period": "七",
+                "start": "15:25",
+                "end": "16:15",
+                "teacher": "XXX"
+            }
+        ]
+    },
+    "西點烘焙": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "一",
+                "period": "八",
+                "start": "16:20",
+                "end": "17:10",
+                "room": "家政教室"
+            }
+        ]
+    },
+    "英文口說加強": {
+        "count": 3,
+        "schedule": [
+            {
+                "weekday": "二",
+                "period": "八",
+                "start": "16:20",
+                "end": "17:10",
+                "teacher": "XXX",
+                "room": "103教室"
+            },
+            {
+                "weekday": "三",
+                "period": "八",
+                "start": "16:20",
+                "end": "17:10",
+                "teacher": "XXX",
+                "room": "103教室"
+            },
+            {
+                "weekday": "四",
+                "period": "八",
+                "start": "16:20",
+                "end": "17:10",
+                "teacher": "XXX",
+                "room": "103教室"
+            }
+        ]
+    },
+    "創意自造家": {
+        "count": 1,
+        "schedule": [
+            {
+                "weekday": "四",
+                "period": "八",
+                "start": "16:20",
+                "end": "17:10",
+                "teacher": "XXX",
+                "room": "403電腦教室"
             }
         ]
     }

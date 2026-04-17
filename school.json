@@ -21229,5 +21229,38 @@
             "semester_scores": "/StuScoreQuery/LoginStu",
             "curriculum": "/CCT/LoginStu"
         }
+    },
+    "中壢家商": {
+        "vision": "v9",
+        "app": 1.0,
+        "beta": true,
+        "logined_api": "https://dell.clvs.tyc.edu.tw/skyweb",
+        "url": {
+            "login": "/",
+            "logined": "/f_head.asp",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "txtid"
+            },
+            "password": {
+                "name": "txtpwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "修改密碼"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/stu/stu_result6.asp",
+            "attendance": "/stu/stu_result4.asp",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "/stu/lesson.asp"
+        }
     }
 }

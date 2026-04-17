@@ -1,0 +1,193 @@
+from fastapi import APIRouter, Response, Request, status, Header, Depends
+from utils.debug import Debug
+from utils.http_client import HttpsClient
+from dotenv import load_dotenv
+
+import utils.v9 as v9
+from utils import metrics as m
+
+load_dotenv()
+router = APIRouter(prefix="/api/v9", tags=["v9 解析端點"])
+http = HttpsClient()
+
+
+def require_cookie_header(
+    cookie: str = Header(
+        ...,
+        alias="Cookie",
+        description="登入後取得的 Cookie 標頭",
+    )
+):
+    return cookie
+
+
+def send_debug_error(request: Request, error_message: str, school_name: str, page: str, status: int, response_body=None, traceback=None):
+    client = getattr(request.app.state, "pb_client", None)
+    return Debug(client).send_error(error_message, school_name, page, status, response_body=response_body, traceback=traceback)
+
+
+@router.get("/merit_demerit", summary="解析獎懲紀錄")
+async def get_merit_demerit(
+    request: Request,
+    response: Response,
+    school_name: str,
+    _cookie: str = Depends(require_cookie_header),
+):
+    """
+    取得獎懲紀錄，回傳 JSON 格式的獎懲紀錄列表。
+     - 需帶入 cookies
+     - **返回值**: 包含獎懲資料的 JSON 物件。
+    """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v9", data_type="merit_demerit").inc()
+
+    school = request.app.state.schools.get(school_name)
+    data = request.app.state.response
+    if not school:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        data["code"] = 400
+        data["message"] = "Unsupported school."
+        data["data"] = None
+        return data
+
+    url = f"{school['logined_api']}{school['route']['merit_demerit']}"
+    original_data = await http.get(url, request.cookies, encoding="utf-8", school_name=school_name, endpoint="merit_demerit")
+    if not original_data.data:
+        e = send_debug_error(request, "Failed to fetch original data.", school_name, "merit_demerit", original_data.code)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        data["code"] = original_data.code
+        data["error_id"] = e
+        data["message"] = "Failed to fetch original data."
+        data["data"] = None
+        return data
+
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = v9.parse_merit_demerit_records(original_data.data)
+    return data
+
+
+@router.get("/attendance", summary="解析出缺紀錄")
+async def get_attendance(
+    request: Request,
+    response: Response,
+    school_name: str,
+    _cookie: str = Depends(require_cookie_header),
+):
+    """
+    取得出勤紀錄，回傳 JSON 格式的出勤紀錄列表。
+     - 需帶入 cookies
+     - **返回值**: 包含出勤資料的 JSON 物件。
+    """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v9", data_type="attendance").inc()
+
+    school = request.app.state.schools.get(school_name)
+    data = request.app.state.response
+    if not school:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        data["code"] = 400
+        data["message"] = "Unsupported school."
+        data["data"] = None
+        return data
+
+    url = f"{school['logined_api']}{school['route']['attendance']}"
+    original_data = await http.get(url, request.cookies, encoding="utf-8", school_name=school_name, endpoint="attendance")
+    if not original_data.data:
+        e = send_debug_error(request, "Failed to fetch original data.", school_name, "attendance", original_data.code)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        data["code"] = original_data.code
+        data["error_id"] = e
+        data["message"] = "Failed to fetch original data."
+        data["data"] = None
+        return data
+
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = v9.parse_absence_records(original_data.data)
+    return data
+
+
+@router.get("/exam_menu", summary="解析考試選單")
+async def get_exam_menu(
+    request: Request,
+    response: Response,
+    school_name: str,
+    _cookie: str = Depends(require_cookie_header),
+):
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v9", data_type="exam_menu").inc()
+    data = request.app.state.response
+    data["code"] = 404
+    data["message"] = "Not supported"
+    response.status_code = status.HTTP_404_NOT_FOUND
+    return data
+
+
+@router.get("/exam_results", summary="解析考試成績")
+async def get_exam_results(
+    request: Request,
+    response: Response,
+    school_name: str,
+    exam: str,
+    _cookie: str = Depends(require_cookie_header),
+):
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v9", data_type="exam_results").inc()
+    data = request.app.state.response
+    data["code"] = 404
+    data["message"] = "Not supported"
+    response.status_code = status.HTTP_404_NOT_FOUND
+    return data
+
+
+@router.get("/semester_scores", summary="解析學期成績")
+async def get_semester_scores(
+    request: Request,
+    response: Response,
+    school_name: str,
+    semester: int = 1,
+    _cookie: str = Depends(require_cookie_header),
+):
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v9", data_type="semester_scores").inc()
+    data = request.app.state.response
+    data["code"] = 404
+    data["message"] = "Not supported"
+    response.status_code = status.HTTP_404_NOT_FOUND
+    return data
+
+
+@router.get("/curriculum", summary="解析課表")
+async def get_curriculum(
+    request: Request,
+    response: Response,
+    school_name: str,
+    _cookie: str = Depends(require_cookie_header),
+):
+    """
+    取得課表，回傳 JSON 格式的課程表資料。
+     - 需帶入 cookies
+     - **返回值**: 包含課表資料的 JSON 物件。
+    """
+    m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v9", data_type="curriculum").inc()
+
+    school = request.app.state.schools.get(school_name)
+    data = request.app.state.response
+    if not school:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        data["code"] = 400
+        data["message"] = "Unsupported school."
+        data["data"] = None
+        return data
+
+    url = f"{school['logined_api']}{school['route']['curriculum']}"
+    original_data = await http.get(url, request.cookies, encoding="utf-8", school_name=school_name, endpoint="curriculum")
+    if not original_data.data:
+        e = send_debug_error(request, "Failed to fetch original data.", school_name, "curriculum", original_data.code)
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        data["code"] = original_data.code
+        data["error_id"] = e
+        data["message"] = "Failed to fetch original data."
+        data["data"] = None
+        return data
+
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = v9.parse_curriculum(original_data.data)
+    return data
