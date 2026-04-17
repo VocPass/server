@@ -21233,8 +21233,8 @@
     "中壢家商": {
         "vision": "v9",
         "app": 1.0,
-        "beta": true,
-        "logined_api": "https://dell.clvs.tyc.edu.tw/skyweb",
+        "beta": false,
+        "api": "https://dell.clvs.tyc.edu.tw/skyweb",
         "url": {
             "login": "/",
             "logined": "/f_head.asp",
