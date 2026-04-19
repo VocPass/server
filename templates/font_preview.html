@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字體預覽</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f5f5f5;
+      padding: 2rem;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+    }
+
+    .label {
+      font-size: .75rem;
+      color: #999;
+      margin-bottom: .5rem;
+    }
+
+    .preview {
+      font-size: 1.6rem;
+      line-height: 1.5;
+      color: #222;
+      min-height: 2.4rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="title">字體預覽</h1>
+  <div class="grid">
+    <div class="card">
+      <div class="label">Noto Sans TC (NotoSansTC)</div>
+      <div class="preview emfont-NotoSansTC" id="preview-NotoSansTC"></div>
+    </div>
+    <div class="card">
+      <div class="label">台北黑體 (TaipeiSansTC)</div>
+      <div class="preview emfont-TaipeiSansTC" id="preview-TaipeiSansTC"></div>
+    </div>
+    <div class="card">
+      <div class="label">辰宇落雁體 (ChenYuLuoYan)</div>
+      <div class="preview emfont-ChenYuLuoYan" id="preview-ChenYuLuoYan"></div>
+    </div>
+    <div class="card">
+      <div class="label">得意黑 (SmileySans)</div>
+      <div class="preview emfont-SmileySans" id="preview-SmileySans"></div>
+    </div>
+    <div class="card">
+      <div class="label">大波浪圓體 (PopGothicTC)</div>
+      <div class="preview emfont-PopGothicTC" id="preview-PopGothicTC"></div>
+    </div>
+    <div class="card">
+      <div class="label">铁蒺藜体 (Tiejili)</div>
+      <div class="preview emfont-Tiejili" id="preview-Tiejili"></div>
+    </div>
+    <div class="card">
+      <div class="label">寒蝉点阵体 (ChillBitmap16px)</div>
+      <div class="preview emfont-ChillBitmap16px" id="preview-ChillBitmap16px"></div>
+    </div>
+    <div class="card">
+      <div class="label">快去寫作業 (CEFFontsCJK)</div>
+      <div class="preview emfont-CEFFontsCJK" id="preview-CEFFontsCJK"></div>
+    </div>
+  </div>
+  <script src="https://font.emtech.cc/emfont.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const text = params.get("text") || "永夜後的黎明ABC123";
+    document.getElementById("title").textContent = "字體預覽 — " + text;
+    document.querySelectorAll(".preview").forEach(el => el.textContent = text);
+    emfont.init();
+  </script>
+</body>
+
+</html>
