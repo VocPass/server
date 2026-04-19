@@ -58,7 +58,7 @@ async def get_font(request: Request, response: Response):
     return data
 
 
-@router.get("/status", summary="取得統計資訊")
+@router.get("/curriculum/status", summary="取得統計資訊")
 async def get_status(request: Request, response: Response):
     db = request.app.state.pb_client
     od = db.collection("wallpaper_use").get_full_list()
@@ -73,7 +73,7 @@ async def get_status(request: Request, response: Response):
     return data
 
 
-@router.post("/status", summary="更新統計資訊")
+@router.post("/curriculum/status", summary="更新統計資訊")
 async def update_status(request: Request, response: Response, wallpaper_name: str):
     db = request.app.state.pb_client
     data = request.app.state.response
