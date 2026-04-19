@@ -50,6 +50,11 @@ async def get_font(request: Request, response: Response):
         "大波浪圓體": f"{font_url}PopGothicCjkTc-Regular.ttf",
         "铁蒺藜体": f"{font_url}TiejiliSC-Regular.ttf",
         "寒蝉点阵体": f"{font_url}ChillBitmap_16px.ttf",
+        "jf open 粉圓": f"{font_url}jf-openhuninn-2.1.ttf",
+        "思源宋體": f"{font_url}NotoSerifTC-Regular.ttf",
+        "光芒黑體": f"{font_url}GlowSansTC-Normal-Regular.ttf",
+        "霞鶩文楷": f"{font_url}LXGWWenKaiTC-Regular.ttf",
+        "LINE Seed TW": f"{font_url}LINESeedTW-Regular.ttf",
     }
     data = request.app.state.response
     data["code"] = 200
