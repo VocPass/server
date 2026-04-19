@@ -155,62 +155,62 @@
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/dudu/table7.png"
                     ],
-                    "left": 210,
-                    "right": 110,
-                    "top_inset": 980,
-                    "bottom": 520
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 630
                 },
                 "8": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/dudu/table8.png"
                     ],
-                    "left": 210,
-                    "right": 110,
-                    "top_inset": 850,
-                    "bottom": 390
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 510
                 },
                 "9": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/dudu/table9.png"
                     ],
-                    "left": 210,
-                    "right": 110,
-                    "top_inset": 720,
-                    "bottom": 250
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 390
                 },
                 "10": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/dudu/table10.png"
                     ],
-                    "left": 210,
-                    "right": 110,
-                    "top_inset": 590,
-                    "bottom": 90
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 270
                 },
                 "11": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/dudu/table11.png"
                     ],
-                    "left": 210,
-                    "right": 110,
-                    "top_inset": 590,
-                    "bottom": 200
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 150
                 },
                 "12": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/dudu/table12.png"
                     ],
-                    "left": 210,
-                    "right": 110,
-                    "top_inset": 590,
-                    "bottom": 200
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 30
                 }
             }
         },
         "table_opacity": 1,
         "top": 30,
         "stickers": 0,
-        "font_size": 7,
+        "font_size": 6,
         "font_color": "#000000",
         "font_family": "快去写作业"
     },
