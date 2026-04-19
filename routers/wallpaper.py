@@ -56,3 +56,18 @@ async def get_font(request: Request, response: Response):
     data["message"] = "Success."
     data["data"] = fonts
     return data
+
+
+@router.get("/status", summary="取得統計資訊")
+async def get_status(request: Request, response: Response):
+    db = request.app.state.pb_client
+    od = db.collection("wallpaper_use").get_full_list()
+    r = {}
+    for i in od:
+        r[i.name] = len(i.users)
+    
+    data = request.app.state.response
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = r
+    return data
