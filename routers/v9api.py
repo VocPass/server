@@ -49,7 +49,7 @@ async def get_merit_demerit(
         data["data"] = None
         return data
 
-    url = f"{school['logined_api']}{school['route']['merit_demerit']}"
+    url = f"{school['api']}{school['route']['merit_demerit']}"
     original_data = await http.get(url, request.cookies, encoding="utf-8", school_name=school_name, endpoint="merit_demerit")
     if not original_data.data:
         e = send_debug_error(request, "Failed to fetch original data.", school_name, "merit_demerit", original_data.code)
@@ -89,7 +89,7 @@ async def get_attendance(
         data["data"] = None
         return data
 
-    url = f"{school['logined_api']}{school['route']['attendance']}"
+    url = f"{school['api']}{school['route']['attendance']}"
     original_data = await http.get(url, request.cookies, encoding="utf-8", school_name=school_name, endpoint="attendance")
     if not original_data.data:
         e = send_debug_error(request, "Failed to fetch original data.", school_name, "attendance", original_data.code)
@@ -176,7 +176,7 @@ async def get_curriculum(
         data["data"] = None
         return data
 
-    url = f"{school['logined_api']}{school['route']['curriculum']}"
+    url = f"{school['api']}{school['route']['curriculum']}"
     original_data = await http.get(url, request.cookies, encoding="utf-8", school_name=school_name, endpoint="curriculum")
     if not original_data.data:
         e = send_debug_error(request, "Failed to fetch original data.", school_name, "curriculum", original_data.code)
