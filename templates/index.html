@@ -95,7 +95,36 @@
         .text-gradient-brand {
             background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* 桌布輪播隱藏捲軸 */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 桌布模板卡 */
+        .wallpaper-card {
+            flex-shrink: 0;
+            width: 160px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+            scroll-snap-align: start;
+        }
+        @media (min-width: 768px) { .wallpaper-card { width: 200px; } }
+        .wallpaper-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 24px 48px -8px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.12);
+        }
+        .wallpaper-card img { width: 100%; aspect-ratio: 9/19.5; object-fit: cover; display: block; }
+        .wallpaper-card .card-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 40px 12px 14px;
+            background: linear-gradient(to top, rgba(0,0,0,.82) 0%, transparent 100%);
         }
     </style>
 </head>
@@ -109,6 +138,8 @@
             </div>
             <div class="hidden md:flex items-center gap-7">
                 <a href="#features" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">特色</a>
+                <a href="#wallpaper" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">桌布</a>
+                <a href="#w2m" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">約時間</a>
                 <a href="#schools" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">支援學校</a>
                 <a href="#status" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">服務狀態</a>
                 <a href="https://github.com/VocPass" target="_blank" class="text-gray-400 hover:text-gray-900 transition-colors">
@@ -204,6 +235,7 @@
                 <p class="text-gray-500 text-base md:text-lg">極致流暢的使用體驗，保護隱私的本地架構。</p>
             </div>
 
+
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:auto-rows-[220px]">
 
                 <!-- 課表：手機全寬，桌面跨2欄2列 -->
@@ -271,6 +303,125 @@
                         </div>
                     </div>
 
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 桌布產生器 ===== -->
+    <section id="wallpaper" class="py-20 md:py-32 px-5 overflow-hidden" style="background:linear-gradient(160deg,#0a0a0a 0%,#111827 60%,#0f172a 100%)">
+        <div class="max-w-6xl mx-auto relative">
+
+            <!-- 背景光暈 -->
+            <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none" style="background:radial-gradient(ellipse,rgba(99,102,241,.25) 0%,transparent 65%)"></div>
+
+            <div class="relative z-10 text-center mb-12 md:mb-20" data-aos="fade-up">
+                <h2 class="text-3xl md:text-6xl font-black tracking-tight text-white mb-4">
+                    桌布產生器：<br class="md:hidden"/>讓課表<span style="background:linear-gradient(135deg,#818cf8,#38bdf8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent"> 成為藝術</span>
+                </h2>
+                <p class="text-gray-400 text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
+                    由獨立插畫家設計的主題，將你的課表自動變成一張讓人驚豔的手機桌布。
+                </p>
+            </div>
+
+            <!-- 模板卡片輪播（可拖曳滾動） -->
+            <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                <div id="wallpaper-carousel" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-hide select-none" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;">
+                    <!-- 由 JS 動態填入 -->
+                </div>
+                <!-- 漸層遮罩 -->
+                <div class="absolute right-0 top-0 h-full w-24 pointer-events-none" style="background:linear-gradient(to left,#0f172a,transparent)"></div>
+                <div class="absolute left-0 top-0 h-full w-10 pointer-events-none" style="background:linear-gradient(to right,#0a0a0a,transparent)"></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-10 md:mt-14 text-center" data-aos="fade-up" data-aos-delay="150">
+                <p class="text-gray-500 text-sm mb-4">支援多款中文字體 · 多款主題持續更新中</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== When2Meet ===== -->
+    <section id="w2m" class="py-20 md:py-32 px-5 bg-white border-t border-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+
+                <!-- 左側文字 -->
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight text-gray-900 mb-5 leading-tight">
+                        When2Meet：找到<br/>每個人<span style="background:linear-gradient(135deg,#0d9488,#06b6d4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">都有空的時間</span>
+                    </h2>
+                    <p class="text-gray-500 text-base md:text-lg leading-relaxed mb-8">
+                        建立活動、選定候選日期，所有成員各自填寫空閒時間。系統自動計算重疊區間，幫你找到最佳集合時段。
+                    </p>
+
+                    <!-- 功能列表 -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 shrink-0"><i class="fa-solid fa-link"></i></div>
+                            <div>
+                                <div class="font-semibold text-gray-900 mb-0.5">一鍵分享活動連結</div>
+                                <div class="text-sm text-gray-500">把連結傳給朋友，不用安裝 App 就能在瀏覽器填寫空閒。</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 shrink-0"><i class="fa-solid fa-bell"></i></div>
+                            <div>
+                                <div class="font-semibold text-gray-900 mb-0.5">即時推播通知</div>
+                                <div class="text-sm text-gray-500">有人填寫後立即通知活動建立者，不漏接任何更新。</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 shrink-0"><i class="fa-solid fa-table-cells"></i></div>
+                            <div>
+                                <div class="font-semibold text-gray-900 mb-0.5">視覺化時段熱力圖</div>
+                                <div class="text-sm text-gray-500">以顏色深淺直觀呈現每個時段有多少人空閒，一眼看出最佳時間。</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側示意圖 -->
+                <div data-aos="fade-up">
+                    <div class="relative rounded-3xl overflow-hidden border border-gray-100 shadow-2xl shadow-gray-200/60" style="background:linear-gradient(135deg,#f0fdfa,#e0f2fe)">
+                        <div class="p-6 md:p-8">
+                            <!-- 模擬活動標頭 -->
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <div class="text-xs font-semibold text-teal-600 mb-1 uppercase tracking-wider">活動</div>
+                                    <div class="text-xl font-bold text-gray-900">期末聚餐</div>
+                                </div>
+                                <div class="flex -space-x-2">
+                                    <div class="w-8 h-8 rounded-full bg-teal-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">A</div>
+                                    <div class="w-8 h-8 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">B</div>
+                                    <div class="w-8 h-8 rounded-full bg-purple-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">C</div>
+                                    <div class="w-8 h-8 rounded-full bg-rose-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">+2</div>
+                                </div>
+                            </div>
+                            <!-- 熱力格模擬（預先佔位，JS 接管後替換顏色） -->
+                            <div id="w2m-heatmap" class="grid gap-1" style="grid-template-columns:repeat(5,1fr);min-height:260px">
+                                <!-- 50 個預設格子，避免 JS 填入前高度跳動 -->
+                                <div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div>
+                                <div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-teal-200"></div><div class="h-6 rounded-sm bg-teal-200"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-teal-100"></div>
+                                <div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-teal-400"></div><div class="h-6 rounded-sm bg-teal-400"></div><div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-teal-200"></div>
+                                <div class="h-6 rounded-sm bg-teal-200"></div><div class="h-6 rounded-sm bg-teal-500"></div><div class="h-6 rounded-sm bg-teal-500"></div><div class="h-6 rounded-sm bg-teal-200"></div><div class="h-6 rounded-sm bg-teal-400"></div>
+                                <div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-teal-400"></div><div class="h-6 rounded-sm bg-teal-500"></div><div class="h-6 rounded-sm bg-teal-400"></div><div class="h-6 rounded-sm bg-teal-200"></div>
+                                <div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-teal-200"></div><div class="h-6 rounded-sm bg-teal-400"></div><div class="h-6 rounded-sm bg-teal-500"></div><div class="h-6 rounded-sm bg-teal-200"></div>
+                                <div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-teal-200"></div><div class="h-6 rounded-sm bg-teal-400"></div><div class="h-6 rounded-sm bg-teal-100"></div>
+                                <div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-teal-200"></div><div class="h-6 rounded-sm bg-gray-100"></div>
+                                <div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-teal-100"></div><div class="h-6 rounded-sm bg-gray-100"></div>
+                                <div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div><div class="h-6 rounded-sm bg-gray-100"></div>
+                            </div>
+                            <div class="mt-4 flex items-center justify-between text-xs text-gray-400">
+                                <span>週一</span><span>週二</span><span>週三</span><span>週四</span><span>週五</span>
+                            </div>
+                            <div class="mt-5 pt-4 border-t border-gray-200/60 flex items-center justify-between">
+                                <span class="text-xs text-gray-500">5 人參與 · 最佳：週三下午</span>
+                                <span class="text-xs font-semibold text-teal-600 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> 已找到時段</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -738,6 +889,123 @@
             }
         }
         loadDevelopers();
+
+        // ── 桌布模板輪播 ──────────────────────────────────
+        async function loadWallpaperCarousel() {
+            const carousel = document.getElementById('wallpaper-carousel');
+            if (!carousel) return;
+
+            let templates = [];
+            try {
+                const res = await fetch('/api/wallpaper/curriculum');
+                if (res.ok) templates = await res.json();
+            } catch (e) {}
+
+            // fallback：硬編碼已知模板
+            if (!templates.length) {
+                templates = [
+                    { name: '（你說這節什麼課？）', author: 'little monster', preview: 'https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/preview.png' },
+                    { name: '諾巴與灰塵', author: '諾巴Noba', preview: 'https://cdn.vocpass.com/wallpaper_assets/noba_starrr/preview.png' },
+                    { name: 'DuDu', author: 'DuDu', preview: 'https://cdn.vocpass.com/wallpaper_assets/dudu/preview.png' },
+                    { name: '小丹的課表', author: '小丹', preview: 'https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png' },
+                ];
+            }
+
+            carousel.innerHTML = templates.map((t, i) => `
+                <div class="wallpaper-card" style="animation-delay:${i * 60}ms" data-aos="fade-up" data-aos-delay="${i * 60}">
+                    <img src="${t.preview}" alt="${t.name}" loading="lazy">
+                    <div class="card-overlay">
+                        <div class="text-white font-bold text-sm leading-tight truncate">${t.name}</div>
+                        <div class="text-gray-300 text-xs mt-0.5 truncate">by ${t.author}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        loadWallpaperCarousel();
+
+        // 桌布輪播：拖曳滾動 + 自動播放
+        (function initCarousel() {
+            const el = document.getElementById('wallpaper-carousel');
+            if (!el) return;
+
+            // 自動播放
+            let autoTimer = null;
+            let userInteracting = false;
+
+            function startAuto() {
+                stopAuto();
+                autoTimer = setInterval(() => {
+                    if (userInteracting) return;
+                    const maxScroll = el.scrollWidth - el.clientWidth;
+                    if (el.scrollLeft >= maxScroll - 2) {
+                        el.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        el.scrollBy({ left: 210, behavior: 'smooth' });
+                    }
+                }, 2200);
+            }
+            function stopAuto() { clearInterval(autoTimer); }
+
+            // 等 loadWallpaperCarousel 填充後再啟動
+            const observer = new MutationObserver(() => {
+                if (el.children.length > 0) { observer.disconnect(); startAuto(); }
+            });
+            observer.observe(el, { childList: true });
+            // 如果已有內容
+            if (el.children.length > 0) startAuto();
+
+            // 拖曳
+            let isDown = false, startX, scrollLeft;
+            el.addEventListener('mousedown', e => {
+                isDown = true; userInteracting = true;
+                el.style.cursor = 'grabbing';
+                startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft;
+            });
+            el.addEventListener('mouseleave', () => {
+                isDown = false; el.style.cursor = 'grab';
+                userInteracting = false;
+            });
+            el.addEventListener('mouseup', () => {
+                isDown = false; el.style.cursor = 'grab';
+                setTimeout(() => { userInteracting = false; }, 2000);
+            });
+            el.addEventListener('mousemove', e => {
+                if (!isDown) return; e.preventDefault();
+                el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX) * 1.5;
+            });
+            // 觸控滑動後也暫停自動播放 2 秒
+            el.addEventListener('touchstart', () => { userInteracting = true; }, { passive: true });
+            el.addEventListener('touchend', () => { setTimeout(() => { userInteracting = false; }, 2000); });
+        })();
+
+        // ── w2m 熱力圖動畫（操作預先渲染的格子，不改變 DOM 結構） ──
+        (function buildW2mHeatmap() {
+            const grid = document.getElementById('w2m-heatmap');
+            if (!grid) return;
+            const pattern = [
+                [1,2,1,0,1],[2,4,3,1,2],[2,5,4,2,3],
+                [3,5,5,3,4],[2,4,5,4,3],[1,3,4,5,3],
+                [0,2,3,4,2],[0,1,2,3,1],[0,0,1,2,0],[0,0,0,1,0],
+            ];
+            const colors = ['bg-gray-100','bg-teal-100','bg-teal-200','bg-teal-400','bg-teal-500','bg-teal-600'];
+            const divs = Array.from(grid.children);
+            // 套用正確顏色（替換預設佔位顏色）
+            divs.forEach((div, i) => {
+                const r = Math.floor(i / 5), c = i % 5;
+                if (r < pattern.length) div.className = `h-6 rounded-sm ${colors[pattern[r][c]]} transition-all duration-700`;
+            });
+            const hotCells = divs.filter((_, i) => {
+                const r = Math.floor(i / 5), c = i % 5;
+                return r < pattern.length && pattern[r][c] === 5;
+            });
+            let pulse = false;
+            setInterval(() => {
+                pulse = !pulse;
+                hotCells.forEach(el => {
+                    el.className = `h-6 rounded-sm ${pulse ? 'bg-teal-400' : 'bg-teal-600'} transition-all duration-700 ring-2 ring-teal-300/60`;
+                });
+            }, 1200);
+        })();
     </script>
 </body>
 </html>
