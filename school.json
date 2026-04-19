@@ -21252,7 +21252,8 @@
             "button": {},
             "successKeywords": [
                 "修改密碼",
-                "使用說明"
+                "使用說明",
+                "f_left.asp"
             ]
         },
         "route": {
