@@ -56,62 +56,6 @@
         "font_family": "铁蒺藜体"
     },
     {
-        "name": "小丹的課表",
-        "author": "小丹",
-        "author_url": "https://www.threads.com/@daniel_liao_",
-        "preview": "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png",
-        "images": {
-            "background": [
-                "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/background0.png"
-            ],
-            "stickers": [],
-            "table": {
-                "7": {
-                    "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table7.png"
-                    ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 1000
-                },
-                "8": {
-                    "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table8.png"
-                    ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 700
-                },
-                "9": {
-                    "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table9.png"
-                    ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 450
-                },
-                "10": {
-                    "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table10.png"
-                    ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 140
-                }
-            }
-        },
-        "table_opacity": 1,
-        "top": 30,
-        "stickers": 0,
-        "font_size": 5,
-        "font_color": "#000000",
-        "font_family": "铁蒺藜体"
-    },
-    {
         "name": "諾巴與灰塵",
         "author": "諾巴Noba",
         "author_url": "https://www.instagram.com/noba_starrr/",
@@ -190,6 +134,141 @@
         "font_size": 7,
         "font_color": "#000000",
         "font_family": "快去写作业"
+    },
+    {
+        "name": "DuDu",
+        "author": "DuDu",
+        "author_url": "https://vocpass.com",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/dudu/preview.png",
+        "images": {
+            "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/dudu/background0.png"
+            ],
+            "stickers": [
+                "https://cdn.vocpass.com/wallpaper_assets/dudu/sticker0.png",
+                "https://cdn.vocpass.com/wallpaper_assets/dudu/sticker1.png",
+                "https://cdn.vocpass.com/wallpaper_assets/dudu/sticker2.png",
+                "https://cdn.vocpass.com/wallpaper_assets/dudu/sticker3.png"
+            ],
+            "table": {
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/dudu/table7.png"
+                    ],
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 980,
+                    "bottom": 520
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/dudu/table8.png"
+                    ],
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 850,
+                    "bottom": 390
+                },
+                "9": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/dudu/table9.png"
+                    ],
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 720,
+                    "bottom": 250
+                },
+                "10": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/dudu/table10.png"
+                    ],
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 590,
+                    "bottom": 90
+                },
+                "11": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/dudu/table11.png"
+                    ],
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 590,
+                    "bottom": 200
+                },
+                "12": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/dudu/table12.png"
+                    ],
+                    "left": 210,
+                    "right": 110,
+                    "top_inset": 590,
+                    "bottom": 200
+                }
+            }
+        },
+        "table_opacity": 1,
+        "top": 30,
+        "stickers": 0,
+        "font_size": 7,
+        "font_color": "#000000",
+        "font_family": "快去写作业"
+    },
+    {
+        "name": "小丹的課表",
+        "author": "小丹",
+        "author_url": "https://www.threads.com/@daniel_liao_",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png",
+        "images": {
+            "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/background0.png"
+            ],
+            "stickers": [],
+            "table": {
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table7.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 1000
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table8.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 700
+                },
+                "9": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table9.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 450
+                },
+                "10": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/daniel_liao/table10.png"
+                    ],
+                    "left": 160,
+                    "right": 90,
+                    "top_inset": 130,
+                    "bottom": 140
+                }
+            }
+        },
+        "table_opacity": 1,
+        "top": 30,
+        "stickers": 0,
+        "font_size": 5,
+        "font_color": "#000000",
+        "font_family": "铁蒺藜体"
     },
     {
         "name": "Test",
