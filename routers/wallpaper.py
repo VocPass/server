@@ -71,3 +71,49 @@ async def get_status(request: Request, response: Response):
     data["message"] = "Success."
     data["data"] = r
     return data
+
+
+@router.post("/status", summary="更新統計資訊")
+async def update_status(request: Request, response: Response, wallpaper_name: str):
+    db = request.app.state.pb_client
+    data = request.app.state.response
+    token = request.headers.get("Authorization", "")
+    if not token:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        data["code"] = 401
+        data["message"] = "Unauthorized."
+        data["data"] = None
+        return data
+    user = get_user(token)
+    if not user:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        data["code"] = 401
+        data["message"] = "Unauthorized."
+        data["data"] = None
+        return data
+    user_id = user.id
+    od = db.collection("wallpaper_use").get_full_list()
+    for i in od:
+        if i.name == wallpaper_name:
+            if user_id not in i.users:
+                i.users.append(user_id)
+                db.collection("wallpaper_use").update(i.id, {"users": i.users})
+            break
+    else:
+        have_template = False
+        for i in template:
+            if wallpaper_name == i['name']:
+                db.collection("wallpaper_use").create({"name": wallpaper_name, "users": [user_id]})
+                have_template = True
+                break
+        if not have_template:
+            response.status_code = status.HTTP_400_BAD_REQUEST
+            data["code"] = 400
+            data["message"] = "Invalid wallpaper name."
+            data["data"] = None
+            return data
+        
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = None
+    return data
