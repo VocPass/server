@@ -121,6 +121,17 @@
             box-shadow: 0 24px 48px -8px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.12);
         }
         .wallpaper-card img { width: 100%; aspect-ratio: 9/19.5; object-fit: cover; display: block; }
+        .wallpaper-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: wallpaper-scroll linear infinite;
+        }
+        #wallpaper-carousel:hover .wallpaper-track { animation-play-state: paused; }
+        @keyframes wallpaper-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
         .wallpaper-card .card-overlay {
             position: absolute; bottom: 0; left: 0; right: 0;
             padding: 40px 12px 14px;
@@ -327,7 +338,7 @@
 
             <!-- 模板卡片輪播（可拖曳滾動） -->
             <div class="relative" data-aos="fade-up" data-aos-delay="100">
-                <div id="wallpaper-carousel" class="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-hide select-none" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;">
+                <div id="wallpaper-carousel" class="overflow-hidden pb-6 select-none">
                     <!-- 由 JS 動態填入 -->
                 </div>
                 <!-- 漸層遮罩 -->
@@ -337,7 +348,7 @@
 
             <!-- CTA -->
             <div class="mt-10 md:mt-14 text-center" data-aos="fade-up" data-aos-delay="150">
-                <p class="text-gray-500 text-sm mb-4">支援多款中文字體 · 多款主題持續更新中</p>
+                <p class="text-gray-500 text-sm mb-4">支援多款<a href="/font">中文字體</a> · 多款主題持續更新中</p>
             </div>
         </div>
     </section>
@@ -898,85 +909,38 @@
             let templates = [];
             try {
                 const res = await fetch('/api/wallpaper/curriculum');
-                if (res.ok) templates = await res.json();
+                if (res.ok) {
+                    const json = await res.json();
+                    templates = json.data || json;
+                }
             } catch (e) {}
 
             // fallback：硬編碼已知模板
             if (!templates.length) {
                 templates = [
-                    { name: '（你說這節什麼課？）', author: 'little monster', preview: 'https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/preview.png' },
-                    { name: '諾巴與灰塵', author: '諾巴Noba', preview: 'https://cdn.vocpass.com/wallpaper_assets/noba_starrr/preview.png' },
-                    { name: 'DuDu', author: 'DuDu', preview: 'https://cdn.vocpass.com/wallpaper_assets/dudu/preview.png' },
-                    { name: '小丹的課表', author: '小丹', preview: 'https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png' },
+                    { name: '（你說這節什麼課？）', author: 'little monster', author_url: 'https://www.instagram.com/littlemonster__8', preview: 'https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/preview.png' },
+                    { name: '諾巴與灰塵', author: '諾巴Noba', author_url: '', preview: 'https://cdn.vocpass.com/wallpaper_assets/noba_starrr/preview.png' },
+                    { name: 'DuDu', author: 'DuDu', author_url: '', preview: 'https://cdn.vocpass.com/wallpaper_assets/dudu/preview.png' },
+                    { name: '小丹的課表', author: '小丹', author_url: '', preview: 'https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png' },
                 ];
             }
 
-            carousel.innerHTML = templates.map((t, i) => `
-                <div class="wallpaper-card" style="animation-delay:${i * 60}ms" data-aos="fade-up" data-aos-delay="${i * 60}">
+            const cards = templates.map(t => `
+                <a class="wallpaper-card" ${t.author_url ? `href="${t.author_url}" target="_blank" rel="noopener noreferrer"` : ''}>
                     <img src="${t.preview}" alt="${t.name}" loading="lazy">
                     <div class="card-overlay">
                         <div class="text-white font-bold text-sm leading-tight truncate">${t.name}</div>
                         <div class="text-gray-300 text-xs mt-0.5 truncate">by ${t.author}</div>
                     </div>
-                </div>
+                </a>
             `).join('');
+            // 複製一份讓 CSS 動畫無縫循環
+            carousel.innerHTML = `<div class="wallpaper-track">${cards}${cards}</div>`;
+            const track = carousel.querySelector('.wallpaper-track');
+            const speed = templates.length * 3; // 每張卡約 3s
+            track.style.animationDuration = `${speed}s`;
         }
         loadWallpaperCarousel();
-
-        // 桌布輪播：拖曳滾動 + 自動播放
-        (function initCarousel() {
-            const el = document.getElementById('wallpaper-carousel');
-            if (!el) return;
-
-            // 自動播放
-            let autoTimer = null;
-            let userInteracting = false;
-
-            function startAuto() {
-                stopAuto();
-                autoTimer = setInterval(() => {
-                    if (userInteracting) return;
-                    const maxScroll = el.scrollWidth - el.clientWidth;
-                    if (el.scrollLeft >= maxScroll - 2) {
-                        el.scrollTo({ left: 0, behavior: 'smooth' });
-                    } else {
-                        el.scrollBy({ left: 210, behavior: 'smooth' });
-                    }
-                }, 2200);
-            }
-            function stopAuto() { clearInterval(autoTimer); }
-
-            // 等 loadWallpaperCarousel 填充後再啟動
-            const observer = new MutationObserver(() => {
-                if (el.children.length > 0) { observer.disconnect(); startAuto(); }
-            });
-            observer.observe(el, { childList: true });
-            // 如果已有內容
-            if (el.children.length > 0) startAuto();
-
-            // 拖曳
-            let isDown = false, startX, scrollLeft;
-            el.addEventListener('mousedown', e => {
-                isDown = true; userInteracting = true;
-                el.style.cursor = 'grabbing';
-                startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft;
-            });
-            el.addEventListener('mouseleave', () => {
-                isDown = false; el.style.cursor = 'grab';
-                userInteracting = false;
-            });
-            el.addEventListener('mouseup', () => {
-                isDown = false; el.style.cursor = 'grab';
-                setTimeout(() => { userInteracting = false; }, 2000);
-            });
-            el.addEventListener('mousemove', e => {
-                if (!isDown) return; e.preventDefault();
-                el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX) * 1.5;
-            });
-            // 觸控滑動後也暫停自動播放 2 秒
-            el.addEventListener('touchstart', () => { userInteracting = true; }, { passive: true });
-            el.addEventListener('touchend', () => { setTimeout(() => { userInteracting = false; }, 2000); });
-        })();
 
         // ── w2m 熱力圖動畫（操作預先渲染的格子，不改變 DOM 結構） ──
         (function buildW2mHeatmap() {
