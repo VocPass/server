@@ -378,8 +378,9 @@ async def view_event(request: Request, event_id: str):
     在瀏覽器中直接查看活動的可用時段總覽。
     """
     return templates.TemplateResponse(
-        "w2m_view.html",
-        {"request": request, "event_id": event_id},
+        request=request,
+        name="w2m_view.html",
+        context={"request": request, "event_id": event_id},
     )
 
 
@@ -390,6 +391,7 @@ async def deeplink_redirect(request: Request, event_id: str):
     由 app 攔截並開啟對應的活動頁面。
     """
     return templates.TemplateResponse(
-        "w2m_redirect.html",
-        {"request": request, "event_id": event_id},
+        request=request,
+        name="w2m_redirect.html",
+        context={"request": request, "event_id": event_id},
     )
