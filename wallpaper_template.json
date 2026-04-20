@@ -229,8 +229,8 @@
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/lililala/table8.png"
                     ],
-                    "left": 130,
-                    "right": 20,
+                    "left": 135,
+                    "right": 15,
                     "top_inset": 380,
                     "bottom": 440
                 },
@@ -238,8 +238,8 @@
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/lililala/table8.png"
                     ],
-                    "left": 130,
-                    "right": 20,
+                    "left": 135,
+                    "right": 15,
                     "top_inset": 380,
                     "bottom": 340
                 }
@@ -248,9 +248,9 @@
         "table_opacity": 1,
         "top": 30,
         "stickers": 0,
-        "font_size": 6,
+        "font_size": 8,
         "font_color": "#000000",
-        "font_family": "Noto"
+        "font_family": "辰宇落雁體"
     },
     {
         "name": "小丹的課表",
