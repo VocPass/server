@@ -229,19 +229,19 @@
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/lililala/table8.png"
                     ],
-                    "left": 85,
-                    "right": 10,
-                    "top_inset": 70,
-                    "bottom": 630
+                    "left": 130,
+                    "right": 20,
+                    "top_inset": 380,
+                    "bottom": 440
                 },
                 "8": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/lililala/table8.png"
                     ],
-                    "left": 85,
-                    "right": 10,
-                    "top_inset": 70,
-                    "bottom": 510
+                    "left": 130,
+                    "right": 20,
+                    "top_inset": 380,
+                    "bottom": 340
                 }
             }
         },
