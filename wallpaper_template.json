@@ -215,6 +215,44 @@
         "font_family": "Noto"
     },
     {
+        "name": "鴨嘴獸嘟嘟",
+        "author": "鴨嘴獸嘟嘟",
+        "author_url": "https://www.instagram.com/lililala.___",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/lililala/preview.png",
+        "images": {
+            "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/lililala/background0.png"
+            ],
+            "stickers": [],
+            "table": {
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/lililala/table8.png"
+                    ],
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 630
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/lililala/table8.png"
+                    ],
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 510
+                }
+            }
+        },
+        "table_opacity": 1,
+        "top": 30,
+        "stickers": 0,
+        "font_size": 6,
+        "font_color": "#000000",
+        "font_family": "Noto"
+    },
+    {
         "name": "小丹的課表",
         "author": "小丹",
         "author_url": "https://www.threads.com/@daniel_liao_",
