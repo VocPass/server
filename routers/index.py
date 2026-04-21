@@ -84,6 +84,15 @@ async def get_user_profile(request: Request, username: str):
 async def apply_school():
     return FileResponse("templates/apply.html")
 
+@router.get("/selfhost", summary="自架測試端點")
+async def self_host_test(request: Request):
+    data = request.app.state.response
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = {
+        "app_env": os.environ.get("APP_ENV"),
+    }
+    return data
 
 @router.get("/api/v{v}", summary="獲取此端點支援學校列表")
 async def index(request: Request, v: int):
