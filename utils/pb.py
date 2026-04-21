@@ -32,4 +32,4 @@ def set_user(token):
 
 # 刪除非a-zA-Z0-9_.
 def sanitize_str(text):
-    return "".join(c for c in text if c.isalnum() or c in (".", "_")).rstrip()
+    return "".join(c for c in text if c.isalnum() or c in (".", "_","(",")")).rstrip()
