@@ -138,7 +138,7 @@ class FCMToken(BaseModel):
         return data
 
 
-@router.post("/api/user/notify/android",summary="上傳FCM Token")
+@router.post("/notify/android",summary="上傳FCM Token")
 async def upload_fcm_token(request: Request, item: FCMToken):
     user_token = request.headers.get("Authorization")
     db = request.app.state.pb_client
@@ -152,7 +152,7 @@ async def upload_fcm_token(request: Request, item: FCMToken):
         if not user_info:
             return Response(content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED)
         data['user'] = user_info.id
-    data['type'] = "ios"
+    data['type'] = "android"
     try:
         old_token = db.collection("notify_android").get_first_list_item(f'device_token="{item.device_token}"')
         db.collection("notify_android").update(old_token.id, data)
