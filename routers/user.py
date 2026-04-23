@@ -122,3 +122,43 @@ async def upload_push_token(request: Request, item: APNsToken):
         
         
     return {"code": 200, "message": "Token uploaded successfully.", "data": None}
+
+
+
+
+class FCMToken(BaseModel):
+    device_token: str
+    fcm_token:str
+    is_open: bool=True
+    valid: bool=True
+    curriculum: dict=None
+
+    def dict(self, **kwargs):
+        data = super().dict(**kwargs)
+        return data
+
+
+@router.post("/api/user/notify/android",summary="上傳FCM Token")
+async def upload_fcm_token(request: Request, item: FCMToken):
+    user_token = request.headers.get("Authorization")
+    db = request.app.state.pb_client
+    data = item.dict()
+    if not data.get("curriculum"):
+        data.pop("curriculum")
+    if not data.get("fcm_token"):
+        data.pop("fcm_token")
+    if user_token:
+        user_info = get_user(user_token)
+        if not user_info:
+            return Response(content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED)
+        data['user'] = user_info.id
+    data['type'] = "ios"
+    try:
+        old_token = db.collection("notify_android").get_first_list_item(f'device_token="{item.device_token}"')
+        db.collection("notify_android").update(old_token.id, data)
+    
+    except:
+        db.collection("notify_android").create(item.dict())
+        
+        
+    return {"code": 200, "message": "Token uploaded successfully.", "data": None}
