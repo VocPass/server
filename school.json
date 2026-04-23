@@ -9864,23 +9864,19 @@
         },
         "login": {
             "username": {
-                "name": "loginId"
+                "name": "account"
             },
             "password": {
-                "name": "pas1"
+                "name": "password"
             },
-            "captcha": {
-                "name": "validateCode"
-            },
-            "captchaImage": {
-                "selector": "img-fluid",
-                "type": "class"
-            },
+            "captcha": {},
+            "captchaImage": {},
             "button": {
-                "class": "btn btn-orange btn-block rounded-pill"
+                "class": "btn_submit"
             },
             "successKeywords": [
-                "登入者"
+                "登出",
+                ",\"page\":1,"
             ]
         },
         "route": {
@@ -9889,8 +9885,9 @@
             "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
             "exam_results": "#",
             "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
-            "curriculum": "#",
-            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+            "curriculum": "/myLessons.action",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+            "login": "/LoginInfo.action"
         }
     },
     "沙鹿高工(夜)": {
@@ -10049,23 +10046,19 @@
         },
         "login": {
             "username": {
-                "name": "loginId"
+                "name": "account"
             },
             "password": {
-                "name": "pas1"
+                "name": "password"
             },
-            "captcha": {
-                "name": "validateCode"
-            },
-            "captchaImage": {
-                "selector": "img-fluid",
-                "type": "class"
-            },
+            "captcha": {},
+            "captchaImage": {},
             "button": {
-                "class": "btn btn-orange btn-block rounded-pill"
+                "class": "btn_submit"
             },
             "successKeywords": [
-                "登入者"
+                "登出",
+                ",\"page\":1,"
             ]
         },
         "route": {
@@ -10074,8 +10067,9 @@
             "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
             "exam_results": "#",
             "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
-            "curriculum": "#",
-            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+            "curriculum": "/myLessons.action",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+            "login": "/LoginInfo.action"
         }
     },
     "臺中女中": {
@@ -10090,23 +10084,19 @@
         },
         "login": {
             "username": {
-                "name": "loginId"
+                "name": "account"
             },
             "password": {
-                "name": "pas1"
+                "name": "password"
             },
-            "captcha": {
-                "name": "validateCode"
-            },
-            "captchaImage": {
-                "selector": "img-fluid",
-                "type": "class"
-            },
+            "captcha": {},
+            "captchaImage": {},
             "button": {
-                "class": "btn btn-orange btn-block rounded-pill"
+                "class": "btn_submit"
             },
             "successKeywords": [
-                "登入者"
+                "登出",
+                ",\"page\":1,"
             ]
         },
         "route": {
@@ -10115,8 +10105,9 @@
             "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
             "exam_results": "#",
             "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
-            "curriculum": "#",
-            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+            "curriculum": "/myLessons.action",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+            "login": "/LoginInfo.action"
         }
     },
     "臺中一中": {
@@ -10131,23 +10122,19 @@
         },
         "login": {
             "username": {
-                "name": "loginId"
+                "name": "account"
             },
             "password": {
-                "name": "pas1"
+                "name": "password"
             },
-            "captcha": {
-                "name": "validateCode"
-            },
-            "captchaImage": {
-                "selector": "img-fluid",
-                "type": "class"
-            },
+            "captcha": {},
+            "captchaImage": {},
             "button": {
-                "class": "btn btn-orange btn-block rounded-pill"
+                "class": "btn_submit"
             },
             "successKeywords": [
-                "登入者"
+                "登出",
+                ",\"page\":1,"
             ]
         },
         "route": {
@@ -10156,8 +10143,9 @@
             "exam_menu": "/A0410S_Item_select.action?syear={syear}&seme={seme}",
             "exam_results": "#",
             "semester_scores": "/A0410S_OpenStdView_selectA0410s.action?pId={pId}",
-            "curriculum": "#",
-            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}"
+            "curriculum": "/myLessons.action",
+            "info": "/A0410S_StdSemeView_select.action?statusM={statusM}&stdId={stdId}",
+            "login": "/LoginInfo.action"
         }
     },
     "嶺東高中": {
