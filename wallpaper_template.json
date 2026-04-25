@@ -312,52 +312,74 @@
         "name": "Test",
         "author": "VocPass",
         "author_url": "https://vocpass.com",
-        "preview": "https://cdn.vocpass.com/wallpaper_assets/schedule_template/preview.png",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/preview.png",
         "images": {
             "background": [
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/background0.png"
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/background0.png"
             ],
             "stickers": [
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker0.png",
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker1.png",
-                "https://cdn.vocpass.com/wallpaper_assets/schedule_template/sticker2.png"
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/sticker0.png",
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/sticker1.png",
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/sticker2.png",
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/sticker3.png",
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/sticker4.png",
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/sticker5.png",
+                "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/sticker6.png"
             ],
             "table": {
                 "7": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table7.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/table7.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 1000
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 630
                 },
                 "8": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table8.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/table8.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 700
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 510
                 },
                 "9": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table9.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/table9.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 450
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 390
                 },
                 "10": {
                     "images": [
-                        "https://cdn.vocpass.com/wallpaper_assets/schedule_template/table10.png"
+                        "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/table10.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 140
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 270
+                },
+                "11": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/table11.png"
+                    ],
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 150
+                },
+                "12": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/table12.png"
+                    ],
+                    "left": 85,
+                    "right": 10,
+                    "top_inset": 70,
+                    "bottom": 30
                 }
             }
         },
