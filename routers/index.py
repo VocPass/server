@@ -155,3 +155,7 @@ async def ping(
     data["message"] = "Success."
     data["data"] = {"logged_in": False}
     return data
+
+@router.get("/font", summary="字體預覽頁面")
+async def font_preview():
+    return FileResponse("templates/font_preview.html", media_type="text/html")

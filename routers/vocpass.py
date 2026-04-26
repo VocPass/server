@@ -127,12 +127,6 @@ async def report(request: Request, item: dict):
     return {"code": 200, "message": "Reported", "data": None}
 
 
-@router.get("/font", summary="字體預覽頁面")
-async def font_preview():
-    return FileResponse("templates/font_preview.html", media_type="text/html")
-
-
-
 @router.get("/v{v}", summary="獲取此端點支援學校列表")
 async def index(request: Request, v: int):
     """
