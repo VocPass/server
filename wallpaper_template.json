@@ -255,7 +255,7 @@
     {
         "name": "爬蟲類也要上課",
         "author": "嘟嘟",
-        "author_url": "ttps://www.instagram.com/du._.0314",
+        "author_url": "https://www.instagram.com/du._.0314",
         "preview": "https://cdn.vocpass.com/wallpaper_assets/reptiles_have_to_go_to_class_too/preview.png",
         "images": {
             "background": [
@@ -331,6 +331,126 @@
         "top": 30,
         "stickers": 0,
         "font_size": 14,
+        "font_color": "#000000",
+        "font_family": "辰宇落雁體"
+    },
+    {
+        "name": "認真上課的H仔和地球",
+        "author": "Bonus好杯杯",
+        "author_url": "https://www.instagram.com/bonusforutw/",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/bonus_a/preview.png",
+        "images": {
+            "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_a/background0.png"
+            ],
+            "stickers": [
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_a/sticker0.png",
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_a/sticker1.png",
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_a/sticker2.png"
+            ],
+            "table": {
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_a/table10.png"
+                    ],
+                    "left": 260,
+                    "right": 150,
+                    "top_inset": 180,
+                    "bottom": 850
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_a/table10.png"
+                    ],
+                    "left": 260,
+                    "right": 150,
+                    "top_inset": 180,
+                    "bottom": 710
+                },
+                "9": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_a/table10.png"
+                    ],
+                    "left": 260,
+                    "right": 150,
+                    "top_inset": 180,
+                    "bottom": 570
+                },
+                "10": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_a/table10.png"
+                    ],
+                    "left": 260,
+                    "right": 150,
+                    "top_inset": 180,
+                    "bottom": 430
+                }
+            }
+        },
+        "table_opacity": 1,
+        "top": 30,
+        "stickers": 0,
+        "font_size": 8,
+        "font_color": "#000000",
+        "font_family": "辰宇落雁體"
+    },
+    {
+        "name": "負責睡覺的H仔",
+        "author": "Bonus好杯杯",
+        "author_url": "https://www.instagram.com/bonusforutw/",
+        "preview": "https://cdn.vocpass.com/wallpaper_assets/bonus_b/preview.png",
+        "images": {
+            "background": [
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_b/background0.png"
+            ],
+            "stickers": [
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_b/sticker0.png",
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_b/sticker1.png",
+                "https://cdn.vocpass.com/wallpaper_assets/bonus_b/sticker2.png"
+            ],
+            "table": {
+                "7": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_b/table10.png"
+                    ],
+                    "left": 310,
+                    "right": 100,
+                    "top_inset": 400,
+                    "bottom": 650
+                },
+                "8": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_b/table10.png"
+                    ],
+                    "left": 310,
+                    "right": 100,
+                    "top_inset": 400,
+                    "bottom": 510
+                },
+                "9": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_b/table10.png"
+                    ],
+                    "left": 320,
+                    "right": 100,
+                    "top_inset": 390,
+                    "bottom": 370
+                },
+                "10": {
+                    "images": [
+                        "https://cdn.vocpass.com/wallpaper_assets/bonus_b/table10.png"
+                    ],
+                    "left": 320,
+                    "right": 100,
+                    "top_inset": 390,
+                    "bottom": 230
+                }
+            }
+        },
+        "table_opacity": 1,
+        "top": 30,
+        "stickers": 0,
+        "font_size": 8,
         "font_color": "#000000",
         "font_family": "辰宇落雁體"
     },
