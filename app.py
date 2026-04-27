@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 from fastapi import FastAPI, Request, Response, status, Header
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -58,6 +58,7 @@ for module_file in sorted(routers_path.glob("*.py")):
 
 _METRICS_TOKEN = os.getenv("PROMETHEUS_METRICS_TOKEN", "")
 
+
 @app.get("/metrics", include_in_schema=False)
 async def metrics_endpoint(
     response: Response,
@@ -97,12 +98,16 @@ async def observability_middleware(request: Request, call_next):
     duration_ms = duration * 1000
 
     # Prometheus
-    m.HTTP_REQUESTS_TOTAL.labels(method=method, path=path, status_code=status_code).inc()
+    m.HTTP_REQUESTS_TOTAL.labels(
+        method=method, path=path, status_code=status_code
+    ).inc()
     m.HTTP_REQUEST_DURATION_SECONDS.labels(method=method, path=path).observe(duration)
 
     content_length = response.headers.get("content-length")
     if content_length:
-        m.HTTP_RESPONSE_SIZE_BYTES.labels(method=method, path=path).observe(int(content_length))
+        m.HTTP_RESPONSE_SIZE_BYTES.labels(method=method, path=path).observe(
+            int(content_length)
+        )
 
     if status_code >= 400:
         m.HTTP_ERRORS_TOTAL.labels(status_code=status_code, path=path).inc()
@@ -123,9 +128,7 @@ async def observability_middleware(request: Request, call_next):
 
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):
-    m.HTTP_ERRORS_TOTAL.labels(
-        status_code=exc.status_code, path=request.url.path
-    ).inc()
+    m.HTTP_ERRORS_TOTAL.labels(status_code=exc.status_code, path=request.url.path).inc()
     school_name = request.query_params.get("school_name", "system")
     pb_client = getattr(request.app.state, "pb_client", None)
     Debug(pb_client).send_error(
@@ -134,6 +137,8 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
         page=request.url.path,
         status=exc.status_code,
     )
+    if exc.status_code == 404 and "mozilla" in request.headers.get("User-Agent", "").lower():
+        return FileResponse("templates/404.html")
     return JSONResponse(
         status_code=exc.status_code,
         content={"code": exc.status_code, "message": exc.detail, "data": None},
@@ -163,6 +168,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 @app.exception_handler(Exception)
 async def general_exception_handler(request: Request, exc: Exception):
     import traceback as tb
+
     school_name = request.query_params.get("school_name", "system")
     error_type = type(exc).__name__
     m.ERRORS_TOTAL.labels(

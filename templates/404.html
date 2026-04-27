@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | VocPass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, rgba(255,255,255,0) 70%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --apple-text: #1d1d1f;
+            --apple-secondary: #86868b;
+            --bg-gray: #fbfbfd;
+        }
+        body { background-color: var(--bg-gray); color: var(--apple-text); }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .text-gradient-brand {
+            background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -4px rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
+        <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5 cursor-pointer">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
+                <span class="font-bold text-lg tracking-tight">VocPass</span>
+            </a>
+            <div class="hidden md:flex items-center gap-7">
+                <a href="/#features" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">特色</a>
+                <a href="/#wallpaper" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">桌布</a>
+                <a href="/#w2m" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">約時間</a>
+                <a href="/#schools" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">支援學校</a>
+                <a href="https://github.com/VocPass" target="_blank" class="text-gray-400 hover:text-gray-900 transition-colors">
+                    <i class="fa-brands fa-github text-xl"></i>
+                </a>
+                <a href="/#install" class="bg-black text-white px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
+                    獲取 App
+                </a>
+            </div>
+            <a href="/#install" class="md:hidden bg-black text-white px-4 py-1.5 rounded-full text-sm font-semibold">
+                獲取 App
+            </a>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-5 bg-hero-glow">
+        <div class="max-w-4xl mx-auto text-center" data-aos="zoom-y-out" data-aos-duration="1000">
+
+            <h1 class="font-black tracking-tighter mb-5 leading-[1.1]" style="font-size:clamp(64px, 12vw, 144px);">
+                <span class="text-gradient-brand">404</span>
+            </h1>
+
+            <p class="mt-4 max-w-xl mx-auto text-base md:text-xl text-gray-500 font-medium leading-relaxed">
+                這個頁面可能已經被移動、刪除，<br class="hidden sm:block"/>或是你輸入的網址有誤。
+            </p>
+
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+                <a href="/" class="bg-blue-600 text-white px-7 py-3.5 rounded-full font-semibold text-base flex items-center justify-center gap-2 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30 transition-all">
+                    <i class="fa-solid fa-house"></i> 回到首頁
+                </a>
+                <a href="https://forum.vocpass.com/" target="_blank" class="bg-white text-gray-900 border border-gray-200 px-7 py-3.5 rounded-full font-semibold text-base flex items-center justify-center gap-2 hover:bg-gray-50 transition-all shadow-sm">
+                    <i class="fa-solid fa-bug"></i> 回報問題
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 md:py-32 px-5">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
+                <h2 class="text-2xl md:text-5xl font-bold text-gray-900 mb-3 tracking-tight">也許你在找這些頁面</h2>
+                <p class="text-gray-500 text-base md:text-lg">試試看以下快速連結，或是直接回到首頁瀏覽。</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-aos="fade-up" data-aos-delay="100">
+                <a href="/#features" class="bento-card p-6 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-blue-500 text-white rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-md shadow-blue-500/20">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-0.5">功能特色</h3>
+                        <p class="text-sm text-gray-500">課表、成績、缺曠一覽</p>
+                    </div>
+                </a>
+
+                <a href="/#wallpaper" class="bento-card p-6 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-indigo-500 text-white rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-md shadow-indigo-500/20">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-0.5">桌布產生器</h3>
+                        <p class="text-sm text-gray-500">讓課表成為藝術</p>
+                    </div>
+                </a>
+
+                <a href="/#w2m" class="bento-card p-6 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-teal-500 text-white rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-md shadow-teal-500/20">
+                        <i class="fa-solid fa-people-arrows"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-0.5">When2Meet</h3>
+                        <p class="text-sm text-gray-500">找到大家都有空的時間</p>
+                    </div>
+                </a>
+
+                <a href="/#schools" class="bento-card p-6 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-green-500 text-white rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-md shadow-green-500/20">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-0.5">支援學校</h3>
+                        <p class="text-sm text-gray-500">查看已支援的學校名單</p>
+                    </div>
+                </a>
+
+                <a href="/#status" class="bento-card p-6 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-orange-500 text-white rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-md shadow-orange-500/20">
+                        <i class="fa-solid fa-chart-bar"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-0.5">服務狀態</h3>
+                        <p class="text-sm text-gray-500">即時監控服務運作</p>
+                    </div>
+                </a>
+
+                <a href="/#install" class="bento-card p-6 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center text-xl shrink-0 shadow-md shadow-gray-500/20">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-0.5">下載 App</h3>
+                        <p class="text-sm text-gray-500">App Store / APK 下載</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-200 bg-white py-10 px-5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div class="flex items-center gap-3">
+                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
+                <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
+            </div>
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
+                <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
+                <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
+                <div class="w-px h-4 bg-gray-300 hidden sm:block"></div>
+                <a href="https://forum.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-bug mr-1"></i> 回報問題</a>
+                <a href="https://dc.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-commenting mr-1"></i> 加入 Discord</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50 });
+
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.65)';
+            }
+        });
+    </script>
+</body>
+</html>
