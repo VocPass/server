@@ -239,7 +239,7 @@ async def get_curriculum(
             "SchoolCode": school["school_code"],
             "Year": date.year,
             "Term": date.semester,
-            "WeekNo": "6",
+            "WeekNo": "1",
             "ClassNo": v3.get_query_student_class(info_html),
             "ClassroomNo": "",
             "CrossName": "",
