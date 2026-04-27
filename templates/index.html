@@ -348,7 +348,7 @@
 
             <!-- CTA -->
             <div class="mt-10 md:mt-14 text-center" data-aos="fade-up" data-aos-delay="150">
-                <p class="text-gray-500 text-sm mb-4">支援多款<a href="/font">中文字體</a> · 多款主題持續更新中</p>
+                <p class="text-gray-500 text-sm mb-4">支援多款<a href="/font"  class="hover:text-blue-200 underline underline-offset-4">中文字體</a> · 多款主題持續更新中</p>
             </div>
         </div>
     </section>
@@ -508,6 +508,57 @@
                     </div>
                     <div class="mt-8 text-sm text-blue-200 flex justify-center items-center gap-4">
                         <a href="https://github.com/VocPass" class="hover:text-white underline underline-offset-4 decoration-blue-400">前往 GitHub 瀏覽開源程式碼</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 md:py-32 px-5 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10 md:mb-16" data-aos="fade-up">
+                <h2 class="text-2xl md:text-5xl font-bold text-gray-900 mb-3 tracking-tight">常見問題</h2>
+                <p class="text-gray-500 text-base md:text-lg">關於 VocPass 的一些疑問，都在這裡。</p>
+            </div>
+
+            <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white hover:border-blue-300 transition-colors">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')">
+                        <span class="font-bold text-gray-900 text-lg">我在 VocPass 輸入的帳號密碼安全嗎？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-gray-500 leading-relaxed">
+                        VocPass 採用本地端儲存架構，您的學號與密碼僅會加密儲存於設備本身的 Keychain 中，應用程式在抓取資料時是直接與學校伺服器連線，帳號密碼在使用期間絕不會經過、也不會儲存於我們的任何伺服器。
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white hover:border-blue-300 transition-colors">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')">
+                        <span class="font-bold text-gray-900 text-lg">為什麼列表中沒有我的學校？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-gray-500 leading-relaxed">
+                        VocPass 目前使用爬蟲技術。如果您的學校符合條件但不在列表中，您可以點擊「支援學校」區塊的申請按鈕，提交您的學校名稱以供我們評估加入。
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white hover:border-blue-300 transition-colors">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')">
+                        <span class="font-bold text-gray-900 text-lg">支援哪些裝置和作業系統？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-gray-500 leading-relaxed">
+                        目前支援 iOS 17.0 以上的 iPhone、macOS 11.0 以上的 Mac 設備，以及 Android 6.0 以上的 Android 設備。您可以根據您的裝置選擇 App Store 或下載 APK 安裝。
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white hover:border-blue-300 transition-colors">
+                    <button class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')">
+                        <span class="font-bold text-gray-900 text-lg">如果遇到問題該如何回報？</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="hidden px-6 pb-5 text-gray-500 leading-relaxed">
+                        您可以透過頁底的「加入 Discord」隨時在社群中發問，或者前往<a href="https://forum.vocpass.com/" class="hover:text-blue-800 underline underline-offset-4">討論區</a>提交您遇到的問題，開發團隊會盡快協助您解決。
                     </div>
                 </div>
             </div>
