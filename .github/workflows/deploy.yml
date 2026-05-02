@@ -17,27 +17,37 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: deploy-main
+      cancel-in-progress: false
     strategy:
+      fail-fast: false
       matrix:
         include:
           - ssh_host: SSH_HOST_1
             ptero_url: PTERO_URL_1
             ptero_token: PTERO_TOKEN_1
             ssh_password: SSH_PASSWORD_1
+            ssh_port: 22
 
           - ssh_host: SSH_HOST_2
             ptero_url: PTERO_URL_2
             ptero_token: PTERO_TOKEN_2
             ssh_password: SSH_PASSWORD_2
+            ssh_port: 9013
 
     steps:
       - name: SSH deploy
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ env[matrix.ssh_host] }}
-          port: 22
+          port: ${{ matrix.ssh_port }}
           username: root
           password: ${{ env[matrix.ssh_password] }}
+          timeout: 60s
+          command_timeout: 30m
+          script_stop: true
           script: sh v.sh
 
       - name: Restart Pterodactyl
