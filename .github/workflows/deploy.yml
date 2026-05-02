@@ -4,36 +4,46 @@ on:
   push:
     branches: [main]
 
+env:
+  SSH_HOST_1: ${{ secrets.SSH_HOST_1 }}
+  SSH_HOST_2: ${{ secrets.SSH_HOST_2 }}
+  PTERO_URL_1: ${{ secrets.PTERO_URL_1 }}
+  PTERO_URL_2: ${{ secrets.PTERO_URL_2 }}
+  PTERO_TOKEN_1: ${{ secrets.PTERO_TOKEN_1 }}
+  PTERO_TOKEN_2: ${{ secrets.PTERO_TOKEN_2 }}
+  SSH_PASSWORD_1: ${{ secrets.SSH_PASSWORD_1 }}
+  SSH_PASSWORD_2: ${{ secrets.SSH_PASSWORD_2 }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - ssh_host: ${{ secrets.SSH_HOST_1 }}
-            ptero_url: ${{ secrets.PTERO_URL_1 }}
-            ptero_token: ${{ secrets.PTERO_TOKEN_1 }}
-            ssh_password: ${{ secrets.SSH_PASSWORD_1 }}
+          - ssh_host: SSH_HOST_1
+            ptero_url: PTERO_URL_1
+            ptero_token: PTERO_TOKEN_1
+            ssh_password: SSH_PASSWORD_1
 
-          - ssh_host: ${{ secrets.SSH_HOST_2 }}
-            ptero_url: ${{ secrets.PTERO_URL_2 }}
-            ptero_token: ${{ secrets.PTERO_TOKEN_2 }}
-            ssh_password: ${{ secrets.SSH_PASSWORD_2 }}
+          - ssh_host: SSH_HOST_2
+            ptero_url: PTERO_URL_2
+            ptero_token: PTERO_TOKEN_2
+            ssh_password: SSH_PASSWORD_2
 
     steps:
       - name: SSH deploy
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ matrix.ssh_host }}
+          host: ${{ env[matrix.ssh_host] }}
           port: 22
           username: root
-          password: ${{ matrix.ssh_password }}
+          password: ${{ env[matrix.ssh_password] }}
           script: sh v.sh
 
       - name: Restart Pterodactyl
         run: |
-          curl -X POST "${{ matrix.ptero_url }}" \
-            -H "Authorization: Bearer ${{ matrix.ptero_token }}" \
+          curl -X POST "${{ env[matrix.ptero_url] }}" \
+            -H "Authorization: Bearer ${{ env[matrix.ptero_token] }}" \
             -H "Accept: application/vnd.pterodactyl.v1+json" \
             -H "Content-Type: application/json" \
             -d '{"signal": "restart"}'
