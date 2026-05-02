@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - ssh_host: ${{ secrets.SSH_HOST_1 }}
+            ptero_url: ${{ secrets.PTERO_URL_1 }}
+            ptero_token: ${{ secrets.PTERO_TOKEN_1 }}
+            ssh_password: ${{ secrets.SSH_PASSWORD_1 }}
+
+          - ssh_host: ${{ secrets.SSH_HOST_2 }}
+            ptero_url: ${{ secrets.PTERO_URL_2 }}
+            ptero_token: ${{ secrets.PTERO_TOKEN_2 }}
+            ssh_password: ${{ secrets.SSH_PASSWORD_2 }}
+
+    steps:
+      - name: SSH deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ matrix.ssh_host }}
+          port: 22
+          username: root
+          password: ${{ matrix.ssh_password }}
+          script: sh v.sh
+
+      - name: Restart Pterodactyl
+        run: |
+          curl -X POST "${{ matrix.ptero_url }}" \
+            -H "Authorization: Bearer ${{ matrix.ptero_token }}" \
+            -H "Accept: application/vnd.pterodactyl.v1+json" \
+            -H "Content-Type: application/json" \
+            -d '{"signal": "restart"}'
