@@ -25,7 +25,7 @@ async def api_get_user(request: Request, user: str,response: Response):
     data = request.app.state.response
     pb_client = request.app.state.pb_client
     try:
-        record = pb_client.collection("users").get_first_list_item(f'id = "{user}" || username = "{user}"')
+        record = pb_client.collection("users").get_first_list_item(f'id = "{sanitize_str(user)}" || username = "{sanitize_str(user)}"')
         data["code"] = 200
         data["message"] = "Success."
         data["data"] = {
@@ -62,7 +62,7 @@ async def update_user(request: Request, response: Response):
         upload_data["name"] = form["name"]
     if "username" in form:
         try:
-            other = db.collection("users").get_first_list_item(f'username="{form["username"]}" && id != "{user_info.id}"')
+            other = db.collection("users").get_first_list_item(f'username="{sanitize_str(form["username"])}" && id != "{sanitize_str(user_info.id)}"')
             response.status_code = status.HTTP_400_BAD_REQUEST
             data["code"] = 400
             data["message"] = "Username already exists."
@@ -114,7 +114,7 @@ async def upload_push_token(request: Request, item: APNsToken):
         data['user'] = user_info.id
     data['type'] = "ios"
     try:
-        old_token = db.collection("notify").get_first_list_item(f'device_token="{item.device_token}"')
+        old_token = db.collection("notify").get_first_list_item(f'device_token="{sanitize_str(item.device_token)}"')
         db.collection("notify").update(old_token.id, data)
     
     except:
