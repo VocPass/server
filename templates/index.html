@@ -776,6 +776,9 @@
                 <a href="https://dc.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-commenting mr-1"></i> 加入 Discord</a>
             </div>
         </div>
+        <div id="version-status" class="max-w-6xl mx-auto mt-6 pt-5 border-t border-gray-100 text-center text-xs text-gray-400">
+            版本檢查中...
+        </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -961,6 +964,45 @@
             }
         }
         loadDevelopers();
+
+        // 載入目前部署版本
+        async function loadVersionStatus() {
+            const el = document.getElementById('version-status');
+            if (!el) return;
+
+            try {
+                const res = await fetch('/api/version', { cache: 'no-store' });
+                if (!res.ok) throw new Error('API error');
+                const json = await res.json();
+                const data = json.data || {};
+                const commit = data.short_commit || '未知';
+                const latest = data.latest_short_commit || '未知';
+                const branch = data.branch && data.branch !== 'HEAD' ? ` · ${data.branch}` : '';
+
+                let statusClass = 'text-gray-500';
+                let statusText = '無法確認是否為最新';
+                let statusIcon = 'fa-circle-question';
+                if (data.is_latest === true) {
+                    statusClass = 'text-green-600';
+                    statusText = '已是最新';
+                    statusIcon = 'fa-circle-check';
+                } else if (data.is_latest === false) {
+                    statusClass = 'text-amber-600';
+                    statusText = `有新版 ${latest}`;
+                    statusIcon = 'fa-circle-exclamation';
+                }
+
+                el.innerHTML = `
+                    <span class="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+                        <span>版本: <code class="font-mono text-gray-600">${commit}</code>${branch}</span>
+                        <span class="${statusClass} font-semibold"><i class="fa-solid ${statusIcon} mr-1"></i>${statusText}</span>
+                    </span>
+                `;
+            } catch (e) {
+                el.textContent = '目前提交版本：無法載入';
+            }
+        }
+        loadVersionStatus();
 
         // ── 桌布模板輪播 ──────────────────────────────────
         async function loadWallpaperCarousel() {

@@ -8,10 +8,14 @@ import utils.notice as notice
 from utils import metrics as m
 
 import os
+import re
+import subprocess
+from pathlib import Path
 
 router = APIRouter()
 load_dotenv()
 limiter = Limiter(key_func=get_remote_address)
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def require_cookie_header(
@@ -22,6 +26,78 @@ def require_cookie_header(
     )
 ):
     return cookie
+
+
+def run_git(args: list[str]) -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=True,
+        )
+    except (subprocess.SubprocessError, FileNotFoundError):
+        return None
+    return result.stdout.strip() or None
+
+
+def short_commit(commit: str | None) -> str | None:
+    return commit[:7] if commit else None
+
+
+def normalize_branch(branch: str | None) -> str | None:
+    if not branch:
+        return None
+    if branch.startswith("refs/heads/"):
+        return branch.removeprefix("refs/heads/")
+    if branch.startswith("origin/"):
+        return branch.removeprefix("origin/")
+    return branch
+
+
+def parse_github_repo(remote_url: str | None) -> tuple[str, str] | None:
+    if not remote_url:
+        return None
+    match = re.search(
+        r"github\.com[:/](?P<owner>[^/]+)/(?P<repo>[^/.]+)(?:\.git)?$",
+        remote_url,
+    )
+    if not match:
+        return None
+    return match.group("owner"), match.group("repo")
+
+
+async def fetch_github_latest_commit(
+    remote_url: str | None, branch: str | None
+) -> str | None:
+    repo = parse_github_repo(remote_url)
+    if not repo:
+        return None
+    owner, name = repo
+    branch_path = f"/commits/{branch}" if branch and branch != "HEAD" else ""
+    url = f"https://api.github.com/repos/{owner}/{name}{branch_path}"
+    try:
+        async with aiohttp.ClientSession(
+            timeout=aiohttp.ClientTimeout(total=5)
+        ) as session:
+            async with session.get(
+                url, headers={"Accept": "application/vnd.github+json"}
+            ) as resp:
+                if resp.status != 200:
+                    return None
+                data = await resp.json()
+    except (aiohttp.ClientError, TimeoutError):
+        return None
+
+    if "sha" in data:
+        return data.get("sha")
+
+    default_branch = data.get("default_branch")
+    if not default_branch:
+        return None
+    return await fetch_github_latest_commit(remote_url, default_branch)
 
 
 headers = {
@@ -43,6 +119,35 @@ headers = {
 @router.get("/", summary="首頁")
 async def index(request: Request):
     return FileResponse("templates/index.html")
+
+
+@router.get("/api/version", summary="目前部署版本")
+async def version():
+    current_commit = os.getenv("GIT_COMMIT") or run_git(["rev-parse", "HEAD"])
+    branch = normalize_branch(
+        os.getenv("GIT_BRANCH") or run_git(["rev-parse", "--abbrev-ref", "HEAD"])
+    )
+    remote_url = "https://github.com/vocpass/server"
+
+    latest_commit = await fetch_github_latest_commit(remote_url, branch)
+
+    is_latest = None
+    if current_commit and latest_commit:
+        is_latest = current_commit == latest_commit
+
+    return {
+        "code": 200,
+        "message": "Success.",
+        "data": {
+            "commit": current_commit,
+            "short_commit": short_commit(current_commit),
+            "branch": branch,
+            "remote": remote_url,
+            "latest_commit": latest_commit,
+            "latest_short_commit": short_commit(latest_commit),
+            "is_latest": is_latest,
+        },
+    }
 
 
 @router.get("/privacy-policy", summary="隱私權政策")
