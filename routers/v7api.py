@@ -319,9 +319,7 @@ async def get_exam_results(
     original_data = await goto_scores(
         request.cookies, url, school["endpoint_action"]["exam_results"], [sem_val], exam_val
     )
-    with open("debug.html", "w", encoding="utf-8") as f:
-        f.write(original_data[0])
-        
+    
     data = request.app.state.response
     data["code"] = 200
     data["message"] = "Success."
