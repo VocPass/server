@@ -201,7 +201,7 @@
                         <p class="text-xs text-gray-400">VocPass School Request</p>
                     </div>
                 </div>
-                <p class="text-sm text-gray-500 leading-relaxed">填寫以下資訊以申請將你的學校加入 VocPass 支援清單。</p>
+                <p class="text-sm text-gray-500 leading-relaxed">填寫以下資訊以申請將你的學校加入 VocPass 支援清單。大學/五專/國中不在支援範圍內，請詢問你們的校友是否願意自行撰寫程式。申請後時效不固定，請隨時前往 APP 查看。</p>
 
                 <!-- 步驟指示器 -->
                 <div class="flex items-center gap-2 mt-5">
@@ -231,8 +231,8 @@
                             <label class="text-sm font-medium text-gray-700 mb-1.5 flex gap-1">
                                 學校全名 <span class="text-red-500">*</span>
                             </label>
-                            <input class="field-input" type="text" id="school" placeholder="例：國立○○高級工業職業學校">
-                            <p class="text-xs text-red-500 mt-1 hidden" id="err-school">請填寫學校全名</p>
+                            <input class="field-input" type="text" id="school" placeholder="例：市立○○高級工業職業學校(oo高工)">
+                            <p class="text-xs text-red-500 mt-1 hidden" id="err-school">請填寫學校全名與縮寫</p>
                         </div>
 
                         <div>
@@ -346,7 +346,7 @@
                             <label class="text-sm font-medium text-gray-700 mb-1.5 flex gap-1">
                                 補充說明 <span class="text-red-500">*</span>
                             </label>
-                            <textarea class="field-input" id="desc" placeholder="描述校務系統的登入方式等…" rows="4"></textarea>
+                            <textarea class="field-input" id="desc" placeholder="描述校務系統的登入方式等，不保證支援" rows="4"></textarea>
                             <p class="text-xs text-red-500 mt-1 hidden" id="err-desc">請填寫補充說明</p>
                         </div>
 
@@ -422,7 +422,7 @@
                     <i class="fa-solid fa-circle-exclamation text-2xl text-amber-400"></i>
                 </div>
                 <h2 class="text-xl font-bold tracking-tight mb-2">你已經填寫過了</h2>
-                <p class="text-sm text-gray-500 leading-relaxed mb-6">每位使用者只能提交一次申請，我們已收到你的資料並會盡快處理。</p>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">每位使用者只能提交一次申請，我們已收到你的資料並會盡快處理。大學/五專/國中不在支援範圍內</p>
                 <a href="/" class="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
                     <i class="fa-solid fa-house text-xs"></i> 回到首頁
                 </a>
