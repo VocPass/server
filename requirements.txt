@@ -1,7 +1,7 @@
 fastapi
 fastapi[standard]
 dotenv
-pocketbase
+pocketbase==0.15.0
 BeautifulSoup4
 aiohttp
 jinja2
