@@ -47,6 +47,62 @@ def short_commit(commit: str | None) -> str | None:
     return commit[:7] if commit else None
 
 
+def read_git_text(path: Path) -> str | None:
+    try:
+        return path.read_text(encoding="utf-8").strip()
+    except OSError:
+        return None
+
+
+def git_metadata_path(*parts: str) -> Path | None:
+    git_path = REPO_ROOT / ".git"
+    if git_path.is_dir():
+        return git_path.joinpath(*parts)
+
+    gitdir = read_git_text(git_path)
+    if gitdir and gitdir.startswith("gitdir: "):
+        path = Path(gitdir.removeprefix("gitdir: ").strip())
+        if not path.is_absolute():
+            path = REPO_ROOT / path
+        return path.joinpath(*parts)
+
+    return None
+
+
+def read_git_head() -> tuple[str | None, str | None]:
+    head_path = git_metadata_path("HEAD")
+    if not head_path:
+        return None, None
+
+    head = read_git_text(head_path)
+    if not head:
+        return None, None
+
+    if not head.startswith("ref: "):
+        return head, None
+
+    ref = head.removeprefix("ref: ").strip()
+    branch = ref.removeprefix("refs/heads/")
+    ref_path = git_metadata_path(*ref.split("/"))
+    commit = read_git_text(ref_path) if ref_path else None
+    if commit:
+        return commit, branch
+
+    packed_refs_path = git_metadata_path("packed-refs")
+    packed_refs = read_git_text(packed_refs_path) if packed_refs_path else None
+    if not packed_refs:
+        return None, branch
+
+    for line in packed_refs.splitlines():
+        if line.startswith("#") or line.startswith("^"):
+            continue
+        parts = line.split()
+        if len(parts) == 2 and parts[1] == ref:
+            return parts[0], branch
+
+    return None, branch
+
+
 def normalize_branch(branch: str | None) -> str | None:
     if not branch:
         return None
@@ -123,9 +179,10 @@ async def index(request: Request):
 
 @router.get("/api/version", summary="目前部署版本")
 async def version():
-    current_commit = os.getenv("GIT_COMMIT") or run_git(["rev-parse", "HEAD"])
+    file_commit, file_branch = read_git_head()
+    current_commit = file_commit or run_git(["rev-parse", "HEAD"])
     branch = normalize_branch(
-        os.getenv("GIT_BRANCH") or run_git(["rev-parse", "--abbrev-ref", "HEAD"])
+        file_branch or run_git(["rev-parse", "--abbrev-ref", "HEAD"])
     )
     remote_url = "https://github.com/vocpass/server"
 
