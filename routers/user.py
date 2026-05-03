@@ -17,15 +17,18 @@ from pocketbase.models import FileUpload
 load_dotenv()
 router = APIRouter(prefix="/api/user", tags=["VocPass 使用者"])
 
-@router.get("/{user}",summary="獲取使用者資訊")
-async def api_get_user(request: Request, user: str,response: Response):
+
+@router.get("/{user}", summary="獲取使用者資訊")
+async def api_get_user(request: Request, user: str, response: Response):
     """
     根據使用者 ID 或使用者名稱獲取使用者資訊。
     """
     data = request.app.state.response
     pb_client = request.app.state.pb_client
     try:
-        record = pb_client.collection("users").get_first_list_item(f'id = "{sanitize_str(user)}" || username = "{sanitize_str(user)}"')
+        record = pb_client.collection("users").get_first_list_item(
+            f'id = "{sanitize_str(user)}" || username = "{sanitize_str(user)}"'
+        )
         data["code"] = 200
         data["message"] = "Success."
         data["data"] = {
@@ -45,24 +48,31 @@ async def api_get_user(request: Request, user: str,response: Response):
         data["data"] = None
         return data
 
-@router.patch("/",summary="更新使用者資訊")
+
+@router.patch("/", summary="更新使用者資訊")
 async def update_user(request: Request, response: Response):
     token = request.headers.get("Authorization")
     db = request.app.state.pb_client
     data = request.app.state.response
     if not token:
-        return Response(content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED)
+        return Response(
+            content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED
+        )
     user_info = get_user(token)
     if not user_info:
-        return Response(content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED)
-    
+        return Response(
+            content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED
+        )
+
     form = await request.form()
     upload_data = {}
     if "name" in form:
         upload_data["name"] = form["name"]
     if "username" in form:
         try:
-            other = db.collection("users").get_first_list_item(f'username="{sanitize_str(form["username"])}" && id != "{sanitize_str(user_info.id)}"')
+            other = db.collection("users").get_first_list_item(
+                f'username="{sanitize_str(form["username"])}" && id != "{sanitize_str(user_info.id)}"'
+            )
             response.status_code = status.HTTP_400_BAD_REQUEST
             data["code"] = 400
             data["message"] = "Username already exists."
@@ -74,8 +84,10 @@ async def update_user(request: Request, response: Response):
     if "avatar" in form:
         avatar_file = form["avatar"]
         avatar_data = await avatar_file.read()
-        upload_data["avatar"] = FileUpload((avatar_file.filename, avatar_data, avatar_file.content_type))
-    
+        upload_data["avatar"] = FileUpload(
+            (avatar_file.filename, avatar_data, avatar_file.content_type)
+        )
+
     db.collection("users").update(user_info.id, upload_data)
     data["code"] = 200
     data["message"] = "User updated successfully."
@@ -85,20 +97,31 @@ async def update_user(request: Request, response: Response):
 
 class APNsToken(BaseModel):
     device_token: str
-    apns_token: str=None
-    start_token: str=None
-    update_token: str=None
-    is_dev: bool=False
-    is_open: bool=True
-    valid: bool=True
-    curriculum: dict=None
+    apns_token: str = None
+    start_token: str = None
+    update_token: str = None
+    is_dev: bool = False
+    is_open: bool = True
+    valid: bool = True
+    curriculum: dict = None
 
     def dict(self, **kwargs):
         data = super().dict(**kwargs)
         return data
 
 
-@router.post("/notify/ios",summary="上傳Push Token")
+{
+    "device_token": "63A5B41A-070F-48C9-8EAE-32CB082E9547",
+    "apns_token": "3266d1f66478a61fa5c02e590731b050bb9756dcbacbe9d995a0827c526d9e11",
+    "start_token": "4003323bccc4a015e51cf4b80eee75cdec52284c13a388232ef92eaa218b467e877b8b2cf268b9efb588280dc4597cb214cb379cdae992dc4476ec634a0973b08a04b5fe4dfe34025f94fbd0c0c5e054",
+    "update_token": None,
+    "is_dev": False,
+    "is_open": True,
+    "valid": True,
+}
+
+
+@router.post("/notify/ios", summary="上傳Push Token")
 async def upload_push_token(request: Request, item: APNsToken):
     user_token = request.headers.get("Authorization")
     db = request.app.state.pb_client
@@ -110,35 +133,36 @@ async def upload_push_token(request: Request, item: APNsToken):
     if user_token:
         user_info = get_user(user_token)
         if not user_info:
-            return Response(content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED)
-        data['user'] = user_info.id
-    data['type'] = "ios"
+            return Response(
+                content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED
+            )
+        data["user"] = user_info.id
+    data["type"] = "ios"
     try:
-        old_token = db.collection("notify").get_first_list_item(f'device_token="{sanitize_str(item.device_token)}"')
+        old_token = db.collection("notify").get_first_list_item(
+            f'device_token="{sanitize_str(item.device_token)}"'
+        )
         db.collection("notify").update(old_token.id, data)
-    
+
     except:
         db.collection("notify").create(item.dict())
-        
-        
+
     return {"code": 200, "message": "Token uploaded successfully.", "data": None}
-
-
 
 
 class FCMToken(BaseModel):
     device_token: str
-    fcm_token:str
-    is_open: bool=True
-    valid: bool=True
-    curriculum: dict=None
+    fcm_token: str
+    is_open: bool = True
+    valid: bool = True
+    curriculum: dict = None
 
     def dict(self, **kwargs):
         data = super().dict(**kwargs)
         return data
 
 
-@router.post("/notify/android",summary="上傳FCM Token")
+@router.post("/notify/android", summary="上傳FCM Token")
 async def upload_fcm_token(request: Request, item: FCMToken):
     user_token = request.headers.get("Authorization")
     db = request.app.state.pb_client
@@ -150,15 +174,18 @@ async def upload_fcm_token(request: Request, item: FCMToken):
     if user_token:
         user_info = get_user(user_token)
         if not user_info:
-            return Response(content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED)
-        data['user'] = user_info.id
-    data['type'] = "android"
+            return Response(
+                content="Unauthorized", status_code=status.HTTP_401_UNAUTHORIZED
+            )
+        data["user"] = user_info.id
+    data["type"] = "android"
     try:
-        old_token = db.collection("notify_android").get_first_list_item(f'device_token="{item.device_token}"')
+        old_token = db.collection("notify_android").get_first_list_item(
+            f'device_token="{item.device_token}"'
+        )
         db.collection("notify_android").update(old_token.id, data)
-    
+
     except:
         db.collection("notify_android").create(item.dict())
-        
-        
+
     return {"code": 200, "message": "Token uploaded successfully.", "data": None}
