@@ -344,7 +344,7 @@ async def submit_availability(
 
     try:
         existing = db.collection("w2m_availability").get_first_list_item(
-            f'event="{event_id}" && user="{user.id}"',
+            f'event="{sanitize_str(event_id)}" && user="{sanitize_str(user.id)}"',
             query_params={"expand": "user"},
         )
         db.collection("w2m_availability").update(existing.id, {"slots": valid_slots})

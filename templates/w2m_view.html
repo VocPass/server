@@ -382,7 +382,8 @@
 </div>
 
 <script>
-const eventId = "{{ event_id }}";
+const eventId = {{ event_id | tojson }};
+const eventPath = encodeURIComponent(eventId);
 const pb = new PocketBase('https://vppb.zeabur.app');
 
 // ─── State ───────────────────────────────────────────────────────────────
@@ -392,6 +393,102 @@ let isDirty = false;
 let isDragging = false;
 let dragAdding = true;        // true = drag adds slots, false = removes
 let highlightUser = null;     // userId being hovered in participant list
+
+function createAvatar(src, name, sizeClass = "avatar") {
+    const safeName = name || "使用者";
+    if (src) {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = sizeClass;
+        img.alt = safeName;
+        return img;
+    }
+
+    const avatar = document.createElement("div");
+    avatar.className = sizeClass === "avatar" ? "avatar-ph" : sizeClass;
+    avatar.textContent = safeName.charAt(0).toUpperCase();
+    return avatar;
+}
+
+function replaceAvatar(el, src, name, sizeClass = "avatar") {
+    const avatar = createAvatar(src, name, sizeClass);
+    avatar.id = el.id;
+    el.replaceWith(avatar);
+    return avatar;
+}
+
+function appendParticipantRow(listEl, user, slotCount, prepend = false) {
+    const name = user.name || "使用者";
+    const row = document.createElement("div");
+    row.className = "participant-row flex items-center gap-2.5";
+    row.dataset.userId = user.id;
+
+    row.appendChild(createAvatar(user.avatar, name));
+
+    const body = document.createElement("div");
+    body.className = "flex-1 min-w-0";
+
+    const nameEl = document.createElement("p");
+    nameEl.className = "text-sm font-semibold text-gray-800 truncate";
+    nameEl.textContent = name;
+
+    const countEl = document.createElement("p");
+    countEl.className = "text-xs text-gray-400";
+    countEl.textContent = `${slotCount} 個時段`;
+
+    body.appendChild(nameEl);
+    body.appendChild(countEl);
+    row.appendChild(body);
+
+    row.addEventListener("mouseenter", () => { highlightUser = user.id; refreshGridOverlay(); row.classList.add("active"); });
+    row.addEventListener("mouseleave", () => { highlightUser = null; refreshGridOverlay(); row.classList.remove("active"); });
+
+    if (prepend) listEl.prepend(row);
+    else listEl.appendChild(row);
+    return row;
+}
+
+function renderEmptyParticipants(listEl) {
+    listEl.textContent = "";
+    const empty = document.createElement("p");
+    empty.className = "text-xs text-gray-400 py-2";
+    empty.textContent = "尚無人填寫";
+    listEl.appendChild(empty);
+}
+
+function renderTooltip(tooltip, slotKey, userNames, count) {
+    tooltip.textContent = "";
+
+    const title = document.createElement("div");
+    title.style.fontWeight = "700";
+    title.style.marginBottom = "3px";
+    title.textContent = slotKey;
+    tooltip.appendChild(title);
+
+    if (mySlots.has(slotKey)) {
+        const myMark = document.createElement("div");
+        myMark.style.color = "#93c5fd";
+        myMark.style.marginBottom = "2px";
+        myMark.textContent = "✓ 我的時段";
+        tooltip.appendChild(myMark);
+    }
+
+    if (userNames.length > 0) {
+        const countEl = document.createElement("div");
+        countEl.style.color = "#9ca3af";
+        countEl.style.fontSize = "11px";
+        countEl.textContent = `${count} 人可`;
+        tooltip.appendChild(countEl);
+
+        const namesEl = document.createElement("div");
+        namesEl.style.marginTop = "3px";
+        userNames.forEach((name, idx) => {
+            if (idx > 0) namesEl.appendChild(document.createElement("br"));
+            namesEl.appendChild(document.createTextNode(name));
+        });
+        tooltip.appendChild(namesEl);
+    }
+}
 
 // ─── Color scale ─────────────────────────────────────────────────────────
 function slotColor(count, maxCount) {
@@ -424,11 +521,12 @@ function updateAuthUI() {
         const chipAvatarEl = document.getElementById("userChipAvatar");
         const meAvatarEl = document.getElementById("meAvatar");
         if (avatarUrl) {
-            chipAvatarEl.innerHTML = `<img src="${avatarUrl}" class="w-full h-full object-cover">`;
-            meAvatarEl.outerHTML = `<img id="meAvatar" src="${avatarUrl}" class="avatar">`;
+            chipAvatarEl.textContent = "";
+            chipAvatarEl.appendChild(createAvatar(avatarUrl, name, "w-full h-full object-cover"));
+            replaceAvatar(meAvatarEl, avatarUrl, name);
         } else {
             chipAvatarEl.textContent = name.charAt(0).toUpperCase();
-            meAvatarEl.textContent = name.charAt(0).toUpperCase();
+            replaceAvatar(meAvatarEl, null, name);
         }
     }
 }
@@ -462,7 +560,7 @@ function closeLoginModal() { document.getElementById("loginModal").classList.add
 // ─── Load event ───────────────────────────────────────────────────────────
 async function loadEvent() {
     try {
-        const res = await fetch(`/api/w2m/events/${eventId}`);
+        const res = await fetch(`/api/w2m/events/${eventPath}`);
         const json = await res.json();
         if (json.code !== 200) throw new Error();
         eventData = json.data;
@@ -497,8 +595,8 @@ function renderEvent() {
     document.title = `${event.title} | VocPass`;
     document.getElementById("navTitle").textContent = event.title;
     document.getElementById("eventTitle").textContent = event.title;
-    document.getElementById("openAppBtn").href = `vocpass://w2m/${eventId}`;
-    document.getElementById("openAppBtnMobile").href = `vocpass://w2m/${eventId}`;
+    document.getElementById("openAppBtn").href = `vocpass://w2m/${eventPath}`;
+    document.getElementById("openAppBtnMobile").href = `vocpass://w2m/${eventPath}`;
 
     const desc = document.getElementById("eventDesc");
     if (event.description) { desc.textContent = event.description; desc.classList.remove("hidden"); }
@@ -542,24 +640,10 @@ function renderEvent() {
     document.getElementById("participantBadge").textContent = avail.length ? `· ${avail.length} 人` : "";
     const listEl = document.getElementById("participantList");
     if (avail.length === 0) {
-        listEl.innerHTML = `<p class="text-xs text-gray-400 py-2">尚無人填寫</p>`;
+        renderEmptyParticipants(listEl);
     } else {
         avail.forEach(a => {
-            const row = document.createElement("div");
-            row.className = "participant-row flex items-center gap-2.5";
-            row.dataset.userId = a.user.id;
-
-            let avatarHtml;
-            if (a.user.avatar) {
-                avatarHtml = `<img src="${a.user.avatar}" class="avatar">`;
-            } else {
-                avatarHtml = `<div class="avatar-ph">${(a.user.name||"?").charAt(0).toUpperCase()}</div>`;
-            }
-            row.innerHTML = `${avatarHtml}<div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-800 truncate">${a.user.name || "使用者"}</p><p class="text-xs text-gray-400">${a.slots.length} 個時段</p></div>`;
-
-            row.addEventListener("mouseenter", () => { highlightUser = a.user.id; refreshGridOverlay(); row.classList.add("active"); });
-            row.addEventListener("mouseleave", () => { highlightUser = null; refreshGridOverlay(); row.classList.remove("active"); });
-            listEl.appendChild(row);
+            appendParticipantRow(listEl, a.user, a.slots.length);
         });
     }
 
@@ -580,7 +664,7 @@ function buildGrid(event, slotUsers, maxCount) {
     const times = Array.from(timeSet).sort();
 
     const table = document.getElementById("availGrid");
-    table.innerHTML = "";
+    table.textContent = "";
     const tooltip = document.getElementById("tooltip");
 
     // ── Header ──
@@ -593,8 +677,15 @@ function buildGrid(event, slotUsers, maxCount) {
     dates.forEach(d => {
         const th = document.createElement("th");
         const dt = new Date(d + "T00:00:00");
-        th.innerHTML = `<div>${dt.toLocaleDateString("zh-TW",{month:"numeric",day:"numeric"})}</div>`
-            + `<div style="font-size:10px;font-weight:500;color:#9ca3af">${dt.toLocaleDateString("zh-TW",{weekday:"short"})}</div>`;
+        const dateEl = document.createElement("div");
+        dateEl.textContent = dt.toLocaleDateString("zh-TW", { month: "numeric", day: "numeric" });
+        const weekdayEl = document.createElement("div");
+        weekdayEl.style.fontSize = "10px";
+        weekdayEl.style.fontWeight = "500";
+        weekdayEl.style.color = "#9ca3af";
+        weekdayEl.textContent = dt.toLocaleDateString("zh-TW", { weekday: "short" });
+        th.appendChild(dateEl);
+        th.appendChild(weekdayEl);
         hrow.appendChild(th);
     });
     thead.appendChild(hrow);
@@ -641,9 +732,7 @@ function buildGrid(event, slotUsers, maxCount) {
                 tooltip.style.display = "block";
                 tooltip.style.left = (e.clientX + 14) + "px";
                 tooltip.style.top = (e.clientY - 10) + "px";
-                const myMark = mySlots.has(slotKey) ? `<div style="color:#93c5fd;margin-bottom:2px">✓ 我的時段</div>` : "";
-                tooltip.innerHTML = `<div style="font-weight:700;margin-bottom:3px">${slotKey}</div>${myMark}`
-                    + (userNames.length > 0 ? `<div style="color:#9ca3af;font-size:11px">${count} 人可</div><div style="margin-top:3px">${userNames.join("<br>")}</div>` : "");
+                renderTooltip(tooltip, slotKey, userNames, count);
             });
             td.addEventListener("mouseleave", () => { tooltip.style.display = "none"; });
 
@@ -716,7 +805,7 @@ async function saveAvailability() {
     icon.className = "fa-solid fa-circle-notch spin";
 
     try {
-        const res = await fetch(`/api/w2m/events/${eventId}/availability`, {
+        const res = await fetch(`/api/w2m/events/${eventPath}/availability`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -746,21 +835,14 @@ async function saveAvailability() {
         }
         // Re-render participant list count
         const me = eventData.availability.find(a => a.user.id === userId);
-        const meRow = document.querySelector(`.participant-row[data-user-id="${userId}"]`);
+        const meRow = Array.from(document.querySelectorAll(".participant-row"))
+            .find(row => row.dataset.userId === userId);
         if (meRow) {
             meRow.querySelector("p:last-child").textContent = `${mySlots.size} 個時段`;
         } else {
-            // Rebuild participant list
             const listEl = document.getElementById("participantList");
-            const row = document.createElement("div");
-            row.className = "participant-row flex items-center gap-2.5";
-            row.dataset.userId = userId;
-            const avatarHtml = avatarUrl
-                ? `<img src="${avatarUrl}" class="avatar">`
-                : `<div class="avatar-ph">${userObj.name.charAt(0).toUpperCase()}</div>`;
-            row.innerHTML = `${avatarHtml}<div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-800 truncate">${userObj.name}</p><p class="text-xs text-gray-400">${mySlots.size} 個時段</p></div>`;
-            if (listEl.querySelector("p.text-xs.text-gray-400")) listEl.innerHTML = "";
-            listEl.prepend(row);
+            if (listEl.querySelector("p.text-xs.text-gray-400")) listEl.textContent = "";
+            appendParticipantRow(listEl, userObj, mySlots.size, true);
             document.getElementById("participantBadge").textContent = `· ${eventData.availability.length} 人`;
         }
 

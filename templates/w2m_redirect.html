@@ -203,11 +203,12 @@
     </div>
 
     <script>
-        const eventId = "{{ event_id }}";
-        const deeplink = `vocpass://w2m/${eventId}`;
+        const eventId = {{ event_id | tojson }};
+        const eventPath = encodeURIComponent(eventId);
+        const deeplink = `vocpass://w2m/${eventPath}`;
 
         document.getElementById("openBtn").href = deeplink;
-        document.getElementById("webBtn").href = `/w2m/view/${eventId}`;
+        document.getElementById("webBtn").href = `/w2m/view/${eventPath}`;
 
         // 進度條結束後自動跳轉
         setTimeout(() => {
