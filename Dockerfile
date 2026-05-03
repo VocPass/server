@@ -4,6 +4,7 @@ LABEL "language"="python"
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
     build-essential \
     gcc \
     g++ \
