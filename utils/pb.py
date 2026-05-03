@@ -3,9 +3,10 @@ import pocketbase
 from dotenv import load_dotenv
 
 load_dotenv()
-pb = pocketbase.PocketBase(os.getenv("PB_URL"))
+
 
 def get_user(token):
+    pb = pocketbase.PocketBase(os.getenv("PB_URL"))
     try:
         pb.auth_store.save(token, None)
         record = pb.collection('users').auth_refresh().record
@@ -17,6 +18,7 @@ def get_user(token):
     
 
 def share_curriculum(user_token, curriculum_data, status):
+    pb = pocketbase.PocketBase(os.getenv("PB_URL"))
     pb.auth_store.save(user_token, None)
     record = pb.collection('users').auth_refresh().record
     
@@ -26,6 +28,7 @@ def share_curriculum(user_token, curriculum_data, status):
     })
 
 def set_user(token):
+    pb = pocketbase.PocketBase(os.getenv("PB_URL"))
     pb.auth_store.save(token, None)
     return pb
 
