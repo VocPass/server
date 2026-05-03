@@ -134,7 +134,7 @@
     </footer>
 
     <script>
-        const pb = new PocketBase('https://vppb.zeabur.app');
+        const pb = new PocketBase('https://api.vocpass.com');
 
         async function login(m) {
             const authData = await pb.collection('users').authWithOAuth2({ provider: m });
