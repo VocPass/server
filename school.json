@@ -3502,10 +3502,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "020403",
-        "api": "https://shcloud4.k12ea.gov.tw",
+        "api": "https://shcloud4.k12ea.gov.tw/ILVSILC",
         "url": {
-            "login": "/ILVSILC/Auth/Auth/CloudLogin",
-            "logined": "/ILVSILC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3525,23 +3525,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/ILVSILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/ILVSILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/ILVSILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/ILVSILC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/ILVSILC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/ILVSILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/ILVSILC/ICampus/StudentInfo",
-            "attendance": "/ILVSILC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/ILVSILC/ICampus/StudentInfo/Index",
-            "curriculum": "/ILVSILC/ClassTableV2/ClassTable",
-            "info": "/ILVSILC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "家齊高中": {
@@ -3549,10 +3549,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "210309",
-        "api": "https://shcloud14.k12ea.gov.tw",
+        "api": "https://shcloud14.k12ea.gov.tw/CCSHTN",
         "url": {
-            "login": "/CCSHTN/Auth/Auth/CloudLogin",
-            "logined": "/CCSHTN/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3572,23 +3572,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/CCSHTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/CCSHTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CCSHTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/CCSHTN/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/CCSHTN/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/CCSHTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/CCSHTN/ICampus/StudentInfo",
-            "attendance": "/CCSHTN/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CCSHTN/ICampus/StudentInfo/Index",
-            "curriculum": "/CCSHTN/ClassTableV2/ClassTable",
-            "info": "/CCSHTN/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "虎尾農工": {
@@ -3596,10 +3596,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "00000",
-        "api": "https://shcloud12.k12ea.gov.tw",
+        "api": "https://shcloud12.k12ea.gov.tw/HWAIVSYLC",
         "url": {
-            "login": "/HWAIVSYLC/Auth/Auth/CloudLogin",
-            "logined": "/HWAIVSYLC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3619,23 +3619,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/HWAIVSYLC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/HWAIVSYLC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/HWAIVSYLC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/HWAIVSYLC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/HWAIVSYLC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/HWAIVSYLC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/HWAIVSYLC/ICampus/StudentInfo",
-            "attendance": "/HWAIVSYLC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/HWAIVSYLC/ICampus/StudentInfo/Index",
-            "curriculum": "/HWAIVSYLC/ClassTableV2/ClassTable",
-            "info": "/HWAIVSYLC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "台南二中": {
@@ -3643,10 +3643,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "210303",
-        "api": "https://shcloud9.k12ea.gov.tw",
+        "api": "https://shcloud9.k12ea.gov.tw/TNSSHTN",
         "url": {
-            "login": "/TNSSHTN/Auth/Auth/CloudLogin",
-            "logined": "/TNSSHTN/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3666,23 +3666,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/TNSSHTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/TNSSHTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TNSSHTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/TNSSHTN/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/TNSSHTN/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/TNSSHTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/TNSSHTN/ICampus/StudentInfo",
-            "attendance": "/TNSSHTN/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TNSSHTN/ICampus/StudentInfo/Index",
-            "curriculum": "/TNSSHTN/ClassTableV2/ClassTable",
-            "info": "/TNSSHTN/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "北科附工": {
@@ -3690,10 +3690,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "030403",
-        "api": "https://shcloud11.k12ea.gov.tw",
+        "api": "https://shcloud11.k12ea.gov.tw/TYAITYC",
         "url": {
-            "login": "/TYAITYC/Auth/Auth/CloudLogin",
-            "logined": "/TYAITYC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3713,23 +3713,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/TYAITYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/TYAITYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TYAITYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/TYAITYC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/TYAITYC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/TYAITYC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/TYAITYC/ICampus/StudentInfo",
-            "attendance": "/TYAITYC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TYAITYC/ICampus/StudentInfo/Index",
-            "curriculum": "/TYAITYC/ClassTableV2/ClassTable",
-            "info": "/TYAITYC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "嘉義高工": {
@@ -3737,10 +3737,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "200405",
-        "api": "https://shcloud6.k12ea.gov.tw",
+        "api": "https://shcloud6.k12ea.gov.tw/CYIVSCY",
         "url": {
-            "login": "/CYIVSCY/Auth/Auth/CloudLogin",
-            "logined": "/CYIVSCY/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3760,23 +3760,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/CYIVSCY/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/CYIVSCY/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CYIVSCY/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/CYIVSCY/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/CYIVSCY/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/CYIVSCY/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/CYIVSCY/ICampus/StudentInfo",
-            "attendance": "/CYIVSCY/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CYIVSCY/ICampus/StudentInfo/Index",
-            "curriculum": "/CYIVSCY/ClassTableV2/ClassTable",
-            "info": "/CYIVSCY/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "竹南高中": {
@@ -3784,10 +3784,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "050310",
-        "api": "https://shcloud7.k12ea.gov.tw",
+        "api": "https://shcloud7.k12ea.gov.tw/CNSHMLC",
         "url": {
-            "login": "/CNSHMLC/Auth/Auth/CloudLogin",
-            "logined": "/CNSHMLC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3807,23 +3807,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/CNSHMLC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/CNSHMLC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CNSHMLC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/CNSHMLC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/CNSHMLC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/CNSHMLC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/CNSHMLC/ICampus/StudentInfo",
-            "attendance": "/CNSHMLC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CNSHMLC/ICampus/StudentInfo/Index",
-            "curriculum": "/CNSHMLC/ClassTableV2/ClassTable",
-            "info": "/CNSHMLC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "屏東高工": {
@@ -3831,10 +3831,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "130403",
-        "api": "https://shcloud6.k12ea.gov.tw",
+        "api": "https://shcloud6.k12ea.gov.tw/PTIVSPTC",
         "url": {
-            "login": "/PTIVSPTC/Auth/Auth/CloudLogin",
-            "logined": "/PTIVSPTC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3854,23 +3854,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/PTIVSPTC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/PTIVSPTC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/PTIVSPTC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/PTIVSPTC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/PTIVSPTC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/PTIVSPTC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/PTIVSPTC/ICampus/StudentInfo",
-            "attendance": "/PTIVSPTC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/PTIVSPTC/ICampus/StudentInfo/Index",
-            "curriculum": "/PTIVSPTC/ClassTableV2/ClassTable",
-            "info": "/PTIVSPTC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "曾文家商": {
@@ -3878,10 +3878,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "110405",
-        "api": "https://shcloud12.k12ea.gov.tw",
+        "api": "https://shcloud12.k12ea.gov.tw/TWVSTN",
         "url": {
-            "login": "/TWVSTN/Auth/Auth/CloudLogin",
-            "logined": "/TWVSTN/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3901,23 +3901,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/TWVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/TWVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TWVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/TWVSTN/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/TWVSTN/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/TWVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/TWVSTN/ICampus/StudentInfo",
-            "attendance": "/TWVSTN/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TWVSTN/ICampus/StudentInfo/Index",
-            "curriculum": "/TWVSTN/ClassTableV2/ClassTable",
-            "info": "/TWVSTN/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "蘭陽女中": {
@@ -3925,10 +3925,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "020301",
-        "api": "https://shcloud8.k12ea.gov.tw",
+        "api": "https://shcloud8.k12ea.gov.tw/LYGSHILC",
         "url": {
-            "login": "/LYGSHILC/Auth/Auth/CloudLogin",
-            "logined": "/LYGSHILC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3948,23 +3948,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/LYGSHILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/LYGSHILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/LYGSHILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/LYGSHILC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/LYGSHILC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/LYGSHILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/LYGSHILC/ICampus/StudentInfo",
-            "attendance": "/LYGSHILC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/LYGSHILC/ICampus/StudentInfo/Index",
-            "curriculum": "/LYGSHILC/ClassTableV2/ClassTable",
-            "info": "/LYGSHILC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "台南高商": {
@@ -3972,10 +3972,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "210408",
-        "api": "https://shcloud8.k12ea.gov.tw",
+        "api": "https://shcloud8.k12ea.gov.tw/TNCVSTN",
         "url": {
-            "login": "/TNCVSTN/Auth/Auth/CloudLogin",
-            "logined": "/TNCVSTN/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -3995,23 +3995,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/TNCVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/TNCVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TNCVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/TNCVSTN/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/TNCVSTN/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/TNCVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/TNCVSTN/ICampus/StudentInfo",
-            "attendance": "/TNCVSTN/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TNCVSTN/ICampus/StudentInfo/Index",
-            "curriculum": "/TNCVSTN/ClassTableV2/ClassTable",
-            "info": "/TNCVSTN/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "羅東高工": {
@@ -4019,10 +4019,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "020407",
-        "api": "https://shcloud1.k12ea.gov.tw",
+        "api": "https://shcloud1.k12ea.gov.tw/LTIVSILC",
         "url": {
-            "login": "/LTIVSILC/Auth/Auth/CloudLogin",
-            "logined": "/LTIVSILC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -4042,23 +4042,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/LTIVSILC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/LTIVSILC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/LTIVSILC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/LTIVSILC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/LTIVSILC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/LTIVSILC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/LTIVSILC/ICampus/StudentInfo",
-            "attendance": "/LTIVSILC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/LTIVSILC/ICampus/StudentInfo/Index",
-            "curriculum": "/LTIVSILC/ClassTableV2/ClassTable",
-            "info": "/LTIVSILC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "花蓮高工": {
@@ -4066,10 +4066,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "150404",
-        "api": "https://shcloud3.k12ea.gov.tw",
+        "api": "https://shcloud3.k12ea.gov.tw/HLISHLC",
         "url": {
-            "login": "/HLISHLC/Auth/Auth/CloudLogin",
-            "logined": "/HLISHLC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -4089,23 +4089,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/HLISHLC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/HLISHLC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/HLISHLC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/HLISHLC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/HLISHLC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/HLISHLC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/HLISHLC/ICampus/StudentInfo",
-            "attendance": "/HLISHLC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/HLISHLC/ICampus/StudentInfo/Index",
-            "curriculum": "/HLISHLC/ClassTableV2/ClassTable",
-            "info": "/HLISHLC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "台南海事": {
@@ -4113,10 +4113,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "210416",
-        "api": "https://shcloud10.k12ea.gov.tw",
+        "api": "https://shcloud10.k12ea.gov.tw/TNVSTN",
         "url": {
-            "login": "/TNVSTN/Auth/Auth/CloudLogin",
-            "logined": "/TNVSTN/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -4136,23 +4136,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/TNVSTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/TNVSTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TNVSTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/TNVSTN/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/TNVSTN/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/TNVSTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/TNVSTN/ICampus/StudentInfo",
-            "attendance": "/TNVSTN/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/TNVSTN/ICampus/StudentInfo/Index",
-            "curriculum": "/TNVSTN/ClassTableV2/ClassTable",
-            "info": "/TNVSTN/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "中壢高中": {
@@ -4160,10 +4160,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "030305",
-        "api": "https://shcloud2.k12ea.gov.tw",
+        "api": "https://shcloud2.k12ea.gov.tw/CLHSTYC",
         "url": {
-            "login": "/CLHSTYC/Auth/Auth/CloudLogin",
-            "logined": "/CLHSTYC/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -4183,23 +4183,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/CLHSTYC/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CLHSTYC/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/CLHSTYC/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/CLHSTYC/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/CLHSTYC/ICampus/StudentInfo",
-            "attendance": "/CLHSTYC/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/CLHSTYC/ICampus/StudentInfo/Index",
-            "curriculum": "/CLHSTYC/ClassTableV2/ClassTable",
-            "info": "/CLHSTYC/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "南科實中": {
@@ -4207,10 +4207,10 @@
         "app": 1.0,
         "beta": false,
         "school_code": "114542",
-        "api": "https://shcloud13.k12ea.gov.tw",
+        "api": "https://shcloud13.k12ea.gov.tw/NNKIEHTN",
         "url": {
-            "login": "/NNKIEHTN/Auth/Auth/CloudLogin",
-            "logined": "/NNKIEHTN/ICampus/Home/Index2",
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
             "root": "/"
         },
         "login": {
@@ -4230,23 +4230,23 @@
             ]
         },
         "route": {
-            "merit_demerit": "/NNKIEHTN/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
-            "attendance": "/NNKIEHTN/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/NNKIEHTN/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
-            "curriculum": "/NNKIEHTN/ClassTableV2/ClassTable/GetTimeTable",
-            "info": "/NNKIEHTN/ICampus/CommonData/GetStudentBasicInfo",
-            "daily": "/NNKIEHTN/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
         },
         "get": {
-            "merit_demerit": "/NNKIEHTN/ICampus/StudentInfo",
-            "attendance": "/NNKIEHTN/ICampus/StudentInfo",
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
             "exam_menu": "#",
             "exam_results": "#",
-            "semester_scores": "/NNKIEHTN/ICampus/StudentInfo/Index",
-            "curriculum": "/NNKIEHTN/ClassTableV2/ClassTable",
-            "info": "/NNKIEHTN/ICampus/StudentInfo"
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
         }
     },
     "金門高中": {
