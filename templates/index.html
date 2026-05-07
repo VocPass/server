@@ -141,6 +141,30 @@
 </head>
 <body class="antialiased overflow-x-hidden">
 
+    <div id="disclaimer-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-5 py-8" role="dialog" aria-modal="true" aria-labelledby="disclaimer-modal-title">
+        <div id="disclaimer-modal-backdrop" class="absolute inset-0 bg-black/45 backdrop-blur-sm"></div>
+        <div class="relative w-full max-w-md rounded-[2rem] bg-white p-6 shadow-2xl shadow-black/20 border border-white/70">
+            <button id="disclaimer-modal-close" type="button" class="absolute right-4 top-4 w-9 h-9 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors" aria-label="關閉免責聲明">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5">
+                <i class="fa-solid fa-circle-info text-xl"></i>
+            </div>
+            <h2 id="disclaimer-modal-title" class="text-2xl font-bold tracking-tight text-gray-900 mb-3">免責聲明</h2>
+            <p class="text-gray-500 leading-relaxed">
+                VocPass 為非官方校務查詢工具，與原始系統無任何合作關係，資料仍以各校官方系統公告為準。使用本服務即表示您了解並同意相關條款。
+            </p>
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                <button id="disclaimer-modal-confirm" type="button" class="flex-1 bg-blue-600 text-white px-5 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors">
+                    我知道了
+                </button>
+                <a href="/disclaimer" class="flex-1 bg-gray-100 text-gray-900 px-5 py-3 rounded-full font-semibold text-center hover:bg-gray-200 transition-colors">
+                    查看完整內容
+                </a>
+            </div>
+        </div>
+    </div>
+
     <nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
         <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
             <div class="flex items-center gap-2.5 cursor-pointer">
@@ -785,6 +809,39 @@
     <script>
         // 初始化動畫
         AOS.init({ once: true, offset: 50 });
+
+        // 首頁免責聲明彈窗
+        const disclaimerModal = document.getElementById('disclaimer-modal');
+        const disclaimerCloseButtons = [
+            document.getElementById('disclaimer-modal-close'),
+            document.getElementById('disclaimer-modal-confirm'),
+            document.getElementById('disclaimer-modal-backdrop'),
+        ].filter(Boolean);
+
+        function closeDisclaimerModal() {
+            if (!disclaimerModal) return;
+            disclaimerModal.classList.add('hidden');
+            disclaimerModal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function openDisclaimerModal() {
+            if (!disclaimerModal) return;
+            disclaimerModal.classList.remove('hidden');
+            disclaimerModal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+            document.getElementById('disclaimer-modal-confirm')?.focus();
+        }
+
+        disclaimerCloseButtons.forEach(button => {
+            button.addEventListener('click', closeDisclaimerModal);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeDisclaimerModal();
+        });
+
+        openDisclaimerModal();
 
         // 導覽列模糊切換
         const nav = document.querySelector('nav');
