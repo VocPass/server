@@ -10209,6 +10209,67 @@
             ]
         }
     },
+    "東吳工家": {
+        "vision": "v7",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://score.dwvs.cy.edu.tw",
+        "url": {
+            "login": "/SCH_UI",
+            "logined": "/SSO/Main.aspx",
+            "root": "/SCH_UI/SSO/"
+        },
+        "login": {
+            "username": {
+                "name": "UserId"
+            },
+            "password": {
+                "name": "Pswd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "ctrlbutton"
+            },
+            "successKeywords": [
+                "您好"
+            ]
+        },
+        "route": {
+            "merit_demerit": "#",
+            "attendance": "#",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "#"
+        },
+        "endpoint_action": {
+            "merit_demerit": [
+                "出勤獎懲",
+                "獎懲記錄"
+            ],
+            "attendance": [
+                "出勤獎懲",
+                "出勤記錄"
+            ],
+            "exam_menu": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "exam_results": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "semester_scores": [
+                "修課紀錄",
+                "成績查詢"
+            ],
+            "curriculum": [
+                "修課紀錄",
+                "個人課表"
+            ]
+        }
+    },
     "東港海事": {
         "vision": "v7",
         "app": 1.0,
