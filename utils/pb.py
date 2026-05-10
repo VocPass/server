@@ -33,6 +33,16 @@ def set_user(token):
     return pb
 
 
+def set_user_school(user_token, school):
+    pb = pocketbase.PocketBase(os.getenv("PB_URL"))
+    pb.auth_store.save(user_token, None)
+    record = pb.collection('users').auth_refresh().record
+    pb.collection('users').update(record.id, {
+        "school": school
+    })
+
+
+
 # 刪除非a-zA-Z0-9_.
 def sanitize_str(text):
     return "".join(c for c in text if c.isalnum() or c in (".", "_","-","(",")")).rstrip()

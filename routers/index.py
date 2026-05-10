@@ -12,6 +12,8 @@ import subprocess
 from urllib.parse import quote
 from pathlib import Path
 
+import utils.pb as pb
+
 router = APIRouter()
 load_dotenv()
 limiter = Limiter(key_func=get_remote_address)
@@ -271,6 +273,7 @@ async def ping(
     m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="attempt").inc()
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
+    
     if not school:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
@@ -278,6 +281,8 @@ async def ping(
         data["data"] = None
 
         return data
+    user = pb.get_user(request.headers.get("Authorization"))
+    
 
     async with aiohttp.ClientSession(
         cookies=request.cookies, headers=headers
@@ -301,6 +306,8 @@ async def ping(
 
             for i in school["login"]["successKeywords"]:
                 if i in html:
+                    if user:
+                        pb.set_user_school(request.headers.get("Authorization"), school_name)
                     m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(
                         school_name=school_name, result="logged_in"
                     ).inc()
