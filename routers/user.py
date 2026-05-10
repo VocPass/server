@@ -109,18 +109,6 @@ class APNsToken(BaseModel):
         data = super().dict(**kwargs)
         return data
 
-
-{
-    "device_token": "63A5B41A-070F-48C9-8EAE-32CB082E9547",
-    "apns_token": "3266d1f66478a61fa5c02e590731b050bb9756dcbacbe9d995a0827c526d9e11",
-    "start_token": "4003323bccc4a015e51cf4b80eee75cdec52284c13a388232ef92eaa218b467e877b8b2cf268b9efb588280dc4597cb214cb379cdae992dc4476ec634a0973b08a04b5fe4dfe34025f94fbd0c0c5e054",
-    "update_token": None,
-    "is_dev": False,
-    "is_open": True,
-    "valid": True,
-}
-
-
 @router.post("/notify/ios", summary="上傳Push Token")
 async def upload_push_token(request: Request, item: APNsToken):
     user_token = request.headers.get("Authorization")
