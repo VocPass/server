@@ -369,6 +369,33 @@ async def add_post_message(
     data["data"] = []
     return data
 
+@router.delete("/message/{message_id}", summary="刪除文章留言")
+async def delete_post_message(request: Request, response: Response, message_id):
+    token = request.headers.get("Authorization")
+    user = get_user(token) if token else None
+    data = request.app.state.response
+    db = request.app.state.pb_client
+    if not user:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data["code"] = 403
+        data["message"] = "Unauthorized."
+        data["data"] = None
+        return data
+
+    forums = db.collection("forum_message").get_one(sanitize_str(message_id))
+    if forums.user != user.id:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data["code"] = 403
+        data["message"] = "You can only delete your own message."
+        data["data"] = None
+        return data
+
+    db.collection("forum_message").delete(forums.id)
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = []
+    return data
+
 @router.post("/post/{post_id}/like", summary="按讚文章")
 async def like_post(request: Request, response: Response, post_id):
     token = request.headers.get("Authorization")
