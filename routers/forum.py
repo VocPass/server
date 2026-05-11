@@ -37,6 +37,31 @@ async def get_school_post(request: Request, response: Response):
     data["data"] = tags
     return data
 
+@router.get("/{school_name}/admin", summary="取得學校版主")
+async def get_school_admin(request: Request, response: Response, school_name: str):
+    school = request.app.state.schools.get(school_name)
+    data = request.app.state.response
+    if not school and school_name != "all":
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        data["code"] = 400
+        data["message"] = "Unsupported school."
+        data["data"] = None
+
+        return data
+    db = request.app.state.pb_client
+
+    try:
+        pinned_forums = db.collection("forum_admin").get_first_list_item(
+            f'school="{sanitize_str(school_name)}"'
+        )
+        admins = pinned_forums
+        admins.icon = f"{os.environ.get('PB_URL')}api/files/pbc_1619757269/{admins.id}/{admins.icon}" if admins else None
+    except:
+        admins = None
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = admins
+    return data
 
 @router.get("/{school_name}", summary="取得文章列表")
 async def get_school_post(
