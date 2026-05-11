@@ -19,7 +19,7 @@ router = APIRouter(prefix="/api/forum", tags=["論壇"])
 
 
 @router.get("/{school_name}", summary="取得文章列表")
-async def get_curriculum_template(
+async def get_school_post(
     request: Request, response: Response, school_name: str, page: int = 1
 ):
     school = request.app.state.schools.get(school_name)
@@ -52,7 +52,6 @@ async def get_curriculum_template(
             forum_data["user"] = None
         else:
             user_data = forum_data["expand"]["user"].__dict__.copy()
-            print(user_data)
             forum_data["user"] = {
                 "name": user_data["name"],
                 "username": user_data["username"],
@@ -66,8 +65,46 @@ async def get_curriculum_template(
     return data
 
 
+@router.get("/user/{user_id}", summary="取得個人文章列表")
+async def get_user_post(
+    request: Request, response: Response, user_id: str, page: int = 1
+):
+    token = request.headers.get("Authorization")
+    user = get_user(token) if token else None
+    data = request.app.state.response
+    db = request.app.state.pb_client
+    forum_filter = f'user="{sanitize_str(user_id)}"'
+    if not user or user.id != user_id:
+        forum_filter += " && anonymous=false"
+
+    forums = db.collection("forum").get_list(
+        page=page,
+        per_page=50,
+        query_params={
+            "filter": forum_filter,
+            "expand": "user",
+        },
+    )
+
+    f = []
+    for forum in forums.items:
+        forum_data = forum.__dict__.copy()
+        user_data = forum_data["expand"]["user"].__dict__.copy()
+        forum_data["user"] = {
+            "name": user_data["name"],
+            "username": user_data["username"],
+            "avatar": f"{os.environ.get('PB_URL')}api/files/_pb_users_auth_/{user_data['id']}/{user_data['avatar']}",
+        }
+        forum_data.pop("expand", None)
+        f.append(forum_data)
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = {"forums": f, "total_pages": forums.total_pages}
+    return data
+
+
 @router.get("/post/{post_id}/message", summary="取得文章留言")
-async def get_curriculum_template(
+async def get_post_message(
     request: Request, response: Response, post_id, page: int = 1
 ):
     data = request.app.state.response
@@ -87,7 +124,6 @@ async def get_curriculum_template(
             forum_data["user"] = None
         else:
             user_data = forum_data["expand"]["user"].__dict__.copy()
-            print(user_data)
             forum_data["user"] = {
                 "name": user_data["name"],
                 "username": user_data["username"],
@@ -102,9 +138,7 @@ async def get_curriculum_template(
 
 
 @router.post("/post/{post_id}/like", summary="按讚文章")
-async def get_curriculum_template(
-    request: Request, response: Response, post_id
-):
+async def like_post(request: Request, response: Response, post_id):
     token = request.headers.get("Authorization")
     user = get_user(token) if token else None
     if not user:
@@ -114,7 +148,7 @@ async def get_curriculum_template(
         data["message"] = "Unauthorized."
         data["data"] = None
         return data
-    
+
     data = request.app.state.response
     db = request.app.state.pb_client
 
@@ -130,10 +164,9 @@ async def get_curriculum_template(
     data["data"] = []
     return data
 
+
 @router.delete("/post/{post_id}/like", summary="取消按讚文章")
-async def get_curriculum_template(
-    request: Request, response: Response, post_id
-):
+async def delike_post(request: Request, response: Response, post_id):
     token = request.headers.get("Authorization")
     user = get_user(token) if token else None
     if not user:
@@ -143,7 +176,7 @@ async def get_curriculum_template(
         data["message"] = "Unauthorized."
         data["data"] = None
         return data
-    
+
     data = request.app.state.response
     db = request.app.state.pb_client
 
