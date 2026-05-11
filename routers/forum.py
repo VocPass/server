@@ -61,6 +61,7 @@ async def get_school_post(
                 f'school="{sanitize_str(school_name)}"' if school_name != "all" else ""
             ),
             "expand": "user",
+            "sort": "-created" if school_name == "all" else "-pin,-created",
         },
     )
 
@@ -73,6 +74,7 @@ async def get_school_post(
         else:
             user_data = forum_data["expand"]["user"].__dict__.copy()
             forum_data["user"] = {
+                "id": user_data["id"],
                 "name": user_data["name"],
                 "username": user_data["username"],
                 "avatar": f"{os.environ.get('PB_URL')}api/files/_pb_users_auth_/{user_data['id']}/{user_data['avatar']}",
@@ -275,6 +277,7 @@ async def get_user_post(
         query_params={
             "filter": forum_filter,
             "expand": "user",
+            "sort": "-created",
         },
     )
 
@@ -283,6 +286,7 @@ async def get_user_post(
         forum_data = forum.__dict__.copy()
         user_data = forum_data["expand"]["user"].__dict__.copy()
         forum_data["user"] = {
+            "id": user_data["id"],
             "name": user_data["name"],
             "username": user_data["username"],
             "avatar": f"{os.environ.get('PB_URL')}api/files/_pb_users_auth_/{user_data['id']}/{user_data['avatar']}",
@@ -305,7 +309,11 @@ async def get_post_message(
     forums = db.collection("forum_message").get_list(
         page=page,
         per_page=50,
-        query_params={"filter": f'post="{sanitize_str(post_id)}"', "expand": "user"},
+        query_params={
+            "filter": f'post="{sanitize_str(post_id)}"',
+            "expand": "user",
+            "sort": "created",
+        },
     )
 
     f = []
@@ -317,6 +325,7 @@ async def get_post_message(
         else:
             user_data = forum_data["expand"]["user"].__dict__.copy()
             forum_data["user"] = {
+                "id": user_data["id"],
                 "name": user_data["name"],
                 "username": user_data["username"],
                 "avatar": f"{os.environ.get('PB_URL')}api/files/_pb_users_auth_/{user_data['id']}/{user_data['avatar']}",
