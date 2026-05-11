@@ -29,6 +29,30 @@ router = APIRouter(prefix="/api/forum", tags=["論壇"])
 tags = {"公告": {"color": "#FF0000", "admin_only": False}}
 
 
+def parse_tag_names(value):
+    if not value:
+        return []
+    if isinstance(value, dict):
+        return [str(tag).strip() for tag in value.keys() if str(tag).strip()]
+    if isinstance(value, list):
+        return [str(tag).strip() for tag in value if str(tag).strip()]
+
+    tag_str = str(value).strip()
+    if not tag_str:
+        return []
+    if tag_str.startswith("["):
+        parsed = json.loads(tag_str)
+        if not isinstance(parsed, list):
+            raise ValueError("tag must be a list of strings")
+        return [str(tag).strip() for tag in parsed if str(tag).strip()]
+    return [tag.strip() for tag in tag_str.split(",") if tag.strip()]
+
+
+def serialize_forum_tags(value):
+    tag_names = parse_tag_names(value)
+    return {tag: tags.get(tag, {}) for tag in tag_names}
+
+
 def serialize_forum_post(forum):
     forum_data = forum.__dict__.copy()
     image_names = forum_data.get("image") or []
@@ -40,6 +64,7 @@ def serialize_forum_post(forum):
         for image in image_names
         if image
     ]
+    forum_data["tag"] = serialize_forum_tags(forum_data.get("tag"))
     forum_data.pop("image", None)
     return forum_data
 
@@ -171,24 +196,11 @@ async def add_post(
         return data
 
     try:
-        if not tag:
-            tag_data = []
-        else:
-            tag_str = tag.strip()
-            if tag_str.startswith("["):
-                tag_data = json.loads(tag_str)
-            elif "," in tag_str:
-                tag_data = [t.strip() for t in tag_str.split(",") if t.strip()]
-            else:
-                tag_data = [tag_str]
-        if not isinstance(tag_data, list) or not all(
-            isinstance(t, str) for t in tag_data
-        ):
-            raise ValueError("tag must be a list of strings")
+        tag_data = parse_tag_names(tag)
     except Exception:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
-        data["message"] = "tag 格式錯誤，需為字串陣列"
+        data["message"] = "tag 格式錯誤，需為 tag1,tag2,tag3"
         data["data"] = None
         return data
 
@@ -251,16 +263,13 @@ async def add_post(
             return data
         image_uploads = FileUpload(*image_files)
 
-    td = {}
-    for t in tag_data:
-        td[t] = tags[t]
     payload = {
         "user": user.id,
         "school": school,
         "title": title,
         "content": content,
         "anonymous": anonymous,
-        "tag": td,
+        "tag": ",".join(tag_data),
         "pin": pin,
     }
     if image_uploads:
