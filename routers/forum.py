@@ -447,3 +447,55 @@ async def delike_post(request: Request, response: Response, post_id):
     data["message"] = "Success."
     data["data"] = []
     return data
+
+
+@router.post("/message/{message_id}/like", summary="按讚留言")
+async def like_message(request: Request, response: Response, message_id):
+    token = request.headers.get("Authorization")
+    user = get_user(token) if token else None
+    if not user:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data = request.app.state.response
+        data["code"] = 403
+        data["message"] = "Unauthorized."
+        data["data"] = None
+        return data
+
+    data = request.app.state.response
+    db = request.app.state.pb_client
+
+    forums = db.collection("forum_message").get_one(sanitize_str(message_id))
+    if user.id not in forums.likes:
+        if forums.likes:
+            forums.likes.append(user.id)
+        else:
+            forums.likes = [user.id]
+        db.collection("forum_message").update(forums.id, {"likes": forums.likes})
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = []
+    return data
+
+@router.delete("/message/{message_id}/like", summary="取消按讚留言")
+async def delike_message(request: Request, response: Response, message_id):
+    token = request.headers.get("Authorization")
+    user = get_user(token) if token else None
+    if not user:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data = request.app.state.response
+        data["code"] = 403
+        data["message"] = "Unauthorized."
+        data["data"] = None
+        return data
+
+    data = request.app.state.response
+    db = request.app.state.pb_client
+
+    forums = db.collection("forum_message").get_one(sanitize_str(message_id))
+    if user.id in forums.likes:
+        forums.likes.remove(user.id)
+        db.collection("forum_message").update(forums.id, {"likes": forums.likes})
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = []
+    return data
