@@ -103,7 +103,7 @@ async def get_curriculum_template(
 
 @router.post("/post/{post_id}/like", summary="按讚文章")
 async def get_curriculum_template(
-    request: Request, response: Response, post_id, page: int = 1
+    request: Request, response: Response, post_id
 ):
     token = request.headers.get("Authorization")
     user = get_user(token) if token else None
@@ -118,9 +118,12 @@ async def get_curriculum_template(
     data = request.app.state.response
     db = request.app.state.pb_client
 
-    forums = db.collection("forum").get_first_list_item(f'post="{sanitize_str(post_id)}"')
+    forums = db.collection("forum").get_first_list_item(f'id="{sanitize_str(post_id)}"')
     if user.id not in forums.likes:
-        forums.likes.append(user.id)
+        if forums.likes:
+            forums.likes.append(user.id)
+        else:
+            forums.likes = [user.id]
         db.collection("forum").update(forums.id, {"likes": forums.likes})
     data["code"] = 200
     data["message"] = "Success."
@@ -129,7 +132,7 @@ async def get_curriculum_template(
 
 @router.delete("/post/{post_id}/like", summary="取消按讚文章")
 async def get_curriculum_template(
-    request: Request, response: Response, post_id, page: int = 1
+    request: Request, response: Response, post_id
 ):
     token = request.headers.get("Authorization")
     user = get_user(token) if token else None
@@ -144,7 +147,7 @@ async def get_curriculum_template(
     data = request.app.state.response
     db = request.app.state.pb_client
 
-    forums = db.collection("forum").get_first_list_item(f'post="{sanitize_str(post_id)}"')
+    forums = db.collection("forum").get_first_list_item(f'id="{sanitize_str(post_id)}"')
     if user.id in forums.likes:
         forums.likes.remove(user.id)
         db.collection("forum").update(forums.id, {"likes": forums.likes})
