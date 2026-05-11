@@ -1,4 +1,13 @@
-from fastapi import APIRouter, Response, Request, status, Depends, UploadFile, File, Form
+from fastapi import (
+    APIRouter,
+    Response,
+    Request,
+    status,
+    Depends,
+    UploadFile,
+    File,
+    Form,
+)
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import RedirectResponse, FileResponse
 from starlette.datastructures import UploadFile as StarletteUploadFile
@@ -17,12 +26,17 @@ from pocketbase.models import FileUpload
 load_dotenv()
 router = APIRouter(prefix="/api/forum", tags=["論壇"])
 
-tags={
-    "公告":{
-        "color": "#FF0000",
-        "admin_only": False
-    }
-}
+tags = {"公告": {"color": "#FF0000", "admin_only": False}}
+
+
+@router.get("/tags", summary="取得標籤列表")
+async def get_school_post(request: Request, response: Response):
+    data = request.app.state.response
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = tags
+    return data
+
 
 @router.get("/{school_name}", summary="取得文章列表")
 async def get_school_post(
@@ -100,7 +114,9 @@ async def add_post(
         data["message"] = "Unauthorized."
         data["data"] = None
         return data
-    if ((school not in request.app.state.schools) or (user.school != school)) and school != "all":
+    if (
+        (school not in request.app.state.schools) or (user.school != school)
+    ) and school != "all":
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
         data["message"] = "你只能在你學校的論壇發文！"
@@ -118,7 +134,9 @@ async def add_post(
                 tag_data = [t.strip() for t in tag_str.split(",") if t.strip()]
             else:
                 tag_data = [tag_str]
-        if not isinstance(tag_data, list) or not all(isinstance(t, str) for t in tag_data):
+        if not isinstance(tag_data, list) or not all(
+            isinstance(t, str) for t in tag_data
+        ):
             raise ValueError("tag must be a list of strings")
     except Exception:
         response.status_code = status.HTTP_400_BAD_REQUEST
@@ -134,10 +152,12 @@ async def add_post(
         data["message"] = "tag 不存在"
         data["data"] = {"invalid_tags": invalid_tags}
         return data
-    
+
     if pin or any(tags[t].get("admin_only") for t in tag_data):
         try:
-            pinned_forums = db.collection("forum_admin").get_first_list_item(f'school="{sanitize_str(school)}"')
+            pinned_forums = db.collection("forum_admin").get_first_list_item(
+                f'school="{sanitize_str(school)}"'
+            )
             if user.id not in pinned_forums.admin:
                 pin = False
                 if any(tags[t].get("admin_only") for t in tag_data):
@@ -184,7 +204,7 @@ async def add_post(
             return data
         image_uploads = FileUpload(*image_files)
 
-    td ={}
+    td = {}
     for t in tag_data:
         td[t] = tags[t]
     payload = {
@@ -200,7 +220,7 @@ async def add_post(
         payload["image"] = image_uploads
 
     record = db.collection("forum").create(payload)
-    
+
     data["code"] = 200
     data["message"] = "Success."
 
