@@ -328,6 +328,46 @@ async def get_post_message(
     data["data"] = {"forums": f, "total_pages": forums.total_pages}
     return data
 
+@router.post("/post/{post_id}/message", summary="新增文章留言")
+async def add_post_message(
+    request: Request,
+    response: Response,
+    post_id: str,
+    content: str = Form(...),
+    anonymous: bool = Form(False),
+):
+    token = request.headers.get("Authorization")
+    user = get_user(token) if token else None
+    data = request.app.state.response
+    db = request.app.state.pb_client
+    if not user:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data["code"] = 403
+        data["message"] = "Unauthorized."
+        data["data"] = None
+        return data
+
+    try:
+        db.collection("forum").get_one(sanitize_str(post_id))
+    except:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        data["code"] = 404
+        data["message"] = "Post not found."
+        data["data"] = None
+        return data
+
+    payload = {
+        "user": user.id,
+        "post": post_id,
+        "content": content,
+        "anonymous": anonymous,
+    }
+    db.collection("forum_message").create(payload)
+
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = []
+    return data
 
 @router.post("/post/{post_id}/like", summary="按讚文章")
 async def like_post(request: Request, response: Response, post_id):
