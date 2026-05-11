@@ -29,6 +29,21 @@ router = APIRouter(prefix="/api/forum", tags=["論壇"])
 tags = {"公告": {"color": "#FF0000", "admin_only": False}}
 
 
+def serialize_forum_post(forum):
+    forum_data = forum.__dict__.copy()
+    image_names = forum_data.get("image") or []
+    if isinstance(image_names, str):
+        image_names = [image_names] if image_names else []
+    collection = forum_data.get("collection_id") or forum_data.get("collection_name") or "forum"
+    forum_data["images"] = [
+        f"{os.environ.get('PB_URL')}api/files/{collection}/{forum_data['id']}/{image}"
+        for image in image_names
+        if image
+    ]
+    forum_data.pop("image", None)
+    return forum_data
+
+
 @router.get("/tags", summary="取得標籤列表")
 async def get_school_post(request: Request, response: Response):
     data = request.app.state.response
@@ -36,6 +51,7 @@ async def get_school_post(request: Request, response: Response):
     data["message"] = "Success."
     data["data"] = tags
     return data
+
 
 @router.get("/{school_name}/admin", summary="取得學校版主")
 async def get_school_admin(request: Request, response: Response, school_name: str):
@@ -51,17 +67,21 @@ async def get_school_admin(request: Request, response: Response, school_name: st
     db = request.app.state.pb_client
 
     try:
-        pinned_forums = db.collection("forum_admin").get_first_list_item(
+        admins = db.collection("forum_admin").get_first_list_item(
             f'school="{sanitize_str(school_name)}"'
         )
-        admins = pinned_forums
-        admins.icon = f"{os.environ.get('PB_URL')}api/files/pbc_1619757269/{admins.id}/{admins.icon}" if admins else None
+        admins.icon = (
+            f"{os.environ.get('PB_URL')}api/files/pbc_1619757269/{admins.id}/{admins.icon}"
+            if admins and admins.icon
+            else None
+        )
     except:
         admins = None
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = admins
     return data
+
 
 @router.get("/{school_name}", summary="取得文章列表")
 async def get_school_post(
@@ -92,7 +112,7 @@ async def get_school_post(
 
     f = []
     for forum in forums.items:
-        forum_data = forum.__dict__.copy()
+        forum_data = serialize_forum_post(forum)
 
         if forum.anonymous:
             forum_data["user"] = None
@@ -308,7 +328,7 @@ async def get_user_post(
 
     f = []
     for forum in forums.items:
-        forum_data = forum.__dict__.copy()
+        forum_data = serialize_forum_post(forum)
         user_data = forum_data["expand"]["user"].__dict__.copy()
         forum_data["user"] = {
             "id": user_data["id"],
