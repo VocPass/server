@@ -226,6 +226,36 @@ async def add_post(
 
     return data
 
+@router.delete("/post/{post_id}", summary="刪除文章")
+async def delete_post(request: Request, response: Response, post_id):
+    token = request.headers.get("Authorization")
+    user = get_user(token) if token else None
+    if not user:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data = request.app.state.response
+        data["code"] = 403
+        data["message"] = "Unauthorized."
+        data["data"] = None
+        return data
+
+    data = request.app.state.response
+    db = request.app.state.pb_client
+
+    forums = db.collection("forum").get_first_list_item(f'id="{sanitize_str(post_id)}"')
+    if forums.user != user.id:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data["code"] = 403
+        data["message"] = "You can only delete your own post."
+        data["data"] = None
+        return data
+
+    db.collection("forum").delete(forums.id)
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = []
+
+    return data
+
 
 @router.get("/user/{user_id}", summary="取得個人文章列表")
 async def get_user_post(
