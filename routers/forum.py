@@ -53,6 +53,16 @@ def serialize_forum_tags(value):
     return {tag: tags.get(tag, {}) for tag in tag_names}
 
 
+def relation_id(value):
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        return relation_id(value[0]) if value else None
+    if isinstance(value, dict):
+        return value.get("id")
+    return getattr(value, "id", value)
+
+
 def serialize_forum_post(forum):
     forum_data = forum.__dict__.copy()
     image_names = forum_data.get("image") or []
@@ -298,7 +308,7 @@ async def delete_post(request: Request, response: Response, post_id):
     db = request.app.state.pb_client
 
     forums = db.collection("forum").get_first_list_item(f'id="{sanitize_str(post_id)}"')
-    if forums.user != user.id:
+    if relation_id(forums.user) != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         data["code"] = 403
         data["message"] = "You can only delete your own post."
@@ -446,7 +456,7 @@ async def delete_post_message(request: Request, response: Response, message_id):
         return data
 
     forums = db.collection("forum_message").get_one(sanitize_str(message_id))
-    if forums.user != user.id:
+    if relation_id(forums.user) != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         data["code"] = 403
         data["message"] = "You can only delete your own message."
