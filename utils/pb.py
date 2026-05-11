@@ -5,7 +5,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def normalize_authorization_token(token):
+    if not token:
+        return None
+    token = str(token).strip()
+    if token.lower().startswith("bearer "):
+        return token[7:].strip()
+    return token
+
+
 def get_user(token):
+    token = normalize_authorization_token(token)
+    if not token:
+        return None
+
     pb = pocketbase.PocketBase(os.getenv("PB_URL"))
     try:
         pb.auth_store.save(token, None)
@@ -18,6 +31,7 @@ def get_user(token):
     
 
 def share_curriculum(user_token, curriculum_data, status):
+    user_token = normalize_authorization_token(user_token)
     pb = pocketbase.PocketBase(os.getenv("PB_URL"))
     pb.auth_store.save(user_token, None)
     record = pb.collection('users').auth_refresh().record
@@ -28,6 +42,7 @@ def share_curriculum(user_token, curriculum_data, status):
     })
 
 def set_user(token):
+    token = normalize_authorization_token(token)
     pb = pocketbase.PocketBase(os.getenv("PB_URL"))
     pb.auth_store.save(token, None)
     return pb
