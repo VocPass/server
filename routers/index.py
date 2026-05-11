@@ -273,6 +273,7 @@ async def ping(
     m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="attempt").inc()
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
+    db = request.app.state.pb_client
     
     if not school:
         response.status_code = status.HTTP_400_BAD_REQUEST
@@ -307,7 +308,8 @@ async def ping(
             for i in school["login"]["successKeywords"]:
                 if i in html:
                     if user:
-                        pb.set_user_school(request.headers.get("Authorization"), school_name)
+                        db.collection("users").update(user.id, {"school": school_name})
+                        
                     m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(
                         school_name=school_name, result="logged_in"
                     ).inc()
