@@ -289,7 +289,6 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException,r
         status=exc.status_code,
     )
     if exc.status_code == 404 and "mozilla" in request.headers.get("User-Agent", "").lower():
-        response.status_code = status.HTTP_200_OK
         return FileResponse("templates/404.html")
     return JSONResponse(
         status_code=exc.status_code,
