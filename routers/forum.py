@@ -29,6 +29,56 @@ router = APIRouter(prefix="/api/forum", tags=["論壇"])
 tags = {"公告": {"color": "#FF0000", "admin_only": False}}
 
 
+def parse_tag_names(value):
+    if not value:
+        return []
+    if isinstance(value, dict):
+        return [str(tag).strip() for tag in value.keys() if str(tag).strip()]
+    if isinstance(value, list):
+        return [str(tag).strip() for tag in value if str(tag).strip()]
+
+    tag_str = str(value).strip()
+    if not tag_str:
+        return []
+    if tag_str.startswith("["):
+        parsed = json.loads(tag_str)
+        if not isinstance(parsed, list):
+            raise ValueError("tag must be a list of strings")
+        return [str(tag).strip() for tag in parsed if str(tag).strip()]
+    return [tag.strip() for tag in tag_str.split(",") if tag.strip()]
+
+
+def serialize_forum_tags(value):
+    tag_names = parse_tag_names(value)
+    return {tag: tags.get(tag, {}) for tag in tag_names}
+
+
+def relation_id(value):
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        return relation_id(value[0]) if value else None
+    if isinstance(value, dict):
+        return value.get("id")
+    return getattr(value, "id", value)
+
+
+def serialize_forum_post(forum):
+    forum_data = forum.__dict__.copy()
+    image_names = forum_data.get("image") or []
+    if isinstance(image_names, str):
+        image_names = [image_names] if image_names else []
+    collection = forum_data.get("collection_id") or forum_data.get("collection_name") or "forum"
+    forum_data["images"] = [
+        f"{os.environ.get('PB_URL')}api/files/{collection}/{forum_data['id']}/{image}"
+        for image in image_names
+        if image
+    ]
+    forum_data["tag"] = serialize_forum_tags(forum_data.get("tag"))
+    forum_data.pop("image", None)
+    return forum_data
+
+
 @router.get("/tags", summary="取得標籤列表")
 async def get_school_post(request: Request, response: Response):
     data = request.app.state.response
@@ -36,6 +86,7 @@ async def get_school_post(request: Request, response: Response):
     data["message"] = "Success."
     data["data"] = tags
     return data
+
 
 @router.get("/{school_name}/admin", summary="取得學校版主")
 async def get_school_admin(request: Request, response: Response, school_name: str):
@@ -51,17 +102,21 @@ async def get_school_admin(request: Request, response: Response, school_name: st
     db = request.app.state.pb_client
 
     try:
-        pinned_forums = db.collection("forum_admin").get_first_list_item(
+        admins = db.collection("forum_admin").get_first_list_item(
             f'school="{sanitize_str(school_name)}"'
         )
-        admins = pinned_forums
-        admins.icon = f"{os.environ.get('PB_URL')}api/files/pbc_1619757269/{admins.id}/{admins.icon}" if admins else None
+        admins.icon = (
+            f"{os.environ.get('PB_URL')}api/files/pbc_1619757269/{admins.id}/{admins.icon}"
+            if admins and admins.icon
+            else None
+        )
     except:
         admins = None
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = admins
     return data
+
 
 @router.get("/{school_name}", summary="取得文章列表")
 async def get_school_post(
@@ -92,7 +147,7 @@ async def get_school_post(
 
     f = []
     for forum in forums.items:
-        forum_data = forum.__dict__.copy()
+        forum_data = serialize_forum_post(forum)
 
         if forum.anonymous:
             forum_data["user"] = None
@@ -151,24 +206,11 @@ async def add_post(
         return data
 
     try:
-        if not tag:
-            tag_data = []
-        else:
-            tag_str = tag.strip()
-            if tag_str.startswith("["):
-                tag_data = json.loads(tag_str)
-            elif "," in tag_str:
-                tag_data = [t.strip() for t in tag_str.split(",") if t.strip()]
-            else:
-                tag_data = [tag_str]
-        if not isinstance(tag_data, list) or not all(
-            isinstance(t, str) for t in tag_data
-        ):
-            raise ValueError("tag must be a list of strings")
+        tag_data = parse_tag_names(tag)
     except Exception:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
-        data["message"] = "tag 格式錯誤，需為字串陣列"
+        data["message"] = "tag 格式錯誤，需為 tag1,tag2,tag3"
         data["data"] = None
         return data
 
@@ -231,16 +273,13 @@ async def add_post(
             return data
         image_uploads = FileUpload(*image_files)
 
-    td = {}
-    for t in tag_data:
-        td[t] = tags[t]
     payload = {
         "user": user.id,
         "school": school,
         "title": title,
         "content": content,
         "anonymous": anonymous,
-        "tag": td,
+        "tag": ",".join(tag_data),
         "pin": pin,
     }
     if image_uploads:
@@ -269,7 +308,7 @@ async def delete_post(request: Request, response: Response, post_id):
     db = request.app.state.pb_client
 
     forums = db.collection("forum").get_first_list_item(f'id="{sanitize_str(post_id)}"')
-    if forums.user != user.id:
+    if relation_id(forums.user) != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         data["code"] = 403
         data["message"] = "You can only delete your own post."
@@ -308,7 +347,7 @@ async def get_user_post(
 
     f = []
     for forum in forums.items:
-        forum_data = forum.__dict__.copy()
+        forum_data = serialize_forum_post(forum)
         user_data = forum_data["expand"]["user"].__dict__.copy()
         forum_data["user"] = {
             "id": user_data["id"],
@@ -417,7 +456,7 @@ async def delete_post_message(request: Request, response: Response, message_id):
         return data
 
     forums = db.collection("forum_message").get_one(sanitize_str(message_id))
-    if forums.user != user.id:
+    if relation_id(forums.user) != user.id:
         response.status_code = status.HTTP_403_FORBIDDEN
         data["code"] = 403
         data["message"] = "You can only delete your own message."
