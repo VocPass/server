@@ -21248,7 +21248,7 @@
         "vision": "v9",
         "app": 1.6,
         "beta": false,
-        "api": "https://fs25.mlsh.mlc.edu.tw",
+        "api": "https://fs25.mlsh.mlc.edu.tw/skyweb",
         "url": {
             "login": "/",
             "logined": "/f_head.asp",
@@ -21318,7 +21318,7 @@
         "vision": "v9",
         "app": 1.6,
         "beta": false,
-        "api": "https://night.kfsh.hc.edu.tw",
+        "api": "https://night.kfsh.hc.edu.tw/skyweb",
         "url": {
             "login": "/",
             "logined": "/f_head.asp",
@@ -21353,7 +21353,7 @@
         "vision": "v9",
         "app": 1.6,
         "beta": false,
-        "api": "https://web.kpvs.ntpc.edu.tw",
+        "api": "https://web.kpvs.ntpc.edu.tw/skyweb",
         "url": {
             "login": "/",
             "logined": "/f_head.asp",
