@@ -278,7 +278,7 @@ async def observability_middleware(request: Request, call_next):
 
 
 @app.exception_handler(StarletteHTTPException)
-async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+async def http_exception_handler(request: Request, exc: StarletteHTTPException,response: Response):
     m.HTTP_ERRORS_TOTAL.labels(status_code=exc.status_code, path=request.url.path).inc()
     school_name = request.query_params.get("school_name", "system")
     pb_client = getattr(request.app.state, "pb_client", None)
@@ -289,6 +289,7 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
         status=exc.status_code,
     )
     if exc.status_code == 404 and "mozilla" in request.headers.get("User-Agent", "").lower():
+        response.status_code = status.HTTP_200_OK
         return FileResponse("templates/404.html")
     return JSONResponse(
         status_code=exc.status_code,
