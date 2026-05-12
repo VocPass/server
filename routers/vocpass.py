@@ -118,6 +118,8 @@ async def report(request: Request, item: dict):
         "restaurant": item.get("restaurant_id"),
         "restaurant_evaluate": item.get("restaurant_evaluate_id"),
         "restaurant_menu": item.get("restaurant_menu_id"),
+        "forum_id": item.get("forum_id"),
+        "forum_message_id": item.get("forum_message_id"),
         "reason": item["reason"],
         "description": item.get("description"),
     }
