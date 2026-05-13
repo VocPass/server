@@ -22,12 +22,12 @@ from utils.http_client import HttpsClient
 import urllib.parse
 import pocketbase
 from pocketbase.models import FileUpload
-from utils.send_notification import send_notification
+from utils.send_notification import send_notifications
 
 load_dotenv()
 router = APIRouter(prefix="/api/forum", tags=["論壇"])
 
-tags = { 
+tags = {
     "問題": {"color": "#2563EB", "admin_only": False},
     "閒聊": {"color": "#22C55E", "admin_only": False},
     "心得": {"color": "#F59E0B", "admin_only": False},
@@ -82,7 +82,9 @@ def serialize_forum_post(forum):
     image_names = forum_data.get("image") or []
     if isinstance(image_names, str):
         image_names = [image_names] if image_names else []
-    collection = forum_data.get("collection_id") or forum_data.get("collection_name") or "forum"
+    collection = (
+        forum_data.get("collection_id") or forum_data.get("collection_name") or "forum"
+    )
     forum_data["images"] = [
         f"{os.environ.get('PB_URL')}api/files/{collection}/{forum_data['id']}/{image}"
         for image in image_names
@@ -106,7 +108,7 @@ async def get_school_post(request: Request, response: Response):
 async def get_school_admin(request: Request, response: Response, school_name: str):
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
-    if not school and school_name not in  ["all","vocpass"]:
+    if not school and school_name not in ["all", "vocpass"]:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
         data["message"] = "Unsupported school."
@@ -134,7 +136,11 @@ async def get_school_admin(request: Request, response: Response, school_name: st
 
 @router.get("/{school_name}", summary="取得文章列表")
 async def get_school_post(
-    request: Request, response: Response, school_name: str, page: int = 1, search: str | None = None
+    request: Request,
+    response: Response,
+    school_name: str,
+    page: int = 1,
+    search: str | None = None,
 ):
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
@@ -155,9 +161,7 @@ async def get_school_post(
         page=page,
         per_page=50,
         query_params={
-            "filter": (
-                filter_str
-            ),
+            "filter": (filter_str),
             "expand": "user",
             "sort": "-created" if school_name == "all" else "-pin,-created",
         },
@@ -310,6 +314,7 @@ async def add_post(
 
     return data
 
+
 @router.delete("/post/{post_id}", summary="刪除文章")
 async def delete_post(request: Request, response: Response, post_id):
     token = request.headers.get("Authorization")
@@ -421,6 +426,7 @@ async def get_post_message(
     data["data"] = {"forums": f, "total_pages": forums.total_pages}
     return data
 
+
 @router.post("/post/{post_id}/message", summary="新增文章留言")
 async def add_post_message(
     request: Request,
@@ -441,7 +447,7 @@ async def add_post_message(
         return data
 
     try:
-        post=db.collection("forum").get_one(sanitize_str(post_id))
+        post = db.collection("forum").get_one(sanitize_str(post_id))
     except:
         response.status_code = status.HTTP_404_NOT_FOUND
         data["code"] = 404
@@ -463,22 +469,27 @@ async def add_post_message(
         data["data"] = None
         return data
     db.collection("forum_message").create(payload)
+    notifys = []
+    devices = db.collection("notify").get_full_list(
+        query_params={"filter": f'user="{sanitize_str(post.user)}"'}
+    )
     if post.user != user.id:
-        devices = db.collection("notify").get_full_list(
-            query_params={"filter": f'user="{sanitize_str(post.user)}"'}
-        )
-        
         for i in devices:
-            await send_notification(
-                title=f"你的貼文有新留言！",
-                body=f"{content[:50]}...",
-                apns_token=i.apns_token,
-            )
+            notifys.append({"title":"你的貼文有新留言！","body":f"{content[:50]}...","apns_token":i.apns_token})
+    messages = db.collection("forum_message").get_full_list(
+        query_params={"filter": f'post="{sanitize_str(post_id)}"'}
+    )
+    for message in messages:
+        if message.user != user.id and message.user != post.user:
+            for i in devices:
+                notifys.append({"title":"你留言的貼文有新留言！","body":f"{content[:50]}...","apns_token":i.apns_token})
+    await send_notifications(notifys)
 
     data["code"] = 200
     data["message"] = "Success."
     data["data"] = []
     return data
+
 
 @router.delete("/message/{message_id}", summary="刪除文章留言")
 async def delete_post_message(request: Request, response: Response, message_id):
@@ -506,6 +517,7 @@ async def delete_post_message(request: Request, response: Response, message_id):
     data["message"] = "Success."
     data["data"] = []
     return data
+
 
 @router.post("/post/{post_id}/like", summary="按讚文章")
 async def like_post(request: Request, response: Response, post_id):
@@ -586,6 +598,7 @@ async def like_message(request: Request, response: Response, message_id):
     data["message"] = "Success."
     data["data"] = []
     return data
+
 
 @router.delete("/message/{message_id}/like", summary="取消按讚留言")
 async def delike_message(request: Request, response: Response, message_id):
