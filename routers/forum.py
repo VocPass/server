@@ -22,6 +22,7 @@ from utils.http_client import HttpsClient
 import urllib.parse
 import pocketbase
 from pocketbase.models import FileUpload
+from utils.send_notification import send_notification
 
 load_dotenv()
 router = APIRouter(prefix="/api/forum", tags=["論壇"])
@@ -331,6 +332,8 @@ async def get_user_post(
     user = get_user(token) if token else None
     data = request.app.state.response
     db = request.app.state.pb_client
+    if user_id == "me":
+        user_id = user.id if user else None
     forum_filter = f'user="{sanitize_str(user_id)}"'
     if not user or user.id != user_id:
         forum_filter += " && anonymous=false"
@@ -421,7 +424,7 @@ async def add_post_message(
         return data
 
     try:
-        db.collection("forum").get_one(sanitize_str(post_id))
+        post=db.collection("forum").get_one(sanitize_str(post_id))
     except:
         response.status_code = status.HTTP_404_NOT_FOUND
         data["code"] = 404
@@ -436,6 +439,17 @@ async def add_post_message(
         "anonymous": anonymous,
     }
     db.collection("forum_message").create(payload)
+    if post.user != user.id:
+        devices = db.collection("notify").get_full_list(
+            query_params={"filter": f'user="{sanitize_str(post.user)}"'}
+        )
+        
+        for i in devices:
+            await send_notification(
+                title=f"你的貼文有新留言！",
+                body=f"{content[:50]}...",
+                apns_token=i.apns_token,
+            )
 
     data["code"] = 200
     data["message"] = "Success."
