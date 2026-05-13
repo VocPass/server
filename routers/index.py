@@ -230,6 +230,11 @@ async def terms_of_use():
     return FileResponse("templates/terms-of-use.html")
 
 
+@router.get("/community-guidelines", summary="社群規範")
+async def community_guidelines():
+    return FileResponse("templates/community-guidelines.html")
+
+
 @router.get("/school")
 async def get_all_schools(request: Request):
     return request.app.state.schools
