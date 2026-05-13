@@ -146,13 +146,17 @@ async def get_school_post(
 
         return data
     db = request.app.state.pb_client
-
+    filter_str = f'school="{sanitize_str(school_name)}"' if school_name != "all" else ""
+    if search:
+        filter_str += f' && title ~ "{sanitize_str(search)}" || content ~ "{sanitize_str(search)}" || tag ~ "{sanitize_str(search)}" || user.name ~ "{sanitize_str(search)}"'
+        if filter_str.startswith(" && "):
+            filter_str = filter_str[4:]
     forums = db.collection("forum").get_list(
         page=page,
         per_page=50,
         query_params={
             "filter": (
-                f'school="{sanitize_str(school_name)}"' if school_name != "all" else ""
+                filter_str
             ),
             "expand": "user",
             "sort": "-created" if school_name == "all" else "-pin,-created",
