@@ -249,6 +249,11 @@ async def get_user_profile(request: Request, username: str):
 async def apply_school():
     return FileResponse("templates/apply.html")
 
+
+@router.get("/apply/admin", summary="申請論壇版主")
+async def apply_forum_admin():
+    return FileResponse("templates/apply_admin.html")
+
 @router.get("/selfhost", summary="自架測試端點")
 async def self_host_test(request: Request):
     data = request.app.state.response
