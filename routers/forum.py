@@ -106,7 +106,7 @@ async def get_school_post(request: Request, response: Response):
 async def get_school_admin(request: Request, response: Response, school_name: str):
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
-    if not school and school_name != "all":
+    if not school and school_name not in  ["all","vocpass"]:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
         data["message"] = "Unsupported school."
@@ -134,7 +134,7 @@ async def get_school_admin(request: Request, response: Response, school_name: st
 
 @router.get("/{school_name}", summary="取得文章列表")
 async def get_school_post(
-    request: Request, response: Response, school_name: str, page: int = 1
+    request: Request, response: Response, school_name: str, page: int = 1, search: str | None = None
 ):
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
