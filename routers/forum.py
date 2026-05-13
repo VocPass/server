@@ -27,7 +27,20 @@ from utils.send_notification import send_notification
 load_dotenv()
 router = APIRouter(prefix="/api/forum", tags=["論壇"])
 
-tags = {"公告": {"color": "#FF0000", "admin_only": False}}
+tags = { 
+    "問題": {"color": "#2563EB", "admin_only": False},
+    "閒聊": {"color": "#22C55E", "admin_only": False},
+    "心得": {"color": "#F59E0B", "admin_only": False},
+    "活動": {"color": "#A855F7", "admin_only": False},
+    "徵人": {"color": "#14B8A6", "admin_only": False},
+    "失物招領": {"color": "#EF4444", "admin_only": False},
+    "課業": {"color": "#6366F1", "admin_only": False},
+    "社團": {"color": "#EC4899", "admin_only": False},
+    "交易": {"color": "#84CC16", "admin_only": False},
+    "公告": {"color": "#FF0000", "admin_only": True},
+    "處理中": {"color": "#000000", "admin_only": True},
+    "已完成": {"color": "#6B7280", "admin_only": True},
+}
 
 
 def parse_tag_names(value):
@@ -194,7 +207,7 @@ async def add_post(
     if not user:
         response.status_code = status.HTTP_403_FORBIDDEN
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
     if (
@@ -202,7 +215,7 @@ async def add_post(
     ) and school != "all":
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
-        data["message"] = "你只能在你學校的論壇發文！"
+        data["message"] = "你只能在你學校的論壇發文，或是您未驗證你的學校。"
         data["data"] = None
         return data
 
@@ -301,7 +314,7 @@ async def delete_post(request: Request, response: Response, post_id):
         response.status_code = status.HTTP_403_FORBIDDEN
         data = request.app.state.response
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
 
@@ -419,7 +432,7 @@ async def add_post_message(
     if not user:
         response.status_code = status.HTTP_403_FORBIDDEN
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
 
@@ -438,6 +451,13 @@ async def add_post_message(
         "content": content,
         "anonymous": anonymous,
     }
+
+    if user.school != post.school and post.school != "all":
+        response.status_code = status.HTTP_403_FORBIDDEN
+        data["code"] = 403
+        data["message"] = "你只能在你學校的論壇留言，或是您未驗證你的學校。"
+        data["data"] = None
+        return data
     db.collection("forum_message").create(payload)
     if post.user != user.id:
         devices = db.collection("notify").get_full_list(
@@ -465,7 +485,7 @@ async def delete_post_message(request: Request, response: Response, message_id):
     if not user:
         response.status_code = status.HTTP_403_FORBIDDEN
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
 
@@ -491,7 +511,7 @@ async def like_post(request: Request, response: Response, post_id):
         response.status_code = status.HTTP_403_FORBIDDEN
         data = request.app.state.response
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
 
@@ -519,7 +539,7 @@ async def delike_post(request: Request, response: Response, post_id):
         response.status_code = status.HTTP_403_FORBIDDEN
         data = request.app.state.response
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
 
@@ -544,7 +564,7 @@ async def like_message(request: Request, response: Response, message_id):
         response.status_code = status.HTTP_403_FORBIDDEN
         data = request.app.state.response
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
 
@@ -571,7 +591,7 @@ async def delike_message(request: Request, response: Response, message_id):
         response.status_code = status.HTTP_403_FORBIDDEN
         data = request.app.state.response
         data["code"] = 403
-        data["message"] = "Unauthorized."
+        data["message"] = "你需要登入VocPass帳號才能操作。"
         data["data"] = None
         return data
 
