@@ -240,6 +240,19 @@
             </div>
         </div>
 
+        <div id="application-rejected" class="hidden">
+            <div class="bento-card p-8 text-center">
+                <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <i class="fa-solid fa-ban text-2xl text-red-500"></i>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight mb-2">申請拒絕</h2>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">你的論壇版主申請未通過審核，若有疑問請聯絡 VocPass 團隊。</p>
+                <a href="/" class="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
+                    <i class="fa-solid fa-house text-xs"></i> 回到首頁
+                </a>
+            </div>
+        </div>
+
         <div id="success-screen" class="hidden">
             <div class="bento-card p-8 text-center">
                 <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-5">
@@ -293,7 +306,8 @@
             const result = await pb.collection('apply_admin').getFirstListItem(
                 `user = "${user.id}"`
             );
-            if (result) showAlreadySubmitted();
+            if (result?.ban === true) showApplicationRejected();
+            else if (result) showAlreadySubmitted();
             return;
         } catch (e) {
             // 404 = 尚未填寫，正常顯示表單
@@ -305,6 +319,11 @@
     function showAlreadySubmitted() {
         document.getElementById('form-body').classList.add('hidden');
         document.getElementById('already-submitted').classList.remove('hidden');
+    }
+
+    function showApplicationRejected() {
+        document.getElementById('form-body').classList.add('hidden');
+        document.getElementById('application-rejected').classList.remove('hidden');
     }
 
     async function login(provider) {
