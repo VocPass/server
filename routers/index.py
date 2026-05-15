@@ -230,6 +230,11 @@ async def terms_of_use():
     return FileResponse("templates/terms-of-use.html")
 
 
+@router.get("/community-guidelines", summary="社群規範")
+async def community_guidelines():
+    return FileResponse("templates/community-guidelines.html")
+
+
 @router.get("/school")
 async def get_all_schools(request: Request):
     return request.app.state.schools
@@ -248,6 +253,11 @@ async def get_user_profile(request: Request, username: str):
 @router.get("/apply", summary="申請學校")
 async def apply_school():
     return FileResponse("templates/apply.html")
+
+
+@router.get("/apply/admin", summary="申請論壇版主")
+async def apply_forum_admin():
+    return FileResponse("templates/apply_admin.html")
 
 @router.get("/selfhost", summary="自架測試端點")
 async def self_host_test(request: Request):

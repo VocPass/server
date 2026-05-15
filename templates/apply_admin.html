@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocPass | 論壇版主申請</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --apple-text: #1d1d1f;
+            --bg-gray: #fbfbfd;
+        }
+        body { background-color: var(--bg-gray); color: var(--apple-text); }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .bento-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.04);
+        }
+
+        .field-input {
+            width: 100%;
+            background: #f5f5f7;
+            border: 1.5px solid transparent;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--apple-text);
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .field-input::placeholder { color: #aeaeb2; }
+        .field-input:focus {
+            background: #fff;
+            border-color: #2563eb;
+        }
+        .field-input.error { border-color: #ef4444; }
+
+        textarea.field-input {
+            resize: vertical;
+            min-height: 132px;
+        }
+
+        .file-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: #f5f5f7;
+            border: 1.5px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #6b7280;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            font-family: inherit;
+        }
+        .file-btn:hover { background: #e8f0fe; border-color: #2563eb; color: #2563eb; }
+        input[type="file"] { display: none; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+<nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
+    <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
+        <a href="/" class="flex items-center gap-2.5 cursor-pointer">
+            <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
+            <span class="font-bold text-lg tracking-tight">VocPass</span>
+        </a>
+        <div class="hidden md:flex items-center gap-7">
+            <a href="/#features" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">特色</a>
+            <a href="/#schools" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">支援學校</a>
+            <a href="https://github.com/VocPass" target="_blank" class="text-gray-400 hover:text-gray-900 transition-colors">
+                <i class="fa-brands fa-github text-xl"></i>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="min-h-screen pt-24 pb-20 px-5">
+    <div class="max-w-xl mx-auto">
+
+        <div id="auth-wall" class="hidden">
+            <div id="login-card" class="bento-card p-8">
+                <div class="text-center mb-7">
+                    <img src="https://github.com/vocpass.png" alt="VocPass" class="w-14 h-14 rounded-2xl object-cover mx-auto mb-4 shadow-sm">
+                    <h2 class="text-2xl font-bold tracking-tight mb-1">登入 VocPass</h2>
+                    <p class="text-sm text-gray-500">登入後才能提交論壇版主申請</p>
+                </div>
+                <div class="space-y-3">
+                    <button onclick="login('google')" type="button"
+                        class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 transition-all">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
+                        使用 Google 登入
+                    </button>
+                    <button onclick="login('discord')" type="button"
+                        class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] text-white transition-all hover:opacity-90"
+                        style="background:#5865F2;">
+                        <i class="fa-brands fa-discord text-lg"></i>
+                        使用 Discord 登入
+                    </button>
+                </div>
+                <p class="text-xs text-center mt-6 leading-relaxed text-gray-500">
+                    登入即表示您同意
+                    <a href="/privacy-policy" class="text-blue-600 hover:underline">隱私權政策</a>
+                    與 <a href="/disclaimer" class="text-blue-600 hover:underline">免責聲明</a>
+                </p>
+            </div>
+
+            <div id="confirm-card" class="hidden bento-card p-8 text-center">
+                <div id="confirm-content"></div>
+            </div>
+        </div>
+
+        <div id="form-body" class="hidden">
+            <div class="bento-card p-7 mb-4">
+                <div class="flex items-center gap-3 mb-3">
+                    <img src="https://github.com/vocpass.png" alt="VocPass" class="w-9 h-9 rounded-xl shadow-sm">
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight leading-tight">論壇版主申請</h1>
+                        <p class="text-xs text-gray-400">Forum Moderator Application</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 leading-relaxed">申請前請先確認你熟悉該校論壇的討論狀況，並願意協助維持討論品質、處理不當內容與公告必要資訊。</p>
+            </div>
+
+            <div class="bento-card p-7 mb-4 border border-blue-100 bg-blue-50/40">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-circle-info text-blue-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-semibold text-base mb-2">申請注意事項</h2>
+                        <ul class="text-sm text-gray-600 leading-relaxed space-y-1 list-disc pl-4">
+                            <li>請使用真實且可辨識的資料，證明圖片需能佐證你與該學校的關聯。</li>
+                            <li>版主需遵守 <a href="/community-guidelines" class="text-blue-600 hover:underline">VocPass 社群規範</a>，避免濫用置頂、公告或管理權限。</li>
+                            <li>版主將優先交予學生會負責，若申請七日內未有學生會代表，將由一般學生擔任。</li>
+                            <li>提交後不代表一定通過，團隊會依學校狀況與資料完整度審核。</li>
+                            <li>每位使用者同一時間只能提交一份版主申請。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card p-7 mb-4">
+                <form id="admin-apply-form" class="space-y-5" onsubmit="submitForm(event)">
+                    <div>
+                        <label class="text-sm font-semibold text-gray-800 mb-1 block">
+                            提交人 <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mb-2">系統會自動使用目前登入的 VocPass 帳號作為申請人。</p>
+                        <div class="field-input bg-gray-100 text-gray-500" id="user-display">讀取中...</div>
+                    </div>
+
+                    <div>
+                        <label for="school" class="text-sm font-semibold text-gray-800 mb-1 block">
+                            學校名稱 <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mb-2">請填寫你想申請管理的學校論壇名稱。</p>
+                        <input class="field-input" type="text" id="school" placeholder="例：市立○○高級工業職業學校">
+                        <p class="text-xs text-red-500 mt-1 hidden" id="err-school">請填寫學校名稱</p>
+                    </div>
+
+                    <div>
+                        <label for="info" class="text-sm font-semibold text-gray-800 mb-1 block">
+                            自我介紹 <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mb-2">簡單說明你是誰、為什麼想成為版主，以及你會如何管理論壇。</p>
+                        <textarea class="field-input" id="info" placeholder="請輸入自我介紹與申請理由"></textarea>
+                        <p class="text-xs text-red-500 mt-1 hidden" id="err-info">請填寫自我介紹</p>
+                    </div>
+
+                    <div>
+                        <label for="proofFile" class="text-sm font-semibold text-gray-800 mb-1 block">
+                            證明圖片 <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mb-2">一般學生請上傳學生證，需包含姓名與當學年註冊章。</p>
+                        <p class="text-xs text-gray-400 mb-2">學生會代表請上傳會帳後台畫面（如 Instagram 個人頁面截圖）。</p>
+                        <p class="text-xs text-gray-400 mb-2">最多 5 張，每張 5MB 以內。</p>
+                        <label class="file-btn" for="proofFile">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> 選擇圖片檔案
+                        </label>
+                        <input type="file" id="proofFile" accept="image/*" multiple onchange="updateFileName()">
+                        <div class="text-xs text-blue-500 mt-2 space-y-1" id="file-name"></div>
+                        <p class="text-xs text-red-500 mt-1 hidden" id="err-file">請上傳證明圖片</p>
+                    </div>
+
+                    <button id="submit-btn" type="submit"
+                        class="w-full bg-black text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-xs"></i> 提交申請
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="already-submitted" class="hidden">
+            <div class="bento-card p-8 text-center">
+                <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <i class="fa-solid fa-circle-exclamation text-2xl text-amber-400"></i>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight mb-2">你已經提交過申請</h2>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">我們已收到你的論壇版主申請，請等待團隊審核。</p>
+                <a href="/" class="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
+                    <i class="fa-solid fa-house text-xs"></i> 回到首頁
+                </a>
+            </div>
+        </div>
+
+        <div id="application-rejected" class="hidden">
+            <div class="bento-card p-8 text-center">
+                <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <i class="fa-solid fa-ban text-2xl text-red-500"></i>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight mb-2">申請拒絕</h2>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">你的論壇版主申請未通過審核，若有疑問請聯絡 VocPass 團隊。</p>
+                <a href="/" class="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
+                    <i class="fa-solid fa-house text-xs"></i> 回到首頁
+                </a>
+            </div>
+        </div>
+
+        <div id="success-screen" class="hidden">
+            <div class="bento-card p-8 text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <i class="fa-solid fa-check text-2xl text-green-500"></i>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight mb-2">申請已送出！</h2>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">感謝你的申請，我們會盡快審核論壇版主資格。</p>
+                <a href="/" class="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
+                    <i class="fa-solid fa-house text-xs"></i> 回到首頁
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="border-t border-gray-200 bg-white py-10 px-5">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+        <div class="flex items-center gap-3">
+            <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
+            <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
+        </div>
+        <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
+            <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
+            <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
+            <a href="/community-guidelines" class="hover:text-gray-900 transition-colors">社群規範</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const pb = new PocketBase('https://api.vocpass.com');
+
+    async function checkAuth() {
+        if (pb.authStore.isValid) {
+            try { await pb.collection('users').authRefresh(); } catch (e) { pb.authStore.clear(); }
+        }
+        if (pb.authStore.isValid) {
+            showForm();
+        } else {
+            document.getElementById('auth-wall').classList.remove('hidden');
+        }
+    }
+
+    async function showForm() {
+        document.getElementById('auth-wall').classList.add('hidden');
+        const user = pb.authStore.model;
+        document.getElementById('user-display').textContent = user?.name || user?.username || user?.email || user?.id || '目前登入帳號';
+
+        try {
+            const result = await pb.collection('apply_admin').getFirstListItem(
+                `user = "${user.id}"`
+            );
+            if (result?.ban === true) showApplicationRejected();
+            else if (result) showAlreadySubmitted();
+            return;
+        } catch (e) {
+            // 404 = 尚未填寫，正常顯示表單
+        }
+        fillSchoolFromUrl();
+        document.getElementById('form-body').classList.remove('hidden');
+    }
+
+    function showAlreadySubmitted() {
+        document.getElementById('form-body').classList.add('hidden');
+        document.getElementById('already-submitted').classList.remove('hidden');
+    }
+
+    function showApplicationRejected() {
+        document.getElementById('form-body').classList.add('hidden');
+        document.getElementById('application-rejected').classList.remove('hidden');
+    }
+
+    async function login(provider) {
+        try {
+            await pb.collection('users').authWithOAuth2({ provider });
+            if (pb.authStore.isValid) showUserInfo(pb.authStore.model);
+        } catch (e) {
+            alert('登入失敗，請重試。');
+        }
+    }
+
+    function showUserInfo(user) {
+        document.getElementById('login-card').classList.add('hidden');
+        const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://github.com/vocpass.png';
+        document.getElementById('confirm-content').innerHTML = `
+            <img src="${avatarUrl}" alt="頭像" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover" onerror="this.src='https://github.com/vocpass.png'">
+            <p class="text-xl font-bold tracking-tight mb-1">${user.name || user.username || '使用者'}</p>
+            <p class="text-sm text-gray-500 mb-6">這是你嗎？</p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="confirmUser()" class="flex-1 px-5 py-3 rounded-full font-semibold text-sm bg-blue-600 text-white hover:bg-blue-700 transition-colors">是</button>
+                <button onclick="cancelUser()" class="flex-1 px-5 py-3 rounded-full font-semibold text-sm bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors">否</button>
+            </div>
+        `;
+        document.getElementById('confirm-card').classList.remove('hidden');
+    }
+
+    function confirmUser() { showForm(); }
+
+    function cancelUser() {
+        pb.authStore.clear();
+        document.getElementById('confirm-card').classList.add('hidden');
+        document.getElementById('login-card').classList.remove('hidden');
+    }
+
+    function setError(id, show) {
+        const el = document.getElementById('err-' + id);
+        const input = id === 'file' ? document.getElementById('proofFile') : document.getElementById(id);
+        if (el) el.classList.toggle('hidden', !show);
+        if (input && input.classList.contains('field-input')) input.classList.toggle('error', show);
+        return show;
+    }
+
+    function validateForm() {
+        let ok = true;
+        const files = Array.from(document.getElementById('proofFile').files);
+
+        if (!document.getElementById('school').value.trim()) ok = !setError('school', true) && ok;
+        else setError('school', false);
+
+        if (!document.getElementById('info').value.trim()) ok = !setError('info', true) && ok;
+        else setError('info', false);
+
+        if (!files.length) {
+            document.getElementById('err-file').textContent = '請上傳證明圖片';
+            ok = !setError('file', true) && ok;
+        } else if (files.length > 5) {
+            document.getElementById('err-file').textContent = '最多只能上傳 5 張圖片';
+            ok = !setError('file', true) && ok;
+        } else if (files.some(file => file.size > 5 * 1024 * 1024)) {
+            document.getElementById('err-file').textContent = '每張圖片大小需在 5MB 以內';
+            ok = !setError('file', true) && ok;
+        } else {
+            setError('file', false);
+        }
+
+        return ok;
+    }
+
+    function updateFileName() {
+        const files = Array.from(document.getElementById('proofFile').files);
+        const fileName = document.getElementById('file-name');
+        fileName.replaceChildren();
+        files.forEach(file => {
+            const item = document.createElement('p');
+            item.textContent = file.name;
+            fileName.appendChild(item);
+        });
+        if (files.length) validateForm();
+    }
+
+    function fillSchoolFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const school = params.get('school');
+        if (!school) return;
+
+        const schoolInput = document.getElementById('school');
+        schoolInput.value = school.trim();
+        setError('school', false);
+    }
+
+    async function submitForm(event) {
+        event.preventDefault();
+        if (!validateForm()) return;
+
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> 提交中...';
+
+        try {
+            const formData = new FormData();
+            formData.append('user', pb.authStore.model?.id || '');
+            formData.append('school', document.getElementById('school').value.trim());
+            formData.append('info', document.getElementById('info').value.trim());
+            Array.from(document.getElementById('proofFile').files).forEach(file => {
+                formData.append('file', file);
+            });
+
+            const record = await pb.collection('apply_admin').create(formData);
+            console.log('提交成功:', record);
+
+            document.getElementById('form-body').classList.add('hidden');
+            document.getElementById('success-screen').classList.remove('hidden');
+        } catch (e) {
+            console.error('提交失敗:', e);
+            alert('提交失敗：' + (e?.message || '請稍後重試'));
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-xs"></i> 提交申請';
+        }
+    }
+
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            nav.classList.add('shadow-sm');
+            nav.style.background = 'rgba(255, 255, 255, 0.85)';
+        } else {
+            nav.classList.remove('shadow-sm');
+            nav.style.background = 'rgba(255, 255, 255, 0.65)';
+        }
+    });
+
+    checkAuth();
+</script>
+</body>
+</html>
