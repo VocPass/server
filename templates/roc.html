@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocPass｜高級中等學校校務資料便民查詢服務網</title>
+    <meta name="description" content="VocPass 高職通用校務查詢系統，提供課表、成績、缺曠、獎懲與校園相關資訊查詢服務。">
+    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --roc-blue: #000095;
+            --roc-blue-2: #001a78;
+            --roc-red: #d90000;
+            --roc-cyan: #00e5ff;
+            --roc-yellow: hsl(52 96% 76%);
+            --roc-yellow-2: hsl(54 92% 72%);
+            --roc-gold: #c89b2b;
+            --ink: #101010;
+            --paper: #fffef0;
+            --silver: #d6d6d6;
+            --line: #666;
+            --shadow: rgba(0, 0, 0, .24);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background:
+                repeating-linear-gradient(0deg, rgba(0, 0, 0, .018) 0 1px, transparent 1px 4px),
+                linear-gradient(90deg, #e5e5e5 0, #f9f9ee 14%, #fffdf2 72%, #d9e2f7 100%);
+            font-family: PMingLiU, MingLiU, "Microsoft JhengHei", Tahoma, Arial, sans-serif;
+            -webkit-font-smoothing: none;
+            font-smooth: never;
+            text-rendering: geometricPrecision;
+            line-height: 1.45;
+        }
+
+        a {
+            color: #0038d6;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            color: #d90000;
+            background: #ffff99;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            touch-action: manipulation;
+        }
+
+        .page-shell {
+            max-width: 1180px;
+            margin: 0 auto;
+            background: #fffdf7;
+            border-left: 2px solid #777;
+            border-right: 3px solid #444;
+            box-shadow: 0 0 22px rgba(0, 0, 0, .26);
+            min-height: 100vh;
+        }
+
+        .top-strip {
+            background: linear-gradient(#efefef, #bcbcbc 52%, #f6f6f6);
+            border-bottom: 1px solid #4b4b4b;
+            color: #111;
+            font-size: 12px;
+            padding: 3.4px 8.2px 4.1px;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .top-strip strong {
+            color: var(--roc-red);
+        }
+
+        .site-header {
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, .14), transparent 18%, rgba(255, 255, 255, .08) 42%, transparent),
+                linear-gradient(180deg, #001ec8 0%, var(--roc-blue) 44%, #000052 100%);
+            color: #fff;
+            border-bottom: 4px solid var(--roc-red);
+            position: relative;
+        }
+
+        .site-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -8px;
+            height: 4px;
+            background: linear-gradient(90deg, #f8d946, #f4f4f4, #f8d946);
+            border-top: 1px solid #805900;
+            border-bottom: 1px solid #805900;
+        }
+
+        .brand-row {
+            display: grid;
+            grid-template-columns: 86px 1fr 236px;
+            gap: 12.6px;
+            align-items: center;
+            min-height: 112px;
+            padding: 15px 16px 14.3px 14px;
+        }
+
+        .logo-box {
+            width: 74px;
+            height: 74px;
+            background: linear-gradient(#fff, #d5d5d5);
+            border: 2px outset #f6f6f6;
+            display: grid;
+            place-items: center;
+            box-shadow: inset 0 0 0 1px #666;
+            transform: translateY(.4px);
+        }
+
+        .logo-box img {
+            width: 58px;
+            height: 58px;
+            object-fit: cover;
+            image-rendering: auto;
+            filter: saturate(1.25) contrast(1.06);
+        }
+
+        .wordart {
+            position: relative;
+            margin: 0 0 4px;
+            font-family: DFKai-SB, PMingLiU, MingLiU, serif;
+            font-size: clamp(30px, 5vw, 58px);
+            line-height: 1;
+            color: #fff;
+            text-shadow:
+                2px 2px 0 #000,
+                4px 4px 0 rgba(255, 0, 0, .6),
+                0 0 8px rgba(255, 255, 0, .55);
+            letter-spacing: 0;
+            white-space: nowrap;
+        }
+
+        .wordart::after {
+            content: attr(data-shadow);
+            position: absolute;
+            left: 7px;
+            top: 31px;
+            color: rgba(0, 255, 255, .24);
+            transform: skewX(-16deg) scaleY(1.2);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .wordart span {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, #fff 0%, #f9ec68 31%, #ff3535 58%, #fff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .wordart span:nth-child(1) {
+            transform: skewX(-7deg) scaleY(1.12);
+        }
+
+        .wordart span:nth-child(2) {
+            transform: scaleX(1.08) translateY(1px);
+        }
+
+        .wordart span:nth-child(3) {
+            transform: skewX(3deg) scaleY(1.04);
+        }
+
+        .site-subtitle {
+            margin: 0;
+            font-size: 15px;
+            color: #e9f4ff;
+            text-shadow: 1px 1px 0 #001;
+        }
+
+        .header-tools {
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .48);
+            border-right-color: rgba(0, 0, 0, .34);
+            border-bottom-color: rgba(0, 0, 0, .48);
+            padding: 8px 7px 9px;
+            font-size: 12px;
+            box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .22);
+        }
+
+        .header-tools table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, .1);
+        }
+
+        .header-tools td {
+            border: 1px solid rgba(255, 255, 255, .28);
+            padding: 3.5px 4px;
+        }
+
+        .header-tools td:first-child {
+            color: #fffb9c;
+            white-space: nowrap;
+            width: 62px;
+        }
+
+        .nav-bar {
+            background: linear-gradient(#ffffe1, #ffdd59 48%, #c89400);
+            border-top: 1px solid #fff6a9;
+            border-bottom: 2px solid #5f4300;
+            padding: 4.4px 7px 5.1px;
+            display: flex;
+            gap: 4.5px;
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a,
+        .roc-btn,
+        .tiny-btn,
+        .faq-toggle,
+        .modal-actions a,
+        .modal-actions button {
+            border: 2px outset #f5f5f5;
+            background: linear-gradient(#ffffff, #d7d7d7 48%, #9c9c9c);
+            color: #000;
+            font-weight: 700;
+            text-decoration: none;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, .75);
+            box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .86), 1px 1px 0 rgba(0, 0, 0, .22);
+            cursor: pointer;
+        }
+
+        .nav-bar a {
+            padding: 5.8px 10.2px 5px;
+            font-size: 13px;
+            min-width: 74px;
+            text-align: center;
+        }
+
+        .nav-bar a.important {
+            background: linear-gradient(#ff4d4d, #d90000 50%, #8b0000);
+            color: #fff;
+            border-color: #ffd6d6 #5d0000 #5d0000 #ffd6d6;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .nav-bar a:hover,
+        .roc-btn:hover,
+        .tiny-btn:hover,
+        .faq-toggle:hover,
+        .modal-actions a:hover,
+        .modal-actions button:hover {
+            filter: brightness(1.08) saturate(1.16);
+            transform: translateY(-.5px);
+        }
+
+        .ticker {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border-bottom: 1px solid #565656;
+            background: var(--roc-yellow);
+            color: #000;
+            font-size: 13px;
+            overflow: hidden;
+        }
+
+        .ticker-label {
+            background: linear-gradient(#f70000, #8d0000);
+            color: #fff;
+            font-weight: 900;
+            padding: 7.2px 10px 7.4px;
+            border-right: 2px ridge #fff;
+            white-space: nowrap;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .ticker-window {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            min-height: 31px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-track {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker-scroll 36s linear infinite;
+        }
+
+        .ticker:hover .ticker-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes ticker-scroll {
+            to { transform: translateX(-100%); }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 214px minmax(0, 1fr) 236px;
+            gap: 10px;
+            padding: 13px 11px 10px 9px;
+            align-items: start;
+        }
+
+        .left-rail,
+        .right-rail,
+        .content-column {
+            min-width: 0;
+        }
+
+        .legacy-box {
+            background: #fff;
+            border: 1px solid #777;
+            border-top-color: #bcbcbc;
+            border-left-color: #c9c9c9;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, .13);
+            margin-bottom: 10.8px;
+        }
+
+        .legacy-box.drift-yellow {
+            background: hsl(52 94% 84%);
+        }
+
+        .legacy-title {
+            margin: 0;
+            padding: 5.6px 8.4px 5px;
+            font-size: 15px;
+            font-weight: 900;
+            color: #fff;
+            background: linear-gradient(#0047ff, var(--roc-blue) 54%, #000047);
+            border-bottom: 2px ridge #d9d9d9;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .legacy-title.red {
+            background: linear-gradient(#ff3636, #cc0000 52%, #710000);
+        }
+
+        .legacy-title.gray {
+            background: linear-gradient(#fefefe, #c7c7c7 52%, #7d7d7d);
+            color: #111;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        .legacy-body {
+            padding: 8.3px 8px 9.1px;
+            font-size: 13px;
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            background: #efefef;
+            border: 1px solid #b5b5b5;
+            padding: 4.3px 6px 4.8px;
+            margin-bottom: 8.7px;
+        }
+
+        .hero-panel {
+            border: 2px solid var(--roc-blue);
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, .88), rgba(255, 255, 219, .86)),
+                repeating-linear-gradient(90deg, transparent 0 42px, rgba(0, 0, 149, .05) 42px 43px);
+            box-shadow: inset 0 0 0 3px #fff, 3px 3px 0 rgba(0, 0, 0, .2);
+            padding: 12.4px 13px 11px 12px;
+            margin-bottom: 10px;
+        }
+
+        .hero-headline {
+            margin: 0 0 7px;
+            color: #00106d;
+            font-family: DFKai-SB, PMingLiU, MingLiU, serif;
+            font-size: clamp(27px, 4.3vw, 47px);
+            line-height: 1.12;
+            text-shadow: 2px 2px 0 #fffa7a, 3px 3px 0 rgba(217, 0, 0, .35);
+        }
+
+        .hero-headline strong {
+            color: var(--roc-red);
+            font-style: italic;
+        }
+
+        .hero-copy {
+            margin: 7px 0 9px;
+            font-size: 15px;
+            color: #202020;
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .roc-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8.2px 12.8px 7px;
+            min-height: 34px;
+            font-size: 14px;
+            line-height: 1.1;
+        }
+
+        .roc-btn.primary {
+            background: linear-gradient(#ffef70, #ffb000 44%, #c97800);
+            border-color: #fff2ad #633600 #633600 #fff2ad;
+        }
+
+        .roc-btn.blue {
+            background: linear-gradient(#53a6ff, #0b4be2 49%, #002173);
+            border-color: #d8eeff #00113d #00113d #d8eeff;
+            color: #fff;
+            text-shadow: 1px 1px 0 #001;
+        }
+
+        .roc-btn.green {
+            background: linear-gradient(#75ff93, #1caa42 48%, #00631a);
+            border-color: #ddffe5 #003c0f #003c0f #ddffe5;
+            color: #fff;
+            text-shadow: 1px 1px 0 #002b0a;
+        }
+
+        .stat-table,
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 13px;
+        }
+
+        .stat-table th,
+        .stat-table td,
+        .data-table th,
+        .data-table td {
+            border: 1px solid #858585;
+            padding: 5.5px 6.4px;
+            vertical-align: middle;
+        }
+
+        .stat-table th,
+        .data-table th {
+            background: linear-gradient(#f5f5f5, #cfcfcf);
+            color: #111;
+            text-align: left;
+            font-weight: 900;
+        }
+
+        .stat-table td strong {
+            color: #b10000;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 18px;
+        }
+
+        .notice-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .notice-list li {
+            border-bottom: 1px dotted #777;
+            padding: 5.2px 2px 5.7px;
+        }
+
+        .notice-list li:last-child {
+            border-bottom: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            min-width: 42px;
+            text-align: center;
+            font-size: 11px;
+            color: #fff;
+            background: #d90000;
+            border: 1px solid #7b0000;
+            padding: 1px 3px;
+            margin-right: 4px;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        .badge.blue {
+            background: #001ec8;
+            border-color: #001064;
+        }
+
+        .badge.gold {
+            color: #000;
+            background: #ffd23d;
+            border-color: #8a6200;
+        }
+
+        .portal-section {
+            border: 1px solid #888;
+            background: #fff;
+            margin-bottom: 10.2px;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, .1);
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, #000095, #113ce7 58%, #00135b);
+            color: #fff;
+            padding: 5.4px 8px 4.9px;
+            border-bottom: 2px ridge #eaeaea;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: 18px;
+            font-family: DFKai-SB, PMingLiU, MingLiU, serif;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .section-head small {
+            font-size: 11px;
+            color: #ffff9b;
+            white-space: nowrap;
+        }
+
+        .section-body {
+            padding: 9.1px 9px 10.3px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 8.7px;
+        }
+
+        .feature-note {
+            border: 1px solid #9b9b9b;
+            background: hsl(52 94% 85%);
+            padding: 7.7px 7px 6.8px;
+            min-height: 100%;
+        }
+
+        .feature-note h3 {
+            margin: 0 0 4px;
+            color: #b00000;
+            font-size: 16px;
+        }
+
+        .schedule-mini {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2px;
+            margin-top: 7px;
+        }
+
+        .schedule-mini div {
+            min-height: 29px;
+            border: 1px solid #777;
+            background: #e7edf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            padding: 2px;
+        }
+
+        .service-links {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .service-link {
+            display: block;
+            border: 1px solid #777;
+            background: linear-gradient(#fff, #ededed 49%, #d3d3d3);
+            padding: 7px 6px 6.4px;
+            color: #001999;
+            text-decoration: none;
+            min-height: 56px;
+            box-shadow: inset 1px 1px 0 #fff;
+        }
+
+        .service-link:hover {
+            background: hsl(54 96% 76%);
+        }
+
+        .service-link b {
+            display: block;
+            color: #000;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .service-link span {
+            display: block;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .wallpaper-strip {
+            overflow: hidden;
+            padding: 8px 0 5px;
+            background: #121212;
+            border: 2px inset #777;
+        }
+
+        .wallpaper-track {
+            display: flex;
+            width: max-content;
+            gap: 9px;
+            animation: wallpaper-scroll linear infinite;
+            padding: 0 8px;
+        }
+
+        #wallpaper-carousel:hover .wallpaper-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes wallpaper-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .wallpaper-card {
+            position: relative;
+            display: block;
+            width: 142px;
+            flex: 0 0 auto;
+            border: 2px ridge #d6d6d6;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .wallpaper-card img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 9 / 19.5;
+            object-fit: cover;
+            filter: saturate(1.16) contrast(1.08) sharpen(1px);
+        }
+
+        .wallpaper-card .card-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 18px 6px 6px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, .9));
+            font-size: 12px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .wallpaper-card .card-overlay div {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .w2m-board {
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            gap: 8px;
+        }
+
+        .heatmap-shell {
+            border: 1px solid #777;
+            background: #e7fff8;
+            padding: 8px 7px 7px;
+        }
+
+        .heatmap-head {
+            display: grid;
+            grid-template-columns: 42px repeat(5, 1fr);
+            gap: 2px;
+            font-size: 12px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3px;
+        }
+
+        .heatmap-head div {
+            border: 1px solid #777;
+            background: linear-gradient(#fff, #cfcfcf);
+            padding: 3px 1px;
+        }
+
+        .heatmap-grid-wrap {
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            gap: 2px;
+        }
+
+        .heatmap-time {
+            display: grid;
+            grid-template-rows: repeat(10, 26px);
+            gap: 2px;
+            font-size: 11px;
+        }
+
+        .heatmap-time span {
+            border: 1px solid #909090;
+            background: #f6f6f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #w2m-heatmap {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(10, 26px);
+            gap: 2px;
+        }
+
+        #w2m-heatmap div {
+            border: 1px solid #777;
+            background: #dbece8;
+            min-width: 0;
+        }
+
+        .heat-0 { background: #e9e9e9 !important; }
+        .heat-1 { background: #cafff1 !important; }
+        .heat-2 { background: #7cf2cf !important; }
+        .heat-3 { background: #1fc99f !important; }
+        .heat-4 { background: #008a6a !important; }
+        .heat-5 { background: #005f46 !important; box-shadow: inset 0 0 0 2px #d1fff2; }
+
+        .marquee {
+            position: relative;
+            overflow: hidden;
+            border: 2px inset #757575;
+            background: #020202;
+            color: #fff;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            align-items: center;
+            gap: 8px;
+            animation: marquee-scroll 44s linear infinite;
+            padding: 7px 0;
+        }
+
+        .marquee:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .school-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            border: 1px solid #7fdcff;
+            background: #00135b;
+            color: #fff;
+            padding: 4px 7px 4.6px;
+            font-size: 12px;
+        }
+
+        .install-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 7px;
+        }
+
+        .download-card {
+            border: 1px solid #777;
+            background: hsl(52 96% 86%);
+            padding: 8px 7px 9px;
+            min-height: 118px;
+        }
+
+        .download-card h3 {
+            margin: 0 0 5px;
+            color: var(--roc-blue);
+            font-size: 16px;
+        }
+
+        .download-card p {
+            margin: 0 0 8px;
+            font-size: 12px;
+        }
+
+        .faq-item {
+            border: 1px solid #888;
+            margin-bottom: 5px;
+            background: #fff;
+        }
+
+        .faq-toggle {
+            width: 100%;
+            text-align: left;
+            padding: 6.5px 8px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .faq-panel {
+            padding: 7px 9px 9px;
+            border-top: 1px dotted #777;
+            font-size: 13px;
+            background: #ffffee;
+        }
+
+        .faq-panel[hidden] {
+            display: none;
+        }
+
+        .status-card,
+        .developer-card {
+            border: 1px solid #858585;
+            background: #fff;
+            padding: 7px;
+            margin-bottom: 6px;
+        }
+
+        .status-row,
+        .developer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border: 1px solid #222;
+            display: inline-block;
+            margin-right: 5px;
+            vertical-align: -1px;
+        }
+
+        .status-pill {
+            border: 1px solid #777;
+            background: #efefef;
+            padding: 2px 5px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 1px;
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .status-block {
+            flex: 1;
+            height: 17px;
+            border: 1px solid rgba(0, 0, 0, .22);
+        }
+
+        .developer-card img {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border: 1px solid #777;
+            background: #fff;
+            padding: 2px;
+            filter: contrast(1.05) saturate(.85);
+            flex: 0 0 auto;
+        }
+
+        .developer-row {
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .developer-meta b {
+            color: var(--roc-blue);
+            font-size: 15px;
+        }
+
+        .role-tag {
+            display: inline-block;
+            background: #ffed7a;
+            border: 1px solid #997800;
+            color: #111;
+            font-size: 11px;
+            padding: 1px 4px;
+            margin-left: 4px;
+        }
+
+        .right-mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .right-mini-table td {
+            border: 1px solid #919191;
+            padding: 4px 4px;
+        }
+
+        .right-mini-table tr:nth-child(odd) td {
+            background: #f5f5f5;
+        }
+
+        .policy-links {
+            display: grid;
+            gap: 4px;
+        }
+
+        .policy-links a {
+            display: block;
+            border: 1px solid #999;
+            background: #f7f7f7;
+            padding: 4px 5px;
+            font-size: 12px;
+        }
+
+        .site-footer {
+            border-top: 3px double #555;
+            background: linear-gradient(#eeeeee, #cfcfcf);
+            padding: 8px 9px 9px;
+            font-size: 12px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #version-status {
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px dotted #777;
+            color: #333;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 18px;
+        }
+
+        .modal.flex {
+            display: flex;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, .54);
+        }
+
+        .modal-box {
+            position: relative;
+            width: min(520px, 100%);
+            background: #fffde8;
+            border: 3px outset #fff;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, .33);
+            padding: 0;
+        }
+
+        .modal-title {
+            margin: 0;
+            background: linear-gradient(#ff3939, #c40000 52%, #620000);
+            color: #fff;
+            padding: 7px 32px 7px 9px;
+            font-size: 18px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 24px;
+            height: 24px;
+            border: 2px outset #fff;
+            background: linear-gradient(#fff, #bdbdbd);
+            cursor: pointer;
+        }
+
+        .modal-content {
+            padding: 10px 11px 12px;
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 10px;
+        }
+
+        .modal-actions a,
+        .modal-actions button {
+            padding: 7px 10px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .mt-tight {
+            margin-top: 6.5px;
+        }
+
+        .note-line {
+            background: hsl(54 96% 74%);
+            border: 1px dashed #886b00;
+            padding: 4.4px 5px 4px;
+            font-size: 12px;
+            margin: 6px 0;
+        }
+
+        .red-text {
+            color: var(--roc-red);
+            font-weight: 900;
+        }
+
+        .cyan-link {
+            color: var(--roc-cyan);
+        }
+
+        @media (max-width: 1060px) {
+            .brand-row {
+                grid-template-columns: 76px 1fr;
+            }
+
+            .header-tools {
+                grid-column: 1 / -1;
+            }
+
+            .main-grid {
+                grid-template-columns: 188px minmax(0, 1fr);
+            }
+
+            .right-rail {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
+            }
+
+            .right-rail .legacy-box {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .page-shell {
+                border: 0;
+            }
+
+            .brand-row {
+                display: block;
+                min-height: 0;
+                padding: 10px;
+            }
+
+            .logo-box {
+                float: left;
+                margin-right: 9px;
+                width: 56px;
+                height: 56px;
+            }
+
+            .logo-box img {
+                width: 43px;
+                height: 43px;
+            }
+
+            .wordart {
+                white-space: normal;
+                font-size: clamp(29px, 10vw, 43px);
+            }
+
+            .site-subtitle {
+                clear: both;
+                padding-top: 6px;
+            }
+
+            .header-tools {
+                margin-top: 8px;
+            }
+
+            .main-grid {
+                display: block;
+                padding: 9px 7px 8px;
+            }
+
+            .left-rail,
+            .right-rail {
+                display: block;
+            }
+
+            .feature-grid,
+            .w2m-board,
+            .install-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-links {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-bar a {
+                flex: 1 1 31%;
+                min-width: 94px;
+            }
+
+            .wallpaper-card {
+                width: 118px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .top-strip {
+                font-size: 11px;
+            }
+
+            .ticker-label {
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+
+            .section-head {
+                display: block;
+            }
+
+            .section-head small {
+                display: block;
+                margin-top: 2px;
+            }
+
+            .heatmap-head {
+                grid-template-columns: 34px repeat(5, 1fr);
+                font-size: 11px;
+            }
+
+            .heatmap-grid-wrap {
+                grid-template-columns: 34px 1fr;
+            }
+
+            .heatmap-time {
+                font-size: 10px;
+            }
+
+            .action-row .roc-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <div id="disclaimer-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="disclaimer-modal-title">
+        <div id="disclaimer-modal-backdrop" class="modal-backdrop"></div>
+        <div class="modal-box">
+            <button id="disclaimer-modal-close" class="modal-close" type="button" aria-label="關閉免責聲明">X</button>
+            <h2 id="disclaimer-modal-title" class="modal-title">【重要提醒】本系統服務性質說明</h2>
+            <div class="modal-content">
+                <p>
+                    VocPass 為非官方校務查詢輔助工具，與各校原始校務行政系統無合作、委託或授權關係。資料內容仍應以各校正式公告及官方系統顯示為準。
+                </p>
+                <p class="note-line">
+                    ※ 請務必詳閱相關聲明事項，以維護您的資料使用權益。造成不便之處，敬請見諒。
+                </p>
+                <div class="modal-actions">
+                    <button id="disclaimer-modal-confirm" type="button">我已詳閱並知道了</button>
+                    <a href="/disclaimer">前往完整免責聲明</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-shell">
+        <div class="top-strip" aria-label="頁首資訊列">
+            <span>今日服務日期：<strong id="today-text">系統載入中</strong>｜瀏覽器建議：Chrome、Safari、Edge 及其他可正常上網之工具</span>
+            <span>服務信箱：請由論壇或 Discord 反映｜本站資料傳輸請務必自行確認</span>
+        </div>
+
+        <header class="site-header">
+            <div class="brand-row">
+                <div class="logo-box" aria-hidden="true">
+                    <img src="https://github.com/vocpass.png" alt="">
+                </div>
+                <div>
+                    <h1 class="wordart" data-shadow="VocPass校務查詢">
+                        <span>VocPass</span><span>校務</span><span>查詢</span>
+                    </h1>
+                    <p class="site-subtitle">高級中等學校學生校務資料便民查詢與學習生活輔助服務網</p>
+                </div>
+                <div class="header-tools" aria-label="服務摘要">
+                    <table>
+                        <tbody>
+                            <tr><td>服務性質</td><td>非官方便民輔助工具</td></tr>
+                            <tr><td>支援裝置</td><td>iOS 17+、macOS 11+、Android 6+</td></tr>
+                            <tr><td>更新狀態</td><td><span class="red-text">持續維護中</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <nav class="nav-bar" aria-label="主要導覽列">
+                <a href="#features">功能服務</a>
+                <a href="#wallpaper">桌布專區</a>
+                <a href="#w2m">約時間系統</a>
+                <a href="#schools">支援學校</a>
+                <a href="#install" class="important">下載安裝</a>
+                <a href="#status">服務狀態</a>
+                <a href="#faq">常見問題</a>
+                <a href="https://github.com/VocPass" target="_blank" rel="noopener noreferrer">開源專案</a>
+            </nav>
+        </header>
+
+        <div class="ticker" aria-label="最新公告跑馬燈">
+            <div class="ticker-label">最新公告</div>
+            <div class="ticker-window">
+                <div class="ticker-track">
+                    ★ 歡迎使用 VocPass 校務資料便民查詢服務！請各位同學妥善保管帳號密碼。　
+                    ※ 本系統為非官方服務，資料仍以各校正式系統公告為準。　
+                    ◆ Android APK 與 iOS App Store 版本持續提供下載使用，敬請踴躍利用。　
+                    ◎ 若學校尚未列入支援名單，歡迎提出申請，讓服務範圍共同擴大。
+                </div>
+            </div>
+        </div>
+
+        <main class="main-grid">
+            <aside class="left-rail" aria-label="左側服務選單">
+                <section class="legacy-box drift-yellow">
+                    <h2 class="legacy-title red">【便民服務入口】</h2>
+                    <div class="legacy-body">
+                        <div class="policy-links">
+                            <a href="https://apps.apple.com/tw/app/vocpass/id6760000951" target="_blank" rel="noopener noreferrer">◆ App Store 正式下載</a>
+                            <a href="https://testflight.apple.com/join/AeHJpDMp" target="_blank" rel="noopener noreferrer">◆ TestFlight 測試服務</a>
+                            <a href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk" target="_blank" rel="noopener noreferrer">◆ Android APK 下載</a>
+                            <a href="/apply" target="_blank">◆ 學校支援申請表</a>
+                            <a href="/font">◆ 中文字體預覽區</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="legacy-box">
+                    <h2 class="legacy-title">【最新公告資訊】</h2>
+                    <div class="legacy-body">
+                        <ul class="notice-list">
+                            <li><span class="badge">重要</span>本系統持續擴充各校資料來源，歡迎協助確認。</li>
+                            <li><span class="badge blue">下載</span>iOS、Android 版本均已提供相關安裝管道。</li>
+                            <li><span class="badge gold">提醒</span>查詢結果請與學校正式公告交叉確認。</li>
+                            <li><span class="badge blue">服務</span>桌布產生器支援課表資料視覺化輸出。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="legacy-box">
+                    <h2 class="legacy-title gray">網站導覽</h2>
+                    <div class="legacy-body">
+                        <div class="breadcrumb">首頁 ＞ 校務查詢 ＞ 便民服務 ＞ VocPass</div>
+                        <table class="right-mini-table">
+                            <tbody>
+                                <tr><td>資料查詢</td><td>課表／成績／缺曠</td></tr>
+                                <tr><td>生活輔助</td><td>桌布／約時間</td></tr>
+                                <tr><td>社群回報</td><td>論壇／Discord</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </aside>
+
+            <div class="content-column">
+                <div class="breadcrumb">目前位置：首頁 ＞ VocPass 高職通用校務查詢系統 ＞ 服務總覽</div>
+
+                <section class="hero-panel" aria-labelledby="hero-title">
+                    <h2 id="hero-title" class="hero-headline">落實校園資訊便民化，<br>讓您的校務資料 <strong>一站查詢</strong>！</h2>
+                    <p class="hero-copy">
+                        本系統提供課表、成績、缺曠、獎懲等資訊整合檢視服務，協助高職及綜合高中學生以更有效率方式掌握學習生活相關資料。請依照裝置類型選擇下列安裝管道，並請慢慢確認，不要著急。
+                    </p>
+                    <div class="action-row">
+                        <a class="roc-btn primary" href="https://apps.apple.com/tw/app/vocpass/id6760000951" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-apple"></i> App Store 下載</a>
+                        <a class="roc-btn green" href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-android"></i> Android APK</a>
+                        <a class="roc-btn blue" href="#features"><i class="fa-solid fa-circle-info"></i> 功能說明</a>
+                    </div>
+                </section>
+
+                <section class="portal-section" aria-labelledby="stat-title">
+                    <div class="section-head">
+                        <h2 id="stat-title">服務成果統計公告</h2>
+                        <small>統計數字僅供服務推廣展示參考</small>
+                    </div>
+                    <div class="section-body">
+                        <table class="stat-table">
+                            <thead>
+                                <tr>
+                                    <th>統計項目</th>
+                                    <th>目前累計數</th>
+                                    <th>說明事項</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>累計下載</td>
+                                    <td><strong><span class="stat-number" data-target="5000" data-suffix="+">0</span></strong></td>
+                                    <td>各平台安裝及使用推廣統計。</td>
+                                </tr>
+                                <tr>
+                                    <td>已註冊使用者</td>
+                                    <td><strong><span class="stat-number" data-target="1000" data-suffix="+">0</span></strong></td>
+                                    <td>曾啟用服務之使用者概估值。</td>
+                                </tr>
+                                <tr>
+                                    <td>總查詢次數</td>
+                                    <td><strong><span class="stat-number" data-target="240000" data-suffix="+">0</span></strong></td>
+                                    <td>校務資料查詢流程累積紀錄。</td>
+                                </tr>
+                                <tr>
+                                    <td>App Store 評分</td>
+                                    <td><strong>4.8 ★</strong></td>
+                                    <td>感謝各位使用者熱心支持與鼓勵。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="features" class="portal-section" aria-labelledby="features-title">
+                    <div class="section-head">
+                        <h2 id="features-title">校務資料查詢功能服務</h2>
+                        <small>請依照需求選擇相關功能事項</small>
+                    </div>
+                    <div class="section-body">
+                        <div class="feature-grid">
+                            <div class="feature-note">
+                                <h3>智慧課表查詢與本機快取服務</h3>
+                                <p>
+                                    提供每週課表資料快速瀏覽、下節課提醒及離線快取輔助。無網路時仍可檢視已同步內容，協助同學掌握教室、科目與時間。
+                                </p>
+                                <div id="schedule-grid" class="schedule-mini" aria-label="課表示意格"></div>
+                            </div>
+                            <table class="data-table">
+                                <tbody>
+                                    <tr><th>功能項目</th><th>服務說明</th></tr>
+                                    <tr><td>歷年成績</td><td>各科分數、學分、名次相關資訊集中查閱。</td></tr>
+                                    <tr><td>缺曠統計</td><td>協助留意出缺席狀態，避免逾越相關門檻。</td></tr>
+                                    <tr><td>獎懲紀錄</td><td>整合校務系統已揭示之相關資料。</td></tr>
+                                    <tr><td>驗證碼辨識</td><td>以裝置端 OCR 協助登入流程，減少反覆輸入。</td></tr>
+                                    <tr><td>本地隱私保護</td><td>帳號密碼儲存於裝置本機 Keychain 或安全儲存區。</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="note-line">※ 本服務不會成為學校正式公告之替代來源，請各位同學務必依照學校規定辦理相關事項。</p>
+                    </div>
+                </section>
+
+                <section class="portal-section" aria-labelledby="service-links-title">
+                    <div class="section-head">
+                        <h2 id="service-links-title">分項服務快速瀏覽</h2>
+                        <small>服務分類依使用情境列示</small>
+                    </div>
+                    <div class="section-body">
+                        <div class="service-links">
+                            <a class="service-link" href="#features">
+                                <b><i class="fa-regular fa-calendar-check"></i> 課表資訊查詢</b>
+                                <span>每週課表、當前課程、教室提醒與快取。</span>
+                            </a>
+                            <a class="service-link" href="#wallpaper">
+                                <b><i class="fa-regular fa-image"></i> 課表桌布產生</b>
+                                <span>依照個人課表產生手機桌布視覺檔。</span>
+                            </a>
+                            <a class="service-link" href="#w2m">
+                                <b><i class="fa-solid fa-table-cells"></i> 空閒時段彙整</b>
+                                <span>多人聚會、班級活動與社團時間協調。</span>
+                            </a>
+                            <a class="service-link" href="#schools">
+                                <b><i class="fa-solid fa-school"></i> 學校支援名錄</b>
+                                <span>查詢目前已支援學校，並提出新增申請。</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="wallpaper" class="portal-section" aria-labelledby="wallpaper-title">
+                    <div class="section-head">
+                        <h2 id="wallpaper-title">課表桌布產生器推廣專區</h2>
+                        <small>主題樣式持續更新中</small>
+                    </div>
+                    <div class="section-body">
+                        <p>
+                            本專區可將個人課表資訊轉換為手機桌布格式，並提供多款創作者設計主題。請注意，不同主題之字體、裁切、顏色可能略有差異，屬正常服務呈現。
+                        </p>
+                        <div id="wallpaper-carousel" class="wallpaper-strip" aria-label="桌布模板輪播">
+                            <div class="note-line">桌布模板資料載入中，請稍候。</div>
+                        </div>
+                        <p class="mt-tight">支援多款 <a href="/font">中文字體預覽</a>，歡迎同學依照個人喜好選擇使用。</p>
+                    </div>
+                </section>
+
+                <section id="w2m" class="portal-section" aria-labelledby="w2m-title">
+                    <div class="section-head">
+                        <h2 id="w2m-title">When2Meet 約時間協調服務</h2>
+                        <small>班級、社團、聚餐皆可參考運用</small>
+                    </div>
+                    <div class="section-body">
+                        <div class="w2m-board">
+                            <div>
+                                <p>
+                                    建立活動後，可將連結提供給同學、朋友或相關人員填寫空閒時段。系統會以熱力圖方式呈現重疊結果，協助找出較適合之共同時間。
+                                </p>
+                                <table class="data-table">
+                                    <tbody>
+                                        <tr><th>操作步驟</th><th>說明</th></tr>
+                                        <tr><td>1. 建立活動</td><td>輸入活動名稱、候選日期與說明。</td></tr>
+                                        <tr><td>2. 分享連結</td><td>傳送給參與者，瀏覽器即可填寫。</td></tr>
+                                        <tr><td>3. 檢視熱力</td><td>顏色越深代表越多人可以出席。</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="heatmap-shell" aria-label="When2Meet 熱力圖示意">
+                                <div class="heatmap-head">
+                                    <div>時間</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div>
+                                </div>
+                                <div class="heatmap-grid-wrap">
+                                    <div class="heatmap-time">
+                                        <span>08</span><span>09</span><span>10</span><span>11</span><span>12</span>
+                                        <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+                                    </div>
+                                    <div id="w2m-heatmap">
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                        <div></div><div></div><div></div><div></div><div></div>
+                                    </div>
+                                </div>
+                                <p class="note-line">目前示意：5 人參與，週三下午較為適合。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="schools" class="portal-section" aria-labelledby="schools-title">
+                    <div class="section-head">
+                        <h2 id="schools-title">支援學校名錄查詢專區</h2>
+                        <small>目前支援 <span id="school-count">450</span> 所學校</small>
+                    </div>
+                    <div class="section-body">
+                        <p>
+                            本系統持續整理全台高職、綜合高中及相關學校校務系統支援狀態。若未查得您的學校，敬請填寫申請表，本單位將依序評估。
+                        </p>
+                        <div class="marquee">
+                            <div id="school-marquee-track" class="marquee-track">
+                                <span class="school-chip">資料載入中</span>
+                            </div>
+                        </div>
+                        <div class="action-row mt-tight">
+                            <a class="roc-btn blue" href="/apply" target="_blank"><i class="fa-solid fa-plus-circle"></i> 申請新增學校</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="install" class="portal-section" aria-labelledby="install-title">
+                    <div class="section-head">
+                        <h2 id="install-title">安裝下載與取得服務</h2>
+                        <small>請依照裝置類型自行選擇</small>
+                    </div>
+                    <div class="section-body">
+                        <div class="install-grid">
+                            <div class="download-card">
+                                <h3><i class="fa-brands fa-apple"></i> iOS 正式版</h3>
+                                <p>適用 iOS 17.0 以上裝置，請由 App Store 安裝。</p>
+                                <a class="roc-btn primary" href="https://apps.apple.com/tw/app/vocpass/id6760000951" target="_blank" rel="noopener noreferrer">取得 App</a>
+                            </div>
+                            <div class="download-card">
+                                <h3><i class="fa-solid fa-flask"></i> TestFlight</h3>
+                                <p>提供測試版使用。功能可能調整，請耐心協助回報。</p>
+                                <a class="roc-btn blue" href="https://testflight.apple.com/join/AeHJpDMp" target="_blank" rel="noopener noreferrer">加入測試</a>
+                            </div>
+                            <div class="download-card">
+                                <h3><i class="fa-brands fa-android"></i> Android APK</h3>
+                                <p>適用 Android 6.0 以上裝置，安裝前請確認來源。</p>
+                                <a class="roc-btn green" href="https://github.com/VocPass/android/releases/latest/download/vocpass.apk" target="_blank" rel="noopener noreferrer">下載 APK</a>
+                            </div>
+                        </div>
+                        <p class="note-line">※ 本專案開源免費，您亦可前往 <a href="https://github.com/VocPass" target="_blank" rel="noopener noreferrer">GitHub</a> 檢視相關原始碼。</p>
+                    </div>
+                </section>
+
+                <section id="faq" class="portal-section" aria-labelledby="faq-title">
+                    <div class="section-head">
+                        <h2 id="faq-title">常見問題與說明事項</h2>
+                        <small>請務必詳閱，以維護您的權益</small>
+                    </div>
+                    <div class="section-body">
+                        <div class="faq-item">
+                            <button class="faq-toggle" type="button" aria-expanded="false">Q1：我在 VocPass 輸入的帳號密碼是否安全？</button>
+                            <div class="faq-panel" hidden>
+                                VocPass 採用本地端儲存架構，您的學號與密碼僅會加密儲存於設備本身的 Keychain 或安全儲存區。應用程式查詢資料時直接與學校伺服器連線。
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-toggle" type="button" aria-expanded="false">Q2：為什麼支援名錄中沒有我的學校？</button>
+                            <div class="faq-panel" hidden>
+                                各校校務系統版本及登入流程不同，支援作業需逐校確認。若您的學校尚未列入，請使用申請表提供相關資訊，本單位將依序處理。
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-toggle" type="button" aria-expanded="false">Q3：支援哪些裝置與作業系統？</button>
+                            <div class="faq-panel" hidden>
+                                目前支援 iOS 17.0 以上 iPhone、macOS 11.0 以上 Mac，以及 Android 6.0 以上裝置。請依照裝置類型選擇安裝方式。
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-toggle" type="button" aria-expanded="false">Q4：遇到問題時要如何回報？</button>
+                            <div class="faq-panel" hidden>
+                                歡迎至 <a href="https://forum.vocpass.com/" target="_blank" rel="noopener noreferrer">討論區</a> 或 <a href="https://dc.vocpass.com/" target="_blank" rel="noopener noreferrer">Discord</a> 提供問題內容、裝置型號與發生時間，以利協助確認。
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="status" class="portal-section" aria-labelledby="status-title">
+                    <div class="section-head">
+                        <h2 id="status-title">服務狀態即時監測</h2>
+                        <small>每分鐘自動更新一次</small>
+                    </div>
+                    <div class="section-body">
+                        <div id="status-monitors">
+                            <div class="status-card">監測資料載入中，請稍候。</div>
+                        </div>
+                        <p class="mt-tight">完整資訊請參閱 <a href="https://status.vocpass.com" target="_blank" rel="noopener noreferrer">status.vocpass.com</a>。</p>
+                    </div>
+                </section>
+
+                <section id="developers" class="portal-section" aria-labelledby="developers-title">
+                    <div class="section-head">
+                        <h2 id="developers-title">開發維護團隊資訊</h2>
+                        <small>感謝各界協助本服務持續運作</small>
+                    </div>
+                    <div class="section-body">
+                        <div id="developer-list">
+                            <div class="developer-card">開發者資料載入中，請稍候。</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="right-rail" aria-label="右側資訊欄">
+                <section class="legacy-box">
+                    <h2 class="legacy-title red">【重要提醒事項】</h2>
+                    <div class="legacy-body">
+                        <p class="note-line">請注意：本服務不是學校官方系統，請務必以學校公告為準！</p>
+                        <table class="right-mini-table">
+                            <tbody>
+                                <tr><td>帳號密碼</td><td>請自行妥善保管</td></tr>
+                                <tr><td>資料正確</td><td>以官方系統為準</td></tr>
+                                <tr><td>服務異常</td><td>請回報社群窗口</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="legacy-box drift-yellow">
+                    <h2 class="legacy-title">【技術項目展示】</h2>
+                    <div class="legacy-body">
+                        <ul class="notice-list">
+                            <li><span class="badge blue">iOS</span>SwiftUI 原生體驗</li>
+                            <li><span class="badge blue">Live</span>ActivityKit 即時活動</li>
+                            <li><span class="badge gold">OCR</span>Vision 驗證碼辨識</li>
+                            <li><span class="badge">Web</span>WKWebView 整合查詢</li>
+                            <li><span class="badge gold">Cache</span>本地快取輔助</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="legacy-box">
+                    <h2 class="legacy-title gray">相關規定與連結</h2>
+                    <div class="legacy-body">
+                        <div class="policy-links">
+                            <a href="/privacy-policy">隱私權政策</a>
+                            <a href="/disclaimer">免責聲明</a>
+                            <a href="/terms-of-use">內容使用條款</a>
+                            <a href="/community-guidelines">社群規範</a>
+                            <a href="/creator-policy">創作者政策</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="legacy-box">
+                    <h2 class="legacy-title">服務窗口</h2>
+                    <div class="legacy-body">
+                        <p>如有不清楚的地方，請先停下來並洽詢服務窗口協助。請大家一起配合，讓系統作業更加順利。</p>
+                        <div class="policy-links">
+                            <a href="https://forum.vocpass.com/" target="_blank" rel="noopener noreferrer">問題回報討論區</a>
+                            <a href="https://dc.vocpass.com/" target="_blank" rel="noopener noreferrer">加入 Discord 社群</a>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-grid">
+                <div>
+                    <strong>VocPass 高級中等學校校務資料便民查詢服務網</strong><br>
+                    Copyright © 2026 VocPass. 本專案以
+                    <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL 3.0</a>
+                    開源授權方式提供。
+                    <div id="version-status">版本檢查中...</div>
+                </div>
+                <div>
+                    <a href="#top" class="roc-btn">回頁首</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const todayText = document.getElementById('today-text');
+        if (todayText) {
+            todayText.textContent = new Date().toLocaleDateString('zh-TW', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                weekday: 'short'
+            });
+        }
+
+        const disclaimerModal = document.getElementById('disclaimer-modal');
+        const disclaimerCloseButtons = [
+            document.getElementById('disclaimer-modal-close'),
+            document.getElementById('disclaimer-modal-confirm'),
+            document.getElementById('disclaimer-modal-backdrop'),
+        ].filter(Boolean);
+
+        function closeDisclaimerModal() {
+            if (!disclaimerModal) return;
+            disclaimerModal.classList.add('hidden');
+            disclaimerModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function openDisclaimerModal() {
+            if (!disclaimerModal) return;
+            disclaimerModal.classList.remove('hidden');
+            disclaimerModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('disclaimer-modal-confirm')?.focus();
+        }
+
+        disclaimerCloseButtons.forEach((button) => {
+            button.addEventListener('click', closeDisclaimerModal);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeDisclaimerModal();
+        });
+
+        openDisclaimerModal();
+
+        document.querySelectorAll('.faq-toggle').forEach((button) => {
+            button.addEventListener('click', () => {
+                const panel = button.nextElementSibling;
+                const expanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', String(!expanded));
+                if (panel) panel.hidden = expanded;
+            });
+        });
+
+        const animateCounter = (el) => {
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1600;
+            const start = performance.now();
+
+            const update = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(eased * target).toLocaleString('zh-TW') + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+            };
+
+            requestAnimationFrame(update);
+        };
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        document.querySelectorAll('.stat-number').forEach((el) => counterObserver.observe(el));
+
+        const subjects = [
+            { name: '國文', bg: '#ffe2e2', fg: '#920000' },
+            { name: '英文', bg: '#dbe9ff', fg: '#001d8f' },
+            { name: '數學', bg: '#ece1ff', fg: '#3b0076' },
+            { name: '歷史', bg: '#fff0b7', fg: '#6e4500' },
+            { name: '地理', bg: '#ddffd8', fg: '#005b16' },
+            { name: '公民', bg: '#d9fff8', fg: '#005a52' },
+            { name: '體育', bg: '#ffe3c3', fg: '#8a3300' },
+            { name: '軍訓', bg: '#e6e6e6', fg: '#333333' },
+            { name: '程式', bg: '#cfefff', fg: '#004d7f' },
+            { name: '會計', bg: '#d7ffe9', fg: '#006033' },
+            { name: '機械', bg: '#eeeeee', fg: '#333333' },
+            { name: '電子', bg: '#d2f3ff', fg: '#00506d' },
+            { name: '設計', bg: '#ffd9fb', fg: '#700061' },
+            { name: '烹飪', bg: '#ffddc4', fg: '#7b2f00' },
+            { name: '汽修', bg: '#d8dde6', fg: '#273041' }
+        ];
+
+        const scheduleGrid = document.getElementById('schedule-grid');
+        if (scheduleGrid) {
+            const total = 10;
+            const cells = [];
+
+            function pickSubject(exclude) {
+                let subject;
+                do {
+                    subject = subjects[Math.floor(Math.random() * subjects.length)];
+                } while (subject.name === exclude);
+                return subject;
+            }
+
+            function setCell(cell, subject) {
+                cell.textContent = subject.name;
+                cell.style.background = subject.bg;
+                cell.style.color = subject.fg;
+            }
+
+            for (let i = 0; i < total; i += 1) {
+                const cell = document.createElement('div');
+                cell.style.opacity = '.92';
+                scheduleGrid.appendChild(cell);
+                cells.push(cell);
+                setCell(cell, pickSubject(null));
+            }
+
+            cells.forEach((cell) => {
+                const delay = Math.random() * 2500;
+                setTimeout(function loop() {
+                    const current = cell.textContent;
+                    cell.style.opacity = '.35';
+                    setTimeout(() => {
+                        setCell(cell, pickSubject(current));
+                        cell.style.opacity = '.92';
+                        setTimeout(loop, 1700 + Math.random() * 2800);
+                    }, 420);
+                }, delay);
+            });
+        }
+
+        async function loadSchools() {
+            const marqueeTrack = document.getElementById('school-marquee-track');
+            const schoolCountElement = document.getElementById('school-count');
+            if (!marqueeTrack) return;
+
+            const fallbackSchools = ['大安高工', '士林高商', '松山家商', '木柵高工', '南港高工', '內湖高工', '鶯歌工商', '三重商工', '新北高工'];
+            let schoolNames = fallbackSchools;
+
+            try {
+                const response = await fetch('/school', { cache: 'no-store' });
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && Object.keys(data).length > 0) schoolNames = Object.keys(data);
+                }
+            } catch (e) {
+                console.log('使用預設學校列表');
+            }
+
+            if (schoolCountElement) schoolCountElement.textContent = schoolNames.length;
+
+            const chips = schoolNames.map((name) => `
+                <span class="school-chip"><i class="fa-solid fa-school"></i>${escapeHtml(name)}</span>
+            `).join('');
+
+            marqueeTrack.innerHTML = `<div>${chips}</div><div aria-hidden="true">${chips}</div>`;
+            marqueeTrack.querySelectorAll('div').forEach((div) => {
+                div.style.display = 'flex';
+                div.style.gap = '8px';
+                div.style.paddingRight = '8px';
+            });
+            marqueeTrack.style.animationDuration = `${Math.max(32, schoolNames.length * 1.55)}s`;
+        }
+
+        async function loadWallpaperCarousel() {
+            const carousel = document.getElementById('wallpaper-carousel');
+            if (!carousel) return;
+
+            let templates = [];
+            try {
+                const res = await fetch('/api/wallpaper/curriculum');
+                if (res.ok) {
+                    const json = await res.json();
+                    templates = json.data || json;
+                }
+            } catch (e) {}
+
+            if (!templates.length) {
+                templates = [
+                    { name: '（你說這節什麼課？）', author: 'little monster', author_url: 'https://www.instagram.com/littlemonster__8', preview: 'https://cdn.vocpass.com/wallpaper_assets/what_class_did_you_say_this_is/preview.png' },
+                    { name: '諾巴與灰塵', author: '諾巴Noba', author_url: '', preview: 'https://cdn.vocpass.com/wallpaper_assets/noba_starrr/preview.png' },
+                    { name: 'DuDu', author: 'DuDu', author_url: '', preview: 'https://cdn.vocpass.com/wallpaper_assets/dudu/preview.png' },
+                    { name: '小丹的課表', author: '小丹', author_url: '', preview: 'https://cdn.vocpass.com/wallpaper_assets/daniel_liao/preview.png' },
+                ];
+            }
+
+            const cards = templates.map((template) => {
+                const href = template.author_url ? `href="${escapeAttribute(template.author_url)}" target="_blank" rel="noopener noreferrer"` : '';
+                return `
+                    <a class="wallpaper-card" ${href}>
+                        <img src="${escapeAttribute(template.preview)}" alt="${escapeAttribute(template.name)}" loading="lazy">
+                        <div class="card-overlay">
+                            <div><strong>${escapeHtml(template.name)}</strong></div>
+                            <div>by ${escapeHtml(template.author || '未署名創作者')}</div>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+
+            carousel.innerHTML = `<div class="wallpaper-track">${cards}${cards}</div>`;
+            const track = carousel.querySelector('.wallpaper-track');
+            if (track) track.style.animationDuration = `${Math.max(16, templates.length * 3.2)}s`;
+        }
+
+        function buildW2mHeatmap() {
+            const grid = document.getElementById('w2m-heatmap');
+            if (!grid) return;
+
+            const pattern = [
+                [1, 2, 1, 0, 1],
+                [2, 4, 3, 1, 2],
+                [2, 5, 4, 2, 3],
+                [3, 5, 5, 3, 4],
+                [2, 4, 5, 4, 3],
+                [1, 3, 4, 5, 3],
+                [0, 2, 3, 4, 2],
+                [0, 1, 2, 3, 1],
+                [0, 0, 1, 2, 0],
+                [0, 0, 0, 1, 0],
+            ];
+
+            const cells = Array.from(grid.children);
+            cells.forEach((cell, index) => {
+                const row = Math.floor(index / 5);
+                const col = index % 5;
+                const heat = pattern[row]?.[col] ?? 0;
+                cell.className = `heat-${heat}`;
+                cell.title = `可出席人數：${heat}`;
+            });
+
+            const hotCells = cells.filter((_, index) => {
+                const row = Math.floor(index / 5);
+                const col = index % 5;
+                return pattern[row]?.[col] === 5;
+            });
+
+            let pulse = false;
+            setInterval(() => {
+                pulse = !pulse;
+                hotCells.forEach((cell) => {
+                    cell.style.outline = pulse ? '2px solid #fff36b' : '';
+                });
+            }, 1200);
+        }
+
+        async function loadStatus() {
+            const SLUG = 'vocpass';
+            const API_BASE = 'https://api.codetabs.com/v1/proxy?quest=https://status.vocpass.com';
+            const container = document.getElementById('status-monitors');
+            if (!container) return;
+
+            function statusColor(up) {
+                return up ? '#18b618' : '#e00000';
+            }
+
+            function statusLabel(up) {
+                return up ? '運作正常' : '異常';
+            }
+
+            function uptimePct(heartbeats) {
+                if (!heartbeats || heartbeats.length === 0) return null;
+                const up = heartbeats.filter((heartbeat) => heartbeat.status === 1).length;
+                return ((up / heartbeats.length) * 100).toFixed(1);
+            }
+
+            function buildBar(heartbeats) {
+                const total = window.innerWidth < 768 ? 30 : 86;
+                const recent = (heartbeats || []).slice(-total);
+                const padCount = total - recent.length;
+                const pads = Array(padCount).fill('<span class="status-block" style="background:#d8d8d8"></span>').join('');
+                const blocks = recent.map((heartbeat) => {
+                    const color = heartbeat.status === 1 ? '#18b618' : heartbeat.status === 0 ? '#e00000' : '#ffd300';
+                    const time = new Date(heartbeat.time).toLocaleString('zh-TW');
+                    return `<span class="status-block" style="background:${color}" title="${escapeAttribute(time)}"></span>`;
+                }).join('');
+                return `<div class="status-bar">${pads}${blocks}</div>`;
+            }
+
+            try {
+                const [pageRes, heartbeatRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/status-page/${SLUG}`),
+                    fetch(`${API_BASE}/api/status-page/heartbeat/${SLUG}`)
+                ]);
+
+                if (!pageRes.ok || !heartbeatRes.ok) throw new Error('API error');
+
+                const pageData = await pageRes.json();
+                const hbData = await heartbeatRes.json();
+                const monitors = pageData.publicGroupList?.flatMap((group) =>
+                    (group.monitorList || []).map((monitor) => ({ ...monitor, group: group.name }))
+                ) || [];
+
+                if (monitors.length === 0) {
+                    container.innerHTML = '<div class="status-card">暫無監控資料。</div>';
+                    return;
+                }
+
+                const nodeMonitors = monitors.filter((monitor) => monitor.name.startsWith('節點'));
+                const otherMonitors = monitors.filter((monitor) => !monitor.name.startsWith('節點'));
+
+                function renderMonitor(monitor) {
+                    const heartbeats = hbData.heartbeatList?.[monitor.id] || [];
+                    const latest = hbData.uptimeList?.[`${monitor.id}_24`];
+                    const isUp = heartbeats.length > 0 ? heartbeats[heartbeats.length - 1].status === 1 : null;
+                    const pct = latest != null ? (latest * 100).toFixed(1) : uptimePct(heartbeats);
+                    const dot = isUp === null ? '#777777' : statusColor(isUp);
+                    const label = isUp === null ? '未知' : statusLabel(isUp);
+                    const bar = buildBar(heartbeats);
+                    return { dot, label, pct, bar };
+                }
+
+                function renderSingleCard(monitor) {
+                    const { dot, label, pct, bar } = renderMonitor(monitor);
+                    return `
+                        <div class="status-card">
+                            <div class="status-row">
+                                <div><span class="status-dot" style="background:${dot}"></span><strong>${escapeHtml(monitor.name)}</strong></div>
+                                <div>
+                                    ${pct != null ? `<span class="status-pill">${pct}% 正常</span>` : ''}
+                                    <span class="status-pill" style="color:${dot}">${label}</span>
+                                </div>
+                            </div>
+                            ${bar}
+                        </div>
+                    `;
+                }
+
+                function renderNodeCard(nodes) {
+                    if (nodes.length === 0) return '';
+                    const total = window.innerWidth < 768 ? 30 : 86;
+
+                    function worstStatus(a, b) {
+                        if (a === 0 || b === 0) return 0;
+                        if (a === 2 || b === 2) return 2;
+                        if (a === 1 || b === 1) return 1;
+                        return null;
+                    }
+
+                    const timeMap = new Map();
+                    nodes.forEach((monitor) => {
+                        (hbData.heartbeatList?.[monitor.id] || []).forEach((heartbeat) => {
+                            const key = Math.floor(new Date(heartbeat.time).getTime() / 60000);
+                            timeMap.set(key, worstStatus(timeMap.get(key) ?? heartbeat.status, heartbeat.status));
+                        });
+                    });
+
+                    const sortedKeys = [...timeMap.keys()].sort((a, b) => a - b).slice(-total);
+                    const padCount = total - sortedKeys.length;
+                    const pads = Array(padCount).fill('<span class="status-block" style="background:#d8d8d8"></span>').join('');
+                    const blocks = sortedKeys.map((key) => {
+                        const status = timeMap.get(key);
+                        const color = status === 1 ? '#18b618' : status === 0 ? '#e00000' : '#ffd300';
+                        return `<span class="status-block" style="background:${color}"></span>`;
+                    }).join('');
+
+                    const overallStatus = sortedKeys.length > 0 ? timeMap.get(sortedKeys[sortedKeys.length - 1]) : null;
+                    const overallUp = overallStatus === 1 ? true : overallStatus === 0 ? false : null;
+                    const dot = overallUp === null ? '#777777' : statusColor(overallUp);
+                    const label = overallUp === null ? '未知' : statusLabel(overallUp);
+                    const pcts = nodes.map((monitor) => hbData.uptimeList?.[`${monitor.id}_24`]).filter((value) => value != null);
+                    const avgPct = pcts.length > 0 ? (pcts.reduce((sum, value) => sum + value, 0) / pcts.length * 100).toFixed(1) : null;
+
+                    return `
+                        <div class="status-card">
+                            <div class="status-row">
+                                <div><span class="status-dot" style="background:${dot}"></span><strong>主要服務節點</strong></div>
+                                <div>
+                                    ${avgPct != null ? `<span class="status-pill">${avgPct}% 正常</span>` : ''}
+                                    <span class="status-pill" style="color:${dot}">${label}</span>
+                                </div>
+                            </div>
+                            <div class="status-bar">${pads}${blocks}</div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = renderNodeCard(nodeMonitors) + otherMonitors.map(renderSingleCard).join('');
+            } catch (e) {
+                container.innerHTML = '<div class="status-card">無法載入狀態資料，請前往 <a href="https://status.vocpass.com" target="_blank" rel="noopener noreferrer">status.vocpass.com</a> 查看。</div>';
+            }
+        }
+
+        async function loadDevelopers() {
+            const container = document.getElementById('developer-list');
+            if (!container) return;
+
+            try {
+                const res = await fetch('/api/developer');
+                if (!res.ok) throw new Error('API error');
+                const json = await res.json();
+                const devs = json.data || [];
+
+                if (devs.length === 0) {
+                    container.innerHTML = '<div class="developer-card">暫無開發者資料。</div>';
+                    return;
+                }
+
+                container.innerHTML = devs.map((dev) => `
+                    <div class="developer-card">
+                        <div class="developer-row">
+                            <img src="${escapeAttribute(dev.user.avatar)}" alt="${escapeAttribute(dev.user.name)}" onerror="this.src='https://github.com/vocpass.png'">
+                            <div class="developer-meta">
+                                <b>${escapeHtml(dev.user.name)}</b>
+                                <span class="role-tag">${escapeHtml(dev.role || '協作者')}</span>
+                                ${dev.description ? `<div>${escapeHtml(dev.description)}</div>` : ''}
+                                ${dev.website ? `<a href="${escapeAttribute(dev.website)}" target="_blank" rel="noopener noreferrer">${escapeHtml(dev.website)}</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                container.innerHTML = '<div class="developer-card">無法載入開發者資料。</div>';
+            }
+        }
+
+        async function loadVersionStatus() {
+            const el = document.getElementById('version-status');
+            if (!el) return;
+
+            try {
+                const res = await fetch('/api/version', { cache: 'no-store' });
+                if (!res.ok) throw new Error('API error');
+                const json = await res.json();
+                const data = json.data || {};
+                const commit = data.short_commit || '未知';
+                const branch = data.branch && data.branch !== 'HEAD' ? `｜分支：${escapeHtml(data.branch)}` : '';
+                let statusText = '是否為最新版本：無法確認';
+                if (data.is_latest === true) statusText = '目前部署版本：已是最新';
+                if (data.is_latest === false) statusText = `目前部署版本：有新版 ${escapeHtml(data.latest_short_commit || '未知')}`;
+                el.innerHTML = `版本：<code>${escapeHtml(commit)}</code>${branch}｜${statusText}`;
+            } catch (e) {
+                el.textContent = '目前提交版本：無法載入';
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        function escapeAttribute(value) {
+            return escapeHtml(value).replaceAll('`', '&#096;');
+        }
+
+        loadSchools();
+        loadWallpaperCarousel();
+        buildW2mHeatmap();
+        loadStatus();
+        setInterval(loadStatus, 60000);
+        loadDevelopers();
+        loadVersionStatus();
+    </script>
+</body>
+</html>

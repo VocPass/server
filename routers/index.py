@@ -178,6 +178,10 @@ headers = {
 async def index(request: Request):
     return FileResponse("templates/index.html")
 
+@router.get("/roc", summary="首頁")
+async def index(request: Request):
+    return FileResponse("templates/roc.html")
+
 
 @router.get("/api/version", summary="目前部署版本")
 async def version():
