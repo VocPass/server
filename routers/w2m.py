@@ -84,6 +84,42 @@ async def create_event(request: Request, response: Response, item: dict):
 
     return {"code": 200, "message": "Event created.", "data": {"id": record.id}}
 
+@router.delete("/api/w2m/events/{event_id}", summary="刪除活動")
+async def delete_event(request: Request, response: Response, event_id: str):
+    """
+    刪除活動，只有 creator 可操作。
+
+    需要 Authorization header（Bearer token）。
+    """
+    token = request.headers.get("Authorization")
+    if not token:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {"code": 401, "message": "Unauthorized", "data": None}
+
+    user = get_user(token)
+    if not user:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {"code": 401, "message": "Unauthorized", "data": None}
+
+    db = request.app.state.pb_client
+
+    try:
+        event = db.collection("w2m_events").get_one(event_id)
+    except Exception:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"code": 404, "message": "Event not found.", "data": None}
+
+    if event.creator != user.id:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        return {
+            "code": 403,
+            "message": "Only the creator can delete this event.",
+            "data": None,
+        }
+
+    db.collection("w2m_events").delete(event_id)
+
+    return {"code": 200, "message": "Event deleted.", "data": None}
 
 @router.patch("/api/w2m/events/{event_id}", summary="編輯活動日期/標題/描述")
 async def edit_event(request: Request, response: Response, event_id: str, item: dict):
