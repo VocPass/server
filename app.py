@@ -13,6 +13,7 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
 from fastapi.responses import JSONResponse
 from fastapi.responses import HTMLResponse
+from fastapi_sitemap import SiteMap
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -33,6 +34,18 @@ app = FastAPI(
     description="VosPass 後端 API 文件。",
     version="1.0.0",
     docs_url=None,
+)
+sitemap = SiteMap(
+    app=app,
+    base_url="https://vocpass.com",
+    exclude_patterns=[
+        r"^/api/",
+        r"^/docs/?$",
+        r"^/openapi\.json$",
+        r"^/metrics$",
+        r"^/sitemap\.xml$",
+        r"^/safehost$",
+    ],
 )
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
@@ -356,3 +369,6 @@ async def on_startup():
         env=os.environ.get("APP_ENV", "development"),
     )
     app_logger.info("vocpass api ready")
+
+
+sitemap.attach()

@@ -1,5 +1,6 @@
 fastapi
 fastapi[standard]
+fastapi-sitemap
 dotenv
 pocketbase==0.15.0
 BeautifulSoup4
