@@ -27,7 +27,14 @@ from utils.page_templates import ICON_URL, render_page
 
 load_dotenv()
 
-limiter = Limiter(key_func=get_remote_address)
+def get_client_ip(request: Request) -> str:
+    cf_ip = request.headers.get("CF-Connecting-IP")
+    if cf_ip:
+        return cf_ip
+
+    return get_remote_address(request)
+
+limiter = Limiter(key_func=get_client_ip)
 
 app = FastAPI(
     title="VocPass API",
