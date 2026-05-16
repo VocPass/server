@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VocPass | 高職通用校務查詢系統</title>
+    {% include "partials/seo.html" %}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
-
     <script>
         tailwind.config = {
             theme: {
@@ -164,32 +162,7 @@
             </div>
         </div>
     </div>
-
-    <nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
-        <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
-            <div class="flex items-center gap-2.5 cursor-pointer">
-                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
-                <span class="font-bold text-lg tracking-tight">VocPass</span>
-            </div>
-            <div class="hidden md:flex items-center gap-7">
-                <a href="#features" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">特色</a>
-                <a href="#wallpaper" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">桌布</a>
-                <a href="#w2m" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">約時間</a>
-                <a href="#schools" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">支援學校</a>
-                <a href="#status" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">服務狀態</a>
-                <a href="https://github.com/VocPass" target="_blank" class="text-gray-400 hover:text-gray-900 transition-colors">
-                    <i class="fa-brands fa-github text-xl"></i>
-                </a>
-                <a href="#install" class="bg-black text-white px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition-colors">
-                    獲取 App
-                </a>
-            </div>
-            <!-- 手機版按鈕 -->
-            <a href="#install" class="md:hidden bg-black text-white px-4 py-1.5 rounded-full text-sm font-semibold">
-                獲取 App
-            </a>
-        </div>
-    </nav>
+    {% include "partials/nav.html" %}
 
     <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-5 bg-hero-glow">
         <div class="max-w-4xl mx-auto text-center" data-aos="zoom-y-out" data-aos-duration="1000">
@@ -785,25 +758,7 @@
             </div>
         </div>
     </section>
-
-    <footer class="border-t border-gray-200 bg-white py-10 px-5">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-            <div class="flex items-center gap-3">
-                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
-                <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
-            </div>
-            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
-                <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
-                <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
-                <div class="w-px h-4 bg-gray-300 hidden sm:block"></div>
-                <a href="https://forum.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-bug mr-1"></i> 回報問題</a>
-                <a href="https://dc.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-commenting mr-1"></i> 加入 Discord</a>
-            </div>
-        </div>
-        <div id="version-status" class="max-w-6xl mx-auto mt-6 pt-5 border-t border-gray-100 text-center text-xs text-gray-400">
-            版本檢查中...
-        </div>
-    </footer>
+    {% include "partials/footer.html" %}
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -1005,7 +960,7 @@
                     <div class="bento-card p-6 flex items-center gap-5">
                         <img src="${dev.user.avatar}" alt="${dev.user.name}"
                              class="w-16 h-16 rounded-2xl object-cover shadow-sm flex-shrink-0"
-                             onerror="this.src='https://github.com/vocpass.png'">
+                             onerror="this.src='https://cdn.vocpass.com/iconr.png'">
                         <div class="min-w-0">
                             <div class="flex items-center gap-2 flex-wrap">
                                 <span class="font-bold text-gray-900 text-base">${dev.user.name}</span>
@@ -1021,45 +976,6 @@
             }
         }
         loadDevelopers();
-
-        // 載入目前部署版本
-        async function loadVersionStatus() {
-            const el = document.getElementById('version-status');
-            if (!el) return;
-
-            try {
-                const res = await fetch('/api/version', { cache: 'no-store' });
-                if (!res.ok) throw new Error('API error');
-                const json = await res.json();
-                const data = json.data || {};
-                const commit = data.short_commit || '未知';
-                const latest = data.latest_short_commit || '未知';
-                const branch = data.branch && data.branch !== 'HEAD' ? ` · ${data.branch}` : '';
-
-                let statusClass = 'text-gray-500';
-                let statusText = '無法確認是否為最新';
-                let statusIcon = 'fa-circle-question';
-                if (data.is_latest === true) {
-                    statusClass = 'text-green-600';
-                    statusText = '已是最新';
-                    statusIcon = 'fa-circle-check';
-                } else if (data.is_latest === false) {
-                    statusClass = 'text-amber-600';
-                    statusText = `有新版 ${latest}`;
-                    statusIcon = 'fa-circle-exclamation';
-                }
-
-                el.innerHTML = `
-                    <span class="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-                        <span>版本: <code class="font-mono text-gray-600">${commit}</code>${branch}</span>
-                        <!--<span class="${statusClass} font-semibold"><i class="fa-solid ${statusIcon} mr-1"></i>${statusText}</span>-->
-                    </span>
-                `;
-            } catch (e) {
-                el.textContent = '目前提交版本：無法載入';
-            }
-        }
-        loadVersionStatus();
 
         // ── 桌布模板輪播 ──────────────────────────────────
         async function loadWallpaperCarousel() {

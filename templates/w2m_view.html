@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VocPass | When2Meet</title>
+    {% include "partials/seo.html" %}
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
-    <style>
+<style>
         :root { --nav-h: 48px; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', system-ui, sans-serif;
@@ -211,7 +210,7 @@
 <!-- Nav -->
 <nav class="apple-nav fixed top-0 left-0 right-0 z-50 flex items-center px-4 gap-3">
     <a href="/" class="flex items-center gap-2 mr-2">
-        <img src="https://github.com/vocpass.png" class="w-6 h-6 rounded-md">
+        <img src="https://cdn.vocpass.com/iconr.png" class="w-6 h-6 rounded-md">
         <span class="font-semibold text-sm hidden sm:block">VocPass</span>
     </a>
     <div class="flex-1 min-w-0">
@@ -360,7 +359,7 @@
         <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-300 hover:text-gray-600 transition-colors">
             <i class="fa-solid fa-xmark text-lg"></i>
         </button>
-        <img src="https://github.com/vocpass.png" class="w-14 h-14 rounded-2xl mx-auto mb-4 shadow-sm">
+        <img src="https://cdn.vocpass.com/iconr.png" class="w-14 h-14 rounded-2xl mx-auto mb-4 shadow-sm">
         <h2 class="text-xl font-black tracking-tight mb-1">登入 VocPass</h2>
         <p class="text-sm text-gray-400 mb-6">使用第三方帳號登入以填寫時段</p>
         <div class="space-y-3">

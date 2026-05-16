@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VocPass | 論壇版主申請</title>
+    {% include "partials/seo.html" %}
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
 
     <script>
         tailwind.config = {
@@ -94,22 +93,7 @@
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
-
-<nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
-    <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
-        <a href="/" class="flex items-center gap-2.5 cursor-pointer">
-            <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
-            <span class="font-bold text-lg tracking-tight">VocPass</span>
-        </a>
-        <div class="hidden md:flex items-center gap-7">
-            <a href="/#features" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">特色</a>
-            <a href="/#schools" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">支援學校</a>
-            <a href="https://github.com/VocPass" target="_blank" class="text-gray-400 hover:text-gray-900 transition-colors">
-                <i class="fa-brands fa-github text-xl"></i>
-            </a>
-        </div>
-    </div>
-</nav>
+    {% include "partials/nav.html" %}
 
 <div class="min-h-screen pt-24 pb-20 px-5">
     <div class="max-w-xl mx-auto">
@@ -117,7 +101,7 @@
         <div id="auth-wall" class="hidden">
             <div id="login-card" class="bento-card p-8">
                 <div class="text-center mb-7">
-                    <img src="https://github.com/vocpass.png" alt="VocPass" class="w-14 h-14 rounded-2xl object-cover mx-auto mb-4 shadow-sm">
+                    <img src="https://cdn.vocpass.com/iconr.png" alt="VocPass" class="w-14 h-14 rounded-2xl object-cover mx-auto mb-4 shadow-sm">
                     <h2 class="text-2xl font-bold tracking-tight mb-1">登入 VocPass</h2>
                     <p class="text-sm text-gray-500">登入後才能提交論壇版主申請</p>
                 </div>
@@ -149,7 +133,7 @@
         <div id="form-body" class="hidden">
             <div class="bento-card p-7 mb-4">
                 <div class="flex items-center gap-3 mb-3">
-                    <img src="https://github.com/vocpass.png" alt="VocPass" class="w-9 h-9 rounded-xl shadow-sm">
+                    <img src="https://cdn.vocpass.com/iconr.png" alt="VocPass" class="w-9 h-9 rounded-xl shadow-sm">
                     <div>
                         <h1 class="text-xl font-bold tracking-tight leading-tight">論壇版主申請</h1>
                         <p class="text-xs text-gray-400">Forum Moderator Application</p>
@@ -268,20 +252,7 @@
 
     </div>
 </div>
-
-<footer class="border-t border-gray-200 bg-white py-10 px-5">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-        <div class="flex items-center gap-3">
-            <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
-            <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
-        </div>
-        <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
-            <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
-            <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
-            <a href="/community-guidelines" class="hover:text-gray-900 transition-colors">社群規範</a>
-        </div>
-    </div>
-</footer>
+    {% include "partials/footer.html" %}
 
 <script>
     const pb = new PocketBase('https://api.vocpass.com');
@@ -337,9 +308,9 @@
 
     function showUserInfo(user) {
         document.getElementById('login-card').classList.add('hidden');
-        const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://github.com/vocpass.png';
+        const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://cdn.vocpass.com/iconr.png';
         document.getElementById('confirm-content').innerHTML = `
-            <img src="${avatarUrl}" alt="頭像" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover" onerror="this.src='https://github.com/vocpass.png'">
+            <img src="${avatarUrl}" alt="頭像" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover" onerror="this.src='https://cdn.vocpass.com/iconr.png'">
             <p class="text-xl font-bold tracking-tight mb-1">${user.name || user.username || '使用者'}</p>
             <p class="text-sm text-gray-500 mb-6">這是你嗎？</p>
             <div class="flex gap-3 justify-center">

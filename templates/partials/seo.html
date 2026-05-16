@@ -1,0 +1,30 @@
+<title>{{ page_meta.title }}</title>
+<meta name="description" content="{{ page_meta.description }}">
+<meta name="keywords" content="{{ page_meta.keywords }}">
+<meta name="author" content="VocPass">
+<meta name="application-name" content="VocPass">
+<meta name="theme-color" content="#2563eb">
+<meta name="robots" content="{{ page_meta.robots }}">
+{% if page_meta.canonical_url -%}
+<link rel="canonical" href="{{ page_meta.canonical_url }}">
+{% endif -%}
+<link rel="icon" type="image/png" href="{{ page_meta.icon_url }}">
+<link rel="apple-touch-icon" href="{{ page_meta.icon_url }}">
+<meta property="og:site_name" content="VocPass">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:type" content="{{ page_meta.type }}">
+<meta property="og:title" content="{{ page_meta.title }}">
+<meta property="og:description" content="{{ page_meta.description }}">
+<meta property="og:url" content="{{ page_meta.og_url }}">
+<meta property="og:image" content="{{ page_meta.share_image_url }}">
+<meta property="og:image:secure_url" content="{{ page_meta.share_image_url }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="VocPass 高職通用校務查詢系統">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_meta.title }}">
+<meta name="twitter:description" content="{{ page_meta.description }}">
+<meta name="twitter:image" content="{{ page_meta.share_image_url }}">
+<meta name="twitter:image:alt" content="VocPass 高職通用校務查詢系統">
+{% if page_meta.structured_data %}
+<script type="application/ld+json">{{ page_meta.structured_data | tojson }}</script>
+{% endif %}

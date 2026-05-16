@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Response, Request, status
-from fastapi.templating import Jinja2Templates
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from utils.pb import get_user,sanitize_str
 from datetime import datetime, date, time, timedelta
 from utils.send_notification import send_notification
-
-templates = Jinja2Templates(directory="templates")
+from utils.page_templates import render_page
 
 router = APIRouter(tags=["When2Meet"])
 limiter = Limiter(key_func=get_remote_address)
@@ -413,11 +411,7 @@ async def view_event(request: Request, event_id: str):
     """
     在瀏覽器中直接查看活動的可用時段總覽。
     """
-    return templates.TemplateResponse(
-        request=request,
-        name="w2m_view.html",
-        context={"request": request, "event_id": event_id},
-    )
+    return render_page(request, "w2m_view.html", "w2m_view", event_id=event_id)
 
 
 @router.get("/w2m/{event_id}", summary="跳轉至 app 連結")
@@ -426,8 +420,4 @@ async def deeplink_redirect(request: Request, event_id: str):
     透過瀏覽器開啟此 URL，顯示中介頁面後自動跳轉至 vocpass://w2m/<event_id>，
     由 app 攔截並開啟對應的活動頁面。
     """
-    return templates.TemplateResponse(
-        request=request,
-        name="w2m_redirect.html",
-        context={"request": request, "event_id": event_id},
-    )
+    return render_page(request, "w2m_redirect.html", "w2m_redirect", event_id=event_id)

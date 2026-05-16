@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>免責聲明 | VocPass</title>
+    {% include "partials/seo.html" %}
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
     <script>
         tailwind.config = {
             theme: {
@@ -36,19 +35,7 @@
     </style>
 </head>
 <body class="antialiased">
-
-    <nav class="glass-nav fixed w-full z-50 transition-all duration-300 h-14 flex items-center">
-        <div class="max-w-7xl mx-auto px-5 w-full flex justify-between items-center">
-            <a href="/" class="flex items-center gap-2.5 cursor-pointer">
-                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-7 h-7 rounded-[8px] object-cover shadow-sm">
-                <span class="font-bold text-lg tracking-tight">VocPass</span>
-            </a>
-            <a href="/" class="flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
-                <i class="fa-solid fa-chevron-left text-xs"></i>
-                返回首頁
-            </a>
-        </div>
-    </nav>
+    {% include "partials/nav.html" %}
 
     <main class="px-5 pb-20" style="padding-top:calc(56px + 40px);">
         <div class="max-w-3xl mx-auto">
@@ -181,22 +168,7 @@
             </div>
         </div>
     </main>
-
-    <footer class="border-t border-gray-200 bg-white py-10 px-5">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-            <div class="flex items-center gap-3">
-                <img src="https://github.com/vocpass.png" alt="VocPass" class="w-8 h-8 rounded-lg grayscale opacity-70">
-                <p class="text-gray-500 text-sm font-medium">© 2026 VocPass. 開源於 <a href="https://github.com/VocPass/ios/blob/main/LICENSE" class="text-gray-800 font-semibold underline">GPL 3.0</a>.</p>
-            </div>
-            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-sm text-gray-500 font-medium">
-                <a href="/privacy-policy" class="hover:text-gray-900 transition-colors">隱私權政策</a>
-                <a href="/disclaimer" class="hover:text-gray-900 transition-colors">免責聲明</a>
-                <div class="w-px h-4 bg-gray-300 hidden sm:block"></div>
-                <a href="https://forum.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-bug mr-1"></i> 回報問題</a>
-                <a href="https://dc.vocpass.com/" target="_blank" class="hover:text-gray-900 transition-colors"><i class="fa-solid fa-commenting mr-1"></i> 加入 Discord</a>
-            </div>
-        </div>
-    </footer>
+    {% include "partials/footer.html" %}
 
     <script>
         const nav = document.querySelector('nav');

@@ -11,7 +11,7 @@ from fastapi import FastAPI, Request, Response, status, Header
 from fastapi.exceptions import RequestValidationError
 from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse
 from fastapi.responses import HTMLResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -22,6 +22,7 @@ from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 from utils.logger import log_request, log_error, log_startup, app_logger
 from utils.debug import Debug
 from utils import metrics as m
+from utils.page_templates import ICON_URL, render_page
 
 load_dotenv()
 
@@ -122,13 +123,15 @@ async def swagger_ui_html():
     title = f"{app.title} - Swagger UI"
     auth_scheme_name = json.dumps(AUTH_SCHEME_NAME)
 
+    icon_url = json.dumps(ICON_URL)
+
     return HTMLResponse(
         f"""
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    <link rel="icon" type="image/png" href={icon_url}>
     <title>{title}</title>
 </head>
 <body>
@@ -289,7 +292,7 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
         status=exc.status_code,
     )
     if exc.status_code == 404 and "mozilla" in request.headers.get("User-Agent", "").lower():
-        return FileResponse("templates/404.html")
+        return render_page(request, "404.html", "404", status_code=404)
     return JSONResponse(
         status_code=exc.status_code,
         content={"code": exc.status_code, "message": exc.detail, "data": None},

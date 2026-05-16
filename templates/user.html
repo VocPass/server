@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VocPass | 個人資料</title>
+    {% include "partials/seo.html" %}
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
     <script>
         tailwind.config = {
             theme: {
@@ -38,24 +37,10 @@
 <body style="background:#f5f5f7; color:#1d1d1f;" class="antialiased overflow-x-hidden">
 
     <!-- 導覽列 -->
-    <nav class="apple-nav fixed w-full z-50 transition-all duration-300" style="height:44px;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-            <div class="flex justify-between h-full items-center">
-                <a href="/" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                    <img src="https://github.com/vocpass.png" alt="VocPass"
-                        class="w-6 h-6 rounded-md object-cover">
-                    <span class="font-semibold text-sm tracking-tight" style="color:#1d1d1f;">VocPass</span>
-                </a>
-                <a href="/" class="flex items-center gap-1.5 text-sm transition-colors" style="color:#0071e3;">
-                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                    返回首頁
-                </a>
-            </div>
-        </div>
-    </nav>
+    {% include "partials/nav.html" %}
 
     <!-- 主內容 -->
-    <div class="min-h-screen px-4 pb-12" style="padding-top:calc(44px + 24px);">
+    <div class="min-h-screen px-4 pb-12" style="padding-top:calc(56px + 24px);">
         <div class="w-full max-w-2xl mx-auto">
 
             <!-- 載入中 -->
@@ -117,6 +102,8 @@
             </div>
         </div>
     </div>
+    {% include "partials/footer.html" %}
+
 
     <script>
         function escapeHTML(str) {
@@ -244,7 +231,7 @@
                 const user = json.data;
                 document.title = `VocPass | ${user.name || user.username}`;
 
-                document.getElementById('user-avatar').src = sanitizeURL(user.avatar) || 'https://github.com/vocpass.png';
+                document.getElementById('user-avatar').src = sanitizeURL(user.avatar) || 'https://cdn.vocpass.com/iconr.png';
                 document.getElementById('user-name').textContent = user.name || user.username;
                 document.getElementById('user-username').textContent = `@${user.username}`;
 

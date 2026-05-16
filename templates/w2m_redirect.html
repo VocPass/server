@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>開啟 VocPass | When2Meet</title>
+    {% include "partials/seo.html" %}
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
-    <style>
+<style>
         :root {
             --apple-text: #1d1d1f;
             --apple-secondary: #86868b;
@@ -149,7 +148,7 @@
             <div class="relative inline-flex items-center justify-center mb-6">
                 <span class="absolute w-20 h-20 rounded-full bg-blue-500/20 ping-slow"></span>
                 <span class="absolute w-20 h-20 rounded-full bg-blue-500/10 ping-slow-delay"></span>
-                <img src="https://github.com/vocpass.png" alt="VocPass" class="app-icon relative z-10">
+                <img src="https://cdn.vocpass.com/iconr.png" alt="VocPass" class="app-icon relative z-10">
             </div>
 
             <!-- 標題 -->
@@ -192,13 +191,7 @@
 
         <!-- Footer -->
         <div class="mt-6 text-center fade-up-delay-4">
-            <div class="flex items-center justify-center gap-3 text-xs text-gray-400 font-medium">
-                <a href="/" class="hover:text-gray-700 transition-colors">VocPass</a>
-                <div class="divider"></div>
-                <a href="/privacy-policy" class="hover:text-gray-700 transition-colors">隱私政策</a>
-                <div class="divider"></div>
-                <a href="/disclaimer" class="hover:text-gray-700 transition-colors">免責聲明</a>
-            </div>
+            {% include "partials/footer_compact.html" %}
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, Request, status, Header, Depends
-from fastapi.responses import RedirectResponse, FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
+from utils.page_templates import render_page
 
 import os
 import json
@@ -180,5 +180,5 @@ async def login(request: Request, response: Response):
 
 
 @router.get("/login", summary="模擬登入")
-async def login():
-    return FileResponse("templates/login.html")
+async def login_page(request: Request):
+    return render_page(request, "login.html", "login")

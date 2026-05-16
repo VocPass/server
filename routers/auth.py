@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Response, Request, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from fastapi.responses import RedirectResponse, FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from utils.pb import *
+from utils.page_templates import render_page
 
 import os
 import json
@@ -19,7 +19,7 @@ router = APIRouter(prefix="/auth", tags=["VocPass 登入端點"])
 
 @router.get("/", summary="Login 頁面")
 async def index(request: Request, response: Response):
-    return FileResponse("templates/auth.html", media_type="text/html")
+    return render_page(request, "auth.html", "auth")
 
 
 @router.get("/me", summary="獲取當前用戶資訊")

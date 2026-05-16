@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VocPass｜高級中等學校校務資料便民查詢服務網</title>
-    <meta name="description" content="VocPass 高職通用校務查詢系統，提供課表、成績、缺曠、獎懲與校園相關資訊查詢服務。">
-    <link rel="icon" type="image/png" href="https://github.com/vocpass.png">
+    {% include "partials/seo.html" %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -972,14 +970,6 @@
             gap: 10px;
             align-items: center;
         }
-
-        #version-status {
-            margin-top: 5px;
-            padding-top: 5px;
-            border-top: 1px dotted #777;
-            color: #333;
-        }
-
         .footer-counters {
             margin-top: 5px;
         }
@@ -1263,7 +1253,7 @@
         <header class="site-header">
             <div class="brand-row">
                 <div class="logo-box" aria-hidden="true">
-                    <img src="https://github.com/vocpass.png" alt="">
+                    <img src="https://cdn.vocpass.com/iconr.png" alt="">
                 </div>
                 <div>
                     <h1 class="wordart" data-shadow="VocPass校務查詢">
@@ -1283,16 +1273,7 @@
                     </table>
                 </div>
             </div>
-            <nav class="nav-bar" aria-label="主要導覽列">
-                <a href="#features">功能服務</a>
-                <a href="#wallpaper">桌布專區</a>
-                <a href="#w2m">約時間系統</a>
-                <a href="#schools">支援學校</a>
-                <a href="#install" class="important">下載安裝</a>
-                <a href="#status">服務狀態</a>
-                <a href="#faq">常見問題</a>
-                <a href="https://github.com/VocPass" target="_blank" rel="noopener noreferrer">開源專案</a>
-            </nav>
+            {% include "partials/roc_nav.html" %}
         </header>
 
         <div class="ticker" aria-label="最新公告跑馬燈">
@@ -1683,25 +1664,7 @@
                 </section>
             </aside>
         </main>
-
-        <footer class="site-footer">
-            <div class="footer-grid">
-                <div>
-                    <strong>VocPass 高級中等學校校務資料便民查詢服務網</strong><br>
-                    Copyright © 2026 VocPass. 本專案以
-                    <a href="https://github.com/VocPass/ios/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL 3.0</a>
-                    開源授權方式提供。
-                    <div class="traffic-counters footer-counters" aria-label="站台流量資訊">
-                        目前上線人數：<strong data-traffic="online">--</strong> 人｜
-                        累計瀏覽量：<strong data-traffic="views">------</strong> 次
-                    </div>
-                    <div id="version-status">版本檢查中...</div>
-                </div>
-                <div>
-                    <a href="#top" class="roc-btn">回頁首</a>
-                </div>
-            </div>
-        </footer>
+        {% include "partials/roc_footer.html" %}
     </div>
 
     <script>
@@ -2127,7 +2090,7 @@
                 container.innerHTML = devs.map((dev) => `
                     <div class="developer-card">
                         <div class="developer-row">
-                            <img src="${escapeAttribute(dev.user.avatar)}" alt="${escapeAttribute(dev.user.name)}" onerror="this.src='https://github.com/vocpass.png'">
+                            <img src="${escapeAttribute(dev.user.avatar)}" alt="${escapeAttribute(dev.user.name)}" onerror="this.src='https://cdn.vocpass.com/iconr.png'">
                             <div class="developer-meta">
                                 <b>${escapeHtml(dev.user.name)}</b>
                                 <span class="role-tag">${escapeHtml(dev.role || '協作者')}</span>
@@ -2139,26 +2102,6 @@
                 `).join('');
             } catch (e) {
                 container.innerHTML = '<div class="developer-card">無法載入開發者資料。</div>';
-            }
-        }
-
-        async function loadVersionStatus() {
-            const el = document.getElementById('version-status');
-            if (!el) return;
-
-            try {
-                const res = await fetch('/api/version', { cache: 'no-store' });
-                if (!res.ok) throw new Error('API error');
-                const json = await res.json();
-                const data = json.data || {};
-                const commit = data.short_commit || '未知';
-                const branch = data.branch && data.branch !== 'HEAD' ? `｜分支：${escapeHtml(data.branch)}` : '';
-                let statusText = '是否為最新版本：無法確認';
-                if (data.is_latest === true) statusText = '目前部署版本：已是最新';
-                if (data.is_latest === false) statusText = `目前部署版本：有新版 ${escapeHtml(data.latest_short_commit || '未知')}`;
-                el.innerHTML = `版本：<code>${escapeHtml(commit)}</code>${branch}｜${statusText}`;
-            } catch (e) {
-                el.textContent = '目前提交版本：無法載入';
             }
         }
 
@@ -2181,7 +2124,6 @@
         loadStatus();
         setInterval(loadStatus, 60000);
         loadDevelopers();
-        loadVersionStatus();
     </script>
 </body>
 </html>

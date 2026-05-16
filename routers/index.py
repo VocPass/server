@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Response, Request, status, Header, Depends
-from fastapi.responses import RedirectResponse, FileResponse
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 import aiohttp
 from dotenv import load_dotenv
 import utils.notice as notice
 from utils import metrics as m
+from utils.page_templates import render_page
 
 import os
 import subprocess
@@ -177,12 +177,12 @@ headers = {
 @router.get("/", summary="首頁")
 async def index(request: Request):
     if random.randint(1,67) == 1:
-        return FileResponse("templates/roc.html")
-    return FileResponse("templates/index.html")
+        return render_page(request, "roc.html", "roc", canonical_path="/")
+    return render_page(request, "index.html", "index")
 
 @router.get("/roc", summary="首頁")
 async def roc(request: Request):
-    return FileResponse("templates/roc.html")
+    return render_page(request, "roc.html", "roc")
 
 
 @router.get("/api/version", summary="目前部署版本")
@@ -217,28 +217,28 @@ async def version():
 
 
 @router.get("/privacy-policy", summary="隱私權政策")
-async def privacy_policy():
-    return FileResponse("templates/privacy-policy.html")
+async def privacy_policy(request: Request):
+    return render_page(request, "privacy-policy.html", "privacy-policy")
 
 
 @router.get("/disclaimer", summary="免責聲明")
-async def disclaimer():
-    return FileResponse("templates/disclaimer.html")
+async def disclaimer(request: Request):
+    return render_page(request, "disclaimer.html", "disclaimer")
 
 
 @router.get("/creator-policy", summary="創作者政策")
-async def creator_policy():
-    return FileResponse("templates/creator-policy.html")
+async def creator_policy(request: Request):
+    return render_page(request, "creator-policy.html", "creator-policy")
 
 
 @router.get("/terms-of-use", summary="內容使用條款")
-async def terms_of_use():
-    return FileResponse("templates/terms-of-use.html")
+async def terms_of_use(request: Request):
+    return render_page(request, "terms-of-use.html", "terms-of-use")
 
 
 @router.get("/community-guidelines", summary="社群規範")
-async def community_guidelines():
-    return FileResponse("templates/community-guidelines.html")
+async def community_guidelines(request: Request):
+    return render_page(request, "community-guidelines.html", "community-guidelines")
 
 
 @router.get("/school")
@@ -248,22 +248,22 @@ async def get_all_schools(request: Request):
 
 @router.get("/me", summary="獲取使用者資訊")
 async def get_me(request: Request, response: Response):
-    return FileResponse("templates/me.html")
+    return render_page(request, "me.html", "me")
 
 
 @router.get("/@{username}", summary="公開個人資料頁面")
 async def get_user_profile(request: Request, username: str):
-    return FileResponse("templates/user.html")
+    return render_page(request, "user.html", "user", username=username)
 
 
 @router.get("/apply", summary="申請學校")
-async def apply_school():
-    return FileResponse("templates/apply.html")
+async def apply_school(request: Request):
+    return render_page(request, "apply.html", "apply")
 
 
 @router.get("/apply/admin", summary="申請論壇版主")
-async def apply_forum_admin():
-    return FileResponse("templates/apply_admin.html")
+async def apply_forum_admin(request: Request):
+    return render_page(request, "apply_admin.html", "apply_admin")
 
 @router.get("/selfhost", summary="自架測試端點")
 async def self_host_test(request: Request):
@@ -345,5 +345,5 @@ async def ping(
     return data
 
 @router.get("/font", summary="字體預覽頁面")
-async def font_preview():
-    return FileResponse("templates/font_preview.html", media_type="text/html")
+async def font_preview(request: Request):
+    return render_page(request, "font_preview.html", "font")
