@@ -11,7 +11,7 @@ import os
 import subprocess
 from urllib.parse import quote
 from pathlib import Path
-
+import random
 import utils.pb as pb
 
 router = APIRouter()
@@ -176,10 +176,12 @@ headers = {
 
 @router.get("/", summary="首頁")
 async def index(request: Request):
+    if random.randint(1,67) == 1:
+        return FileResponse("templates/roc.html")
     return FileResponse("templates/index.html")
 
 @router.get("/roc", summary="首頁")
-async def index(request: Request):
+async def roc(request: Request):
     return FileResponse("templates/roc.html")
 
 
