@@ -436,7 +436,7 @@ def parse_exam_scores(html_content):
     info_text = info_div.get_text() if info_div else ""
     
     student_id = re.search(r'學號：(\d+)', info_text)
-    student_name = re.search(r'姓名：([^　\s]+)', info_text)
+    student_name = re.search(r'姓名：(.+?)(?:班級：|$)', info_text)
     class_name = re.search(r'班級：([^　\s]+)', info_text)
     
     exam_info_span = soup.find('span', class_='bluetext')
@@ -485,20 +485,22 @@ def parse_exam_scores(html_content):
         cells = summary_table.find_all('td')
         for i, cell in enumerate(cells):
             text = cell.get_text().strip()
-            if text == "總分：" and i + 1 < len(cells):
+            if i + 1 >= len(cells):
+                continue
+            if text.startswith("總分"):
                 total_score = cells[i + 1].get_text().strip()
-            elif text == "平均：" and i + 1 < len(cells):
+            elif text.startswith("平均"):
                 avg_span = cells[i + 1].find('span')
                 average_score = avg_span.get_text().strip() if avg_span else cells[i + 1].get_text().strip()
-            elif text == "排名：" and i + 1 < len(cells):
-                class_rank = cells[i + 1].get_text().strip()
-            elif text == "科別排名：" and i + 1 < len(cells):
+            elif text.startswith("科別排名") or text.startswith("科排名"):
                 department_rank = cells[i + 1].get_text().strip()
+            elif text.startswith("排名"):
+                class_rank = cells[i + 1].get_text().strip()
     
     result = {
         "student_info": {
             "student_id": student_id.group(1) if student_id else "",
-            "name": student_name.group(1) if student_name else "",
+            "name": student_name.group(1).strip() if student_name else "",
             "class": class_name.group(1) if class_name else ""
         },
         "exam_info": exam_info,
