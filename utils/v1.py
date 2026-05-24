@@ -504,11 +504,16 @@ def parse_exam_scores(html_content):
         "exam_info": exam_info,
         "subjects": subjects,
         "summary": {
-            "total_score": total_score,
-            "average_score": average_score,
+            # 愛AI
+            "totalScore": total_score,
+            "averageScore": average_score,
+
+            "total_scores": total_score,
+            "average_scores": average_score,
             "class_rank": class_rank,
             "department_rank": department_rank
         }
     }
+    print(json.dumps(result, ensure_ascii=False, indent=2))
     
     return result

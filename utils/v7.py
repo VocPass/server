@@ -473,6 +473,9 @@ def parse_exam_results(exam):
         "exam_info": exam_info,
         "subjects": subjects,
         "summary": {
+            "totalScore": str(total_score),
+            "averageScore": str(average_score),
+            
             "total_score": str(total_score),
             "average_score": str(average_score),
             "class_rank": "",
