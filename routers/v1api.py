@@ -297,7 +297,7 @@ async def get_exam_results(response: Response, request: Request, school_name: st
     """
     school= request.app.state.schools.get(school_name)
     data = request.app.state.response
-    exam = base64.b64decode(exam).decode("utf-8")
+    exam = base64.b64decode(exam).decode("utf-8").replace("../", "")
     m.SCHOOL_REQUESTS_TOTAL.labels(school_name=school_name, api_version="v1", data_type="exam_results").inc()
 
     url = f"{school['api']}{school['route']['exam_results']}".replace("{file_name}",exam)

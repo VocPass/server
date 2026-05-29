@@ -16,7 +16,7 @@ class Debug:
     def send_error(self, error_message, school, page, status, response_body=None, traceback=None):
         if self.client is None:
             return
-        if os.environ.get("ENV") != "production":
+        if os.environ.get("APP_ENV") != "production":
             return
 
         payload = {

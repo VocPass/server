@@ -169,7 +169,7 @@ async def upload_fcm_token(request: Request, item: FCMToken):
     data["type"] = "android"
     try:
         old_token = db.collection("notify_android").get_first_list_item(
-            f'device_token="{item.device_token}"'
+            f'device_token="{sanitize_str(item.device_token)}"'
         )
         db.collection("notify_android").update(old_token.id, data)
 
