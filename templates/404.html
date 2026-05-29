@@ -67,16 +67,107 @@
             box-shadow: 0 12px 30px -4px rgba(0,0,0,0.08);
             border-color: rgba(0,0,0,0.08);
         }
+
+        .easter-egg-trigger {
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+        }
+        .easter-egg-trigger:focus-visible {
+            outline: 3px solid rgba(59, 130, 246, 0.35);
+            outline-offset: 8px;
+            border-radius: 28px;
+        }
+        .game-modal {
+            background: rgba(15, 23, 42, 0.46);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .game-shell {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            box-shadow: 0 28px 80px -24px rgba(15, 23, 42, 0.55);
+        }
+        #snek-canvas {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #f8fafc;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            touch-action: none;
+        }
+        .game-pad button {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: #ffffff;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            color: #1f2937;
+            box-shadow: 0 8px 20px -12px rgba(15, 23, 42, 0.45);
+            transition: transform 0.16s ease, background 0.16s ease;
+        }
+        .game-pad button:active {
+            transform: translateY(1px) scale(0.98);
+            background: #eff6ff;
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
     {% include "partials/nav.html" %}
 
+    <div id="snek-modal" class="game-modal fixed inset-0 z-[100] hidden items-center justify-center px-4 py-8" role="dialog" aria-modal="true" aria-labelledby="snek-title">
+        <div class="game-shell relative w-full max-w-md rounded-[2rem] p-5 md:p-6">
+            <button id="snek-close" type="button" class="absolute right-4 top-4 w-10 h-10 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors" aria-label="關閉小遊戲">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="pr-12">
+                <p class="text-xs font-bold uppercase tracking-[0.22em] text-blue-600 mb-2">Secret level</p>
+                <h2 id="snek-title" class="text-2xl font-black tracking-tight text-gray-950">貪吃蛇</h2>
+                <p class="mt-1 text-sm text-gray-500">貪吃蛇小遊戲。方向鍵 / WASD 可控制。</p>
+            </div>
+
+            <div class="mt-5 flex items-center justify-between">
+                <div class="text-sm font-semibold text-gray-500">分數 <span id="snek-score" class="text-gray-950">0</span></div>
+                <div class="text-sm font-semibold text-gray-500">最高 <span id="snek-best" class="text-gray-950">0</span></div>
+            </div>
+
+            <div class="relative mt-3">
+                <canvas id="snek-canvas" class="block rounded-3xl" width="360" height="360" aria-label="404 小遊戲畫布"></canvas>
+                <div id="snek-message" class="absolute inset-0 flex items-center justify-center rounded-3xl bg-white/72 backdrop-blur-sm text-center px-8">
+                    <div>
+                        <p class="text-2xl font-black tracking-tight text-gray-950">按開始遊玩</p>
+                        <p class="mt-2 text-sm font-medium text-gray-500">吃到食物加分，別撞到牆或自己。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 flex items-center justify-between gap-3">
+                <button id="snek-start" type="button" class="flex-1 bg-blue-600 text-white px-5 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors">
+                    開始
+                </button>
+                <button id="snek-reset" type="button" class="w-12 h-12 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" aria-label="重新開始">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+
+            <div class="game-pad mt-4 grid grid-cols-3 gap-2 place-items-center sm:hidden" aria-label="手機方向控制">
+                <span></span>
+                <button type="button" data-dir="up" aria-label="往上"><i class="fa-solid fa-chevron-up"></i></button>
+                <span></span>
+                <button type="button" data-dir="left" aria-label="往左"><i class="fa-solid fa-chevron-left"></i></button>
+                <button type="button" data-dir="down" aria-label="往下"><i class="fa-solid fa-chevron-down"></i></button>
+                <button type="button" data-dir="right" aria-label="往右"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
     <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 px-5 bg-hero-glow">
         <div class="max-w-4xl mx-auto text-center" data-aos="zoom-y-out" data-aos-duration="1000">
 
             <h1 class="font-black tracking-tighter mb-5 leading-[1.1]" style="font-size:clamp(64px, 12vw, 144px);">
-                <span class="text-gradient-brand">404</span>
+                <button id="snek-open" type="button" class="easter-egg-trigger" aria-label="開啟 404 彩蛋小遊戲">
+                    <span class="text-gradient-brand">404</span>
+                </button>
             </h1>
 
             <p class="mt-4 max-w-xl mx-auto text-base md:text-xl text-gray-500 font-medium leading-relaxed">
@@ -180,6 +271,319 @@
                 nav.style.background = 'rgba(255, 255, 255, 0.65)';
             }
         });
+
+        (() => {
+            const modal = document.getElementById('snek-modal');
+            const openButton = document.getElementById('snek-open');
+            const closeButton = document.getElementById('snek-close');
+            const startButton = document.getElementById('snek-start');
+            const resetButton = document.getElementById('snek-reset');
+            const message = document.getElementById('snek-message');
+            const scoreEl = document.getElementById('snek-score');
+            const bestEl = document.getElementById('snek-best');
+            const canvas = document.getElementById('snek-canvas');
+            const ctx = canvas.getContext('2d');
+
+            const gridSize = 18;
+            const tickSpeed = 170;
+            const startSnake = [{ x: 8, y: 9 }, { x: 7, y: 9 }, { x: 6, y: 9 }];
+            const directions = {
+                up: { x: 0, y: -1 },
+                down: { x: 0, y: 1 },
+                left: { x: -1, y: 0 },
+                right: { x: 1, y: 0 },
+            };
+            const keyMap = {
+                ArrowUp: 'up',
+                KeyW: 'up',
+                ArrowDown: 'down',
+                KeyS: 'down',
+                ArrowLeft: 'left',
+                KeyA: 'left',
+                ArrowRight: 'right',
+                KeyD: 'right',
+            };
+            const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+            function getBestScore() {
+                try {
+                    return Number(localStorage.getItem('vocpass-snek-best') || 0);
+                } catch {
+                    return 0;
+                }
+            }
+
+            function saveBestScore(value) {
+                try {
+                    localStorage.setItem('vocpass-snek-best', value);
+                } catch {
+                    return;
+                }
+            }
+
+            let snake = [];
+            let food = { x: 12, y: 9 };
+            let direction = directions.right;
+            let nextDirection = directions.right;
+            let score = 0;
+            let best = getBestScore();
+            let loopId = null;
+            let running = false;
+            let ended = false;
+            let konamiIndex = 0;
+            let touchStart = null;
+
+            bestEl.textContent = best;
+
+            function setIntroMessage() {
+                message.innerHTML = `<div><p class="text-2xl font-black tracking-tight text-gray-950">按開始遊玩</p><p class="mt-2 text-sm font-medium text-gray-500">吃到食物加分，別撞到牆或自己。</p></div>`;
+            }
+
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+                const size = Math.max(1, Math.round(rect.width));
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.round(size * dpr);
+                canvas.height = Math.round(size * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                draw();
+            }
+
+            function getBoardSize() {
+                return canvas.width / (window.devicePixelRatio || 1);
+            }
+
+            function getTileSize() {
+                return getBoardSize() / gridSize;
+            }
+
+            function resetGame() {
+                snake = startSnake.map((part) => ({ ...part }));
+                direction = directions.right;
+                nextDirection = directions.right;
+                score = 0;
+                ended = false;
+                scoreEl.textContent = score;
+                placeFood();
+                draw();
+            }
+
+            function openGame() {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+                resetGame();
+                resizeCanvas();
+                setIntroMessage();
+                message.classList.remove('hidden');
+                startButton.textContent = '開始';
+                startButton.focus();
+            }
+
+            function closeGame() {
+                stopGame();
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+                openButton.focus();
+            }
+
+            function startGame() {
+                if (ended) {
+                    restartGame();
+                    return;
+                }
+                if (running) return;
+                running = true;
+                message.classList.add('hidden');
+                startButton.textContent = '...';
+                loopId = window.setInterval(tick, tickSpeed);
+            }
+
+            function stopGame() {
+                running = false;
+                window.clearInterval(loopId);
+                loopId = null;
+            }
+
+            function restartGame() {
+                stopGame();
+                resetGame();
+                message.classList.add('hidden');
+                startButton.textContent = '...';
+                running = true;
+                loopId = window.setInterval(tick, tickSpeed);
+            }
+
+            function placeFood() {
+                do {
+                    food = {
+                        x: Math.floor(Math.random() * gridSize),
+                        y: Math.floor(Math.random() * gridSize),
+                    };
+                } while (snake.some((part) => part.x === food.x && part.y === food.y));
+            }
+
+            function setDirection(next) {
+                const candidate = directions[next];
+                if (!candidate) return;
+                if (ended) {
+                    restartGame();
+                    return;
+                }
+                if (candidate.x + direction.x === 0 && candidate.y + direction.y === 0) return;
+                nextDirection = candidate;
+                if (!running && !modal.classList.contains('hidden')) startGame();
+            }
+
+            function tick() {
+                direction = nextDirection;
+                const head = snake[0];
+                const nextHead = { x: head.x + direction.x, y: head.y + direction.y };
+                const hitWall = nextHead.x < 0 || nextHead.x >= gridSize || nextHead.y < 0 || nextHead.y >= gridSize;
+                const hitSelf = snake.some((part) => part.x === nextHead.x && part.y === nextHead.y);
+
+                if (hitWall || hitSelf) {
+                    gameOver();
+                    return;
+                }
+
+                snake.unshift(nextHead);
+                if (nextHead.x === food.x && nextHead.y === food.y) {
+                    score += 10;
+                    scoreEl.textContent = score;
+                    if (score > best) {
+                        best = score;
+                        bestEl.textContent = best;
+                        saveBestScore(best);
+                    }
+                    placeFood();
+                } else {
+                    snake.pop();
+                }
+                draw();
+            }
+
+            function gameOver() {
+                stopGame();
+                ended = true;
+                startButton.textContent = '再玩一次';
+                message.innerHTML = `<div><p class="text-2xl font-black tracking-tight text-gray-950">遊戲結束</p><p class="mt-2 text-sm font-medium text-gray-500">本次分數 ${score}，按再玩一次重新開始。</p></div>`;
+                message.classList.remove('hidden');
+            }
+
+            function drawGrid() {
+                const boardSize = getBoardSize();
+                const tile = getTileSize();
+
+                ctx.fillStyle = '#f8fafc';
+                ctx.fillRect(0, 0, boardSize, boardSize);
+                ctx.strokeStyle = 'rgba(148, 163, 184, 0.16)';
+                ctx.lineWidth = 1;
+
+                for (let i = 1; i < gridSize; i += 1) {
+                    const line = i * tile;
+                    ctx.beginPath();
+                    ctx.moveTo(line, 0);
+                    ctx.lineTo(line, boardSize);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(0, line);
+                    ctx.lineTo(boardSize, line);
+                    ctx.stroke();
+                }
+            }
+
+            function drawRoundedCell(x, y, color, radius = 7) {
+                const tile = getTileSize();
+                const gap = Math.max(2, tile * 0.15);
+                const px = x * tile + gap;
+                const py = y * tile + gap;
+                const size = tile - gap * 2;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.roundRect(px, py, size, size, Math.min(radius, size / 2));
+                ctx.fill();
+            }
+
+            function draw() {
+                const boardSize = getBoardSize();
+                const tile = getTileSize();
+
+                ctx.clearRect(0, 0, boardSize, boardSize);
+                drawGrid();
+                snake.forEach((part, index) => {
+                    drawRoundedCell(part.x, part.y, index === 0 ? '#2563eb' : '#60a5fa', index === 0 ? 8 : 7);
+                });
+                drawRoundedCell(food.x, food.y, '#14b8a6', 9);
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(food.x * tile + tile / 2, food.y * tile + tile / 2, Math.max(2, tile * 0.15), 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            openButton.addEventListener('click', openGame);
+            closeButton.addEventListener('click', closeGame);
+            resetButton.addEventListener('click', restartGame);
+            startButton.addEventListener('click', () => {
+                if (startButton.textContent === '再玩一次') {
+                    restartGame();
+                    return;
+                }
+                startGame();
+            });
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) closeGame();
+            });
+
+            document.querySelectorAll('[data-dir]').forEach((button) => {
+                button.addEventListener('click', () => setDirection(button.dataset.dir));
+            });
+
+            window.addEventListener('resize', () => {
+                if (!modal.classList.contains('hidden')) resizeCanvas();
+            });
+
+            canvas.addEventListener('touchstart', (event) => {
+                const touch = event.changedTouches[0];
+                touchStart = { x: touch.clientX, y: touch.clientY };
+            }, { passive: true });
+
+            canvas.addEventListener('touchend', (event) => {
+                if (!touchStart) return;
+                const touch = event.changedTouches[0];
+                const dx = touch.clientX - touchStart.x;
+                const dy = touch.clientY - touchStart.y;
+                touchStart = null;
+                if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) return;
+                setDirection(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
+            }, { passive: true });
+
+            document.addEventListener('keydown', (event) => {
+                if (!modal.classList.contains('hidden')) {
+                    if (event.key === 'Escape') closeGame();
+                    const dir = keyMap[event.code] || keyMap[event.key];
+                    if (dir) {
+                        event.preventDefault();
+                        setDirection(dir);
+                    }
+                    return;
+                }
+
+                if (event.code === konami[konamiIndex]) {
+                    konamiIndex += 1;
+                    if (konamiIndex === konami.length) {
+                        konamiIndex = 0;
+                        openGame();
+                    }
+                } else {
+                    konamiIndex = event.code === konami[0] ? 1 : 0;
+                }
+            });
+
+            resetGame();
+        })();
     </script>
 </body>
 </html>
