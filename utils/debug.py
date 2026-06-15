@@ -21,6 +21,7 @@ class Debug:
 
         payload = {
             "error_message": str(error_message) if error_message is not None else "",
+            "server_name": os.environ.get("SERVER_NAME") or os.environ.get("INSTANCE_ID", ""),
             "school": school,
             "page": page,
             "status": status,
