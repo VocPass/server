@@ -305,12 +305,13 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     m.HTTP_ERRORS_TOTAL.labels(status_code=exc.status_code, path=request.url.path).inc()
     school_name = request.query_params.get("school_name", "system")
     pb_client = getattr(request.app.state, "pb_client", None)
-    Debug(pb_client).send_error(
-        error_message=exc.detail,
-        school=school_name,
-        page=request.url.path,
-        status=exc.status_code,
-    )
+    if not (exc.status_code == 404 and exc.detail == "Not Found"):
+        Debug(pb_client).send_error(
+            error_message=exc.detail,
+            school=school_name,
+            page=request.url.path,
+            status=exc.status_code,
+        )
     if exc.status_code == 404 and "mozilla" in request.headers.get("User-Agent", "").lower():
         return render_page(request, "404.html", "404", status_code=404)
     return JSONResponse(
