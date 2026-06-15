@@ -3966,6 +3966,53 @@
             "curriculum": "/ClassTableV2/ClassTable",
             "info": "/ICampus/StudentInfo"
         }
+    },,
+    "永年高中": {
+        "vision": "v3",
+        "app": 1.0,
+        "beta": false,
+        "school_code": "091307",
+        "api": "https://senior.ynhs.ylc.edu.tw/YNHS",
+        "url": {
+            "login": "/Auth/Auth/CloudLogin",
+            "logined": "/ICampus/Home/Index2",
+            "root": "/"
+        },
+        "login": {
+            "username": {
+                "name": "LoginId"
+            },
+            "password": {
+                "name": "PassString"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {
+                "class": "loginBtnAdjust"
+            },
+            "successKeywords": [
+                "智慧校園平台首頁"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/ICampus/TutorShSheMoralMeritPenalty/GetMeritPenaltyDetailsList",
+            "attendance": "/ICampus/TutorShSheAbsentStatistics/GetTutorShSheAbsentDetails",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/TutorShGrade/GetScoreForStudentGradeLevel",
+            "curriculum": "/ClassTableV2/ClassTable/GetTimeTable",
+            "info": "/ICampus/CommonData/GetStudentBasicInfo",
+            "daily": "/ICampus/TutorShSheMoralMeritPenalty/GetDailyList"
+        },
+        "get": {
+            "merit_demerit": "/ICampus/StudentInfo",
+            "attendance": "/ICampus/StudentInfo",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "/ICampus/StudentInfo/Index",
+            "curriculum": "/ClassTableV2/ClassTable",
+            "info": "/ICampus/StudentInfo"
+        }
     },
     "台南高商": {
         "vision": "v3",
