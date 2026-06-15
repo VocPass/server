@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -595,7 +595,7 @@
     <script>
     (function () {
         const SLUG = 'vocpass';
-        const API_BASE = 'https://api.codetabs.com/v1/proxy?quest=https://status.vocpass.com';
+        const API_BASE = '/uptime';
         const container = document.getElementById('status-monitors');
 
         function statusColor(up) {
@@ -628,8 +628,8 @@
         async function load() {
             try {
                 const [pageRes, heartbeatRes] = await Promise.all([
-                    fetch(`${API_BASE}/api/status-page/${SLUG}`),
-                    fetch(`${API_BASE}/api/status-page/heartbeat/${SLUG}`)
+                    fetch(`${API_BASE}/${SLUG}`),
+                    fetch(`${API_BASE}/${SLUG}?heartbeat=1`)
                 ]);
 
                 if (!pageRes.ok || !heartbeatRes.ok) throw new Error('API error');
@@ -682,12 +682,12 @@
                 function renderNodeCard(nodes) {
                     if (nodes.length === 0) return '';
                     const TOTAL = window.innerWidth < 768 ? 30 : 100;
-                    // worst priority: 0(down) > 2(pending) > 1(up)
-                    function worstStatus(a, b) {
-                        if (a === 0 || b === 0) return 0;
-                        if (a === 2 || b === 2) return 2;
+                    // Only red (0) if ALL nodes are down; green (1) if any is up
+                    function mergedStatus(a, b) {
                         if (a === 1 || b === 1) return 1;
-                        return null;
+                        if (a === 2 || b === 2) return 2;
+                        if (a === 0 && b === 0) return 0;
+                        return a ?? b;
                     }
                     // Build a time-keyed map: roundedMinute -> worst status across all nodes
                     const timeMap = new Map();
@@ -695,7 +695,7 @@
                         (hbData.heartbeatList?.[m.id] || []).forEach(h => {
                             // Round to minute for alignment
                             const key = Math.floor(new Date(h.time).getTime() / 60000);
-                            timeMap.set(key, worstStatus(timeMap.get(key) ?? h.status, h.status));
+                            timeMap.set(key, mergedStatus(timeMap.get(key) ?? h.status, h.status));
                         });
                     });
                     // Sort keys, take last TOTAL

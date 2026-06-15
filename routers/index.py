@@ -135,7 +135,9 @@ async def fetch_github_json(url: str) -> dict | None:
         return None
 
 
-async def fetch_github_latest_commit(branch: str | None) -> tuple[str | None, str | None]:
+async def fetch_github_latest_commit(
+    branch: str | None,
+) -> tuple[str | None, str | None]:
     repo_url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}"
 
     if branch and branch != "HEAD":
@@ -176,9 +178,10 @@ headers = {
 
 @router.get("/", summary="首頁")
 async def index(request: Request):
-    if random.randint(1,67) == 1:
+    if random.randint(1, 67) == 1:
         return render_page(request, "roc.html", "roc", canonical_path="/")
     return render_page(request, "index.html", "index")
+
 
 @router.get("/roc", summary="首頁")
 async def roc(request: Request):
@@ -265,6 +268,7 @@ async def apply_school(request: Request):
 async def apply_forum_admin(request: Request):
     return render_page(request, "apply_admin.html", "apply_admin")
 
+
 @router.get("/selfhost", summary="自架測試端點")
 async def self_host_test(request: Request):
     data = request.app.state.response
@@ -274,6 +278,18 @@ async def self_host_test(request: Request):
         "app_env": os.environ.get("APP_ENV"),
     }
     return data
+
+
+@router.get("/uptime/{n}", summary="伺服器運行時間")
+async def uptime(request: Request, n, heartbeat:int=0):
+    if heartbeat:
+        n = f"heartbeat/{n}"
+    async with aiohttp.ClientSession() as session:
+        async with session.get(f"https://status.vocpass.com/api/status-page/{n}") as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                return data
+
 
 @router.get("/ping", summary="檢查登入狀態")
 async def ping(
@@ -290,7 +306,7 @@ async def ping(
     school = request.app.state.schools.get(school_name)
     data = request.app.state.response
     db = request.app.state.pb_client
-    
+
     if not school:
         response.status_code = status.HTTP_400_BAD_REQUEST
         data["code"] = 400
@@ -299,7 +315,6 @@ async def ping(
 
         return data
     user = pb.get_user(request.headers.get("Authorization"))
-    
 
     async with aiohttp.ClientSession(
         cookies=request.cookies, headers=headers
@@ -325,7 +340,7 @@ async def ping(
                 if i in html:
                     if user:
                         db.collection("users").update(user.id, {"school": school_name})
-                        
+
                     m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(
                         school_name=school_name, result="logged_in"
                     ).inc()
@@ -343,6 +358,7 @@ async def ping(
     data["message"] = "Success."
     data["data"] = {"logged_in": False}
     return data
+
 
 @router.get("/font", summary="字體預覽頁面")
 async def font_preview(request: Request):
