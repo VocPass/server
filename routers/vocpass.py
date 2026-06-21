@@ -150,3 +150,16 @@ async def index(request: Request, v: int):
     data["data"] = supported_schools
 
     return data
+
+@router.get("/{v}/ua", summary="獲取user agent")
+async def get_headers(request: Request, v: str, response: Response):
+    """
+    獲取 user agent。
+     - **返回值**: 包含 user agent 的文字。
+    """
+    data = request.app.state.response
+    data["code"] = 200
+    data["message"] = "Success."
+    data["data"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.3 Mobile/15E148 Safari/604.1"
+
+    return data
