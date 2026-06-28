@@ -81,7 +81,7 @@ async def goto_page(cookies, root, endpoint: list, years: list,only_two=False):
     async with aiohttp.ClientSession(
         cookies=cookies, headers=headers, cookie_jar=jar
     ) as session:
-        async with session.get(f"{root}Main.aspx") as resp:
+        async with session.get(f"{root}Main.aspx", ssl=False) as resp:
             text = await resp.text()
         for menu in endpoint:
             href = v7.parse_href(text)[menu]
@@ -127,7 +127,7 @@ async def goto_scores(
     async with aiohttp.ClientSession(
         cookies=cookies, headers=headers, cookie_jar=jar
     ) as session:
-        async with session.get(f"{root}Main.aspx") as resp:
+        async with session.get(f"{root}Main.aspx", ssl=False) as resp:
             text = await resp.text()
         for menu in endpoint:
             href = v7.parse_href(text)[menu]
