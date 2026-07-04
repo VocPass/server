@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "partials/seo.html" %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.25.0/pocketbase.umd.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --apple-text: #1d1d1f;
+            --bg-gray: #fbfbfd;
+        }
+        body { background-color: var(--bg-gray); color: var(--apple-text); }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .bento-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.04);
+        }
+
+        .agree-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #f5f5f7;
+            border: 1.5px solid transparent;
+            border-radius: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .agree-box:hover { background: #eef2f7; }
+        .agree-box.error { border-color: #ef4444; }
+        .agree-box input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 1px;
+            accent-color: #2563eb;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+    {% include "partials/nav.html" %}
+
+<div class="min-h-screen pt-24 pb-20 px-5">
+    <div class="max-w-xl mx-auto">
+
+        <div id="auth-wall" class="hidden">
+            <div id="login-card" class="bento-card p-8">
+                <div class="text-center mb-7">
+                    <img src="https://cdn.vocpass.com/iconr.png" alt="VocPass" class="w-14 h-14 rounded-2xl object-cover mx-auto mb-4 shadow-sm">
+                    <h2 class="text-2xl font-bold tracking-tight mb-1">登入 VocPass</h2>
+                    <p class="text-sm text-gray-500">登入後才能加入論壇 Beta</p>
+                </div>
+                <div class="space-y-3">
+                    <button onclick="login('google')" type="button"
+                        class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 transition-all">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
+                        使用 Google 登入
+                    </button>
+                    <button onclick="login('discord')" type="button"
+                        class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] text-white transition-all hover:opacity-90"
+                        style="background:#5865F2;">
+                        <i class="fa-brands fa-discord text-lg"></i>
+                        使用 Discord 登入
+                    </button>
+                </div>
+                <p class="text-xs text-center mt-6 leading-relaxed text-gray-500">
+                    登入即表示您同意
+                    <a href="/privacy-policy" class="text-blue-600 hover:underline">隱私權政策</a>
+                    與 <a href="/disclaimer" class="text-blue-600 hover:underline">免責聲明</a>
+                </p>
+            </div>
+
+            <div id="confirm-card" class="hidden bento-card p-8 text-center">
+                <div id="confirm-content"></div>
+            </div>
+        </div>
+
+        <div id="form-body" class="hidden">
+            <div class="bento-card p-7 mb-4">
+                <div class="flex items-center gap-3 mb-3">
+                    <img src="https://cdn.vocpass.com/iconr.png" alt="VocPass" class="w-9 h-9 rounded-xl shadow-sm">
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight leading-tight">加入論壇 Beta</h1>
+                        <p class="text-xs text-gray-400">Forum Beta Program</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 leading-relaxed">論壇目前處於 Beta 測試階段，加入後即可搶先體驗校園論壇功能。加入前請先閱讀並同意以下事項。</p>
+            </div>
+
+            <div class="bento-card p-7 mb-4 border border-amber-100 bg-amber-50/40">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-amber-100 rounded-xl flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-flask text-amber-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-semibold text-base mb-2">Beta 測試提示</h2>
+                        <ul class="text-sm text-gray-600 leading-relaxed space-y-1 list-disc pl-4">
+                            <li>論壇功能仍在開發中，你可能會看到尚未完成或會隨時調整的內容。</li>
+                            <li>Beta 期間的貼文、留言與資料可能在正式上線前被重置或移除。</li>
+                            <li>若遇到問題或有建議，歡迎隨時回報給 VocPass 團隊。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card p-7 mb-4">
+                <form id="forum-beta-form" class="space-y-5" onsubmit="submitForm(event)">
+                    <div>
+                        <label class="text-sm font-semibold text-gray-800 mb-1 block">
+                            加入帳號 <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-xs text-gray-400 mb-2">系統會自動使用目前登入的 VocPass 帳號。</p>
+                        <div class="field-input bg-gray-100 text-gray-500 rounded-[10px] px-3.5 py-2.5 text-[15px]" id="user-display">讀取中...</div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="agree-box" id="agree-guidelines-box">
+                            <input type="checkbox" id="agree-guidelines">
+                            <span class="text-sm text-gray-700 leading-relaxed">
+                                我已閱讀並同意遵守
+                                <a href="/community-guidelines" target="_blank" class="text-blue-600 hover:underline font-medium">VocPass 社群守則</a>，
+                                不發表違規、攻擊性或不當內容。
+                            </span>
+                        </label>
+
+                        <label class="agree-box" id="agree-beta-box">
+                            <input type="checkbox" id="agree-beta">
+                            <span class="text-sm text-gray-700 leading-relaxed">
+                                我了解論壇目前為 Beta 測試版本，可能會看到未完成的功能，且資料可能在正式上線前被調整或重置。
+                            </span>
+                        </label>
+
+                        <p class="text-xs text-red-500 mt-1 hidden" id="err-agree">請先勾選並同意上述兩項才能加入</p>
+                    </div>
+
+                    <button id="submit-btn" type="submit"
+                        class="w-full bg-black text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i> 加入論壇 Beta
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="already-joined" class="hidden">
+            <div class="bento-card p-8 text-center">
+                <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <i class="fa-solid fa-circle-check text-2xl text-blue-500"></i>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight mb-2">你已經加入論壇 Beta</h2>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">你已是 Beta 測試成員，感謝你的參與！</p>
+                <a href="/" class="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
+                    <i class="fa-solid fa-house text-xs"></i> 回到首頁
+                </a>
+            </div>
+        </div>
+
+        <div id="success-screen" class="hidden">
+            <div class="bento-card p-8 text-center">
+                <div class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <i class="fa-solid fa-check text-2xl text-green-500"></i>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight mb-2">已加入論壇 Beta！</h2>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">感謝你的參與，快去體驗校園論壇吧。</p>
+                <a href="/" class="inline-flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
+                    <i class="fa-solid fa-house text-xs"></i> 回到首頁
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+    {% include "partials/footer.html" %}
+
+<script>
+    const pb = new PocketBase('https://api.vocpass.com');
+
+    async function checkAuth() {
+        if (pb.authStore.isValid) {
+            try { await pb.collection('users').authRefresh(); } catch (e) { pb.authStore.clear(); }
+        }
+        if (pb.authStore.isValid) {
+            showForm();
+        } else {
+            document.getElementById('auth-wall').classList.remove('hidden');
+        }
+    }
+
+    async function showForm() {
+        document.getElementById('auth-wall').classList.add('hidden');
+        const user = pb.authStore.model;
+        document.getElementById('user-display').textContent = user?.name || user?.username || user?.email || user?.id || '目前登入帳號';
+
+        try {
+            const result = await pb.collection('forum_beta').getFirstListItem(
+                `user = "${user.id}"`
+            );
+            if (result) { showAlreadyJoined(); return; }
+        } catch (e) {
+            // 404 = 尚未加入，正常顯示表單
+        }
+        document.getElementById('form-body').classList.remove('hidden');
+    }
+
+    function showAlreadyJoined() {
+        document.getElementById('form-body').classList.add('hidden');
+        document.getElementById('already-joined').classList.remove('hidden');
+    }
+
+    async function login(provider) {
+        try {
+            await pb.collection('users').authWithOAuth2({ provider });
+            if (pb.authStore.isValid) showUserInfo(pb.authStore.model);
+        } catch (e) {
+            alert('登入失敗，請重試。');
+        }
+    }
+
+    function showUserInfo(user) {
+        document.getElementById('login-card').classList.add('hidden');
+        const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://cdn.vocpass.com/iconr.png';
+        document.getElementById('confirm-content').innerHTML = `
+            <img src="${avatarUrl}" alt="頭像" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover" onerror="this.src='https://cdn.vocpass.com/iconr.png'">
+            <p class="text-xl font-bold tracking-tight mb-1">${user.name || user.username || '使用者'}</p>
+            <p class="text-sm text-gray-500 mb-6">這是你嗎？</p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="confirmUser()" class="flex-1 px-5 py-3 rounded-full font-semibold text-sm bg-blue-600 text-white hover:bg-blue-700 transition-colors">是</button>
+                <button onclick="cancelUser()" class="flex-1 px-5 py-3 rounded-full font-semibold text-sm bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors">否</button>
+            </div>
+        `;
+        document.getElementById('confirm-card').classList.remove('hidden');
+    }
+
+    function confirmUser() { showForm(); }
+
+    function cancelUser() {
+        pb.authStore.clear();
+        document.getElementById('confirm-card').classList.add('hidden');
+        document.getElementById('login-card').classList.remove('hidden');
+    }
+
+    function validateForm() {
+        const guidelines = document.getElementById('agree-guidelines').checked;
+        const beta = document.getElementById('agree-beta').checked;
+        const ok = guidelines && beta;
+
+        document.getElementById('agree-guidelines-box').classList.toggle('error', !guidelines);
+        document.getElementById('agree-beta-box').classList.toggle('error', !beta);
+        document.getElementById('err-agree').classList.toggle('hidden', ok);
+
+        return ok;
+    }
+
+    document.getElementById('agree-guidelines').addEventListener('change', validateForm);
+    document.getElementById('agree-beta').addEventListener('change', validateForm);
+
+    async function submitForm(event) {
+        event.preventDefault();
+        if (!validateForm()) return;
+
+        const submitBtn = document.getElementById('submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> 加入中...';
+
+        try {
+            const body = {
+                user: pb.authStore.model?.id || '',
+            };
+
+            const record = await pb.collection('forum_beta').create(body);
+            console.log('加入成功:', record);
+
+            document.getElementById('form-body').classList.add('hidden');
+            document.getElementById('success-screen').classList.remove('hidden');
+        } catch (e) {
+            console.error('加入失敗:', e);
+            alert('加入失敗：' + (e?.message || '請稍後重試'));
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket text-xs"></i> 加入論壇 Beta';
+        }
+    }
+
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            nav.classList.add('shadow-sm');
+            nav.style.background = 'rgba(255, 255, 255, 0.85)';
+        } else {
+            nav.classList.remove('shadow-sm');
+            nav.style.background = 'rgba(255, 255, 255, 0.65)';
+        }
+    });
+
+    checkAuth();
+</script>
+</body>
+</html>

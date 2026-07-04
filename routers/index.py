@@ -363,3 +363,8 @@ async def ping(
 @router.get("/font", summary="字體預覽頁面")
 async def font_preview(request: Request):
     return render_page(request, "font_preview.html", "font")
+
+
+@router.get("/forum", summary="論壇加入beta")
+async def forum_beta(request: Request):
+    return render_page(request, "forum_beta.html", "forum_beta")

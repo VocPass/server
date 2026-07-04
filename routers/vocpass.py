@@ -163,3 +163,17 @@ async def get_headers(request: Request, v: str, response: Response):
     data["data"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.3 Mobile/15E148 Safari/604.1"
 
     return data
+
+@router.get("/forum_beta/{user}", summary="驗證用戶具有論壇beta資格")
+async def forum_beta(request: Request, user: str, response: Response):
+    """
+    驗證用戶是否具有論壇beta資格。
+     - **返回值**: 包含驗證結果的 JSON 物件。
+    """
+    db = request.app.state.pb_client
+    try:
+        record = db.collection("forum_beta").get_first_list_item(f'user="{user}"')
+        return {"code": 200, "message": "User has forum beta access.", "data": True}
+    except Exception as e:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"code": 404, "message": f"User does not have forum beta access.", "data": False}
