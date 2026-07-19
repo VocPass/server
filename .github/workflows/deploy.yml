@@ -18,7 +18,7 @@ jobs:
             --request POST \
             --header 'Content-Type: application/json' \
             --header 'Accept: */*' \
-            --header "Authorization: $PANEL_KEY" \
+            --header "Authorization: Bearer $PANEL_KEY" \
             --data '{
               "action": "restart"
             }'
