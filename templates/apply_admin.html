@@ -99,35 +99,9 @@
     <div class="max-w-xl mx-auto">
 
         <div id="auth-wall" class="hidden">
-            <div id="login-card" class="bento-card p-8">
-                <div class="text-center mb-7">
-                    <img src="https://cdn.vocpass.com/iconr.png" alt="VocPass" class="w-14 h-14 rounded-2xl object-cover mx-auto mb-4 shadow-sm">
-                    <h2 class="text-2xl font-bold tracking-tight mb-1">登入 VocPass</h2>
-                    <p class="text-sm text-gray-500">登入後才能提交論壇版主申請</p>
-                </div>
-                <div class="space-y-3">
-                    <button onclick="login('google')" type="button"
-                        class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 transition-all">
-                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
-                        使用 Google 登入
-                    </button>
-                    <button onclick="login('discord')" type="button"
-                        class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] text-white transition-all hover:opacity-90"
-                        style="background:#5865F2;">
-                        <i class="fa-brands fa-discord text-lg"></i>
-                        使用 Discord 登入
-                    </button>
-                </div>
-                <p class="text-xs text-center mt-6 leading-relaxed text-gray-500">
-                    登入即表示您同意
-                    <a href="/privacy-policy" class="text-blue-600 hover:underline">隱私權政策</a>
-                    與 <a href="/disclaimer" class="text-blue-600 hover:underline">免責聲明</a>
-                </p>
-            </div>
-
-            <div id="confirm-card" class="hidden bento-card p-8 text-center">
-                <div id="confirm-content"></div>
-            </div>
+            {% with auth_wall_reason = "登入後才能提交論壇版主申請" %}
+                {% include "partials/auth_wall.html" %}
+            {% endwith %}
         </div>
 
         <div id="form-body" class="hidden">
@@ -295,38 +269,6 @@
     function showApplicationRejected() {
         document.getElementById('form-body').classList.add('hidden');
         document.getElementById('application-rejected').classList.remove('hidden');
-    }
-
-    async function login(provider) {
-        try {
-            await pb.collection('users').authWithOAuth2({ provider });
-            if (pb.authStore.isValid) showUserInfo(pb.authStore.model);
-        } catch (e) {
-            alert('登入失敗，請重試。');
-        }
-    }
-
-    function showUserInfo(user) {
-        document.getElementById('login-card').classList.add('hidden');
-        const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://cdn.vocpass.com/iconr.png';
-        document.getElementById('confirm-content').innerHTML = `
-            <img src="${avatarUrl}" alt="頭像" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover" onerror="this.src='https://cdn.vocpass.com/iconr.png'">
-            <p class="text-xl font-bold tracking-tight mb-1">${user.name || user.username || '使用者'}</p>
-            <p class="text-sm text-gray-500 mb-6">這是你嗎？</p>
-            <div class="flex gap-3 justify-center">
-                <button onclick="confirmUser()" class="flex-1 px-5 py-3 rounded-full font-semibold text-sm bg-blue-600 text-white hover:bg-blue-700 transition-colors">是</button>
-                <button onclick="cancelUser()" class="flex-1 px-5 py-3 rounded-full font-semibold text-sm bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors">否</button>
-            </div>
-        `;
-        document.getElementById('confirm-card').classList.remove('hidden');
-    }
-
-    function confirmUser() { showForm(); }
-
-    function cancelUser() {
-        pb.authStore.clear();
-        document.getElementById('confirm-card').classList.add('hidden');
-        document.getElementById('login-card').classList.remove('hidden');
     }
 
     function setError(id, show) {

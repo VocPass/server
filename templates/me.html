@@ -72,7 +72,7 @@
                 </div>
                 <h1 class="font-semibold mb-2 text-[20px]">尚未登入</h1>
                 <p class="mb-6 text-gray-500 text-[15px]">請先登入以查看您的帳號資訊</p>
-                <a href="/auth?web=1"
+                <a href="/auth?redirect=%2Fme"
                     class="block w-full px-5 py-3.5 rounded-full font-semibold text-center text-[15px] bg-blue-600 text-white hover:bg-blue-700 transition-colors">
                     前往登入
                 </a>
@@ -134,7 +134,13 @@
 
         async function checkAuth() {
             if (pb.authStore.isValid) {
-                await pb.collection('users').authRefresh();
+                try {
+                    await pb.collection('users').authRefresh();
+                } catch (e) {
+                    pb.authStore.clear();
+                    document.getElementById('guest-card').classList.remove('hidden');
+                    return;
+                }
                 const user = pb.authStore.model;
                 const avatarUrl = user.avatar ? pb.files.getUrl(user, user.avatar) : 'https://cdn.vocpass.com/iconr.png';
 

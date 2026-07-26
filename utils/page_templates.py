@@ -56,7 +56,7 @@ PAGE_META: dict[str, dict[str, Any]] = {
     },
     "auth": {
         "title": "VocPass | 登入",
-        "description": "使用 Google 或 Discord 登入 VocPass，管理帳號資料並在 App 與網頁服務間安全銜接。",
+        "description": "使用 Google、Apple 或 Discord 登入 VocPass，管理帳號資料並在 App 與網頁服務間安全銜接。",
         "robots": "noindex, follow",
         "path": "/auth",
     },

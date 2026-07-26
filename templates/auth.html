@@ -69,11 +69,23 @@
                     <p class="text-sm text-gray-500">使用第三方帳號快速登入</p>
                 </div>
 
+                <div id="login-error"
+                    class="hidden mb-4 px-4 py-3 rounded-xl bg-red-50 text-red-600 text-sm text-left"></div>
+
                 <div class="space-y-3">
                     <button onclick="login('google')" type="button"
                         class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 transition-all">
                         <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
                         使用 Google 登入
+                    </button>
+
+                    <button onclick="login('apple')" type="button"
+                        class="w-full flex items-center justify-center gap-3 px-5 py-3.5 rounded-2xl font-semibold text-[15px] text-white transition-all hover:opacity-90"
+                        style="background:#000000;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 384 512" fill="#fff">
+                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+                        </svg>
+                        使用 Apple 登入
                     </button>
 
                     <button onclick="login('discord')" type="button"
@@ -105,24 +117,70 @@
     <script>
         const pb = new PocketBase('https://api.vocpass.com');
 
+        function getSafeRedirect() {
+            const raw = new URLSearchParams(location.search).get('redirect');
+            if (!raw) return null;
+            // 必須以單一 "/" 開頭，且第二個字元不是 "/" 或 "\"（協定相對網址）
+            if (!raw.startsWith('/') || raw[1] === '/' || raw[1] === '\\') return null;
+
+            let url;
+            try {
+                url = new URL(raw, location.origin);
+            } catch (e) {
+                return null;
+            }
+            if (url.origin !== location.origin) return null;
+
+            if (url.pathname === location.pathname) return null;
+
+            return url.pathname + url.search + url.hash;
+        }
+
+        const safeRedirect = getSafeRedirect();
+
+        function showError(msg) {
+            const el = document.getElementById('login-error');
+            el.textContent = msg;
+            el.classList.remove('hidden');
+        }
+
         async function login(m) {
-            const authData = await pb.collection('users').authWithOAuth2({ provider: m });
+            document.getElementById('login-error').classList.add('hidden');
+            try {
+                await pb.collection('users').authWithOAuth2({ provider: m });
+            } catch (e) {
+                showError('登入失敗，請重試。');
+                return;
+            }
             if (pb.authStore.isValid) {
                 showUserInfo(pb.authStore.model);
             } else {
-                alert("登入失敗！");
+                showError('登入失敗，請重試。');
             }
+        }
+
+        function escapeHTML(str) {
+            if (str == null) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
 
         function showUserInfo(userData) {
             document.getElementById('login-card').classList.add('hidden');
             const userInfoDiv = document.getElementById('user-info');
-            const avatarUrl = pb.files.getUrl(userData, userData.avatar);
+            const avatarUrl = userData.avatar
+                ? pb.files.getUrl(userData, userData.avatar)
+                : 'https://cdn.vocpass.com/iconr.png';
             document.getElementById('user-info-content').innerHTML = `
-                <img src="${avatarUrl}" alt="頭像"
+                <img src="${escapeHTML(avatarUrl)}" alt="頭像"
                     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover"
-                    style="border:3px solid #fbfbfd;">
-                <p class="text-xl font-bold tracking-tight mb-1">${userData.name || userData.username || '使用者'}</p>
+                    style="border:3px solid #fbfbfd;"
+                    onerror="this.src='https://cdn.vocpass.com/iconr.png'">
+                <p class="text-xl font-bold tracking-tight mb-1">${escapeHTML(userData.name || userData.username || '使用者')}</p>
                 <p class="text-sm mb-6 text-gray-500">這是你嗎？</p>
                 <div class="flex gap-3 justify-center">
                     <button onclick="confirmUser()"
@@ -144,26 +202,31 @@
         }
 
         function confirmUser() {
-            if (location.search) {
-                const params = new URLSearchParams(location.search);
-                if (params.get('web') == 1) {
-                    location.href = `/me`;
-                    return;
-                }
+            if (safeRedirect) {
+                location.replace(safeRedirect);
+                return;
             }
-            location.href = `vocpass://auth?token=${pb.authStore.token}`;
+            const params = new URLSearchParams(location.search);
+            if (params.get('web') == 1) {
+                location.replace('/me');
+                return;
+            }
+            location.href = `vocpass://auth?token=${encodeURIComponent(pb.authStore.token)}`;
         }
 
         async function checkAuth() {
-            if (pb.authStore.isValid) {
+            if (!pb.authStore.isValid) return;
+            try {
                 await pb.collection('users').authRefresh();
-                showUserInfo(pb.authStore.model);
+            } catch (e) {
+                pb.authStore.clear();
+                return;
             }
+            showUserInfo(pb.authStore.model);
         }
 
         checkAuth();
 
-        // 導覽列捲動效果
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {

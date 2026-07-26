@@ -1,0 +1,30 @@
+{#
+  {% with auth_wall_reason = "登入後才能提交新學校申請" %}{% include "partials/auth_wall.html" %}{% endwith %}
+#}
+<div id="login-card" class="bento-card p-8">
+    <div class="text-center">
+        <img src="https://cdn.vocpass.com/iconr.png" alt="VocPass"
+            class="w-14 h-14 rounded-2xl object-cover mx-auto mb-4 shadow-sm">
+        <h2 class="text-2xl font-bold tracking-tight mb-1">登入 VocPass</h2>
+        <p class="text-sm text-gray-500 mb-7">{{ auth_wall_reason | default("請先登入以繼續") }}</p>
+
+        <a id="auth-wall-link" href="/auth"
+            class="block w-full px-5 py-3.5 rounded-full font-semibold text-center text-[15px] bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+            前往登入
+        </a>
+
+        <p class="text-xs text-center mt-6 leading-relaxed text-gray-500">
+            登入即表示您同意
+            <a href="/privacy-policy" class="text-blue-600 hover:underline">隱私權政策</a>
+            與 <a href="/disclaimer" class="text-blue-600 hover:underline">免責聲明</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var link = document.getElementById('auth-wall-link');
+        var target = location.pathname + location.search + location.hash;
+        link.href = '/auth?redirect=' + encodeURIComponent(target);
+    })();
+</script>
