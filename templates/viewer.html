@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include "partials/seo.html" %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, rgba(255,255,255,0) 70%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            color-scheme: light;
+            --apple-text: #1d1d1f;
+            --apple-secondary: #86868b;
+            --bg-gray: #fbfbfd;
+
+            /* 圖表色票：已用 dataviz 驗證器檢查過色盲分辨度與對比 */
+            --surface: #ffffff;
+            --series-1: #2a78d6;   /* 學科平均 / 個人成績 */
+            --series-2: #eb6834;   /* 智育成績 / 班平均 */
+            --att-1: #e34948;      /* 曠課 */
+            --att-2: #4a3aa7;      /* 事假 */
+            --att-3: #eb6834;      /* 遲到 */
+            --att-4: #2a78d6;      /* 病假 */
+            --att-5: #1baf7a;      /* 公假 */
+            --att-6: #9ca3af;      /* 其他 */
+            --grid: #e8e8ed;
+        }
+
+        body { background-color: var(--bg-gray); color: var(--apple-text); }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .bento-card {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .text-gradient-brand {
+            background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ---------- 上傳區 ---------- */
+        #drop {
+            border: 2px dashed #d2d2d7;
+            border-radius: 28px;
+            background: #ffffff;
+            transition: border-color .2s, background .2s, transform .2s;
+            cursor: pointer;
+        }
+        #drop:hover, #drop.over { border-color: #2563eb; background: #f5f9ff; }
+        #drop.over { transform: scale(1.005); }
+        #drop:focus-visible { outline: 3px solid #2563eb; outline-offset: 4px; }
+
+        /* ---------- 表格 ---------- */
+        .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .vtable { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 460px; }
+        .vtable th, .vtable td {
+            text-align: left; padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f3; white-space: nowrap;
+        }
+        .vtable th {
+            font-size: 12px; font-weight: 600; color: #86868b;
+            position: sticky; top: 0; background: #fff; z-index: 1;
+        }
+        .vtable td.num, .vtable th.num { text-align: right; font-variant-numeric: tabular-nums; }
+        .vtable tbody tr:hover { background: #fafafc; }
+        .vtable tbody tr:last-child td { border-bottom: 0; }
+        .vtable td.wrapme { white-space: normal; min-width: 260px; }
+
+        /* ---------- 圖表 ---------- */
+        .chart { position: relative; }
+        .chart svg { display: block; width: 100%; overflow: visible; }
+        .chart-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .axis-label { font-size: 11px; fill: #86868b; }
+        .value-label { font-size: 11px; font-weight: 600; fill: #52525b; }
+        .grid-line { stroke: var(--grid); stroke-width: 1; }
+        .tip {
+            position: absolute; pointer-events: none; opacity: 0;
+            transform: translate(-50%, -100%);
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,0,0,.06);
+            box-shadow: 0 8px 28px rgba(0,0,0,.12);
+            border-radius: 14px; padding: 8px 12px;
+            font-size: 13px; line-height: 1.5; white-space: nowrap;
+            transition: opacity .12s; z-index: 20;
+        }
+        .tip b { font-variant-numeric: tabular-nums; }
+
+        .rawpre {
+            background: #f6f6f8; border-radius: 16px; padding: 16px;
+            font-size: 12.5px; line-height: 1.6; overflow: auto; max-height: 640px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            white-space: pre;
+        }
+
+        /* ---------- 匯出 PDF（走瀏覽器列印） ---------- */
+        @media print {
+            @page { size: A4; margin: 14mm 12mm; }
+
+            nav, footer, #tabs, #uploader, .no-print { display: none !important; }
+            body { background: #fff !important; }
+            #app { padding: 0 !important; }
+
+            /* 列印時所有分頁一次攤開，原始 JSON 太長就不印了 */
+            #panels > section { display: block !important; }
+            #panel-raw { display: none !important; }
+            #panels > section + section { break-before: page; }
+
+            .bento-card {
+                box-shadow: none !important;
+                border: 1px solid #e3e3e8 !important;
+                break-inside: avoid;
+                margin-bottom: 10px !important;
+            }
+            .chart-scroll { overflow: visible !important; }
+            .tablewrap { overflow: visible !important; }
+            .vtable { min-width: 0 !important; font-size: 11px; }
+            .vtable th, .vtable td { padding: 5px 7px; }
+            .vtable thead { display: table-header-group; }
+            .vtable tr { break-inside: avoid; }
+            .tip { display: none !important; }
+
+            /* 讓底色與線條在列印時保留，不然圖表會整片變白 */
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    {% include "partials/nav.html" %}
+
+    <!-- ==================== 上傳畫面 ==================== -->
+    <div id="uploader">
+        <section class="px-5 pt-24 md:pt-28 pb-20 max-w-3xl mx-auto">
+            <div class="flex flex-col items-center text-center gap-3 mb-6">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full font-medium bg-white border border-gray-200 shadow-sm text-xs text-gray-600">
+                    <i class="fa-solid fa-lock text-green-600"></i> 100% 本地解析 · 檔案不會上傳
+                </span>
+                <p class="text-sm text-gray-500">把 VocPass App 匯出的 JSON 拖進來，立刻看見成績趨勢、缺曠分布與獎懲紀錄。</p>
+            </div>
+
+            <div id="drop" tabindex="0" role="button" aria-label="選擇或拖曳 JSON 檔案"
+                 class="px-6 py-14 md:py-20 text-center" data-aos="fade-up">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-5">
+                    <i class="fa-solid fa-file-arrow-up"></i>
+                </div>
+                <h1 class="text-lg md:text-xl font-bold text-gray-900 mb-2">拖曳 JSON 檔案到這裡</h1>
+                <p class="text-gray-500 text-sm">或點一下選擇檔案 · 也可以直接貼上 JSON 內容</p>
+                <span class="inline-flex items-center gap-2 mt-6 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors">
+                    <i class="fa-solid fa-folder-open"></i> 選擇檔案
+                </span>
+            </div>
+            <input type="file" id="file" accept=".json,application/json" hidden>
+
+            <div id="err" class="hidden mt-4 rounded-2xl bg-red-50 border border-red-100 text-red-600 px-5 py-4 text-sm" role="alert"></div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="bento-card p-5">
+                    <div class="w-10 h-10 rounded-xl bg-gray-900 text-white flex items-center justify-center mb-3"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="font-bold text-gray-900 text-base mb-1">不經過伺服器</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">檔案只在瀏覽器記憶體中解析，關掉分頁就消失。</p>
+                </div>
+                <div class="bento-card p-5">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center mb-3"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="font-bold text-gray-900 text-base mb-1">趨勢一眼看懂</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">學期成績、考試與班平均落差、每月缺曠都有圖表。</p>
+                </div>
+                <div class="bento-card p-5">
+                    <div class="w-10 h-10 rounded-xl bg-orange-500 text-white flex items-center justify-center mb-3"><i class="fa-solid fa-table-list"></i></div>
+                    <h3 class="font-bold text-gray-900 text-base mb-1">完整明細</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">課表、獎懲、導師評語與原始 JSON 全都保留。</p>
+                </div>
+            </div>
+
+            <div class="bento-card p-6 md:p-8 mt-4" data-aos="fade-up" data-aos-delay="150">
+                <h3 class="font-bold text-gray-900 text-base mb-4 flex items-center gap-2">
+                    <i class="fa-regular fa-circle-question text-gray-400"></i> 檔案要去哪裡拿？
+                </h3>
+                <ol class="text-sm text-gray-500 leading-relaxed space-y-2 list-decimal list-inside">
+                    <li>打開 VocPass App，確認資料已同步完成。</li>
+                    <li>在設定中選擇匯出／備份個人資料，取得 <code class="bg-gray-100 px-1.5 py-0.5 rounded text-gray-700 text-xs">VocPass_學校_日期.json</code>。</li>
+                    <li>把檔案傳到電腦，拖進上面的區塊即可。</li>
+                </ol>
+                <p class="text-xs text-gray-400 mt-4">支援 schema 1（成績、考試、出缺勤、獎懲、課表、日常表現）。這是非官方工具，資料仍以學校官方系統為準。</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== 資料畫面 ==================== -->
+    <main id="app" class="hidden pt-20 md:pt-24 pb-24 px-5">
+        <div class="max-w-6xl mx-auto">
+
+            <div class="bento-card p-5 md:p-6 flex flex-wrap items-center justify-between gap-4 mb-5">
+                <div class="flex items-center gap-4 min-w-0">
+                    <div id="p-initial" class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-black shrink-0">—</div>
+                    <div class="min-w-0">
+                        <h1 id="p-name" class="text-xl md:text-2xl font-bold tracking-tight text-gray-900 truncate">—</h1>
+                        <p id="p-sub" class="text-xs md:text-sm text-gray-500 truncate">—</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 no-print">
+                    <button id="export-pdf" title="開啟瀏覽器列印視窗，選擇「儲存為 PDF」"
+                            class="bg-blue-600 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-file-pdf"></i> 匯出 PDF
+                    </button>
+                    <button id="reset" class="bg-gray-100 text-gray-900 px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-left"></i> 換一個檔案
+                    </button>
+                </div>
+            </div>
+
+            <nav id="tabs" role="tablist" aria-label="資料分類"
+                 class="flex gap-1 p-1.5 bg-gray-100 rounded-full mb-6 overflow-x-auto scrollbar-hide"></nav>
+
+            <div id="panels"></div>
+        </div>
+    </main>
+
+    {% include "partials/footer.html" %}
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+    'use strict';
+    AOS.init({ once: true, offset: 40 });
+
+    /* ==================== 小工具 ==================== */
+    const $ = (sel, root = document) => root.querySelector(sel);
+
+    /** 建立 HTML 元素：h('div', { class: 'x', onclick: fn }, ...children) */
+    function h(tag, attrs, ...kids) {
+        const n = document.createElement(tag);
+        for (const [k, v] of Object.entries(attrs || {})) {
+            if (v === null || v === undefined || v === false) continue;
+            if (k === 'class') n.className = v;
+            else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+            else n.setAttribute(k, v);
+        }
+        for (const kid of kids.flat(2)) {
+            if (kid === null || kid === undefined || kid === false) continue;
+            n.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+        }
+        return n;
+    }
+
+    const SVGNS = 'http://www.w3.org/2000/svg';
+    function sv(tag, attrs) {
+        const n = document.createElementNS(SVGNS, tag);
+        for (const [k, v] of Object.entries(attrs || {})) {
+            if (v === null || v === undefined) continue;
+            n.setAttribute(k, v);
+        }
+        return n;
+    }
+
+    const esc = str => String(str).replace(/[&<>"']/g, c =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    /** 資料裡的數字常夾雜全形字或空字串，統一轉成 number 或 null */
+    function num(v) {
+        if (v === null || v === undefined || v === '') return null;
+        const n = parseFloat(String(v).replace(/[^\d.\-]/g, ''));
+        return Number.isFinite(n) ? n : null;
+    }
+    const fmt = (v, d = 1) => v === null ? '—' : (Math.round(v * 10 ** d) / 10 ** d).toLocaleString('zh-TW');
+    const dash = v => (v === null || v === undefined || String(v).trim() === '') ? '—' : v;
+
+    /** 部分欄位夾帶原始 HTML（例如 <td …>待人誠信：優異<br/>），拆成純文字清單 */
+    const htmlToLines = str => String(str || '')
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<[^>]*>/g, '')
+        .split('\n')
+        .map(x => x.replace(/\s+/g, ' ').trim())
+        .filter(Boolean);
+
+    const parseDate = d => {
+        const m = String(d || '').match(/(\d{4})[/\-.](\d{1,2})[/\-.](\d{1,2})/);
+        return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+    };
+
+    const CN_NUM = { 一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10 };
+    const periodNum = p => CN_NUM[String(p || '').trim()] ?? (num(p) ?? 99);
+
+    /* ==================== 出缺勤類型（顏色順序已驗證） ==================== */
+    const ATT_TYPES = [
+        { key: '曠', label: '曠課', color: 'var(--att-1)' },
+        { key: '事', label: '事假', color: 'var(--att-2)' },
+        { key: '遲', label: '遲到', color: 'var(--att-3)' },
+        { key: '病', label: '病假', color: 'var(--att-4)' },
+        { key: '公', label: '公假', color: 'var(--att-5)' },
+    ];
+    const OTHER_TYPE = { key: '其他', label: '其他', color: 'var(--att-6)' };
+    /** 學校欄位可能是「曠」也可能是「曠課」，取首字歸類，其餘一律進「其他」 */
+    const attKey = cell => {
+        const c = String(cell || '').trim().charAt(0);
+        return ATT_TYPES.some(t => t.key === c) ? c : OTHER_TYPE.key;
+    };
+
+    /* ==================== 讀檔 ==================== */
+    let DATA = null;
+    const errBox = $('#err');
+    const showError = msg => { errBox.textContent = msg; errBox.classList.remove('hidden'); };
+    const clearError = () => errBox.classList.add('hidden');
+
+    function loadText(text, sourceName) {
+        clearError();
+        let json;
+        try {
+            json = JSON.parse(text);
+        } catch (e) {
+            return showError('無法解析 JSON：' + e.message);
+        }
+        if (!json || typeof json !== 'object' || Array.isArray(json)) {
+            return showError('這不是有效的 VocPass 匯出檔（最外層必須是一個物件）。');
+        }
+        if (!json._meta && !json.semester_scores && !json.attendance) {
+            return showError('看起來不是 VocPass 匯出的資料，找不到 _meta / semester_scores / attendance 欄位。');
+        }
+        DATA = json;
+        render(sourceName);
+    }
+
+    function readFile(f) {
+        if (!f) return;
+        const reader = new FileReader();
+        reader.onerror = () => showError('讀取檔案失敗，請再試一次。');
+        reader.onload = () => loadText(reader.result, f.name);
+        reader.readAsText(f, 'utf-8');
+    }
+
+    const drop = $('#drop'), fileInput = $('#file');
+    drop.addEventListener('click', () => fileInput.click());
+    drop.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+    });
+    fileInput.addEventListener('change', e => readFile(e.target.files[0]));
+    ['dragenter', 'dragover'].forEach(ev =>
+        drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+    ['dragleave', 'drop'].forEach(ev =>
+        drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+    drop.addEventListener('drop', e => readFile(e.dataTransfer.files[0]));
+    document.addEventListener('paste', e => {
+        if ($('#uploader').classList.contains('hidden')) return;
+        const t = e.clipboardData.getData('text');
+        if (t && t.trim().startsWith('{')) loadText(t, '貼上的內容');
+    });
+    $('#reset').addEventListener('click', () => {
+        DATA = null;
+        fileInput.value = '';
+        $('#app').classList.add('hidden');
+        $('#uploader').classList.remove('hidden');
+        clearError();
+        window.scrollTo(0, 0);
+    });
+
+    /* ==================== 資料整理 ==================== */
+    const years = () => Object.keys(DATA.semester_scores || {}).sort((a, b) => (num(a) ?? 0) - (num(b) ?? 0));
+
+    function identity() {
+        let name = '', klass = '', sid = '';
+        for (const y of years()) {
+            const info = DATA.semester_scores[y] && DATA.semester_scores[y].student_info;
+            // 形如「洪碩亨│一年級歷年成績總表」
+            if (typeof info === 'string' && info.trim()) { name = info.split(/[│|｜]/)[0].trim(); break; }
+        }
+        for (const ex of (DATA.exams || [])) {
+            const si = (ex && ex.data && ex.data.student_info) || {};
+            // 形如「洪碩亨班級：訊三孝」
+            if (!name && si.name) name = String(si.name).split('班級')[0].trim();
+            if (!klass && si.class) klass = String(si.class).trim();
+            if (!sid && si.student_id) sid = String(si.student_id).trim();
+        }
+        return { name: name || '未知學生', klass, sid };
+    }
+
+    /**
+     * 只留下真的有分數的考試。
+     * 學校系統常常先把整排「平時成績 N」建好、分數卻全是空的，
+     * 光看 subjects 有沒有東西會挑到一整頁破折號。
+     */
+    const usableExams = () => (DATA.exams || []).filter(e =>
+        e && e.data && Array.isArray(e.data.subjects) &&
+        e.data.subjects.some(s => num(s.personal_score) !== null || num(s.class_average) !== null));
+
+    /** merit_demerit 是「群組陣列」，攤平後依 action 文字判斷獎或懲 */
+    function meritRecords() {
+        const flat = [];
+        for (const group of (DATA.merit_demerit || [])) {
+            for (const rec of (Array.isArray(group) ? group : [group])) {
+                if (!rec || typeof rec !== 'object') continue;
+                const action = String(rec.action || '');
+                const kind = /警告|申誡|過|懲/.test(action) ? 'demerit' : 'merit';
+                flat.push(Object.assign({}, rec, { kind }));
+            }
+        }
+        flat.sort((a, b) =>
+            (parseDate(b.date_occurred || b.date_approved) || 0) - (parseDate(a.date_occurred || a.date_approved) || 0));
+        return flat;
+    }
+
+    /** 各學期的學科平均 / 智育成績，依學年 × 上下學期攤平成一條時間軸 */
+    function semesterSeries() {
+        const rows = [];
+        for (const y of years()) {
+            const ts = (DATA.semester_scores[y] || {}).total_scores || {};
+            for (const [term, label] of [['first_semester', '上'], ['second_semester', '下']]) {
+                const academic = num((ts['學科平均'] || {})[term]);
+                const intellect = num((ts['智育成績'] || {})[term]);
+                const rank = (ts['學期名次'] || {})[term] || '';
+                const credits = (ts['實得學分'] || {})[term] || '';
+                if (academic === null && intellect === null && !rank && !credits) continue;
+                rows.push({ label: y + '年' + label, academic, intellect, rank, credits });
+            }
+        }
+        return rows;
+    }
+
+    /* ==================== 圖表零件 ==================== */
+    function tooltipHost(container) {
+        const tip = h('div', { class: 'tip' });
+        container.append(tip);
+        return {
+            show(x, y, html) {
+                tip.innerHTML = html;
+                tip.style.left = x + 'px';
+                tip.style.top = (y - 12) + 'px';
+                tip.style.opacity = '1';
+            },
+            hide() { tip.style.opacity = '0'; },
+        };
+    }
+
+    /** 堆疊段之間用 2px 的底色縫隙分隔，而不是描邊 */
+    const GAP_STACK = 2;
+
+    /** 資料端圓角、基線端方角的長條路徑 */
+    function barPath(x, y, w, hgt, r, dir) {
+        const rad = Math.max(0, Math.min(r, dir === 'right' ? w : hgt, dir === 'right' ? hgt / 2 : w / 2));
+        if (dir === 'right') {
+            return `M${x},${y} H${x + w - rad} Q${x + w},${y} ${x + w},${y + rad}` +
+                   ` V${y + hgt - rad} Q${x + w},${y + hgt} ${x + w - rad},${y + hgt} H${x} Z`;
+        }
+        return `M${x},${y + hgt} V${y + rad} Q${x},${y} ${x + rad},${y}` +
+               ` H${x + w - rad} Q${x + w},${y} ${x + w},${y + rad} V${y + hgt} Z`;
+    }
+
+    function legend(items) {
+        return h('div', { class: 'flex flex-wrap items-center gap-x-5 gap-y-2 mb-4' },
+            items.map(it => h('span', { class: 'inline-flex items-center gap-2 text-xs font-medium text-gray-500' },
+                h('i', { class: 'w-2.5 h-2.5 rounded-[3px] inline-block', style: 'background:' + it.color }),
+                it.label)));
+    }
+
+    /**
+     * 表格：headers 可為字串或 { label, num }；cells 可為字串、節點或 { value, node, num, cls }
+     */
+    function table(headers, rows) {
+        const thead = h('thead', {}, h('tr', {},
+            headers.map(x => h('th', { class: x && x.num ? 'num' : null }, (x && x.label !== undefined) ? x.label : x))));
+        const tbody = h('tbody', {}, rows.map(cells => h('tr', {}, cells.map(c => {
+            if (c && c.nodeType) return h('td', {}, c);
+            if (c && typeof c === 'object') {
+                const cls = [c.num ? 'num' : '', c.cls || ''].join(' ').trim();
+                return h('td', { class: cls || null }, c.node || dash(c.value));
+            }
+            return h('td', {}, dash(c));
+        }))));
+        return h('div', { class: 'tablewrap' }, h('table', { class: 'vtable' }, thead, tbody));
+    }
+
+    /** 匯出 PDF 前要把所有折疊的明細攤開，否則印出來只有第一頁的資料 */
+    let EXPANDERS = [];
+
+    /** 明細動輒好幾百筆，先給一頁，其餘按需展開，避免頁面長到滑不完 */
+    function pagedTable(headers, rows, pageSize = 60) {
+        if (rows.length <= pageSize) return table(headers, rows);
+        let shown = pageSize;
+        const wrap = h('div', {});
+        const more = h('button', {
+            class: 'mt-4 w-full bg-gray-100 text-gray-900 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors no-print',
+            onclick: () => { shown = Math.min(rows.length, shown + pageSize); paint(); },
+        });
+        function paint() {
+            more.textContent = '顯示更多（' + shown + ' / ' + rows.length + '）';
+            wrap.replaceChildren(table(headers, rows.slice(0, shown)), shown < rows.length ? more : '');
+        }
+        EXPANDERS.push(() => { shown = rows.length; paint(); });
+        paint();
+        return wrap;
+    }
+
+    const card = (...kids) => h('div', { class: 'bento-card p-5 md:p-7 mb-4' }, kids);
+    const sectionTitle = (t, sub) => h('div', { class: 'mb-5' },
+        h('h2', { class: 'text-lg font-bold text-gray-900 tracking-tight' }, t),
+        sub ? h('p', { class: 'text-xs text-gray-400 mt-1' }, sub) : null);
+    const empty = msg => h('p', { class: 'text-sm text-gray-400 py-6 text-center' }, msg);
+
+    function tiles(items) {
+        return h('div', { class: 'grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4' },
+            items.map(t => h('div', { class: 'bento-card p-4 md:p-5' },
+                h('div', { class: 'text-xs font-semibold text-gray-400 mb-1' }, t.label),
+                h('div', {
+                    class: 'font-black text-gray-900 tracking-tight leading-tight',
+                    style: 'font-size:clamp(22px,4vw,32px);font-variant-numeric:tabular-nums',
+                }, String(t.value)),
+                t.foot ? h('div', { class: 'text-xs text-gray-400 mt-1 truncate' }, t.foot) : null)));
+    }
+
+    /* ---------- 折線圖（單一 y 軸；多條線共用刻度） ---------- */
+    function lineChart(rows, series) {
+        const values = rows.flatMap(r => series.map(s => r[s.field])).filter(v => v !== null);
+        if (!values.length) return empty('沒有可繪製的數值。');
+
+        const W = 760, H = 280, PAD = { t: 20, r: 64, b: 38, l: 42 };
+        const box = h('div', { class: 'chart' });
+        const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': '成績趨勢圖' });
+        box.append(svg);
+        const tip = tooltipHost(box);
+
+        const top = Math.ceil(Math.max(...values) / 10) * 10;
+        const bottom = Math.max(0, Math.floor(Math.min(...values) / 10) * 10 - 10);
+        const span = Math.max(10, top - bottom);
+        const px = i => PAD.l + (rows.length === 1 ? (W - PAD.l - PAD.r) / 2 : i * (W - PAD.l - PAD.r) / (rows.length - 1));
+        const py = v => PAD.t + (1 - (v - bottom) / span) * (H - PAD.t - PAD.b);
+
+        const step = Math.max(10, Math.round(span / 5 / 10) * 10);
+        for (let g = bottom; g <= top; g += step) {
+            svg.append(sv('line', { class: 'grid-line', x1: PAD.l, x2: W - PAD.r, y1: py(g), y2: py(g) }));
+            const t = sv('text', { class: 'axis-label', x: PAD.l - 8, y: py(g) + 4, 'text-anchor': 'end' });
+            t.textContent = g;
+            svg.append(t);
+        }
+        // x 軸標籤太密會疊在一起，固定間隔跳著標
+        const every = Math.ceil(rows.length / 9);
+        rows.forEach((r, i) => {
+            if (i % every !== 0 && i !== rows.length - 1) return;
+            const t = sv('text', { class: 'axis-label', x: px(i), y: H - PAD.b + 18, 'text-anchor': 'middle' });
+            t.textContent = r.label;
+            svg.append(t);
+        });
+
+        series.forEach(s => {
+            const pts = rows.map((r, i) => ({ i, v: r[s.field] })).filter(p => p.v !== null);
+            if (!pts.length) return;
+            const d = pts.map((p, k) => (k ? 'L' : 'M') + px(p.i) + ',' + py(p.v)).join(' ');
+            svg.append(sv('path', {
+                d, fill: 'none', stroke: s.color, 'stroke-width': 2,
+                'stroke-linecap': 'round', 'stroke-linejoin': 'round',
+            }));
+            pts.forEach(p => svg.append(sv('circle', {
+                cx: px(p.i), cy: py(p.v), r: 4.5,
+                fill: s.color, stroke: 'var(--surface)', 'stroke-width': 2,
+            })));
+            // 只在最後一點直接標值，其餘交給刻度與提示框
+            const last = pts[pts.length - 1];
+            const t = sv('text', { class: 'value-label', x: px(last.i) + 10, y: py(last.v) + 4 });
+            t.textContent = s.label + ' ' + fmt(last.v);
+            svg.append(t);
+        });
+
+        const cursor = sv('line', { class: 'grid-line', y1: PAD.t, y2: H - PAD.b, opacity: 0, 'stroke-width': 1.5 });
+        svg.append(cursor);
+        const hit = sv('rect', {
+            x: PAD.l, y: PAD.t, width: W - PAD.l - PAD.r, height: H - PAD.t - PAD.b, fill: 'transparent',
+        });
+        svg.append(hit);
+
+        const move = ev => {
+            const rect = svg.getBoundingClientRect();
+            const clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+            const rel = (clientX - rect.left) / rect.width * W;
+            let idx = 0, best = Infinity;
+            rows.forEach((_, k) => { const dd = Math.abs(px(k) - rel); if (dd < best) { best = dd; idx = k; } });
+            cursor.setAttribute('x1', px(idx));
+            cursor.setAttribute('x2', px(idx));
+            cursor.setAttribute('opacity', 1);
+            const lines = series
+                .map(s => `${esc(s.label)} <b>${fmt(rows[idx][s.field])}</b>`)
+                .join('<br>');
+            const extra = rows[idx].rank ? `<br>名次 <b>${esc(rows[idx].rank)}</b>` : '';
+            const topV = Math.max(...series.map(s => rows[idx][s.field] ?? bottom));
+            const title = esc(rows[idx].full || rows[idx].label);
+            tip.show(px(idx) / W * rect.width, py(topV) / H * rect.height, `<b>${title}</b><br>${lines}${extra}`);
+        };
+        hit.addEventListener('mousemove', move);
+        hit.addEventListener('touchmove', move, { passive: true });
+        hit.addEventListener('mouseleave', () => { cursor.setAttribute('opacity', 0); tip.hide(); });
+        hit.addEventListener('touchend', () => { cursor.setAttribute('opacity', 0); tip.hide(); });
+        return box;
+    }
+
+    /* ---------- 橫向分組長條：個人 vs 班平均 ---------- */
+    function groupedBars(items, series) {
+        const usable = items.filter(it => series.some(s => it[s.field] !== null));
+        if (!usable.length) return empty('沒有可繪製的科目成績。');
+
+        const rowH = 48, BAR = 14, GAP = 2, W = 760;
+        const PAD = { t: 10, r: 60, b: 10, l: 118 };
+        const H = PAD.t + PAD.b + usable.length * rowH;
+        const box = h('div', { class: 'chart' });
+        const svg = sv('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': '個人成績與班平均比較' });
+        box.append(svg);
+        const tip = tooltipHost(box);
+
+        const max = Math.max(100, ...usable.flatMap(it => series.map(s => it[s.field]).filter(v => v !== null)));
+        const bw = v => Math.max(1, (v / max) * (W - PAD.l - PAD.r));
+
+        usable.forEach((it, i) => {
+            const y0 = PAD.t + i * rowH;
+            const label = sv('text', { class: 'axis-label', x: PAD.l - 10, y: y0 + rowH / 2 + 4, 'text-anchor': 'end' });
+            label.textContent = it.subject.length > 8 ? it.subject.slice(0, 8) + '…' : it.subject;
+            svg.append(label);
+
+            series.forEach((s, k) => {
+                const v = it[s.field];
+                if (v === null) return;
+                const y = y0 + (rowH - (BAR * series.length + GAP * (series.length - 1))) / 2 + k * (BAR + GAP);
+                const path = sv('path', { d: barPath(PAD.l, y, bw(v), BAR, 4, 'right'), fill: s.color });
+                path.addEventListener('mousemove', ev => {
+                    const rect = svg.getBoundingClientRect();
+                    tip.show(ev.clientX - rect.left, y / H * rect.height,
+                        `<b>${esc(it.subject)}</b><br>${esc(s.label)} <b>${fmt(v, 2)}</b>`);
+                });
+                path.addEventListener('mouseleave', tip.hide);
+                svg.append(path);
+                const t = sv('text', { class: 'value-label', x: PAD.l + bw(v) + 6, y: y + BAR - 2 });
+                t.textContent = fmt(v, 1);
+                svg.append(t);
+            });
+        });
+        return box;
+    }
+
+    /* ---------- 堆疊長條：每月各類出缺勤節數 ---------- */
+    function stackedColumns(months, types) {
+        if (!months.length) return empty('沒有可繪製的出缺勤資料。');
+
+        const H = 260, PAD = { t: 18, r: 14, b: 42, l: 36 };
+        const W = Math.max(560, PAD.l + PAD.r + months.length * 46);
+        const box = h('div', { class: 'chart' });
+        const svg = sv('svg', {
+            viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': '每月出缺勤節數',
+            style: `min-width:${Math.min(W, 640)}px`,
+        });
+        box.append(svg);
+        const tip = tooltipHost(box);
+
+        const max = Math.max(1, ...months.map(m => m.total));
+        const slot = (W - PAD.l - PAD.r) / months.length;
+        const barW = Math.min(24, slot * 0.6);
+        const scale = v => (v / max) * (H - PAD.t - PAD.b);
+        const tickStep = Math.max(1, Math.ceil(max / 4));
+
+        for (let g = 0; g <= max; g += tickStep) {
+            const y = H - PAD.b - scale(g);
+            svg.append(sv('line', { class: 'grid-line', x1: PAD.l, x2: W - PAD.r, y1: y, y2: y }));
+            const t = sv('text', { class: 'axis-label', x: PAD.l - 8, y: y + 4, 'text-anchor': 'end' });
+            t.textContent = g;
+            svg.append(t);
+        }
+
+        months.forEach((m, i) => {
+            const x = PAD.l + i * slot + (slot - barW) / 2;
+            const present = types.filter(t => m.counts[t.key]);
+            let base = H - PAD.b;
+            present.forEach((t, k) => {
+                const v = m.counts[t.key];
+                const isTop = k === present.length - 1;
+                const slotH = scale(v);
+                // 縫隙留在每段的上緣，最上面那段不留（下方沒有東西要分隔）
+                const drawH = Math.max(2, slotH - (isTop ? 0 : GAP_STACK));
+                const y = base - drawH;
+                const path = sv('path', { d: barPath(x, y, barW, drawH, isTop ? 4 : 0, 'up'), fill: t.color });
+                path.addEventListener('mousemove', () => {
+                    const rect = svg.getBoundingClientRect();
+                    tip.show((x + barW / 2) / W * rect.width, y / H * rect.height,
+                        `<b>${esc(m.label)}</b><br>${esc(t.label)} <b>${v}</b> 節`);
+                });
+                path.addEventListener('mouseleave', tip.hide);
+                svg.append(path);
+                base -= slotH;
+            });
+
+            if (months.length <= 14 || i % Math.ceil(months.length / 12) === 0 || i === months.length - 1) {
+                const t = sv('text', { class: 'axis-label', x: x + barW / 2, y: H - PAD.b + 18, 'text-anchor': 'middle' });
+                t.textContent = m.label;
+                svg.append(t);
+            }
+        });
+        return h('div', { class: 'chart-scroll' }, box);
+    }
+
+    /* ==================== 各分頁 ==================== */
+    function renderOverview(panel) {
+        const rows = semesterSeries();
+        // 平時成績那類考試常常沒有平均分，往回找最後一次真的有分數的
+        const latest = [...usableExams()].reverse()
+            .find(ex => num((ex.data.summary || {}).averageScore ?? (ex.data.summary || {}).average_scores) !== null);
+        const md = meritRecords();
+        const att = DATA.attendance || [];
+        const countOf = k => att.filter(a => attKey(a.cell) === k).length;
+        const lastRow = [...rows].reverse().find(r => r.academic !== null);
+
+        const cumCredits = (() => {
+            const ys = years();
+            for (let i = ys.length - 1; i >= 0; i--) {
+                const c = ((DATA.semester_scores[ys[i]] || {}).total_scores || {})['實得累計'] || {};
+                const v = c.second_semester || c.first_semester || c.annual;
+                if (v) return v;
+            }
+            return null;
+        })();
+
+        panel.append(tiles([
+            {
+                label: '最近學期學科平均',
+                value: lastRow ? fmt(lastRow.academic) : '—',
+                foot: lastRow ? lastRow.label + (lastRow.rank ? ' · 名次 ' + lastRow.rank : '') : '無學期成績',
+            },
+            {
+                label: '最近一次考試平均',
+                value: latest
+                    ? fmt(num((latest.data.summary || {}).averageScore ?? (latest.data.summary || {}).average_scores), 2)
+                    : '—',
+                foot: latest
+                    ? '班排 ' + dash((latest.data.summary || {}).class_rank) + ' · 科排 ' + dash((latest.data.summary || {}).department_rank)
+                    : '無考試資料',
+            },
+            {
+                label: '曠課節數',
+                value: countOf('曠'),
+                foot: ATT_TYPES.filter(t => t.key !== '曠' && countOf(t.key))
+                    .map(t => t.label + ' ' + countOf(t.key)).join(' · ') || '沒有其他缺曠',
+            },
+            {
+                label: '獎懲紀錄',
+                value: md.filter(x => x.kind === 'merit').length + ' / ' + md.filter(x => x.kind === 'demerit').length,
+                foot: '獎勵 / 懲戒 筆數',
+            },
+        ]));
+
+        const series = [
+            { field: 'academic', label: '學科平均', color: 'var(--series-1)' },
+            { field: 'intellect', label: '智育成績', color: 'var(--series-2)' },
+        ];
+        panel.append(card(
+            sectionTitle('各學期成績趨勢', '學科平均與智育成績共用同一個分數刻度'),
+            rows.length ? legend(series) : null,
+            rows.length ? lineChart(rows, series) : empty('沒有學期成績資料。'),
+            rows.length ? h('div', { class: 'mt-5' }, table(
+                ['學期', { label: '學科平均', num: true }, { label: '智育成績', num: true },
+                 { label: '名次', num: true }, { label: '實得學分', num: true }],
+                rows.map(r => [
+                    r.label,
+                    { value: fmt(r.academic), num: true },
+                    { value: fmt(r.intellect), num: true },
+                    { value: r.rank, num: true },
+                    { value: r.credits, num: true },
+                ]))) : null,
+        ));
+
+        const meta = DATA._meta || {};
+        panel.append(card(
+            sectionTitle('檔案資訊'),
+            table(['項目', '內容'], [
+                ['學校', meta.school],
+                ['App 版本', meta.app_version],
+                ['Schema 版本', meta.schema_version],
+                ['匯出時間', meta.exported_at ? new Date(meta.exported_at).toLocaleString('zh-TW') : null],
+                ['學年筆數', years().length],
+                ['考試筆數', (DATA.exams || []).length],
+                ['出缺勤筆數', (DATA.attendance || []).length],
+                ['獎懲筆數', meritRecords().length],
+            ]),
+            h('p', { class: 'text-xs text-gray-400 mt-4' },
+                '此頁面僅在本機解析資料，不會傳送任何內容到伺服器。'),
+        ));
+    }
+
+    function renderSemester(panel) {
+        const ys = years();
+        const body = h('div', {});
+        let active = ys[ys.length - 1];
+
+        const chips = h('div', { class: 'flex flex-wrap gap-2 mb-4' }, ys.map(y => h('button', {
+            class: 'chip px-4 py-2 rounded-full text-sm font-semibold border transition-colors',
+            'data-y': y,
+            onclick: () => { active = y; paint(); },
+        }, y + ' 年級')));
+
+        function paint() {
+            [...chips.children].forEach(c => {
+                const on = c.getAttribute('data-y') === active;
+                c.className = 'chip px-4 py-2 rounded-full text-sm font-semibold border transition-colors ' +
+                    (on ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300');
+            });
+
+            const yd = DATA.semester_scores[active] || {};
+            const subjects = yd.subject_scores || [];
+            const scoreCell = v => {
+                const n = num(v);
+                return {
+                    value: (v === '' || v === null || v === undefined) ? '—' : v,
+                    num: true,
+                    cls: (n !== null && n < 60) ? 'text-red-600 font-semibold' : '',
+                };
+            };
+            const failing = subjects.filter(s => { const n = num(s.annual_score); return n !== null && n < 60; });
+            const ts = yd.total_scores || {};
+
+            body.replaceChildren(
+                card(
+                    sectionTitle(
+                        active + ' 年級各科成績',
+                        subjects.length
+                            ? subjects.length + ' 科' + (failing.length ? ' · ' + failing.length + ' 科學年成績未達 60' : '')
+                            : null),
+                    subjects.length ? table(
+                        ['科目', '修別', { label: '上學期', num: true }, { label: '學分', num: true },
+                         { label: '下學期', num: true }, { label: '學分', num: true }, { label: '學年', num: true }],
+                        subjects.map(s => [
+                            s.subject,
+                            (s.first_semester || {}).type || (s.second_semester || {}).type || '',
+                            scoreCell((s.first_semester || {}).score),
+                            { value: (s.first_semester || {}).credits, num: true },
+                            scoreCell((s.second_semester || {}).score),
+                            { value: (s.second_semester || {}).credits, num: true },
+                            scoreCell(s.annual_score),
+                        ])) : empty('這個學年沒有科目資料。'),
+                ),
+                card(
+                    sectionTitle('學期總表'),
+                    Object.keys(ts).length ? table(
+                        ['項目', { label: '上學期', num: true }, { label: '下學期', num: true }, { label: '學年', num: true }],
+                        Object.keys(ts).sort().map(k => [
+                            k,
+                            { value: ts[k].first_semester, num: true },
+                            { value: ts[k].second_semester, num: true },
+                            { value: ts[k].annual, num: true },
+                        ])) : empty('沒有學期總表資料。'),
+                ),
+            );
+        }
+
+        panel.append(chips, body);
+        paint();
+    }
+
+    /** 考試名稱前面常有一長串共同前綴（如「114下學期」），砍掉才看得出差別 */
+    function stripCommonPrefix(names) {
+        if (names.length < 2) return names.slice();
+        let i = 0;
+        while (i < names[0].length && names.every(n => n[i] === names[0][i])) i++;
+        return i >= 2 ? names.map(n => n.slice(i) || n) : names.slice();
+    }
+
+    function renderExams(panel) {
+        const exams = usableExams();
+        const fullNames = exams.map(ex => String(ex.name || '').replace(/^\[[^\]]*\]\s*/, ''));
+        const shortNames = stripCommonPrefix(fullNames);
+        const trend = exams
+            .map((ex, i) => ({
+                label: shortNames[i].length > 6 ? shortNames[i].slice(0, 6) + '…' : shortNames[i],
+                full: fullNames[i],
+                academic: num((ex.data.summary || {}).averageScore ?? (ex.data.summary || {}).average_scores),
+            }))
+            .filter(r => r.academic !== null);
+
+        if (trend.length > 1) {
+            panel.append(card(
+                sectionTitle('歷次考試平均', '單一數列，只在最後一次直接標分數；其餘滑過去看'),
+                lineChart(trend, [{ field: 'academic', label: '平均', color: 'var(--series-1)' }]),
+            ));
+        }
+
+        const select = h('select', {
+            class: 'w-full sm:w-auto text-sm font-medium px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-900',
+            onchange: e => paint(+e.target.value),
+        }, exams.map((ex, i) => h('option', { value: i }, ex.name)));
+
+        const body = h('div', {});
+        const series = [
+            { field: 'personal', label: '個人', color: 'var(--series-1)' },
+            { field: 'classAvg', label: '班平均', color: 'var(--series-2)' },
+        ];
+
+        function paint(i) {
+            const ex = exams[i];
+            const sm = ex.data.summary || {};
+            const items = (ex.data.subjects || []).map(s => ({
+                subject: String(s.subject || '—'),
+                personal: num(s.personal_score),
+                classAvg: num(s.class_average),
+            }));
+
+            body.replaceChildren(
+                tiles([
+                    { label: '平均', value: fmt(num(sm.averageScore ?? sm.average_scores), 2), foot: ex.data.exam_info || '' },
+                    { label: '總分', value: dash(sm.totalScore ?? sm.total_scores), foot: items.length + ' 科' },
+                    { label: '班級排名', value: dash(sm.class_rank), foot: '班內' },
+                    { label: '科別排名', value: dash(sm.department_rank), foot: '同科別' },
+                ]),
+                card(
+                    sectionTitle('各科成績 vs 班平均'),
+                    legend(series),
+                    groupedBars(items, series),
+                    h('div', { class: 'mt-5' }, table(
+                        ['科目', { label: '個人', num: true }, { label: '班平均', num: true }, { label: '差距', num: true }],
+                        items.map(it => {
+                            const diff = (it.personal !== null && it.classAvg !== null) ? it.personal - it.classAvg : null;
+                            return [
+                                it.subject,
+                                {
+                                    value: fmt(it.personal, 1), num: true,
+                                    cls: (it.personal !== null && it.personal < 60) ? 'text-red-600 font-semibold' : '',
+                                },
+                                { value: fmt(it.classAvg, 2), num: true },
+                                {
+                                    num: true,
+                                    node: diff === null ? document.createTextNode('—') : h('span', {
+                                        class: 'inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold ' +
+                                            (diff >= 0 ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'),
+                                    }, (diff >= 0 ? '+' : '') + fmt(diff, 1)),
+                                },
+                            ];
+                        }))),
+                ),
+            );
+        }
+
+        panel.append(
+            h('div', { class: 'flex flex-wrap items-center gap-3 mb-4' },
+                h('span', { class: 'text-sm font-semibold text-gray-500' }, '選擇考試'),
+                select),
+            body);
+        paint(exams.length - 1);
+        select.value = String(exams.length - 1);
+    }
+
+    function renderCurriculum(panel) {
+        const cur = DATA.curriculum || {};
+        const slots = [];
+        for (const [subject, info] of Object.entries(cur)) {
+            for (const s of ((info || {}).schedule || [])) {
+                slots.push({ subject, weekday: String(s.weekday || ''), period: s.period, room: s.room || '', teacher: s.teacher || '' });
+            }
+        }
+        if (!slots.length) return panel.append(card(empty('這個檔案沒有課表資料。')));
+
+        const order = ['一', '二', '三', '四', '五', '六', '日'];
+        const days = order.filter(d => slots.some(s => s.weekday === d));
+        const periods = [...new Set(slots.map(s => String(s.period)))].sort((a, b) => periodNum(a) - periodNum(b));
+        const at = (d, p) => slots.find(s => s.weekday === d && String(s.period) === p);
+
+        const grid = h('div', { class: 'tablewrap' },
+            h('table', { class: 'vtable' },
+                h('thead', {}, h('tr', {}, [h('th', {}, '節次'), ...days.map(d => h('th', {}, '週' + d))])),
+                h('tbody', {}, periods.map(p => h('tr', {}, [
+                    h('td', { class: 'text-gray-400 text-xs font-semibold' }, '第 ' + p + ' 節'),
+                    ...days.map(d => {
+                        const s = at(d, p);
+                        if (!s) return h('td', { class: 'text-gray-300' }, '—');
+                        return h('td', {},
+                            h('div', { class: 'font-semibold text-gray-900 text-[13px]' }, s.subject),
+                            (s.room || s.teacher)
+                                ? h('div', { class: 'text-[11px] text-gray-400 mt-0.5' },
+                                    [s.room, s.teacher].filter(Boolean).join(' · '))
+                                : null);
+                    }),
+                ])))));
+
+        const counts = Object.entries(cur)
+            .map(([subject, info]) => ({ subject, count: (info || {}).count || ((info || {}).schedule || []).length }))
+            .sort((a, b) => b.count - a.count);
+
+        panel.append(
+            card(sectionTitle('每週課表', days.length + ' 天 · ' + periods.length + ' 節 · ' + Object.keys(cur).length + ' 個科目'), grid),
+            card(sectionTitle('各科每週節數'), table(['科目', { label: '每週節數', num: true }],
+                counts.map(c => [c.subject, { value: c.count, num: true }]))),
+        );
+    }
+
+    function renderAttendance(panel) {
+        const all = DATA.attendance || [];
+        const terms = [...new Set(all.map(a => a.academic_term))].filter(Boolean);
+        const usedTypes = [...ATT_TYPES, OTHER_TYPE].filter(t => all.some(a => attKey(a.cell) === t.key));
+
+        let term = 'all', type = 'all';
+        const filterRow = h('div', { class: 'flex flex-wrap gap-2 mb-4' });
+        const body = h('div', {});
+
+        function chip(label, isOn, onClick) {
+            return h('button', {
+                class: 'px-4 py-2 rounded-full text-sm font-semibold border transition-colors ' +
+                    (isOn ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'),
+                onclick: onClick,
+            }, label);
+        }
+
+        function paint() {
+            filterRow.replaceChildren(
+                chip('全部學期', term === 'all', () => { term = 'all'; paint(); }),
+                ...terms.map(t => chip(t + '學期', term === t, () => { term = t; paint(); })),
+                h('span', { class: 'w-px h-6 bg-gray-200 self-center mx-1' }),
+                chip('全部類型', type === 'all', () => { type = 'all'; paint(); }),
+                ...usedTypes.map(t => chip(t.label, type === t.key, () => { type = t.key; paint(); })),
+            );
+
+            const byTerm = all.filter(a => term === 'all' || a.academic_term === term);
+            const rows = byTerm.filter(a => type === 'all' || attKey(a.cell) === type);
+
+            // 月度堆疊圖固定顯示所有類型，只跟著學期篩選走
+            const byMonth = new Map();
+            for (const a of byTerm) {
+                const d = parseDate(a.date);
+                if (!d) continue;
+                const key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+                if (!byMonth.has(key)) byMonth.set(key, { key, label: (d.getMonth() + 1) + '月', counts: {}, total: 0 });
+                const m = byMonth.get(key);
+                const k = attKey(a.cell);
+                m.counts[k] = (m.counts[k] || 0) + 1;
+                m.total++;
+            }
+            const months = [...byMonth.values()].sort((a, b) => a.key.localeCompare(b.key));
+
+            const sorted = [...rows].sort((a, b) =>
+                (parseDate(b.date) || 0) - (parseDate(a.date) || 0) || (num(a.period) ?? 0) - (num(b.period) ?? 0));
+
+            const pillFor = cell => {
+                const k = attKey(cell);
+                const cls = k === '曠' ? 'bg-red-50 text-red-600'
+                    : k === '公' ? 'bg-green-50 text-green-700'
+                    : 'bg-gray-100 text-gray-600';
+                return h('span', { class: 'inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold ' + cls }, String(cell));
+            };
+
+            body.replaceChildren(
+                tiles(usedTypes.slice(0, 4).map(t => ({
+                    label: t.label + '節數',
+                    value: byTerm.filter(a => attKey(a.cell) === t.key).length,
+                    foot: new Set(byTerm.filter(a => attKey(a.cell) === t.key).map(a => a.date)).size + ' 天',
+                }))),
+                card(
+                    sectionTitle('每月出缺勤節數', '同一個月的各類節數堆疊呈現'),
+                    legend(usedTypes),
+                    stackedColumns(months, usedTypes),
+                    h('div', { class: 'mt-5' }, table(
+                        ['月份', ...usedTypes.map(t => ({ label: t.label, num: true })), { label: '合計', num: true }],
+                        months.map(m => [
+                            m.key,
+                            ...usedTypes.map(t => ({ value: m.counts[t.key] || 0, num: true })),
+                            { value: m.total, num: true },
+                        ]))),
+                ),
+                card(
+                    sectionTitle('明細', sorted.length + ' 筆'),
+                    sorted.length ? pagedTable(
+                        ['日期', '星期', '學期', { label: '節次', num: true }, '類型'],
+                        sorted.map(a => [
+                            a.date, a.weekday, a.academic_term,
+                            { value: a.period, num: true },
+                            { node: pillFor(a.cell) },
+                        ])) : empty('這個篩選條件下沒有紀錄。'),
+                ),
+            );
+        }
+
+        panel.append(filterRow, body);
+        paint();
+    }
+
+    function renderMerit(panel) {
+        const all = meritRecords();
+        let kind = 'all';
+        const filterRow = h('div', { class: 'flex flex-wrap gap-2 mb-4' });
+        const body = h('div', {});
+
+        function chip(label, isOn, onClick) {
+            return h('button', {
+                class: 'px-4 py-2 rounded-full text-sm font-semibold border transition-colors ' +
+                    (isOn ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'),
+                onclick: onClick,
+            }, label);
+        }
+
+        function paint() {
+            filterRow.replaceChildren(
+                chip('全部', kind === 'all', () => { kind = 'all'; paint(); }),
+                chip('獎勵', kind === 'merit', () => { kind = 'merit'; paint(); }),
+                chip('懲戒', kind === 'demerit', () => { kind = 'demerit'; paint(); }),
+            );
+            const rows = all.filter(r => kind === 'all' || r.kind === kind);
+            body.replaceChildren(
+                tiles([
+                    { label: '獎勵', value: all.filter(r => r.kind === 'merit').length, foot: '筆' },
+                    { label: '懲戒', value: all.filter(r => r.kind === 'demerit').length, foot: '筆' },
+                    { label: '已銷過', value: all.filter(r => r.date_revoked).length, foot: '筆' },
+                    { label: '涵蓋學年', value: new Set(all.map(r => r.year).filter(Boolean)).size, foot: '個學年' },
+                ]),
+                card(
+                    sectionTitle('獎懲明細', rows.length + ' 筆'),
+                    rows.length ? pagedTable(
+                        ['學年', '發生日期', '核准日期', '獎懲', '事由', '銷過日期'],
+                        rows.map(r => [
+                            r.year, r.date_occurred, r.date_approved,
+                            {
+                                node: h('span', {
+                                    class: 'inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold whitespace-nowrap ' +
+                                        (r.kind === 'merit' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'),
+                                }, String(r.action || '—')),
+                            },
+                            { value: r.reason, cls: 'wrapme' },
+                            r.date_revoked,
+                        ])) : empty('這個篩選條件下沒有紀錄。'),
+                ),
+            );
+        }
+
+        panel.append(filterRow, body);
+        paint();
+    }
+
+    function renderComments(panel) {
+        let any = false;
+        for (const y of years()) {
+            const dp = (DATA.semester_scores[y] || {}).daily_performance || {};
+            for (const [term, label] of [['first_semester', '上學期'], ['second_semester', '下學期']]) {
+                const d = dp[term];
+                if (!d) continue;
+                const evalLines = htmlToLines((d.daily_life_performance || {}).evaluation);
+                const blocks = [
+                    ['個性描述', (d.daily_life_performance || {}).description],
+                    ['特殊表現', d.special_achievements],
+                    ['服務學習', d.service_learning],
+                    ['導師建議', d.suggestions_and_comments],
+                    ['其他', d.others],
+                ].filter(([, v]) => v && String(v).trim());
+                if (!blocks.length && !evalLines.length) continue;
+                any = true;
+                panel.append(card(
+                    sectionTitle(y + ' 年級 · ' + label),
+                    h('div', { class: 'grid grid-cols-1 md:grid-cols-2 gap-3' }, [
+                        ...blocks.map(([t, v]) => h('div', { class: 'bg-gray-50 rounded-2xl p-4' },
+                            h('h3', { class: 'text-xs font-semibold text-gray-400 mb-1.5' }, t),
+                            h('p', { class: 'text-sm text-gray-700 leading-relaxed' }, String(v)))),
+                        evalLines.length ? h('div', { class: 'bg-gray-50 rounded-2xl p-4' },
+                            h('h3', { class: 'text-xs font-semibold text-gray-400 mb-1.5' }, '日常生活表現評量'),
+                            h('ul', { class: 'text-sm text-gray-700 leading-relaxed list-disc list-inside space-y-0.5' },
+                                evalLines.map(l => h('li', {}, l)))) : null,
+                    ]),
+                ));
+            }
+        }
+        if (!any) panel.append(card(empty('這個檔案沒有日常表現或評語資料。')));
+    }
+
+    function renderRaw(panel) {
+        const pretty = JSON.stringify(DATA, null, 2);
+        const copyBtn = h('button', {
+            class: 'bg-gray-100 text-gray-900 px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-gray-200 transition-colors',
+            onclick: async () => {
+                try {
+                    await navigator.clipboard.writeText(pretty);
+                    copyBtn.textContent = '已複製 ✓';
+                } catch (e) {
+                    copyBtn.textContent = '複製失敗';
+                }
+                setTimeout(() => { copyBtn.textContent = '複製到剪貼簿'; }, 1600);
+            },
+        }, '複製到剪貼簿');
+
+        panel.append(card(
+            sectionTitle('原始 JSON', (pretty.length / 1024).toFixed(0) + ' KB'),
+            h('div', { class: 'flex flex-wrap gap-2 mb-4' },
+                h('button', {
+                    class: 'bg-blue-600 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors',
+                    onclick: () => {
+                        const url = URL.createObjectURL(new Blob([pretty], { type: 'application/json' }));
+                        const a = h('a', { href: url, download: 'vocpass_formatted.json' });
+                        a.click();
+                        URL.revokeObjectURL(url);
+                    },
+                }, '下載格式化 JSON'),
+                copyBtn),
+            h('pre', { class: 'rawpre' }, pretty),
+        ));
+    }
+
+    /* ==================== 分頁切換 ==================== */
+    let PRINT_PREP = null;
+
+    $('#export-pdf').addEventListener('click', () => {
+        if (PRINT_PREP) PRINT_PREP();
+        // 等版面重排完再開列印視窗，不然剛展開的表格會來不及計算高度
+        setTimeout(() => window.print(), 150);
+    });
+
+    const TABS = [
+        { id: 'overview', label: '總覽', icon: 'fa-gauge-high', render: renderOverview, has: () => true },
+        { id: 'semester', label: '學期成績', icon: 'fa-graduation-cap', render: renderSemester, has: () => years().length > 0 },
+        { id: 'exams', label: '考試成績', icon: 'fa-pen-to-square', render: renderExams, has: () => usableExams().length > 0 },
+        { id: 'curriculum', label: '課表', icon: 'fa-calendar-days', render: renderCurriculum, has: () => Object.keys(DATA.curriculum || {}).length > 0 },
+        { id: 'attendance', label: '出缺勤', icon: 'fa-clock', render: renderAttendance, has: () => (DATA.attendance || []).length > 0 },
+        { id: 'merit', label: '獎懲', icon: 'fa-award', render: renderMerit, has: () => meritRecords().length > 0 },
+        { id: 'comments', label: '日常表現', icon: 'fa-comment-dots', render: renderComments, has: () => years().length > 0 },
+        { id: 'raw', label: '原始資料', icon: 'fa-code', render: renderRaw, has: () => true },
+    ];
+
+    function render(sourceName) {
+        const who = identity();
+        $('#p-name').textContent = who.name;
+        $('#p-initial').textContent = who.name.slice(-2, -1) || who.name.slice(0, 1) || '?';
+        $('#p-sub').textContent = [
+            (DATA._meta || {}).school, who.klass, who.sid && ('學號 ' + who.sid), sourceName,
+        ].filter(Boolean).join(' · ');
+
+        const active = TABS.filter(t => t.has());
+        const tabsEl = $('#tabs'), panelsEl = $('#panels');
+        const rendered = new Set();
+        EXPANDERS = [];
+
+        const panels = new Map(active.map(t => [t.id, h('section', {
+            id: 'panel-' + t.id, role: 'tabpanel', class: 'hidden', 'aria-labelledby': 'tab-' + t.id,
+        }, h('h2', { class: 'hidden print:block text-base font-bold text-gray-900 mb-3' }, t.label))]));
+
+        // 匯出 PDF 前需要把所有分頁都渲染、所有明細都展開
+        PRINT_PREP = () => {
+            active.forEach(t => {
+                if (!rendered.has(t.id)) { t.render(panels.get(t.id)); rendered.add(t.id); }
+            });
+            EXPANDERS.forEach(fn => fn());
+        };
+
+        function select(id) {
+            active.forEach(t => {
+                const on = t.id === id;
+                panels.get(t.id).classList.toggle('hidden', !on);
+                const btn = tabsEl.querySelector('#tab-' + t.id);
+                btn.setAttribute('aria-selected', String(on));
+                btn.className = 'shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-colors ' +
+                    (on ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900');
+                if (on && !rendered.has(t.id)) {
+                    t.render(panels.get(t.id));
+                    rendered.add(t.id);
+                }
+            });
+        }
+
+        tabsEl.replaceChildren(...active.map(t => h('button', {
+            id: 'tab-' + t.id, role: 'tab', 'aria-selected': 'false',
+            class: 'shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-gray-500',
+            onclick: () => select(t.id),
+        }, h('i', { class: 'fa-solid ' + t.icon + ' text-xs' }), t.label)));
+
+        panelsEl.replaceChildren(...active.map(t => panels.get(t.id)));
+        select('overview');
+
+        $('#uploader').classList.add('hidden');
+        $('#app').classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+    </script>
+</body>
+</html>

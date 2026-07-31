@@ -259,6 +259,11 @@ async def get_user_profile(request: Request, username: str):
     return render_page(request, "user.html", "user", username=username)
 
 
+@router.get("/export", summary="匯出資料檢視器")
+async def data_viewer(request: Request):
+    return render_page(request, "viewer.html", "viewer")
+
+
 @router.get("/apply", summary="申請學校")
 async def apply_school(request: Request):
     return render_page(request, "apply.html", "apply")

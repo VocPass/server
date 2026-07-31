@@ -108,6 +108,15 @@ PAGE_META: dict[str, dict[str, Any]] = {
         "type": "article",
         "path": "/community-guidelines",
     },
+    "viewer": {
+        "title": "VocPass | 資料檢視器",
+        "description": (
+            "在瀏覽器中開啟 VocPass 匯出的 JSON，檢視成績趨勢、考試與班平均落差、"
+            "課表、出缺勤與獎懲紀錄。檔案僅在本機解析，不會上傳。"
+        ),
+        "keywords": "VocPass, 資料檢視器, 成績分析, 缺曠統計, 獎懲紀錄, JSON, 本地解析",
+        "path": "/viewer",
+    },
     "font": {
         "title": "字體預覽 | VocPass",
         "description": "VocPass 字體預覽工具，用於檢視不同中文字型在校園內容中的呈現效果。",
