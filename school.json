@@ -4495,7 +4495,7 @@
         "vision": "v3",
         "app": 1.0,
         "beta": true,
-        "school_code": "{sb}",
+        "school_code": "110410",
         "api": "https://shcloud1.k12ea.gov.tw/TWIVSTN",
         "url": {
             "login": "/Auth/Auth/Login",
@@ -4542,7 +4542,7 @@
         "vision": "v3",
         "app": 1.0,
         "beta": true,
-        "school_code": "{sb}",
+        "school_code": "130417",
         "api": "https://shcloud13.k12ea.gov.tw/HCVSPTC",
         "url": {
             "login": "/Auth/Auth/Login",
@@ -4683,7 +4683,7 @@
         "vision": "v3",
         "app": 1.0,
         "beta": false,
-        "school_code": "{sb}",
+        "school_code": "090315",
         "api": "https://shcloud13.k12ea.gov.tw/HWSHYLC",
         "url": {
             "login": "/Auth/Auth/Login",
@@ -4730,7 +4730,7 @@
         "vision": "v3",
         "app": 1.0,
         "beta": true,
-        "school_code": "{sb}",
+        "school_code": "070402",
         "api": "https://shcloud7.k12ea.gov.tw/YJVSCHC",
         "url": {
             "login": "/Auth/Auth/Login",
@@ -4777,7 +4777,7 @@
         "vision": "v3",
         "app": 1.0,
         "beta": true,
-        "school_code": "{sb}",
+        "school_code": "160401",
         "api": "https://shcloud12.k12ea.gov.tw/PHMHSPHC",
         "url": {
             "login": "/Auth/Auth/Login",
