@@ -5,6 +5,7 @@
         "beta": false,
         "api": "https://vocpass.com",
         "url": {
+            "index":"/api/demo",
             "login": "/api/demo/login",
             "logined": "/api/demo/login",
             "root": "/"
@@ -4637,9 +4638,9 @@
         "app": 1.0,
         "beta": false,
         "school_code": "150309",
-        "api": "https://shinher.kfsh.hc.edu.tw/YLSHHLC",
+        "api": "https://shcloud2.k12ea.gov.tw/YLSHHLC",
         "url": {
-            "login": "/Auth/Auth/Login",
+            "login": "/Auth/Auth/CloudLogin",
             "logined": "/ICampus/Home/Index2",
             "root": ""
         },

@@ -182,3 +182,7 @@ async def login(request: Request, response: Response):
 @router.get("/login", summary="模擬登入")
 async def login_page(request: Request):
     return render_page(request, "login.html", "login")
+
+@router.get("/", summary="測試端點")
+async def demo(request: Request):
+    return request.cookies
