@@ -473,28 +473,28 @@
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/whitecat/table8.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 1000
+                    "left": 180,
+                    "right": 70,
+                    "top_inset": 290,
+                    "bottom": 240
                 },
                 "8": {
                     "images": [
                         "https://cdn.vocpass.com/wallpaper_assets/whitecat/table8.png"
                     ],
-                    "left": 160,
-                    "right": 90,
-                    "top_inset": 130,
-                    "bottom": 700
+                    "left": 180,
+                    "right": 70,
+                    "top_inset": 290,
+                    "bottom": 80
                 }
             }
         },
         "table_opacity": 1,
         "top": 30,
         "stickers": 0,
-        "font_size": 5,
+        "font_size": 8,
         "font_color": "#000000",
-        "font_family": "铁蒺藜体"
+        "font_family": "霞鶩文楷"
     },
     {
         "name": "小丹的課表",
