@@ -129,18 +129,6 @@
         const WEEKDAY_LABELS = { '一': '週一', '二': '週二', '三': '週三', '四': '週四', '五': '週五' };
         const PERIOD_ORDER = { '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9, '十': 10 };
         const PERIOD_LABELS = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-        const PERIOD_TIME_MAP = {
-            '一': ['08:10', '09:00'],
-            '二': ['09:10', '10:00'],
-            '三': ['10:10', '11:00'],
-            '四': ['11:10', '12:00'],
-            '五': ['13:10', '14:00'],
-            '六': ['14:10', '15:00'],
-            '七': ['15:10', '16:00'],
-            '八': ['16:10', '17:00'],
-            '九': ['17:10', '18:00'],
-            '十': ['18:10', '19:00'],
-        };
 
         function normalizePeriod(period) {
             if (period == null) return '';
@@ -152,9 +140,16 @@
             return map[value] || value;
         }
 
-        function getPeriodTime(period) {
-            const normalized = normalizePeriod(period);
-            return PERIOD_TIME_MAP[normalized] || ['', ''];
+        function getCurriculumTimeMap(curriculum) {
+            const timeMap = {};
+            for (const info of Object.values(curriculum)) {
+                for (const slot of info.schedule || []) {
+                    const normalizedPeriod = normalizePeriod(slot.period);
+                    if (!normalizedPeriod || !slot.start || !slot.end) continue;
+                    timeMap[normalizedPeriod] = [slot.start, slot.end];
+                }
+            }
+            return timeMap;
         }
 
         function getUsername() {
@@ -166,6 +161,8 @@
         function buildTimetable(curriculum) {
             const periodsSet = new Set();
             const cellMap = {};
+            const timeMap = getCurriculumTimeMap(curriculum);
+            const hasTimeData = Object.keys(timeMap).length > 0;
 
             for (const [subject, info] of Object.entries(curriculum)) {
                 for (const slot of info.schedule) {
@@ -182,9 +179,10 @@
             const weekdays = WEEKDAYS;
 
             const header = document.getElementById('table-header');
+            const timeHeader = hasTimeData ? `<span class="block text-[10px] mt-0.5">時間</span>` : '';
             header.innerHTML = `<th class="py-2 px-2 text-left text-xs font-semibold w-24" style="color:#6e6e73;">
                     <span class="block">節次</span>
-                    <span class="block text-[10px] mt-0.5">時間</span>
+                    ${timeHeader}
                 </th>` +
                 weekdays.map(d => `<th class="py-2 px-2 text-center text-xs font-semibold" style="color:#1d1d1f;">${WEEKDAY_LABELS[d]}</th>`).join('');
 
@@ -212,8 +210,8 @@
             }
 
             tbody.innerHTML = periods.map(period => {
-                const [start, end] = getPeriodTime(period);
-                const timeText = start && end ? `${start}–${end}` : '';
+                const timeInfo = timeMap[period] || null;
+                const timeText = timeInfo ? `${timeInfo[0]}–${timeInfo[1]}` : '';
                 const cells = weekdays.map(day => {
                     const key = `${day}-${period}`;
                     const entries = cellMap[key];
@@ -231,7 +229,7 @@
                     return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full flex flex-col justify-start">${inner}</div></td>`;
                 }).join('');
 
-                const timeMarkup = timeText ? `<div class="text-[10px] mt-1 opacity-80">${escapeHTML(timeText)}</div>` : '';
+                const timeMarkup = hasTimeData && timeText ? `<div class="text-[10px] mt-1 opacity-80">${escapeHTML(timeText)}</div>` : '';
 
                 return `<tr style="border-top:1px solid rgba(0,0,0,0.06);">
                     <td class="py-2 px-2 text-center align-top pt-3" style="color:#6e6e73;">
