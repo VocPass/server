@@ -128,6 +128,34 @@
         const WEEKDAYS = ['一', '二', '三', '四', '五'];
         const WEEKDAY_LABELS = { '一': '週一', '二': '週二', '三': '週三', '四': '週四', '五': '週五' };
         const PERIOD_ORDER = { '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9, '十': 10 };
+        const PERIOD_LABELS = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+        const PERIOD_TIME_MAP = {
+            '一': ['08:10', '09:00'],
+            '二': ['09:10', '10:00'],
+            '三': ['10:10', '11:00'],
+            '四': ['11:10', '12:00'],
+            '五': ['13:10', '14:00'],
+            '六': ['14:10', '15:00'],
+            '七': ['15:10', '16:00'],
+            '八': ['16:10', '17:00'],
+            '九': ['17:10', '18:00'],
+            '十': ['18:10', '19:00'],
+        };
+
+        function normalizePeriod(period) {
+            if (period == null) return '';
+            const value = String(period).trim();
+            const map = {
+                '1': '一', '2': '二', '3': '三', '4': '四', '5': '五',
+                '6': '六', '7': '七', '8': '八', '9': '九', '10': '十'
+            };
+            return map[value] || value;
+        }
+
+        function getPeriodTime(period) {
+            const normalized = normalizePeriod(period);
+            return PERIOD_TIME_MAP[normalized] || ['', ''];
+        }
 
         function getUsername() {
             const path = window.location.pathname;
@@ -136,30 +164,30 @@
         }
 
         function buildTimetable(curriculum) {
-            // Collect all periods and weekdays used
             const periodsSet = new Set();
-            const weekdaysUsed = new Set();
-            const cellMap = {}; // "weekday-period" -> [{subject, room, teacher}]
+            const cellMap = {};
 
             for (const [subject, info] of Object.entries(curriculum)) {
                 for (const slot of info.schedule) {
-                    const key = `${slot.weekday}-${slot.period}`;
-                    periodsSet.add(slot.period);
-                    weekdaysUsed.add(slot.weekday);
+                    const normalizedPeriod = normalizePeriod(slot.period);
+                    const weekday = slot.weekday;
+                    const key = `${weekday}-${normalizedPeriod}`;
+                    periodsSet.add(normalizedPeriod);
                     if (!cellMap[key]) cellMap[key] = [];
                     cellMap[key].push({ subject, room: slot.room, teacher: slot.teacher });
                 }
             }
 
-            const periods = [...periodsSet].sort((a, b) => (PERIOD_ORDER[a] || 99) - (PERIOD_ORDER[b] || 99));
-            const weekdays = WEEKDAYS.filter(d => weekdaysUsed.has(d));
+            const periods = PERIOD_LABELS;
+            const weekdays = WEEKDAYS;
 
-            // Header
             const header = document.getElementById('table-header');
-            header.innerHTML = `<th class="py-2 px-2 text-left text-xs font-semibold w-10" style="color:#6e6e73;">節次</th>` +
+            header.innerHTML = `<th class="py-2 px-2 text-left text-xs font-semibold w-24" style="color:#6e6e73;">
+                    <span class="block">節次</span>
+                    <span class="block text-[10px] mt-0.5">時間</span>
+                </th>` +
                 weekdays.map(d => `<th class="py-2 px-2 text-center text-xs font-semibold" style="color:#1d1d1f;">${WEEKDAY_LABELS[d]}</th>`).join('');
 
-            // Body
             const tbody = document.getElementById('table-body');
             const colors = [
                 'bg-indigo-50 text-indigo-700',
@@ -184,6 +212,8 @@
             }
 
             tbody.innerHTML = periods.map(period => {
+                const [start, end] = getPeriodTime(period);
+                const timeText = start && end ? `${start}–${end}` : '';
                 const cells = weekdays.map(day => {
                     const key = `${day}-${period}`;
                     const entries = cellMap[key];
@@ -200,8 +230,14 @@
                     }).join('');
                     return `<td class="p-1 align-top min-w-[90px]" style="height:1px"><div class="h-full flex flex-col justify-start">${inner}</div></td>`;
                 }).join('');
+
+                const timeMarkup = timeText ? `<div class="text-[10px] mt-1 opacity-80">${escapeHTML(timeText)}</div>` : '';
+
                 return `<tr style="border-top:1px solid rgba(0,0,0,0.06);">
-                    <td class="py-2 px-2 text-center text-xs font-bold align-top pt-3" style="color:#6e6e73;">${escapeHTML(period)}</td>
+                    <td class="py-2 px-2 text-center align-top pt-3" style="color:#6e6e73;">
+                        <div class="text-xs font-bold">第${escapeHTML(period)}節</div>
+                        ${timeMarkup}
+                    </td>
                     ${cells}
                 </tr>`;
             }).join('');
