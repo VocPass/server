@@ -30,13 +30,9 @@ def get_user(token):
         return None
     
 
-def share_curriculum(user_token, curriculum_data, status):
-    user_token = normalize_authorization_token(user_token)
-    pb = pocketbase.PocketBase(os.getenv("PB_URL"))
-    pb.auth_store.save(user_token, None)
-    record = pb.collection('users').auth_refresh().record
-    
-    pb.collection('users').update(record.id, {
+def share_curriculum(admin_client, user_id, curriculum_data, status):
+    # 使用 admin token 更新，避免受 users collection 的 update rule 限制
+    admin_client.collection('users').update(user_id, {
         "curriculum": curriculum_data,
         "curriculum_status": bool(status)
     })

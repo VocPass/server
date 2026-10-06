@@ -42,7 +42,7 @@ async def share_curriculum_api(
         return {"code": 401, "message": "Unauthorized", "data": None}
 
     try:
-        share_curriculum(token, curriculum, share_status)
+        share_curriculum(request.app.state.pb_client, user.id, curriculum, share_status)
         return {"code": 200, "message": "Curriculum shared successfully.", "data": None}
     except Exception as e:
         print(f"Error sharing curriculum: {e}")
