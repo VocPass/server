@@ -21456,6 +21456,41 @@
             "curriculum": "/stu/lesson.asp"
         }
     },
+    "宜寧高中": {
+        "vision": "v9",
+        "app": 1.0,
+        "beta": false,
+        "api": "https://web2.inhs.tc.edu.tw/skyweb/",
+        "url": {
+            "login": "/",
+            "logined": "/f_head.asp",
+            "root": ""
+        },
+        "login": {
+            "username": {
+                "name": "txtid"
+            },
+            "password": {
+                "name": "txtpwd"
+            },
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "修改密碼",
+                "使用說明",
+                "f_left.asp"
+            ]
+        },
+        "route": {
+            "merit_demerit": "/stu/stu_result6.asp",
+            "attendance": "/stu/stu_result4.asp",
+            "exam_menu": "#",
+            "exam_results": "#",
+            "semester_scores": "#",
+            "curriculum": "/stu/lesson.asp"
+        }
+    },
     "光復高中(夜)": {
         "vision": "v9",
         "app": 1.6,
@@ -21524,6 +21559,201 @@
             "exam_results": "#",
             "semester_scores": "#",
             "curriculum": "/stu/lesson.asp"
+        }
+    },
+    "樹林高中": {
+        "vision": "v10",
+        "app": 1.6,
+        "beta": false,
+        "api": "https://esa.ntpc.edu.tw",
+        "logined_api": "https://hsa.ntpc.edu.tw",
+        "school_full_name": "新北市立樹林高級中學",
+        "url": {
+            "login": "/module/sso2/module/sso2/login-page25/init",
+            "logined": "/web-module_list/rest/service/main",
+            "root": "/"
+        },
+        "login": {
+            "username": {},
+            "password": {},
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "KEY_AUTHENTICATION_CODE_ACCESSTOKEN"
+            ]
+        },
+        "cookie": {
+            "entry": "/jsp/hsa/pub/index.jsp",
+            "portal": "/Login",
+            "profile": "/MyPortalContent",
+            "affairs": "/StuAffairs/LoginStu",
+            "scores": "/StuScoreQuery/LoginStu"
+        },
+        "route": {
+            "merit_page": "/StuAffairs/RewPun",
+            "merit_demerit": "/StuAffairs/BrowseSelftRecord.do",
+            "attendance": "/StuAffairs/AbsForStu",
+            "exam_menu": "/StuScoreQuery/StuScoreQuery",
+            "exam_results": "/StuScoreQuery/StuScoreQuery",
+            "semester_scores": "/StuScoreQuery/StuScoreQuery",
+            "curriculum": "#"
+        }
+    },
+    "中和高中": {
+        "vision": "v10",
+        "app": 1.6,
+        "beta": false,
+        "api": "https://esa.ntpc.edu.tw",
+        "logined_api": "https://hsa.ntpc.edu.tw",
+        "school_full_name": "新北市立中和高級中學",
+        "url": {
+            "login": "/module/sso2/module/sso2/login-page25/init",
+            "logined": "/web-module_list/rest/service/main",
+            "root": "/"
+        },
+        "login": {
+            "username": {},
+            "password": {},
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "KEY_AUTHENTICATION_CODE_ACCESSTOKEN"
+            ]
+        },
+        "cookie": {
+            "entry": "/jsp/hsa/pub/index.jsp",
+            "portal": "/Login",
+            "profile": "/MyPortalContent",
+            "affairs": "/StuAffairs/LoginStu",
+            "scores": "/StuScoreQuery/LoginStu"
+        },
+        "route": {
+            "merit_page": "/StuAffairs/RewPun",
+            "merit_demerit": "/StuAffairs/BrowseSelftRecord.do",
+            "attendance": "/StuAffairs/AbsForStu",
+            "exam_menu": "/StuScoreQuery/StuScoreQuery",
+            "exam_results": "/StuScoreQuery/StuScoreQuery",
+            "semester_scores": "/StuScoreQuery/StuScoreQuery",
+            "curriculum": "#"
+        }
+    },
+    "新店高中": {
+        "vision": "v10",
+        "app": 1.6,
+        "beta": false,
+        "api": "https://esa.ntpc.edu.tw",
+        "logined_api": "https://hsa.ntpc.edu.tw",
+        "school_full_name": "新北市立新店高級中學",
+        "url": {
+            "login": "/module/sso2/module/sso2/login-page25/init",
+            "logined": "/web-module_list/rest/service/main",
+            "root": "/"
+        },
+        "login": {
+            "username": {},
+            "password": {},
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "KEY_AUTHENTICATION_CODE_ACCESSTOKEN"
+            ]
+        },
+        "cookie": {
+            "entry": "/jsp/hsa/pub/index.jsp",
+            "portal": "/Login",
+            "profile": "/MyPortalContent",
+            "affairs": "/StuAffairs/LoginStu",
+            "scores": "/StuScoreQuery/LoginStu"
+        },
+        "route": {
+            "merit_page": "/StuAffairs/RewPun",
+            "merit_demerit": "/StuAffairs/BrowseSelftRecord.do",
+            "attendance": "/StuAffairs/AbsForStu",
+            "exam_menu": "/StuScoreQuery/StuScoreQuery",
+            "exam_results": "/StuScoreQuery/StuScoreQuery",
+            "semester_scores": "/StuScoreQuery/StuScoreQuery",
+            "curriculum": "#"
+        }
+    },
+    "新北高中": {
+        "vision": "v10",
+        "app": 1.6,
+        "beta": false,
+        "api": "https://esa.ntpc.edu.tw",
+        "logined_api": "https://hsa.ntpc.edu.tw",
+        "school_full_name": "新北市立新北高級中學",
+        "url": {
+            "login": "/module/sso2/module/sso2/login-page25/init",
+            "logined": "/web-module_list/rest/service/main",
+            "root": "/"
+        },
+        "login": {
+            "username": {},
+            "password": {},
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "KEY_AUTHENTICATION_CODE_ACCESSTOKEN"
+            ]
+        },
+        "cookie": {
+            "entry": "/jsp/hsa/pub/index.jsp",
+            "portal": "/Login",
+            "profile": "/MyPortalContent",
+            "affairs": "/StuAffairs/LoginStu",
+            "scores": "/StuScoreQuery/LoginStu"
+        },
+        "route": {
+            "merit_page": "/StuAffairs/RewPun",
+            "merit_demerit": "/StuAffairs/BrowseSelftRecord.do",
+            "attendance": "/StuAffairs/AbsForStu",
+            "exam_menu": "/StuScoreQuery/StuScoreQuery",
+            "exam_results": "/StuScoreQuery/StuScoreQuery",
+            "semester_scores": "/StuScoreQuery/StuScoreQuery",
+            "curriculum": "#"
+        }
+    },
+    "板橋高中": {
+        "vision": "v10",
+        "app": 1.6,
+        "beta": false,
+        "api": "https://esa.ntpc.edu.tw",
+        "logined_api": "https://hsa.ntpc.edu.tw",
+        "school_full_name": "新北市立板橋高級中學",
+        "url": {
+            "login": "/module/sso2/module/sso2/login-page25/init",
+            "logined": "/web-module_list/rest/service/main",
+            "root": "/"
+        },
+        "login": {
+            "username": {},
+            "password": {},
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
+            "successKeywords": [
+                "KEY_AUTHENTICATION_CODE_ACCESSTOKEN"
+            ]
+        },
+        "cookie": {
+            "entry": "/jsp/hsa/pub/index.jsp",
+            "portal": "/Login",
+            "profile": "/MyPortalContent",
+            "affairs": "/StuAffairs/LoginStu",
+            "scores": "/StuScoreQuery/LoginStu"
+        },
+        "route": {
+            "merit_page": "/StuAffairs/RewPun",
+            "merit_demerit": "/StuAffairs/BrowseSelftRecord.do",
+            "attendance": "/StuAffairs/AbsForStu",
+            "exam_menu": "/StuScoreQuery/StuScoreQuery",
+            "exam_results": "/StuScoreQuery/StuScoreQuery",
+            "semester_scores": "/StuScoreQuery/StuScoreQuery",
+            "curriculum": "#"
         }
     }
 }

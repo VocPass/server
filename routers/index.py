@@ -321,6 +321,22 @@ async def ping(
         return data
     user = pb.get_user(request.headers.get("Authorization"))
 
+    if school.get("vision") == "v10":
+        from utils.esa_client import EsaError, open_esa_client
+
+        try:
+            async with open_esa_client(request.cookies, school, school_name):
+                pass
+        except EsaError as exc:
+            response.status_code = exc.code
+            m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="not_logged_in").inc()
+            return {"code": exc.code, "message": str(exc),
+                    "data": {"logged_in": False} if exc.code == 403 else None}
+        if user:
+            db.collection("users").update(user.id, {"school": school_name})
+        m.SCHOOL_LOGIN_CHECKS_TOTAL.labels(school_name=school_name, result="logged_in").inc()
+        return {"code": 200, "message": "Success.", "data": {"logged_in": True}}
+
     async with aiohttp.ClientSession(
         cookies=request.cookies, headers=headers
     ) as session:
