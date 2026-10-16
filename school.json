@@ -722,48 +722,47 @@
         }
     },
     "新北高工": {
-        "vision": "v1",
-        "app": 1.0,
+        "vision": "v10",
+        "app": 1.6,
         "beta": false,
-        "api": "https://elife.ntvs.ntpc.edu.tw",
+        "api": "https://esa.ntpc.edu.tw",
         "notice": {
             "vision": "v2",
             "url": "https://www.ntvs.ntpc.edu.tw/app/index.php?Action=mobileloadmod&Type=mobile_rcg_mstr&Nbr=54",
             "method": "POST"
         },
         "url": {
-            "login": "/auth/Auth/Login",
-            "logined": "/online/student/frames.asp",
+            "login": "/module/sso2/module/sso2/login-page25/init",
+            "logined": "/web-module_list/rest/service/main",
             "root": "/"
         },
         "login": {
-            "username": {
-                "name": "studentLId"
-            },
-            "password": {
-                "name": "studentPwd"
-            },
-            "captcha": {
-                "name": "v1CaptchaImageInput"
-            },
-            "captchaImage": {
-                "selector": "captcha-image",
-                "type": "id"
-            },
-            "button": {
-                "class": "loginBtnAdjust"
-            },
+            "username": {},
+            "password": {},
+            "captcha": {},
+            "captchaImage": {},
+            "button": {},
             "successKeywords": [
-                "學生線上查詢"
+                "KEY_AUTHENTICATION_CODE_ACCESSTOKEN"
             ]
         },
         "route": {
-            "merit_demerit": "/online/selection_student/moralculture_%20bonuspenalty.asp",
-            "attendance": "/online/selection_student/absentation_skip_school.asp",
-            "exam_menu": "/online/selection_student/student_subjects_number.asp?action=open_window_frame",
-            "exam_results": "/online/selection_student/{file_name}",
-            "semester_scores": "/online/selection_student/year_accomplishment.asp?action=selection_underside_year&year_class={year_class}&number={number}",
-            "curriculum": "/online/student/school_class_tabletime.asp"
+            "merit_page": "/StuAffairs/RewPun",
+            "merit_demerit": "/StuAffairs/BrowseSelftRecord.do",
+            "attendance": "/StuAffairs/AbsForStu",
+            "exam_menu": "/StuScoreQuery/StuScoreQuery",
+            "exam_results": "/StuScoreQuery/StuScoreQuery",
+            "semester_scores": "/StuScoreQuery/StuScoreQuery",
+            "curriculum": "#"
+        },
+        "logined_api": "https://hsa.ntpc.edu.tw",
+        "school_full_name": "新北市立新北高級工業職業學校",
+        "cookie": {
+            "entry": "/jsp/hsa/pub/index.jsp",
+            "portal": "/Login",
+            "profile": "/MyPortalContent",
+            "affairs": "/StuAffairs/LoginStu",
+            "scores": "/StuScoreQuery/LoginStu"
         }
     },
     "武陵高中": {
