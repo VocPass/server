@@ -16,7 +16,7 @@ import base64
 from urllib.parse import unquote_plus
 
 load_dotenv()
-router = APIRouter(prefix="/api/v7", tags=["v7 解析端點"])
+router = APIRouter(prefix="/api/v7", tags=["v7 亞昕解析端點"])
 http = HttpsClient()
 
 

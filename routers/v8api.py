@@ -11,7 +11,7 @@ from utils.base import YearModel
 from urllib.parse import unquote_plus
 
 load_dotenv()
-router = APIRouter(prefix="/api/v8", tags=["v8 解析端點"])
+router = APIRouter(prefix="/api/v8", tags=["v8 北科大解析端點"])
 
 
 class LoginCookie(BaseModel):

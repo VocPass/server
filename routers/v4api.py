@@ -13,7 +13,7 @@ from utils import metrics as m
 import urllib.parse
 
 load_dotenv()
-router = APIRouter(prefix="/api/v4", tags=["v4 解析端點"])
+router = APIRouter(prefix="/api/v4", tags=["v4 天方（新版）解析端點"])
 http = HttpsClient()
 
 

@@ -12,7 +12,7 @@ from utils.base import *
 from utils import metrics as m
 
 load_dotenv()
-router = APIRouter(prefix="/api/v3", tags=["v3 解析端點"])
+router = APIRouter(prefix="/api/v3", tags=["v3 欣河（新版）解析端點"])
 http = HttpsClient()
 
 headers = {

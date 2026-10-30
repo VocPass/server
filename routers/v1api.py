@@ -14,7 +14,7 @@ import urllib.parse
 import base64
 
 load_dotenv()
-router = APIRouter(prefix="/api/v1", tags=["v1 解析端點"])
+router = APIRouter(prefix="/api/v1", tags=["v1 欣河（舊版）解析端點"])
 http = HttpsClient()
 
 

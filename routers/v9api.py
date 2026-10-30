@@ -7,7 +7,7 @@ import utils.v9 as v9
 from utils import metrics as m
 
 load_dotenv()
-router = APIRouter(prefix="/api/v9", tags=["v9 解析端點"])
+router = APIRouter(prefix="/api/v9", tags=["v9 天方科技（舊版）解析端點"])
 http = HttpsClient()
 
 

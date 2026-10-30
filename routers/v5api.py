@@ -15,7 +15,7 @@ from utils import metrics as m
 import urllib.parse
 
 load_dotenv()
-router = APIRouter(prefix="/api/v5", tags=["v5 解析端點"])
+router = APIRouter(prefix="/api/v5", tags=["v5 巨耀（高雄）解析端點"])
 http = HttpsClient()
 
 
